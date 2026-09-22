@@ -19,10 +19,20 @@ title: SQL
 
 ## Practice
 
-Pick 2–3 medium-difficulty problems (joins + window functions) and solve
-them without looking anything up, timed to ~10 minutes each. Good sources:
-[PG Exercises](https://pgexercises.com/) for query volume, *Use The
-Index, Luke* for reading query plans and indexes.
+**This repo has its own practice sandbox** — a real SQLite database
+(`employees`/`departments`, seeded with deliberate salary ties) plus an
+8-problem set (joins through `RANK`/`ROW_NUMBER`/`LAG`/`LEAD`) and
+verified solutions. See [`practice/sql/`](https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep/tree/main/practice/sql)
+in the repo:
+
+```bash
+cd practice/sql
+sqlite3 practice.db < schema.sql   # one-time setup
+sqlite3 practice.db                # open the shell and start querying
+```
+
+Beyond that, [PG Exercises](https://pgexercises.com/) for more query
+volume, *Use The Index, Luke* for reading query plans and indexes.
 
 ## Worked example: rank within a group (window functions)
 
