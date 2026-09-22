@@ -44,11 +44,53 @@ JOIN departments d ON e.department_id = d.id
 ORDER BY d.name, salary_rank;
 ```
 
-**The core idea:** `PARTITION BY` splits the result set into groups —
-here, one per department — **without collapsing rows** the way
-`GROUP BY` does (`GROUP BY` produces one row per group; a window function
-keeps every row and just annotates it). `ORDER BY salary DESC` inside the
-`OVER (...)` clause then ranks rows within each partition.
+### Tracing it on real data
+
+Abstract syntax doesn't stick — trace it on actual rows instead.
+
+**Sample data:**
+
+| name | department_id | salary |
+|---|---|---|
+| Alice | 10 | 90000 |
+| Bob | 10 | 80000 |
+| Carol | 10 | 80000 |
+| Dave | 20 | 70000 |
+| Eve | 20 | 60000 |
+
+Running `RANK() OVER (PARTITION BY department_id ORDER BY salary DESC)`
+produces:
+
+| name | department_id | salary | salary_rank |
+|---|---|---|---|
+| Alice | 10 | 90000 | 1 |
+| Bob | 10 | 80000 | 2 |
+| Carol | 10 | 80000 | 2 |
+| Dave | 20 | 70000 | 1 |
+| Eve | 20 | 60000 | 2 |
+
+**Step by step:**
+
+1. **`PARTITION BY department_id`** — mentally split the table into
+   buckets, one per department. Nothing is deleted or merged; every row
+   is still there.
+2. **`ORDER BY salary DESC`** (inside `OVER(...)`) — within *each bucket
+   separately*, sort by salary, highest first.
+3. **`RANK()`** — walk down each bucket's sorted order and assign 1st,
+   2nd, etc., restarting at 1 every time you cross into a new bucket.
+   Tied rows (Bob and Carol, both 80000) get the same rank.
+
+**Why not plain `ORDER BY` + row position?** That gives one ranking
+across the *whole table* (Alice would be #1 overall, Dave #4 overall).
+`RANK() OVER (PARTITION BY ...)` gives a ranking that resets **per
+group**, in a single query, without collapsing rows the way `GROUP BY`
+would.
+
+**The core idea, stated generally:** `PARTITION BY` splits the result
+set into groups — here, one per department — **without collapsing rows**
+the way `GROUP BY` does (`GROUP BY` produces one row per group; a window
+function keeps every row and just annotates it). `ORDER BY salary DESC`
+inside the `OVER (...)` clause then ranks rows within each partition.
 
 **Tie handling — the other thing this tests:**
 
