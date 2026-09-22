@@ -60,7 +60,31 @@ relations. Correct fix:
 a "which one was it again" pause under interview pressure. Full writeup:
 [Django & DRF](django-drf.md#worked-example-select_related-vs-prefetch_related).
 
+### Q3 — Rank within a group / window functions (SQL)
+
+**Asked:** given `employees(id, name, department_id, salary, hire_date)`
+and `departments(id, name)`, return each employee's name, department
+name, salary, and salary rank *within their department*, ordered by
+department then rank.
+
+**Answer:** `SELECT name, department_id, salary FROM employees GROUP BY department.`
+
+**Feedback:** Missed on multiple fronts — `GROUP BY department` isn't a
+valid column (`department_id`), and `GROUP BY` was the wrong tool
+regardless, since it collapses rows into one per group instead of
+ranking within them. No join to `departments` for the name, and no
+window function at all, which was the actual point of the question.
+Correct answer uses `RANK() OVER (PARTITION BY department_id ORDER BY
+salary DESC)` — see full writeup for the `PARTITION BY` vs `GROUP BY`
+distinction and `RANK`/`DENSE_RANK`/`ROW_NUMBER` tie-handling
+differences.
+
+**Status:** ❌ gap — window functions are not yet solid. This was called
+out ahead of time as "common in senior-level tests," so it's a priority
+for more reps before the real interview, not just a one-off review. Full
+writeup: [SQL](sql.md#worked-example-rank-within-a-group-window-functions).
+
 ---
 
-*Next session: continue Django/DRF drills, then move to SQL and AWS gap
-topics.*
+*Next session: more window-function reps (a second problem, timed),
+then AWS gap topics (ECS/Aurora/DynamoDB) and a full mock run-through.*
