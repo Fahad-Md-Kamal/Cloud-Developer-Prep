@@ -71,14 +71,70 @@ by reflex when what you actually want is a window function (see
 `solutions.md` problem 4 vs. `GROUP BY` — they solve different
 problems).
 
-**`HAVING`** — filters *after* grouping/aggregation, on the aggregated
-value itself (e.g. `HAVING AVG(e.salary) > 65000`). `WHERE` can't do
-this because at the point `WHERE` is evaluated, the aggregate (`AVG`)
-doesn't exist yet.
+```sql
+SELECT department_id, COUNT(*) AS headcount
+FROM employees
+GROUP BY department_id;
+```
 
-**`AVG()` / `SUM()`** — aggregate functions: compute one value across a
-group of rows. Used both as plain aggregates (problem 2/3) and inside a
-window function (problem 7's running-total `SUM`).
+| department_id | headcount |
+|---|---|
+| 10 | 5 |
+| 20 | 4 |
+| 30 | 3 |
+| 40 | 4 |
+
+16 individual employee rows collapse into 4 rows, one per department —
+this is the "collapsing" behavior a window function deliberately avoids.
+
+**`HAVING`** — filters *after* grouping/aggregation, on the aggregated
+value itself. `WHERE` can't do this because at the point `WHERE` is
+evaluated, the aggregate doesn't exist yet — it hasn't been computed.
+
+```sql
+SELECT department_id, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY department_id
+HAVING AVG(salary) > 65000;
+```
+
+| department_id | avg_salary |
+|---|---|
+| 10 | 82800.0 |
+| 20 | 67750.0 |
+
+Departments 30 and 40 are computed internally (their averages are 60000
+and 52000) but never make it into the output — `HAVING` drops them
+*after* the aggregate is calculated, unlike `WHERE`, which would have to
+run before any grouping happens at all.
+
+**`AVG()`** — aggregate function: the mean of a column across a group of
+rows (or the whole table, with no `GROUP BY`).
+
+```sql
+SELECT AVG(salary) AS avg_company_salary FROM employees;
+```
+
+Returns a single row: `avg_company_salary = 67062.5` — one number across
+all 16 employees, no grouping at all.
+
+**`SUM()`** — aggregate function: the total of a column across a group of
+rows. Used both as a plain aggregate (below) and inside a window function
+(problem 7's running-total `SUM(...) OVER (...)`, which is a different
+use of the same function — no `GROUP BY` involved there at all).
+
+```sql
+SELECT department_id, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department_id;
+```
+
+| department_id | total_salary |
+|---|---|
+| 10 | 414000 |
+| 20 | 271000 |
+| 30 | 180000 |
+| 40 | 208000 |
 
 ## Window functions
 
