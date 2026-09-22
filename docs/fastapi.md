@@ -60,7 +60,7 @@ for "fire and forget, but not so important it needs a real message
 queue." It runs in the same process, though, so it's not a substitute
 for Celery when the work is heavy, needs retries, or must survive a
 process restart — for that, hand off to a real task queue (see
-[Chapter 1 §9: Background Tasks with Celery](chapter-1.md#9-background-tasks-celery))
+[Chapter 1 §9](chapter-1.md#9-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
 instead.
 
 **Where this actually shows up:** kicking off a slow analysis or
@@ -95,7 +95,7 @@ Three independent calls awaited one at a time triples the latency for no
 reason — `asyncio.gather` runs them concurrently since none depends on
 another's result. This is the same "why is this endpoint slow"
 diagnostic covered in
-[Chapter 1 §6](chapter-1.md#6-asyncio-vs-threading-vs-multiprocessing),
+[Chapter 1 §6](chapter-1.md#6-a-django-view-calling-three-third-party-apis-is-slow-walk-me-through-fixing-it),
 applied specifically to a FastAPI handler.
 
 ---

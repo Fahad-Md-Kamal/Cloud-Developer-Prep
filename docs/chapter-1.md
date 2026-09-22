@@ -4,13 +4,13 @@ title: "Chapter 1: Modern Python Mastery (Typing, AsyncIO, Memory, Concurrency)"
 
 # Chapter 1: Modern Python Mastery (Typing, AsyncIO, Memory, Concurrency)
 
-Nine focused topics, each one a thing interviewers actually ask a senior
-Python candidate to explain or code. Each section stands alone — read
-one, understand it, move on.
+Nine interview questions, each with the answer you should be able to
+give cold — code plus the reasoning behind it. Read a question, try to
+answer it yourself first, then check against the answer.
 
 ---
 
-## 1. Type Hints & Generics
+## 1. "How would you write a generic repository class instead of one per model?"
 
 ```python
 from typing import TypeVar, Generic
@@ -25,21 +25,17 @@ class APIResponse(Generic[T]):
 user_response = APIResponse[User](user_data, 200)
 ```
 
-`Generic[T]` lets a class or function work with any type while keeping
-that type checkable — a repository class that works for `User`,
-`Order`, or `Document` without losing type safety on each one.
+**Answer:** `Generic[T]` lets a class work with any type while the type
+checker still tracks *which* type — a `Repository[T]` base class works
+for `UserRepository` and `OrderRepository` without duplicating CRUD
+logic or falling back to untyped `Any`.
 
-**Where this actually shows up:** a generic `Repository[T]` base class
-in a Django/FastAPI codebase, so `UserRepository` and `OrderRepository`
-share CRUD logic without duplicating it or falling back to untyped
-`Any`.
+**Likely follow-up — "what's wrong with just using `TypeVar` unbounded,
+or `Any`?"** Both hide exactly the errors typing exists to catch. Bound
+it (`TypeVar('T', bound=BaseModel)`) once the generic needs to call a
+specific method on `T`.
 
-**Know this:** an unbounded `TypeVar` (or `Any`) in a public function
-signature defeats the point — it hides exactly the errors typing exists
-to catch. Bound it (`TypeVar('T', bound=BaseModel)`) when the generic
-needs to call a specific method.
-
-## 2. Protocols — Structural Typing
+## 2. "Explain Protocols — how are they different from inheritance-based interfaces?"
 
 ```python
 from typing import Protocol
@@ -54,17 +50,17 @@ class APICrawler:
     def fetch(self, url: str) -> str: ...  # so does this
 ```
 
-A `Protocol` says "anything with this method counts," checked
-structurally instead of by inheritance — duck typing with static
-verification. This is how you type a function argument that accepts
-"anything file-like" or "anything with a `.save()` method" without
-forcing every caller through a shared base class.
+**Answer:** A `Protocol` checks structurally — "anything with this
+method counts" — instead of requiring a shared base class. It's duck
+typing with static verification: `WebCrawler` and `APICrawler` both
+satisfy `Crawlable` just by having the right method signature.
 
-**Where this actually shows up:** swapping HTTP clients (`requests` for
-`httpx`) or mocking a dependency in a test — both work because they
-satisfy the same Protocol, not because they inherit from anything.
+**Likely follow-up — "when would you reach for this over inheritance?"**
+Swapping HTTP clients (`requests` for `httpx`) or mocking a dependency
+in a test — both work because they satisfy the same Protocol, without
+forcing every implementation through one base class.
 
-## 3. Decorators
+## 3. "Write a decorator that takes an argument. Then explain why it works."
 
 ```python
 def repeat(n: int):
@@ -80,17 +76,20 @@ def say_hello(name: str):
     print(f"Hello, {name}!")
 ```
 
-A parameterized decorator nests three levels:
-`outer(args) → decorator(func) → wrapper(*a, **kw)`. Be able to draw
-that shape cold, and explain *why* `wrapper` can still see `n` after
-`repeat(3)` has already returned — it's a closure, `n` stays alive
-because `wrapper` references it.
+**Answer:** Three nested levels — `outer(args) → decorator(func) →
+wrapper(*a, **kw)`. Be able to draw that shape cold.
 
-**Where this actually shows up:** `@login_required`, `@transaction.atomic`,
-a `@retry(max_attempts=3)` around a flaky external API call, a timing
-decorator wrapped around a slow endpoint during a perf investigation.
+**Likely follow-up — "why can `wrapper` still see `n` after `repeat(3)`
+already returned?"** It's a closure — `wrapper` references `n`, so
+Python keeps it alive as long as `wrapper` exists, even though
+`repeat`'s own stack frame is long gone.
 
-## 4. Context Managers
+**Where you'd actually use this:** `@login_required`,
+`@transaction.atomic`, `@retry(max_attempts=3)` around a flaky external
+call, a timing decorator wrapped around a slow endpoint during a perf
+investigation.
+
+## 4. "What are the two ways to build a context manager, and what does `__exit__`'s return value control?"
 
 ```python
 from contextlib import contextmanager
@@ -104,78 +103,65 @@ def managed_file(path: str, mode: str):
         f.close()
 ```
 
-Two ways to build one: a class with `__enter__`/`__exit__`, or a
-generator wrapped in `@contextmanager` (simpler for most cases). The
-point is deterministic cleanup — the `finally` runs whether the block
-succeeded or raised.
+**Answer:** A class with `__enter__`/`__exit__`, or (simpler, most of
+the time) a generator wrapped in `@contextmanager`. The point is
+deterministic cleanup — `finally` runs whether the block succeeded or
+raised.
 
-**Know this:** `__exit__`'s return value controls exception propagation
-— return `True` and an exception raised inside the `with` block gets
-swallowed instead of propagating. Rarely what you want; know it's there
-because interviewers ask.
+**The part people miss:** `__exit__` returning `True` **swallows** an
+exception raised inside the `with` block instead of propagating it.
+Rarely what you actually want — know it's there because interviewers
+specifically probe this.
 
-**Where this actually shows up:** DB transactions (`with
-transaction.atomic():`), file/socket handling, temporarily overriding a
-setting in a test.
+**Where you'd actually use this:** `with transaction.atomic():`,
+file/socket handling, temporarily overriding a setting in a test.
 
-## 5. The GIL
+## 5. "Explain the GIL. Then explain why threads still help I/O-bound code despite it."
 
-A single mutex preventing more than one thread from executing Python
-bytecode at a time, in CPython specifically. Threads still help
-I/O-bound work, because a thread releases the GIL while it's blocked on
-I/O (a network call, a file read) — another thread runs during that
-wait. CPU-bound work doesn't benefit from threads at all, since only one
-thread can be *executing* Python at any instant regardless of how many
-exist.
+**Answer:** The GIL is a single mutex in CPython that prevents more than
+one thread from executing Python bytecode at a time. Threads still help
+I/O-bound work because a thread **releases** the GIL while blocked on
+I/O (network call, file read, DB query) — another thread runs during
+that wait. CPU-bound work gets no benefit from threads at all, since
+only one thread can be *executing* Python at any instant no matter how
+many exist.
 
-**The demo interviewers want:** the same CPU-bound loop run three ways —
-sequential, threaded, multiprocessed. Threaded comes out roughly equal
-to sequential (no real parallelism gained); multiprocessed actually
-scales, because separate processes each have their own GIL.
+**If asked to demonstrate it live:** run the same CPU-bound loop three
+ways — sequential, threaded, multiprocessed. Threaded comes out roughly
+equal to sequential (no real parallelism gained); multiprocessed
+actually scales, because separate processes each get their own GIL.
 
-**The one-line answer:** "threads for I/O-bound, processes for
+**The one-liner to lead with:** "threads for I/O-bound, processes for
 CPU-bound" — then be ready to explain *why*, not just recite it.
 
-## 6. AsyncIO vs. Threading vs. Multiprocessing
-
-```python
-# AsyncIO -- I/O-bound, one thread, thousands of concurrent tasks
-async def fetch_async(session, url):
-    async with session.get(url) as response:
-        return await response.text()
-
-# Threading -- blocking libraries with no async variant
-def fetch_threaded(url):
-    return requests.get(url).text
-
-# Multiprocessing -- CPU-bound work, bypasses the GIL entirely
-def process_document(doc_text):
-    return heavy_nlp_analysis(doc_text)
-```
-
-**Decision rule:** mostly network-bound → AsyncIO. Must call a blocking
-library with no async client → a thread pool around the blocking calls.
-CPU-dominated (parsing, number-crunching, ML inference) →
-multiprocessing, sized to core count. Never run CPU work directly inside
-an async event loop — it blocks *every* other task on that loop, not
-just the one doing the work.
+## 6. "A Django view calling three third-party APIs is slow. Walk me through fixing it."
 
 ```python
 import asyncio
 
+async def fetch_async(session, url):
+    async with session.get(url) as response:
+        return await response.text()
+
 async def main():
-    urls = [...]
     tasks = [fetch_async(session, url) for url in urls]
     results = await asyncio.gather(*tasks)  # all concurrent, one thread
 ```
 
-**Where this actually shows up:** a Django view that calls three
-third-party APIs sequentially is slow because it waits for each one in
-turn; the same three calls under `asyncio.gather` (or a thread pool, in
-sync Django) run concurrently instead — the classic "why is this
-endpoint slow" interview follow-up.
+**Answer:** If the calls are sequential — awaiting each one in turn —
+they're slow because the total time is the *sum* of three round trips
+instead of the *max*. `asyncio.gather` (or a thread pool, in sync
+Django) runs them concurrently instead.
 
-## 7. Memory: Generators & `__slots__`
+**Likely follow-up — "when would you reach for threading or
+multiprocessing instead of asyncio here?"** Decision rule: mostly
+network-bound → AsyncIO. Must call a blocking library with no async
+client → thread pool around the blocking calls. CPU-dominated (parsing,
+number-crunching, ML inference) → multiprocessing, sized to core count.
+Never run CPU work directly inside an async event loop — it blocks
+*every* other task on that loop, not just the one doing the work.
+
+## 7. "How would you process a file too large to fit in memory?"
 
 ```python
 # Loads the whole file into memory at once
@@ -188,28 +174,29 @@ def process_streaming(filename):
     with open(filename) as f:
         for line in f:
             yield process_line(line)
-
-
-class Document:
-    __slots__ = ['id', 'title', 'content']  # no per-instance __dict__
-    def __init__(self, id, title, content):
-        self.id, self.title, self.content = id, title, content
 ```
 
-A generator trades "have the whole result ready immediately" for
-"produce one item at a time" — the right trade whenever the input might
-be large (a big file, a paginated API, a DB cursor) and you don't need
-everything in memory simultaneously. `__slots__` removes the per-instance
-`__dict__` that a normal Python object carries, cutting memory
-meaningfully for classes you instantiate a lot — at the cost of losing
-dynamic attribute assignment.
+**Answer:** A generator — trade "have the whole result ready
+immediately" for "produce one item at a time." Memory stays flat
+whether the file is 1MB or 10GB.
 
-**Know this exists, don't over-invest:** `tracemalloc` (built in) for
-measuring where memory actually goes when something's using more than
-expected — enough to name it in an interview; the deep profiling
-tooling tour isn't interview material.
+**Likely follow-up — "how would you cut memory further for a class
+you're instantiating millions of times?"**
 
-## 8. LRU Cache
+```python
+class Document:
+    __slots__ = ['id', 'title', 'content']  # no per-instance __dict__
+```
+
+`__slots__` removes the per-instance `__dict__` a normal Python object
+carries — real memory savings at scale, at the cost of losing dynamic
+attribute assignment.
+
+**If asked how you'd actually measure it:** `tracemalloc` (built in) —
+enough to name it and explain what it does; the deep profiling-tooling
+tour isn't interview material.
+
+## 8. "Implement an LRU cache. What data structures does it need, and why both?"
 
 ```python
 import functools
@@ -220,17 +207,18 @@ def get_user_data(user_id: int) -> dict:
 
 get_user_data(123)  # hits the DB
 get_user_data(123)  # cache hit, no DB call
-print(get_user_data.cache_info())
 ```
 
-`functools.lru_cache` is the fast path for memoizing an expensive, pure
-function (same input → same output, no side effects) — a DB lookup, a
-slow computation. Know `cache_info()` exists to talk about hit rates.
-From scratch, an LRU cache is a hash map (O(1) lookup) plus a doubly
-linked list (O(1) move-to-front / eviction) — be ready to explain why
-both pieces are needed, not just one.
+**Answer for the built-in version:** `functools.lru_cache` for
+memoizing an expensive, pure function (same input → same output, no
+side effects). `cache_info()` gives hit-rate stats.
 
-## 9. Background Tasks: Celery
+**Answer for "build it from scratch":** a hash map for O(1) lookup, plus
+a doubly linked list for O(1) move-to-front and eviction. Be ready to
+explain *why both* are needed — a hash map alone can't cheaply track
+recency order, and a linked list alone can't do O(1) lookup by key.
+
+## 9. "When do you reach for Celery instead of just handling something in the request?"
 
 ```python
 from celery import Celery
@@ -247,16 +235,16 @@ def process_document(self, doc_id, doc_content):
 process_document.delay(doc_id, content)  # runs in a worker, not this request
 ```
 
-Anything slow or non-critical to the immediate HTTP response — sending
-an email, processing an upload, calling a slow third-party API — moves
-out of the request/response cycle and into a Celery task, backed by
-Redis or RabbitMQ as the broker. `.delay()` queues it; a separate worker
-process picks it up.
+**Answer:** Anything slow or non-critical to the immediate HTTP response
+— sending an email, processing an upload, calling a slow third-party
+API — moves out of the request/response cycle into a task, backed by
+Redis or RabbitMQ. `.delay()` queues it; a separate worker process picks
+it up.
 
-**Know this:** an idempotency key on the task matters once retries are
-in play — `max_retries=3` means the task can run more than once, and
-"process this payment twice" is a real bug class if the task isn't safe
-to repeat.
+**Likely follow-up — "what breaks if this task runs twice?"** Retries
+mean it can. Add an idempotency key so a retried task doesn't
+double-process — "charge the customer twice" is the textbook version of
+this bug.
 
 ---
 
@@ -280,6 +268,8 @@ mypy code_samples/chapter-1/ --config-file code_samples/chapter-1/config/mypy.in
 
 ### Mutable default arguments
 
+**Asked:** what does this print, and why?
+
 ```python
 def add_item(item, items=[]):
     items.append(item)
@@ -289,17 +279,17 @@ print(add_item("a"))
 print(add_item("b"))
 ```
 
-**Output:**
+**Answer:**
 
 ```
 ['a']
 ['a', 'b']
 ```
 
-**Why:** default arguments are evaluated **once, at function definition
-time**, not on each call. `items=[]` creates a single list object bound to
-the parameter default, and it persists (and gets mutated) across every
-call that doesn't pass its own `items` — it's not "reusing the parameter
+Default arguments are evaluated **once, at function definition time**,
+not on each call. `items=[]` creates a single list object bound to the
+parameter default, and it persists (and gets mutated) across every call
+that doesn't pass its own `items` — it's not "reusing the parameter
 value" so much as "there's only ever one default object, mutated in
 place."
 
