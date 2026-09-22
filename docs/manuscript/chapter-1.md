@@ -862,3 +862,51 @@ This chapter covers the essential advanced Python concepts needed for senior bac
 These concepts are specifically chosen to align with the requirements for both Lawstronaut (web crawling and data processing) and Optimizely (AI systems and high-performance APIs). The examples demonstrate production-ready patterns used in enterprise systems.
 
 **Next Steps**: Practice implementing these patterns in your own projects, focusing on the specific areas most relevant to your target roles. Each concept builds upon the others to create a comprehensive foundation for advanced Python engineering.
+
+---
+
+## Practice Notes (from live session)
+
+### Mutable default arguments
+
+```python
+def add_item(item, items=[]):
+    items.append(item)
+    return items
+
+print(add_item("a"))
+print(add_item("b"))
+```
+
+**Output:**
+
+```
+['a']
+['a', 'b']
+```
+
+**Why:** default arguments are evaluated **once, at function definition
+time**, not on each call. `items=[]` creates a single list object bound to
+the parameter default, and it persists (and gets mutated) across every
+call that doesn't pass its own `items` — it's not "reusing the parameter
+value" so much as "there's only ever one default object, mutated in
+place."
+
+**Fix — the standard idiom:**
+
+```python
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+```
+
+Default to `None` (immutable, safe to reuse), then create a fresh mutable
+object inside the function body on each call if none was passed. Same
+pattern applies to any mutable default (`{}`, `[]`, or a custom mutable
+object).
+
+!!! note "Session note"
+    Covered in the [session log](session-log.md#2026-09-22) — answered
+    correctly, including the fix, after a nudge on the "why."

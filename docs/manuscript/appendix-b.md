@@ -296,3 +296,55 @@ When discussing Django ORM in interviews, try to speak in this order:
 Good concise summary:
 
 > Most Django ORM problems are not caused by Django itself. They come from weak query design, missing indexes, poor loading strategy, or doing work in Python that should have been done in SQL.
+
+---
+
+## Practice Notes (from live session)
+
+### `select_related` vs `prefetch_related` — a real N+1 round
+
+Given this view:
+
+```python
+def get_reports(request):
+    reports = Report.objects.filter(status='active')
+    data = [
+        {"title": r.title, "owner": r.owner.name, "org": r.owner.organization.name}
+        for r in reports
+    ]
+    return JsonResponse(data, safe=False)
+```
+
+**Problem:** every iteration hits the DB again for `r.owner` and
+`r.owner.organization` — classic N+1.
+
+**The nuance that matters at senior level** — the two fixes are not
+interchangeable:
+
+| | Use for | How |
+|---|---|---|
+| `select_related` | `ForeignKey` / `OneToOne` (single-valued, "to-one") relations | SQL `JOIN`, one query |
+| `prefetch_related` | reverse FK / `ManyToMany` (multi-valued, "to-many") relations | a second query, joined in Python |
+
+`owner` is a FK on `Report`, and `organization` is a FK on `owner` — both
+single-valued, always "one row points to one related row." Correct fix:
+
+```python
+reports = Report.objects.filter(status='active') \
+    .select_related('owner', 'owner__organization')
+```
+
+Using `prefetch_related` here would still reduce query count vs. the
+original, but it's the wrong tool — extra queries instead of a single
+JOIN. Interviewers probe this specific distinction to separate "knows N+1
+is bad" from "actually understands the ORM."
+
+**Rule of thumb:** if you can reach the field through a chain of dots
+without ever going "backwards" through a `ForeignKey`/`M2M`, use
+`select_related`. If at any point you're fetching a *collection* (reverse
+FK, M2M), use `prefetch_related`.
+
+!!! note "Session note"
+    Covered in the [session log](session-log.md#2026-09-22) — N+1
+    correctly diagnosed; initial fix used `prefetch_related`, corrected to
+    `select_related` after discussion of the to-one/to-many distinction.

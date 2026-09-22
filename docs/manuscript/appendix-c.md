@@ -1,8 +1,13 @@
 ---
-title: AWS Services
+title: "Appendix C: AWS Services Quick Reference"
 ---
 
-# AWS Services
+# Appendix C: AWS Services Quick Reference
+
+Targeted at the current job-search track's JD requirements (basic AWS
+knowledge including ECS, Lambda, S3, Aurora RDS, SQS, DynamoDB) — see
+also Chapter 8 (Database Architecture), Chapter 16 (Docker), and
+Chapter 17 (Kubernetes & Orchestration) for deeper related material.
 
 ## Already hands-on
 
@@ -44,9 +49,9 @@ experience. 30–45 minutes each is enough to hold a competent conversation
 - Be honest about depth here: convey understanding of *when* to reach for
   it, not hands-on expertise
 
-!!! note "Why this page exists"
+!!! note "Why this appendix exists"
     The risk with "basic knowledge of AWS Services (including but not
     limited to ECS, Lambda, S3, Aurora RDS, SQS, DynamoDB)" style
     requirements isn't being under-qualified — it's having *nothing* to
-    say about a named service. This page exists to make sure that never
-    happens.
+    say about a named service. This appendix exists to make sure that
+    never happens.

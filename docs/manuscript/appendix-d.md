@@ -1,17 +1,15 @@
 ---
-title: System Design & Stories
+title: "Appendix D: Personal Project Stories"
 ---
 
-# System Design & Stories
+# Appendix D: Personal Project Stories
 
 Senior-level interviews often include one open-ended design question.
 Rehearse these **out loud**, not just in your head, so the numbers come
-out fluently instead of fumbled.
-
-!!! note "Names genericized"
-    Real client/product names replaced with generic labels since this
-    site is public — see [why](index.md#a-note-on-names). Tech stack,
-    architecture decisions, and metrics are real.
+out fluently instead of fumbled. Related: Chapter 26 (System Design
+Interviews), Chapter 31 (Behavioral Interview Prep), Chapter 33 (Mock
+Projects) cover the book's own hypothetical scenarios — these are your
+*real* projects to use instead.
 
 ## Project A — Geospatial Data Platform
 
@@ -64,7 +62,9 @@ existing product." Genuinely uncommon, strong answer — most candidates at
 this level haven't shipped RAG end-to-end. If the interviewer's stack is
 AWS-native (Lex) or IBM Watson/GCP rather than Azure, be ready to say:
 "the concepts — embeddings, retrieval, prompt orchestration — transfer
-directly, I just haven't used those specific SDKs."
+directly, I just haven't used those specific SDKs." See also Appendix A
+(MeetingFlow Case Study) for the deep technical write-up behind this
+project.
 
 ## Project D — Omnichannel Customer Engagement Platform
 

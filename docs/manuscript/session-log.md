@@ -37,7 +37,7 @@ object, not "reused per call." Fix (the `None` sentinel idiom) required a
 prompt but was then given correctly.
 
 **Status:** ✅ solid after one nudge. Full writeup:
-[Python Core](python-core.md#worked-example-mutable-default-arguments).
+[Chapter 1: Modern Python Mastery](chapter-1.md#practice-notes-from-live-session).
 
 ### Q2 — N+1 queries / `select_related` vs `prefetch_related` (Django ORM)
 
@@ -58,7 +58,7 @@ relations. Correct fix:
 **Status:** ⚠️ needs another rep — N+1 diagnosis is solid, but
 `select_related`/`prefetch_related` choice needs to become automatic, not
 a "which one was it again" pause under interview pressure. Full writeup:
-[Django & DRF](django-drf.md#worked-example-select_related-vs-prefetch_related).
+[Appendix B: Django ORM Cheat Sheet](appendix-b.md#practice-notes-from-live-session).
 
 ### Q3 — Rank within a group / window functions (SQL)
 
@@ -82,7 +82,7 @@ differences.
 **Status:** ❌ gap — window functions are not yet solid. This was called
 out ahead of time as "common in senior-level tests," so it's a priority
 for more reps before the real interview, not just a one-off review. Full
-writeup: [SQL](sql.md#worked-example-rank-within-a-group-window-functions).
+writeup: [Chapter 8: Database Architecture for Scale](chapter-8.md#worked-example-rank-within-a-group-window-functions).
 
 ### Q4 — Practice sandbox problem 1: warm-up join (SQL)
 
@@ -115,4 +115,4 @@ error message to lean on there.
 
 *Next session: continue through the practice sandbox problems (2–8:
 aggregates, HAVING, then window functions), then AWS gap topics
-(ECS/Aurora/DynamoDB) and a full mock run-through.*
+(ECS/Aurora/DynamoDB — Appendix C) and a full mock run-through.*

@@ -42,6 +42,9 @@ building on the previous one.
 
 ## Contents
 
+- **[Session Log](session-log.md)** — running, dated record of live
+  practice Q&A, cross-linked into the chapters below.
+
 ### Part I — Core Engineering Foundations (Chapters 1–5)
 
 - [Chapter 1: Modern Python Mastery](chapter-1.md)
@@ -127,3 +130,7 @@ building on the previous one.
 
 - [Appendix A: MeetingFlow Case Study](appendix-a.md)
 - [Appendix B: Django ORM Query Cheat Sheet](appendix-b.md)
+- [Appendix C: AWS Services Quick Reference](appendix-c.md) — current
+  job-search track's AWS gap review (ECS, Aurora RDS, DynamoDB)
+- [Appendix D: Personal Project Stories](appendix-d.md) — real project
+  STAR stories for system-design/behavioral questions

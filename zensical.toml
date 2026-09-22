@@ -10,13 +10,8 @@ repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
 nav = [
   { "Home" = "index.md" },
   { "Study Materials" = [
-      { "Python Core" = "python-core.md" },
-      { "Django & DRF" = "django-drf.md" },
-      { "SQL" = "sql.md" },
-      { "AWS Services" = "aws-services.md" },
-      { "System Design & Stories" = "system-design.md" },
-      { "Session Log" = "session-log.md" },
       { "Manuscript Home" = "manuscript/index.md" },
+      { "Session Log" = "manuscript/session-log.md" },
       { "Core Engineering Foundations" = [
           { "1. Modern Python Mastery" = "manuscript/chapter-1.md" },
           { "2. Clean Code & Design Patterns" = "manuscript/chapter-2.md" },
@@ -91,6 +86,8 @@ nav = [
       { "Appendix: Real-World Case Studies" = [
           { "Appendix A: MeetingFlow Case Study" = "manuscript/appendix-a.md" },
           { "Appendix B: Django ORM Cheat Sheet" = "manuscript/appendix-b.md" },
+          { "Appendix C: AWS Services Quick Reference" = "manuscript/appendix-c.md" },
+          { "Appendix D: Personal Project Stories" = "manuscript/appendix-d.md" },
       ] },
   ] },
 ]
