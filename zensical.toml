@@ -82,13 +82,16 @@ nav = [
       { "Additional" = [
           { "38. Python Standard Library" = "chapter-38.md" },
       ] },
-      { "Django & DRF" = [
-          { "ORM Query Cheat Sheet" = "appendix-b.md" },
-          { "Deep Dive: Serializers, Auth, Signals, Testing" = "appendix-e.md" },
+      { "Frameworks" = [
+          { "Django & DRF" = [
+              { "ORM Query Cheat Sheet" = "django-orm.md" },
+              { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
+          ] },
+          { "FastAPI" = "fastapi.md" },
       ] },
-      { "AWS Services Quick Reference" = "appendix-c.md" },
-      { "Personal Project Stories" = "appendix-d.md" },
-      { "MeetingFlow Case Study" = "appendix-a.md" },
+      { "AWS Services Quick Reference" = "aws-services.md" },
+      { "Personal Project Stories" = "project-stories.md" },
+      { "MeetingFlow Case Study" = "meetingflow-case-study.md" },
   ] },
 ]
 

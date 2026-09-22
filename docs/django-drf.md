@@ -8,7 +8,7 @@ Django/DRF-specific depth beyond what's covered elsewhere — serializers,
 permissions, auth, signals, migrations, testing, caching. For query
 optimization and ORM patterns (`select_related`, `F()`, `Subquery`,
 window functions), see the
-[Django ORM Query Cheat Sheet](appendix-b.md). For general REST API
+[Django ORM Query Cheat Sheet](django-orm.md). For general REST API
 design principles, versioning, and the FastAPI comparison, see
 [Chapter 3: Advanced REST API Design](chapter-3.md).
 
@@ -270,10 +270,15 @@ relying on TTL alone for data that needs to be fresh.
 
 ---
 
+## Code Samples
+
+- `code_samples/chapter-3/django_legal_document_api.py` — nested
+  serializers, permissions, query optimization
+
 ## Practice Notes (from live session)
 
 No dedicated rounds here yet — the `select_related` vs `prefetch_related`
 round from the session log lives in the
-[Django ORM Query Cheat Sheet](appendix-b.md#practice-notes-from-live-session),
+[Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session),
 since it was specifically about ORM query behavior. Future rounds on
 serializers, permissions, or auth get logged here.

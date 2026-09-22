@@ -63,7 +63,7 @@ this level haven't shipped RAG end-to-end. If the interviewer's stack is
 AWS-native (Lex) or IBM Watson/GCP rather than Azure, be ready to say:
 "the concepts — embeddings, retrieval, prompt orchestration — transfer
 directly, I just haven't used those specific SDKs." See also the
-[MeetingFlow Case Study](appendix-a.md) for the deep technical write-up
+[MeetingFlow Case Study](meetingflow-case-study.md) for the deep technical write-up
 behind this project.
 
 ## Project D — Omnichannel Customer Engagement Platform

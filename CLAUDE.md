@@ -23,8 +23,8 @@ All content lives flat under `docs/*.md` (plus `docs/chapter-36/` for the
 DSA sub-chapters) as one unified tree — there is no longer a separate
 public-safe layer vs. a private layer split by directory. Real
 company/target names (Lawstronaut, Optimizely, Cefalo) and a real client
-case study (`docs/appendix-a.md`, the MeetingFlow system) are mixed
-directly into the chapters. **Not genericized.**
+case study (`docs/meetingflow-case-study.md`) are mixed directly into
+the chapters. **Not genericized.**
 
 The public/private boundary is enforced entirely at the **repo
 visibility** level (must be private), not per-file. If asked to make this

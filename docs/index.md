@@ -14,7 +14,7 @@ chapter each round belongs to.
 
 !!! warning "Private content — repo must stay private"
     Contains real company names (Lawstronaut, Optimizely, Cefalo) and a
-    client case study (the [MeetingFlow Case Study](appendix-a.md)).
+    client case study (the [MeetingFlow Case Study](meetingflow-case-study.md)).
 
 ## About this book
 
@@ -48,11 +48,11 @@ Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
 - Mutable default arguments → [Chapter 1: Modern Python Mastery](chapter-1.md#practice-notes-from-live-session)
-- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](appendix-b.md#practice-notes-from-live-session)
+- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [Chapter 8: Database Architecture for Scale](chapter-8.md#practice-notes-from-live-session)
-- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](appendix-c.md)
-- Project stories for system-design questions → [Personal Project Stories](appendix-d.md)
-- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](appendix-e.md)
+- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](aws-services.md)
+- Project stories for system-design questions → [Personal Project Stories](project-stories.md)
+- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](django-drf.md)
 
 ## Contents
 
@@ -63,7 +63,7 @@ inside the relevant chapter, not on separate pages:
 
 - [Chapter 1: Modern Python Mastery](chapter-1.md)
 - [Chapter 2: Clean Code, Design Patterns, and SOLID Principles](chapter-2.md)
-- [Chapter 3: Advanced REST API Design](chapter-3.md)
+- [Chapter 3: REST API Design Principles](chapter-3.md)
 - [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
 - [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
 
@@ -140,29 +140,32 @@ inside the relevant chapter, not on separate pages:
 
 - [Chapter 38: Python Standard Library for Enterprise Systems](chapter-38.md)
 
-### Django & DRF
+### Frameworks
 
-- [Django ORM Query Cheat Sheet](appendix-b.md)
-- [Django & DRF Deep Dive](appendix-e.md) — serializers, permissions,
-  auth, signals, migrations, testing, caching
+- **Django & DRF**
+    - [Django ORM Query Cheat Sheet](django-orm.md)
+    - [Django & DRF Deep Dive](django-drf.md) — serializers, permissions,
+      auth, signals, migrations, testing, caching
+- **[FastAPI](fastapi.md)** — dependency injection, background tasks,
+  performance patterns
 
 ### AWS Services Quick Reference
 
-- [AWS Services Quick Reference](appendix-c.md) — current job-search
+- [AWS Services Quick Reference](aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 
 ### Personal Project Stories
 
-- [Personal Project Stories](appendix-d.md) — real project STAR stories
+- [Personal Project Stories](project-stories.md) — real project STAR stories
   for system-design/behavioral questions
 
 ### MeetingFlow Case Study
 
-- [MeetingFlow Case Study](appendix-a.md)
+- [MeetingFlow Case Study](meetingflow-case-study.md)
 
 ## A note on names
 
-[Personal Project Stories](appendix-d.md) uses generic project labels
+[Personal Project Stories](project-stories.md) uses generic project labels
 ("geospatial data platform client", "cybersecurity risk platform
 client") left over from when this content lived on a public site. The
 repo is private now, so these could be restored to the real project
