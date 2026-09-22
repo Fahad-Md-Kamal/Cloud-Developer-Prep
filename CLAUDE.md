@@ -68,6 +68,17 @@ between each term/definition pair.
 is parsed as an extra column separator and silently corrupts/drops the rest
 of that row. Escape it as `\|`.
 
+**A table with no blank line before it** — if a table's header row
+immediately follows a non-blank, non-table line (e.g. `**Trace Table:**`
+directly above the `| ... |` header, no blank line between), Python-Markdown
+doesn't recognize it as a table at all — the whole thing gets absorbed into
+the preceding paragraph as literal text with `<br />` tags instead of
+rendering a `<table>`. This was a real, confirmed bug found across 114
+occurrences in the migrated manuscript content (mostly Chapter 36's
+"Trace Table:" pattern), fixed by inserting a blank line before every
+such table. Always put a blank line between a preceding line and a
+table's header row.
+
 ## Verifying content changes
 
 - `zensical build --clean` exits with "No issues found." Any "Warning:
