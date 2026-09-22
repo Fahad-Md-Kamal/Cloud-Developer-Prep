@@ -17,7 +17,6 @@ nav = [
       { "System Design & Stories" = "system-design.md" },
       { "Session Log" = "session-log.md" },
       { "Manuscript Home" = "manuscript/index.md" },
-      { "Progress Tracker" = "manuscript/progress.md" },
       { "Core Engineering Foundations" = [
           { "1. Modern Python Mastery" = "manuscript/chapter-1.md" },
           { "2. Clean Code & Design Patterns" = "manuscript/chapter-2.md" },
