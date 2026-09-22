@@ -111,6 +111,7 @@ def find_min(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Rotated once | [3,4,5,1,2] | 1 | Array was rotated, minimum is 1 |
@@ -174,6 +175,7 @@ def search(nums: list[int], target: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (nums) | Target | Output | Explanation |
 |-----------|--------------|--------|--------|-------------|
 | Found in rotated | [4,5,6,7,0,1,2] | 0 | 4 | Target found at index 4 |

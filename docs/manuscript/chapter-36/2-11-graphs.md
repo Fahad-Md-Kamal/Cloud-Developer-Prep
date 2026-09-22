@@ -129,6 +129,7 @@ def num_islands(grid: list[list[str]]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Multiple islands | [["1","1","0"],["1","0","0"],["0","0","1"]] | 2 | Two separate islands |
@@ -205,6 +206,7 @@ def clone_graph(node: 'Node') -> 'Node':
 ```
 
 **Trace Table:**
+
 | Test Case | Input (adjacency list) | Output | Explanation |
 |-----------|------------------------|--------|-------------|
 | Basic graph | [[2,4],[1,3],[2,4],[1,3]] | [[2,4],[1,3],[2,4],[1,3]] | 4-node graph cloned |
@@ -292,6 +294,7 @@ def pacific_atlantic(heights: list[list[int]]) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]] | [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]] | Water can flow to both oceans from these cells |
@@ -389,6 +392,7 @@ def accounts_merge(accounts: list[list[str]]) -> list[list[str]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic merge | [["John","john@mail.com","john_work@mail.com"],["John","john@mail.com","john_home@mail.com"]] | [["John","john@mail.com","john_home@mail.com","john_work@mail.com"]] | Two accounts merged via common email |
@@ -483,6 +487,7 @@ def can_finish(numCourses: int, prerequisites: list[list[int]]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | numCourses | Prerequisites | Output | Explanation |
 |-----------|------------|---------------|--------|-------------|
 | No cycle | 2 | [[1,0]] | True | Course 1 requires course 0 (no cycle) |
@@ -577,6 +582,7 @@ def count_components(n: int, edges: list[list[int]]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | n | Edges | Output | Explanation |
 |-----------|---|-------|--------|-------------|
 | Multiple components | 5 | [[0,1],[1,2],[3,4]] | 2 | Two groups: {0,1,2} and {3,4} |

@@ -436,6 +436,7 @@ code_samples/
 ## Interview Prep Alignment: API Design & Webhooks (Week 1)
 
 ### REST vs GraphQL vs gRPC
+
 | Feature | **REST** | **GraphQL** | **gRPC** |
 | :--- | :--- | :--- | :--- |
 | Paradigm | Resource-oriented | Query-based | Service/RPC-oriented |

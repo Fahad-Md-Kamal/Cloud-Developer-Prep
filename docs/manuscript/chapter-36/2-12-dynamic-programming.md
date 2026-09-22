@@ -101,6 +101,7 @@ def climb_stairs(n: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Small n | 2 | 2 | Two ways: (1+1) or (2) |
@@ -156,6 +157,7 @@ def coin_change(coins: list[int], amount: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Coins | Amount | Output | Explanation |
 |-----------|-------|--------|--------|-------------|
 | Basic | [1,2,5] | 11 | 3 | 5+5+1 = 11 (3 coins) |
@@ -230,6 +232,7 @@ def length_of_lis_optimized(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [10,9,2,5,3,7,101,18] | 4 | LIS is [2,3,7,101] or [2,5,7,101] |
@@ -284,6 +287,7 @@ def longest_common_subsequence(text1: str, text2: str) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | text1 | text2 | Output | Explanation |
 |-----------|-------|-------|--------|-------------|
 | Basic | "abcde" | "ace" | 3 | LCS is "ace" with length 3 |
@@ -338,6 +342,7 @@ def word_break(s: str, wordDict: list[str]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | s | wordDict | Output | Explanation |
 |-----------|---|----------|--------|-------------|
 | Basic | "leetcode" | ["leet","code"] | True | Can be segmented as "leet" + "code" |
@@ -413,6 +418,7 @@ class Codec:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Encoded | Decoded | Explanation |
 |-----------|-------|---------|---------|-------------|
 | Basic | ["hello","world"] | "5#hello5#world" | ["hello","world"] | Length prefix handles decoding |
@@ -469,6 +475,7 @@ def is_valid_sudoku(board: list[list[str]]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input Description | Output | Explanation |
 |-----------|------------------|--------|-------------|
 | Valid board | Standard partially filled valid board | True | No duplicates in rows/cols/boxes |
@@ -518,6 +525,7 @@ def two_sum_sorted(numbers: list[int], target: int) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Target | Output | Explanation |
 |-----------|-------|--------|--------|-------------|
 | Basic | [2,7,11,15] | 9 | [1,2] | 2 + 7 = 9 |
@@ -579,6 +587,7 @@ def trap(height: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [0,1,0,2,1,0,1,3,2,1,2,1] | 6 | Water trapped in valleys |
@@ -647,6 +656,7 @@ def check_inclusion(s1: str, s2: str) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | s1 | s2 | Output | Explanation |
 |-----------|----|----|--------|-------------|
 | Basic | "ab" | "eidbaooo" | True | "ba" is permutation of "ab" |
@@ -707,6 +717,7 @@ def max_sliding_window(nums: list[int], k: int) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | k | Output | Explanation |
 |-----------|------|---|--------|-------------|
 | Basic | [1,3,-1,-3,5,3,6,7] | 3 | [3,3,5,5,6,7] | Max in each window of 3 |
@@ -774,6 +785,7 @@ class MinStack:
 ```
 
 **Trace Table:**
+
 | Operations | Result | Explanation |
 |------------|--------|-------------|
 | push(-2), push(0), push(-3), getMin() | -3 | Minimum is -3 |
@@ -831,6 +843,7 @@ def eval_rpn(tokens: list[str]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | tokens | Output | Explanation |
 |-----------|--------|--------|-------------|
 | Basic | ["2","1","+","3","*"] | 9 | ((2 + 1) * 3) = 9 |
@@ -885,6 +898,7 @@ def generate_parenthesis(n: int) -> list[str]:
 ```
 
 **Trace Table:**
+
 | Test Case | n | Output | Explanation |
 |-----------|---|--------|-------------|
 | n=1 | 1 | ["()"] | Only one valid combination |
@@ -931,6 +945,7 @@ def daily_temperatures(temperatures: list[int]) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | temperatures | Output | Explanation |
 |-----------|-------------|--------|-------------|
 | Basic | [73,74,75,71,69,72,76,73] | [1,1,4,2,1,1,0,0] | Days until warmer |
@@ -982,6 +997,7 @@ def binary_search(nums: list[int], target: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | target | Output | Explanation |
 |-----------|------|--------|--------|-------------|
 | Found | [-1,0,3,5,9,12] | 9 | 4 | Element at index 4 |
@@ -1045,6 +1061,7 @@ def search_matrix(matrix: list[list[int]], target: int) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | matrix | target | Output | Explanation |
 |-----------|--------|--------|--------|-------------|
 | Found | [[1,3,5,7],[10,11,16,20],[23,30,34,60]] | 3 | True | Element exists in first row |
@@ -1104,6 +1121,7 @@ def min_eating_speed(piles: list[int], h: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | piles | h | Output | Explanation |
 |-----------|-------|---|--------|-------------|
 | Basic | [3,6,7,11] | 8 | 4 | Eating at speed 4: 1+2+2+3=8 hours |
@@ -1149,6 +1167,7 @@ def max_sub_array(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [-2,1,-3,4,-1,2,1,-5,4] | 6 | Subarray [4,-1,2,1] has sum 6 |
@@ -1194,6 +1213,7 @@ def can_jump(nums: list[int]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Can reach | [2,3,1,1,4] | True | Jump path: 0->1->4 |
@@ -1255,6 +1275,7 @@ def jump(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [2,3,1,1,4] | 2 | Jump 1->3->4 (2 jumps) |
@@ -1312,6 +1333,7 @@ def merge(intervals: list[list[int]]) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | intervals | Output | Explanation |
 |-----------|-----------|--------|-------------|
 | Basic | [[1,3],[2,6],[8,10],[15,18]] | [[1,6],[8,10],[15,18]] | [1,3] and [2,6] overlap |
@@ -1380,6 +1402,7 @@ def insert(intervals: list[list[int]], newInterval: list[int]) -> list[list[int]
 ```
 
 **Trace Table:**
+
 | Test Case | intervals | newInterval | Output | Explanation |
 |-----------|-----------|-------------|--------|-------------|
 | Middle insert | [[1,3],[6,9]] | [2,5] | [[1,5],[6,9]] | Merges with [1,3] |
@@ -1433,6 +1456,7 @@ def erase_overlap_intervals(intervals: list[list[int]]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | intervals | Output | Explanation |
 |-----------|-----------|--------|-------------|
 | Basic | [[1,2],[2,3],[3,4],[1,3]] | 1 | Remove [1,3] |
@@ -1472,6 +1496,7 @@ def single_number(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [2,2,1] | 1 | 1 appears once |
@@ -1509,6 +1534,7 @@ def hamming_weight(n: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | n (binary) | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | 11 (1011) | 3 | Three 1 bits |
@@ -1544,6 +1570,7 @@ def count_bits(n: int) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | n | Output | Explanation |
 |-----------|---|--------|-------------|
 | Small | 2 | [0,1,1] | 0:0 bits, 1:1 bit, 2:1 bit |
@@ -1590,6 +1617,7 @@ def missing_number_sum(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [3,0,1] | 2 | Missing 2 from [0,1,2,3] |
@@ -1679,6 +1707,7 @@ def copy_random_list(head: 'Node') -> 'Node':
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | With random | [[7,null],[13,0],[11,4],[10,2],[1,0]] | Deep copy with all pointers | Each node copied with random links |
@@ -1738,6 +1767,7 @@ def add_two_numbers(l1: ListNode, l2: ListNode) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | l1 | l2 | Output | Explanation |
 |-----------|----|----|--------|-------------|
 | Basic | [2,4,3] | [5,6,4] | [7,0,8] | 342 + 465 = 807 |
@@ -1830,6 +1860,7 @@ class LRUCache:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | put(1,1), put(2,2), get(1), put(3,3), get(2) | [null,null,1,null,-1] | Key 2 evicted |
@@ -1902,6 +1933,7 @@ def right_side_view(root: TreeNode) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | Tree | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [1,2,3,null,5,null,4] | [1,3,4] | Right side view |
@@ -1954,6 +1986,7 @@ def good_nodes(root: TreeNode) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Tree | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [3,1,4,3,null,1,5] | 4 | Nodes 3,4,3,5 are good |
@@ -2000,6 +2033,7 @@ def lowest_common_ancestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode
 ```
 
 **Trace Table:**
+
 | Test Case | Tree | p | q | Output | Explanation |
 |-----------|------|---|---|--------|-------------|
 | Siblings | [3,5,1,6,2,0,8] | 5 | 1 | 3 | Root is LCA |
@@ -2075,6 +2109,7 @@ def deserialize(data: str) -> TreeNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Tree | Serialized | Explanation |
 |-----------|------|------------|-------------|
 | Basic | [1,2,3,null,null,4,5] | "1,2,null,null,3,4,null,null,5,null,null" | Pre-order with nulls |
@@ -2134,6 +2169,7 @@ def max_path_sum(root: TreeNode) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Tree | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [1,2,3] | 6 | Path 2->1->3 |
@@ -2198,6 +2234,7 @@ class KthLargest:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | init(3,[4,5,8,2]), add(3), add(5), add(10) | [4,5,5] | Track 3rd largest |
@@ -2249,6 +2286,7 @@ def k_closest(points: list[list[int]], k: int) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | points | k | Output | Explanation |
 |-----------|--------|---|--------|-------------|
 | Basic | [[1,3],[-2,2]] | 1 | [[-2,2]] | Closest to origin |
@@ -2322,6 +2360,7 @@ class MedianFinder:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | add(1), add(2), find(), add(3), find() | [null,null,1.5,null,2.0] | Median updates |
@@ -2367,6 +2406,7 @@ def least_interval(tasks: list[str], n: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | tasks | n | Output | Explanation |
 |-----------|-------|---|--------|-------------|
 | Basic | ["A","A","A","B","B","B"] | 2 | 8 | A->B->idle->A->B->idle->A->B |
@@ -2428,6 +2468,7 @@ def subsets_with_dup(nums: list[int]) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | With dups | [1,2,2] | [[],[1],[1,2],[1,2,2],[2],[2,2]] | Skip duplicate subsets |
@@ -2493,6 +2534,7 @@ def combination_sum2(candidates: list[int], target: int) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | candidates | target | Output | Explanation |
 |-----------|------------|--------|--------|-------------|
 | Basic | [10,1,2,7,6,1,5] | 8 | [[1,1,6],[1,2,5],[1,7],[2,6]] | Unique combinations |
@@ -2558,6 +2600,7 @@ def permute(nums: list[int]) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [1,2,3] | [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]] | All permutations |
@@ -2629,6 +2672,7 @@ def partition(s: str) -> list[list[str]]:
 ```
 
 **Trace Table:**
+
 | Test Case | s | Output | Explanation |
 |-----------|---|--------|-------------|
 | Basic | "aab" | [["a","a","b"],["aa","b"]] | Two valid partitions |
@@ -2708,6 +2752,7 @@ def exist(board: list[list[str]], word: str) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | board | word | Output | Explanation |
 |-----------|-------|------|--------|-------------|
 | Exists | [["A","B","C"],["S","F","C"],["A","D","E"]] | "ABCCED" | True | Path exists |
@@ -2802,6 +2847,7 @@ def solve(board: list[list[str]]) -> None:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Surrounded | [["X","X","X"],["X","O","X"],["X","X","X"]] | [["X","X","X"],["X","X","X"],["X","X","X"]] | Center O surrounded |
@@ -2880,6 +2926,7 @@ def oranges_rotting(grid: list[list[int]]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | grid | Output | Explanation |
 |-----------|------|--------|-------------|
 | All rot | [[2,1,1],[1,1,0],[0,1,1]] | 4 | Takes 4 minutes |
@@ -2962,6 +3009,7 @@ def find_order(numCourses: int, prerequisites: list[list[int]]) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | numCourses | prerequisites | Output | Explanation |
 |-----------|------------|---------------|--------|-------------|
 | Valid | 2 | [[1,0]] | [0,1] | Take 0 then 1 |
@@ -3037,6 +3085,7 @@ def valid_tree(n: int, edges: list[list[int]]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | n | edges | Output | Explanation |
 |-----------|---|-------|--------|-------------|
 | Valid tree | 5 | [[0,1],[0,2],[0,3],[1,4]] | True | Tree structure |
@@ -3101,6 +3150,7 @@ def rob(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | nums | Output | Explanation |
 |-----------|------|--------|-------------|
 | Basic | [2,3,2] | 3 | Rob house 2 (can't rob 1 and 3) |
@@ -3165,6 +3215,7 @@ def num_decodings(s: str) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | s | Output | Explanation |
 |-----------|---|--------|-------------|
 | Basic | "12" | 2 | "AB" (1,2) or "L" (12) |
@@ -3223,6 +3274,7 @@ def unique_paths_with_obstacles(obstacleGrid: list[list[int]]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | obstacleGrid | Output | Explanation |
 |-----------|--------------|--------|-------------|
 | With obstacle | [[0,0,0],[0,1,0],[0,0,0]] | 2 | Two paths around obstacle |

@@ -130,6 +130,7 @@ class LRUCache:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | LRUCache(2), put(1,1), put(2,2), get(1), put(3,3), get(2) | [null, null, null, 1, null, -1] | Key 2 was evicted |
@@ -218,6 +219,7 @@ class TimeMap:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | set("foo","bar",1), get("foo",1), get("foo",3) | [null, "bar", "bar"] | Timestamp 3 uses value from 1 |
@@ -425,6 +427,7 @@ except ValueError as e:
 ```
 
 **Trace Table:**
+
 | Operation | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | add_rectangle | (0, 0, 2, 2) | 1 | Added 2×2 rectangle at origin |

@@ -84,6 +84,7 @@ def is_palindrome(s: str) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic palindrome | "A man, a plan, a canal: Panama" | True | Ignoring spaces and punctuation, reads same both ways |
@@ -190,6 +191,7 @@ def three_sum(nums: list[int]) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|  
 | Basic | [-1,0,1,2,-1,-4] | [[-1,-1,2],[-1,0,1]] | Two triplets sum to 0 |
@@ -271,6 +273,7 @@ def max_area(height: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [1,8,6,2,5,4,8,3,7] | 49 | Max area between index 1 (height 8) and index 8 (height 7): 7*7=49 |
@@ -332,6 +335,7 @@ def merge_alternately(word1: str, word2: str) -> str:
 ```
 
 **Trace Table:**
+
 | Test Case | word1 | word2 | Output | Explanation |
 |-----------|-------|-------|--------|-------------|
 | Same length | "abc" | "pqr" | "apbqcr" | Alternates every character evenly |

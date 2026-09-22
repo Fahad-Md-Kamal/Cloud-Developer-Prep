@@ -85,6 +85,7 @@ def is_valid(s: str) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Valid simple | "()" | True | Single pair of matching parentheses |
@@ -143,6 +144,7 @@ def add_binary(a: str, b: str) -> str:
 ```
 
 **Trace Table:**
+
 | Test Case | a | b | Output | Explanation |
 |-----------|---|---|--------|-------------|
 | Basic | "11" | "1" | "100" | 3 + 1 = 4 in binary |

@@ -107,6 +107,7 @@ class MedianFinder:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic | addNum(1), addNum(2), findMedian() | [null, null, 1.5] | Median of [1,2] is 1.5 |

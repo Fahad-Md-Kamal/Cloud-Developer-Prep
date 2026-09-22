@@ -95,6 +95,7 @@ class Trie:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Basic operations | insert("apple"), search("apple"), search("app") | [null, true, false] | "apple" found, "app" not complete word |
@@ -187,6 +188,7 @@ class WordDictionary:
 ```
 
 **Trace Table:**
+
 | Test Case | Operations | Output | Explanation |
 |-----------|------------|--------|-------------|
 | Exact match | addWord("bad"), search("bad") | [null, true] | Exact word found |
@@ -305,6 +307,7 @@ def find_words(board: list[list[str]], words: list[str]) -> list[str]:
 ```
 
 **Trace Table:**
+
 | Test Case | Board | Words | Output | Explanation |
 |-----------|-------|-------|--------|-------------|
 | Basic | [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]] | ["oath","pea","eat","rain"] | ["eat","oath"] | Found "eat" and "oath" on board |

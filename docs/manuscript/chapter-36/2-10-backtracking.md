@@ -57,10 +57,13 @@ def backtrack(state, choices):
         [2]  [3]    [6]  [7] ✓
        / \    |
     [2,2] [2,3]  [3,3]
+
       |     |      |
   [2,2,2] [2,3,2] [3,3,3]
+
     |       |  
  [2,2,2,2] [2,2,3] ✓
+
     |
 [2,2,2,2,2] (>7, prune)
 ```
@@ -134,6 +137,7 @@ def combination_sum(candidates: list[int], target: int) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Candidates | Target | Output | Explanation |
 |-----------|------------|--------|--------|-------------|
 | Basic | [2,3,6,7] | 7 | [[2,2,3],[7]] | Two ways to sum to 7 |
@@ -233,6 +237,7 @@ def exist(board: list[list[str]], word: str) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Board | Word | Output | Explanation |
 |-----------|-------|------|--------|-------------|
 | Found | [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]] | "ABCCED" | True | Path exists: A→B→C→C→E→D |

@@ -106,6 +106,7 @@ def invert_tree(root: TreeNode) -> TreeNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic tree | [4,2,7,1,3,6,9] | [4,7,2,9,6,3,1] | All left/right children swapped |
@@ -145,6 +146,7 @@ def max_depth(root: TreeNode) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Balanced tree | [3,9,20,null,null,15,7] | 3 | Three levels: root, middle, leaves |
@@ -193,6 +195,7 @@ def is_same_tree(p: TreeNode, q: TreeNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (p) | Input (q) | Output | Explanation |
 |-----------|-----------|-----------|--------|-------------|
 | Same trees | [1,2,3] | [1,2,3] | True | Identical structure and values |
@@ -244,6 +247,7 @@ def is_subtree(root: TreeNode, subRoot: TreeNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (root) | Input (subRoot) | Output | Explanation |
 |-----------|--------------|-----------------|--------|-------------|
 | Is subtree | [3,4,5,1,2] | [4,1,2] | True | Subtree found |
@@ -301,6 +305,7 @@ def diameter_of_binary_tree(root: TreeNode) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [1,2,3,4,5] | 3 | Path 4→2→1→3 (3 edges) |
@@ -363,6 +368,7 @@ def is_balanced(root: TreeNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Balanced | [3,9,20,null,null,15,7] | True | All nodes balanced |
@@ -439,6 +445,7 @@ def find_min_height_trees(n: int, edges: list[list[int]]) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | n | edges | Output | Explanation |
 |-----------|---|-------|--------|-------------|
 | Line | 4 | [[1,0],[1,2],[1,3]] | [1] | Node 1 is center |
@@ -468,6 +475,7 @@ def is_subtree(root: TreeNode, subRoot: TreeNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (root) | Input (subRoot) | Output | Explanation |
 |-----------|--------------|-----------------|--------|-------------|
 | Is subtree | [3,4,5,1,2] | [4,1,2] | True | subRoot found as left subtree |
@@ -518,6 +526,7 @@ def lowest_common_ancestor_bst(root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -
 ```
 
 **Trace Table:**
+
 | Test Case | Input (root) | p | q | Output | Explanation |
 |-----------|--------------|---|---|--------|-------------|
 | Both in subtrees | [6,2,8,0,4,7,9,null,null,3,5] | 2 | 8 | 6 | 2 is left of 6, 8 is right, so LCA is 6 |
@@ -593,6 +602,7 @@ def level_order(root: TreeNode) -> list[list[int]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic tree | [3,9,20,null,null,15,7] | [[3],[9,20],[15,7]] | Three levels traversed |
@@ -648,6 +658,7 @@ def is_valid_bst(root: TreeNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Valid BST | [2,1,3] | True | All nodes satisfy BST property |
@@ -711,6 +722,7 @@ def kth_smallest(root: TreeNode, k: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | k | Output | Explanation |
 |-----------|-------|---|--------|-------------|
 | Basic BST | [3,1,4,null,2] | 1 | 1 | 1st smallest is 1 |
@@ -790,6 +802,7 @@ def build_tree(preorder: list[int], inorder: list[int]) -> TreeNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Preorder | Inorder | Output | Explanation |
 |-----------|----------|---------|--------|-------------|
 | Basic tree | [3,9,20,15,7] | [9,3,15,20,7] | [3,9,20,null,null,15,7] | Tree reconstructed correctly |

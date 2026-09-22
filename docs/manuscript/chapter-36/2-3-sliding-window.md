@@ -80,6 +80,7 @@ def max_profit(prices: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [7,1,5,3,6,4] | 5 | Buy at 1, sell at 6: profit = 5 |
@@ -125,6 +126,7 @@ def length_of_longest_substring(s: str) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | "abcabcbb" | 3 | Longest substring is "abc" with length 3 |
@@ -179,6 +181,7 @@ def character_replacement(s: str, k: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (s) | k | Output | Explanation |
 |-----------|-----------|---|--------|-------------|
 | Basic | "ABAB" | 2 | 4 | Replace both B's with A (or vice versa) |
@@ -272,6 +275,7 @@ def min_window(s: str, t: str) -> str:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (s) | Input (t) | Output | Explanation |
 |-----------|-----------|-----------|--------|-------------|
 | Basic | "ADOBECODEBANC" | "ABC" | "BANC" | Minimum window containing A, B, C |

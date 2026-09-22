@@ -72,6 +72,7 @@ def majority_element(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [3,2,3] | 3 | 3 appears twice (majority) |
@@ -170,6 +171,7 @@ def reverse_and_add_two_math(n: int) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | 123 | 323 | 123 → 321 + 2 = 323 |
@@ -229,6 +231,7 @@ def two_sum(nums: list[int], target: int) -> list[int]:
 ```
 
 **Trace Table (nums = [2, 7, 11, 15], target = 9):**
+
 | Step | i | num | complement | seen before step | action/result |
 |------|---|-----|------------|------------------|---------------|
 | 1 | 0 | 2 | 7 | {} | add seen[2] = 0 |
@@ -314,6 +317,7 @@ def contains_duplicate_oneliner(nums: list[int]) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Has duplicate | [1, 2, 3, 1] | True | Element 1 appears twice |
@@ -400,6 +404,7 @@ def group_anagrams(strs: list[str]) -> list[list[str]]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Mixed anagrams | ["eat","tea","tan","ate","nat","bat"] | [["bat"],["nat","tan"],["ate","eat","tea"]] | Groups anagrams together |
@@ -515,6 +520,7 @@ def top_k_frequent(nums: list[int], k: int) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | k | Output | Explanation |
 |-----------|-------|---|--------|-------------|
 | Basic | [1,1,1,2,2,3] | 2 | [1,2] | 1 appears 3 times, 2 appears 2 times |
@@ -668,6 +674,7 @@ def product_except_self(nums: list[int]) -> list[int]:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [1,2,3,4] | [24,12,8,6] | [2*3*4, 1*3*4, 1*2*4, 1*2*3] |
@@ -780,6 +787,7 @@ def longest_consecutive(nums: list[int]) -> int:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [100,4,200,1,3,2] | 4 | Sequence: 1,2,3,4 |

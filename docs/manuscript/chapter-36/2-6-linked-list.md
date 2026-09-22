@@ -105,6 +105,7 @@ def reverse_list(head: ListNode) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [1,2,3,4,5] | [5,4,3,2,1] | Entire list reversed |
@@ -171,6 +172,7 @@ def merge_two_lists(list1: ListNode, list2: ListNode) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (list1) | Input (list2) | Output | Explanation |
 |-----------|---------------|---------------|--------|-------------|
 | Basic | [1,2,4] | [1,3,4] | [1,1,2,3,4,4] | Merged sorted lists |
@@ -253,6 +255,7 @@ def reorder_list(head: ListNode) -> None:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [1,2,3,4] | [1,4,2,3] | Reordered by alternating from ends |
@@ -289,6 +292,7 @@ def middle_node(head: ListNode) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Odd length | [1,2,3,4,5] | [3,4,5] | Middle node is 3 |
@@ -349,6 +353,7 @@ def detect_cycle(head: ListNode) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Pos | Output | Explanation |
 |-----------|-------|-----|--------|-------------|
 | Cycle at 1 | [3,2,0,-4] | 1 | node(2) | Cycle starts at node with value 2 |
@@ -407,6 +412,7 @@ def reverse_between(head: ListNode, left: int, right: int) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | left | right | Output | Explanation |
 |-----------|-------|------|-------|--------|-------------|
 | Basic | [1,2,3,4,5] | 2 | 4 | [1,4,3,2,5] | Reversed middle portion |
@@ -471,6 +477,7 @@ def remove_nth_from_end(head: ListNode, n: int) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | n | Output | Explanation |
 |-----------|-------|---|--------|-------------|
 | Remove middle | [1,2,3,4,5] | 2 | [1,2,3,5] | Remove 4 (2nd from end) |
@@ -519,6 +526,7 @@ def has_cycle(head: ListNode) -> bool:
 ```
 
 **Trace Table:**
+
 | Test Case | Input (list → cycle pos) | Output | Explanation |
 |-----------|--------------------------|--------|-------------|
 | Has cycle | [3,2,0,-4] → pos 1 | True | Tail connects to node index 1 |
@@ -594,6 +602,7 @@ def merge_k_lists(lists: list[ListNode]) -> ListNode:
 ```
 
 **Trace Table:**
+
 | Test Case | Input | Output | Explanation |
 |-----------|-------|--------|-------------|
 | Basic | [[1,4,5],[1,3,4],[2,6]] | [1,1,2,3,4,4,5,6] | Merged 3 sorted lists |

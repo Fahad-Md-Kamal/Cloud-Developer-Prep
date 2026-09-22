@@ -443,6 +443,7 @@ class ApiResult(BaseModel, Generic[T]):
 #### Union Types and Narrowing
 ```ts
 type LoadState<T> =
+
     | { status: "idle" }
     | { status: "loading" }
     | { status: "success"; data: T }
