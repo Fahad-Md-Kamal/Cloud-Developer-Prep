@@ -84,7 +84,35 @@ out ahead of time as "common in senior-level tests," so it's a priority
 for more reps before the real interview, not just a one-off review. Full
 writeup: [SQL](sql.md#worked-example-rank-within-a-group-window-functions).
 
+### Q4 — Practice sandbox problem 1: warm-up join (SQL)
+
+**Asked:** write a query listing every employee's name, department name,
+and salary, and run it against the real `practice.db`.
+
+**Attempt 1:** `SELECT e.name, d.name, e.salary WHERE employees AS e
+JOIN departments AS d ON e.department_id = d.department_id;` —
+`WHERE` used where `FROM` was needed (can't introduce a table via
+`WHERE` — it only filters rows after a `FROM` has already supplied
+them).
+
+**Attempt 2:** fixed `FROM`/`WHERE`, but `ON e.department_id =
+d.department_id` still failed — `departments` only has `id`/`name`
+(per `schema.sql`); `department_id` only exists on `employees` as the
+foreign key. Should be `d.id`.
+
+**Attempt 3:** `SELECT e.name, d.name, e.salary FROM employees e JOIN
+departments d ON e.department_id = d.id;` — ran clean, all 16 rows
+correct.
+
+**Status:** ✅ correct on the third try, in the real sandbox (not just
+talked through). Pattern to watch: both bugs came from not checking the
+schema before writing the join — guessed a column name instead of
+confirming it. Worth being deliberate about glancing at the schema
+first under real interview time pressure, since there's no `sqlite3`
+error message to lean on there.
+
 ---
 
-*Next session: more window-function reps (a second problem, timed),
-then AWS gap topics (ECS/Aurora/DynamoDB) and a full mock run-through.*
+*Next session: continue through the practice sandbox problems (2–8:
+aggregates, HAVING, then window functions), then AWS gap topics
+(ECS/Aurora/DynamoDB) and a full mock run-through.*
