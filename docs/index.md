@@ -14,7 +14,7 @@ chapter each round belongs to.
 
 !!! warning "Private content — repo must stay private"
     Contains real company names (Lawstronaut, Optimizely, Cefalo) and a
-    client case study (Appendix A).
+    client case study (the [MeetingFlow Case Study](appendix-a.md)).
 
 ## About this book
 
@@ -48,10 +48,11 @@ Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
 - Mutable default arguments → [Chapter 1: Modern Python Mastery](chapter-1.md#practice-notes-from-live-session)
-- `select_related` vs `prefetch_related` → [Appendix B: Django ORM Cheat Sheet](appendix-b.md#practice-notes-from-live-session)
+- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](appendix-b.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [Chapter 8: Database Architecture for Scale](chapter-8.md#practice-notes-from-live-session)
-- AWS gap services (ECS, Aurora RDS, DynamoDB) → [Appendix C: AWS Services Quick Reference](appendix-c.md)
-- Project stories for system-design questions → [Appendix D: Personal Project Stories](appendix-d.md)
+- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](appendix-c.md)
+- Project stories for system-design questions → [Personal Project Stories](appendix-d.md)
+- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](appendix-e.md)
 
 ## Contents
 
@@ -139,19 +140,31 @@ inside the relevant chapter, not on separate pages:
 
 - [Chapter 38: Python Standard Library for Enterprise Systems](chapter-38.md)
 
-### Appendix — Real-World Case Studies
+### Django & DRF
 
-- [Appendix A: MeetingFlow Case Study](appendix-a.md)
-- [Appendix B: Django ORM Query Cheat Sheet](appendix-b.md)
-- [Appendix C: AWS Services Quick Reference](appendix-c.md) — current
-  job-search track's AWS gap review (ECS, Aurora RDS, DynamoDB)
-- [Appendix D: Personal Project Stories](appendix-d.md) — real project
-  STAR stories for system-design/behavioral questions
+- [Django ORM Query Cheat Sheet](appendix-b.md)
+- [Django & DRF Deep Dive](appendix-e.md) — serializers, permissions,
+  auth, signals, migrations, testing, caching
+
+### AWS Services Quick Reference
+
+- [AWS Services Quick Reference](appendix-c.md) — current job-search
+  track's AWS gap review (ECS, Aurora RDS, DynamoDB)
+
+### Personal Project Stories
+
+- [Personal Project Stories](appendix-d.md) — real project STAR stories
+  for system-design/behavioral questions
+
+### MeetingFlow Case Study
+
+- [MeetingFlow Case Study](appendix-a.md)
 
 ## A note on names
 
-Appendix D uses generic project labels ("geospatial data platform
-client", "cybersecurity risk platform client") left over from when this
-content lived on a public site. The repo is private now, so these could
-be restored to the real project names if useful — ask if you want that
+[Personal Project Stories](appendix-d.md) uses generic project labels
+("geospatial data platform client", "cybersecurity risk platform
+client") left over from when this content lived on a public site. The
+repo is private now, so these could be restored to the real project
+names if useful — ask if you want that
 done.

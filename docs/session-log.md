@@ -58,7 +58,7 @@ relations. Correct fix:
 **Status:** ⚠️ needs another rep — N+1 diagnosis is solid, but
 `select_related`/`prefetch_related` choice needs to become automatic, not
 a "which one was it again" pause under interview pressure. Full writeup:
-[Appendix B: Django ORM Cheat Sheet](appendix-b.md#practice-notes-from-live-session).
+[Django ORM Query Cheat Sheet](appendix-b.md#practice-notes-from-live-session).
 
 ### Q3 — Rank within a group / window functions (SQL)
 
@@ -115,4 +115,5 @@ error message to lean on there.
 
 *Next session: continue through the practice sandbox problems (2–8:
 aggregates, HAVING, then window functions), then AWS gap topics
-(ECS/Aurora/DynamoDB — Appendix C) and a full mock run-through.*
+(ECS/Aurora/DynamoDB — [AWS Services Quick Reference](appendix-c.md))
+and a full mock run-through.*

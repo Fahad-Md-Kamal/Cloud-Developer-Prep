@@ -82,12 +82,13 @@ nav = [
       { "Additional" = [
           { "38. Python Standard Library" = "chapter-38.md" },
       ] },
-      { "Appendix: Real-World Case Studies" = [
-          { "Appendix A: MeetingFlow Case Study" = "appendix-a.md" },
-          { "Appendix B: Django ORM Cheat Sheet" = "appendix-b.md" },
-          { "Appendix C: AWS Services Quick Reference" = "appendix-c.md" },
-          { "Appendix D: Personal Project Stories" = "appendix-d.md" },
+      { "Django & DRF" = [
+          { "ORM Query Cheat Sheet" = "appendix-b.md" },
+          { "Deep Dive: Serializers, Auth, Signals, Testing" = "appendix-e.md" },
       ] },
+      { "AWS Services Quick Reference" = "appendix-c.md" },
+      { "Personal Project Stories" = "appendix-d.md" },
+      { "MeetingFlow Case Study" = "appendix-a.md" },
   ] },
 ]
 

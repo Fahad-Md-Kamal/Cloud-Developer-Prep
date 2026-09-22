@@ -1,8 +1,8 @@
 ---
-title: "Appendix C: AWS Services Quick Reference"
+title: "AWS Services Quick Reference"
 ---
 
-# Appendix C: AWS Services Quick Reference
+# AWS Services Quick Reference
 
 Targeted at the current job-search track's JD requirements (basic AWS
 knowledge including ECS, Lambda, S3, Aurora RDS, SQS, DynamoDB) — see

@@ -1,8 +1,8 @@
 ---
-title: "Appendix B: Django ORM Query Cheat Sheet for Senior Engineers"
+title: "Django ORM Query Cheat Sheet for Senior Engineers"
 ---
 
-# Appendix B: Django ORM Query Cheat Sheet for Senior Engineers
+# Django ORM Query Cheat Sheet for Senior Engineers
 
 This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops.
 

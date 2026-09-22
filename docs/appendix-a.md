@@ -1,8 +1,8 @@
 ---
-title: "Appendix A: MeetingFlow - Enterprise AI System Architecture Case Study"
+title: "MeetingFlow: Enterprise AI System Architecture Case Study"
 ---
 
-# Appendix A: MeetingFlow - Enterprise AI System Architecture Case Study
+# MeetingFlow: Enterprise AI System Architecture Case Study
 
 ## Overview
 

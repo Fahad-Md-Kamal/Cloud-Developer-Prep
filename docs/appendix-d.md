@@ -1,8 +1,8 @@
 ---
-title: "Appendix D: Personal Project Stories"
+title: "Personal Project Stories"
 ---
 
-# Appendix D: Personal Project Stories
+# Personal Project Stories
 
 Senior-level interviews often include one open-ended design question.
 Rehearse these **out loud**, not just in your head, so the numbers come
@@ -62,9 +62,9 @@ existing product." Genuinely uncommon, strong answer — most candidates at
 this level haven't shipped RAG end-to-end. If the interviewer's stack is
 AWS-native (Lex) or IBM Watson/GCP rather than Azure, be ready to say:
 "the concepts — embeddings, retrieval, prompt orchestration — transfer
-directly, I just haven't used those specific SDKs." See also Appendix A
-(MeetingFlow Case Study) for the deep technical write-up behind this
-project.
+directly, I just haven't used those specific SDKs." See also the
+[MeetingFlow Case Study](appendix-a.md) for the deep technical write-up
+behind this project.
 
 ## Project D — Omnichannel Customer Engagement Platform
 
