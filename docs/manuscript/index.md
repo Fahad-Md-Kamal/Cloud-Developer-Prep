@@ -14,6 +14,9 @@ title: Manuscript Home
     **private**. Migrated from the original `In-Prep` Sphinx project into
     Zensical-flavored Markdown.
 
+**[→ Progress Tracker](progress.md)** — per-chapter status across all 38
+chapters + appendices. Check this before picking what to study next.
+
 ## About this book
 
 A guide for senior Python engineers with 5+ years of experience targeting
