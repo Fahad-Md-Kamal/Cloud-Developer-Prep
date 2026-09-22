@@ -1,0 +1,28 @@
+lawstronaut:
+  circuits:
+    crawler:
+      failure_threshold: 3
+      recovery_timeout_seconds: 10
+    enrichment:
+      failure_threshold: 4
+      recovery_timeout_seconds: 15
+  bulkheads:
+    ingestion_workers: 4
+    ocr_workers: 6
+
+optimizely:
+  autoscaling:
+    min_pods: 4
+    max_pods: 24
+    target_rps: 7200
+  rollout:
+    quorum: 2
+    safe_regional_lag_ms: 250
+
+shared:
+  retry:
+    max_attempts: 5
+    backoff_base_ms: 120
+    jitter_ms: 35
+  cache:
+    ttl_seconds: 45

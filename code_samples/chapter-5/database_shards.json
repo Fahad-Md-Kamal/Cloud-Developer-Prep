@@ -1,0 +1,88 @@
+{
+  "shards": [
+    {
+      "shard_id": 0,
+      "database_url": "postgresql://user:pass@db-shard-0.example.com:5432/lawstronaut_shard_0",
+      "weight": 1.0,
+      "is_active": true,
+      "is_read_replica": false,
+      "region": "us-east-1",
+      "description": "Primary shard for legal documents A-H"
+    },
+    {
+      "shard_id": 1, 
+      "database_url": "postgresql://user:pass@db-shard-1.example.com:5432/lawstronaut_shard_1",
+      "weight": 1.0,
+      "is_active": true,
+      "is_read_replica": false,
+      "region": "us-east-1", 
+      "description": "Primary shard for legal documents I-P"
+    },
+    {
+      "shard_id": 2,
+      "database_url": "postgresql://user:pass@db-shard-2.example.com:5432/lawstronaut_shard_2", 
+      "weight": 1.0,
+      "is_active": true,
+      "is_read_replica": false,
+      "region": "us-east-1",
+      "description": "Primary shard for legal documents Q-Z"
+    },
+    {
+      "shard_id": 3,
+      "database_url": "postgresql://user:pass@db-shard-0-replica.example.com:5432/lawstronaut_shard_0",
+      "weight": 0.5,
+      "is_active": true,
+      "is_read_replica": true,
+      "region": "us-west-2",
+      "description": "Read replica for shard 0"
+    }
+  ],
+  "sharding_strategies": {
+    "legal_documents": {
+      "type": "hash",
+      "shard_field": "document_id",
+      "hash_function": "md5"
+    },
+    "user_profiles": {
+      "type": "hash", 
+      "shard_field": "user_id",
+      "hash_function": "consistent_hash"
+    },
+    "document_analytics": {
+      "type": "range",
+      "shard_field": "created_date",
+      "ranges": [
+        {"shard_id": 0, "start": "2020-01-01", "end": "2021-12-31"},
+        {"shard_id": 1, "start": "2022-01-01", "end": "2023-12-31"}, 
+        {"shard_id": 2, "start": "2024-01-01", "end": "2025-12-31"}
+      ]
+    }
+  },
+  "connection_pools": {
+    "default": {
+      "min_connections": 5,
+      "max_connections": 20, 
+      "connection_timeout": 30,
+      "idle_timeout": 300,
+      "health_check_interval": 60,
+      "retry_attempts": 3,
+      "retry_delay": 1.0
+    },
+    "read_heavy": {
+      "min_connections": 10,
+      "max_connections": 50,
+      "connection_timeout": 15, 
+      "idle_timeout": 180,
+      "health_check_interval": 30,
+      "retry_attempts": 5,
+      "retry_delay": 0.5
+    }
+  },
+  "replication": {
+    "enabled": true,
+    "read_preference": "primary_preferred",
+    "write_preference": "primary_only",
+    "replica_lag_threshold_ms": 1000,
+    "failover_timeout": 30
+  }
+}

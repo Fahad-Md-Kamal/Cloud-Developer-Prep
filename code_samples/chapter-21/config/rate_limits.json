@@ -1,0 +1,122 @@
+{
+  "rate_limits": {
+    "global": {
+      "requests_per_minute": 1000,
+      "requests_per_hour": 50000,
+      "concurrent_requests": 100
+    },
+    "per_provider": {
+      "openai": {
+        "requests_per_minute": 60,
+        "requests_per_day": 200000,
+        "tokens_per_minute": 300000,
+        "tokens_per_day": 10000000
+      },
+      "anthropic": {
+        "requests_per_minute": 50,
+        "requests_per_day": 100000,
+        "tokens_per_minute": 250000,
+        "tokens_per_day": 5000000
+      },
+      "vertex_ai": {
+        "requests_per_minute": 40,
+        "requests_per_day": 150000,
+        "tokens_per_minute": 200000,
+        "tokens_per_day": 8000000
+      }
+    },
+    "per_user_tier": {
+      "free": {
+        "requests_per_hour": 100,
+        "requests_per_day": 1000,
+        "monthly_cost_limit": 10.00
+      },
+      "basic": {
+        "requests_per_hour": 1000,
+        "requests_per_day": 10000,
+        "monthly_cost_limit": 100.00
+      },
+      "pro": {
+        "requests_per_hour": 5000,
+        "requests_per_day": 50000,
+        "monthly_cost_limit": 1000.00
+      },
+      "enterprise": {
+        "requests_per_hour": 20000,
+        "requests_per_day": 200000,
+        "monthly_cost_limit": 10000.00
+      }
+    }
+  },
+  "adaptive_limits": {
+    "enabled": true,
+    "success_rate_threshold": 0.95,
+    "latency_threshold_ms": 5000,
+    "adjustment_factors": {
+      "increase_on_success": 1.1,
+      "decrease_on_failure": 0.8,
+      "min_rate_multiplier": 0.1,
+      "max_rate_multiplier": 2.0
+    },
+    "backoff_strategies": {
+      "exponential": {
+        "base_delay_ms": 1000,
+        "max_delay_ms": 60000,
+        "multiplier": 2.0,
+        "jitter": true
+      },
+      "linear": {
+        "base_delay_ms": 500,
+        "increment_ms": 500,
+        "max_delay_ms": 30000
+      }
+    }
+  },
+  "circuit_breaker": {
+    "enabled": true,
+    "failure_threshold": 10,
+    "timeout_seconds": 60,
+    "half_open_max_calls": 3,
+    "success_threshold": 3,
+    "sliding_window_size": 100,
+    "minimum_request_threshold": 20
+  },
+  "quota_management": {
+    "enabled": true,
+    "check_interval_seconds": 60,
+    "grace_period_seconds": 300,
+    "soft_limit_percentage": 80,
+    "hard_limit_percentage": 95,
+    "auto_scale_enabled": true,
+    "notification_thresholds": [50, 75, 90, 95],
+    "emergency_throttle": {
+      "enabled": true,
+      "trigger_percentage": 98,
+      "throttle_percentage": 50
+    }
+  },
+  "burst_handling": {
+    "enabled": true,
+    "burst_capacity_multiplier": 1.5,
+    "burst_duration_seconds": 300,
+    "recovery_time_seconds": 600,
+    "priority_levels": {
+      "critical": {
+        "burst_multiplier": 2.0,
+        "queue_priority": 1
+      },
+      "high": {
+        "burst_multiplier": 1.5,
+        "queue_priority": 2
+      },
+      "normal": {
+        "burst_multiplier": 1.2,
+        "queue_priority": 3
+      },
+      "low": {
+        "burst_multiplier": 1.0,
+        "queue_priority": 4
+      }
+    }
+  }
+}

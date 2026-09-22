@@ -1,0 +1,197 @@
+monitoring:
+  enabled: true
+  interval_seconds: 30
+  retention_days: 30
+  
+  metrics:
+    system:
+      - cpu_usage
+      - memory_usage
+      - disk_io
+      - network_io
+      - load_average
+    
+    application:
+      - request_rate
+      - response_time
+      - error_rate
+      - cache_hit_rate
+      - database_connections
+    
+    custom:
+      - legal_document_processing_rate
+      - personalization_recommendations_served
+      - active_user_sessions
+      - document_analysis_queue_size
+
+  alerts:
+    cpu_usage:
+      warning_threshold: 70
+      critical_threshold: 90
+      evaluation_period: 300  # 5 minutes
+      
+    memory_usage:
+      warning_threshold: 80
+      critical_threshold: 95
+      evaluation_period: 300
+      
+    response_time:
+      warning_threshold_ms: 500
+      critical_threshold_ms: 2000
+      evaluation_period: 180  # 3 minutes
+      
+    error_rate:
+      warning_threshold: 0.05  # 5%
+      critical_threshold: 0.10  # 10%
+      evaluation_period: 300
+      
+    cache_hit_rate:
+      warning_threshold: 0.70  # 70%
+      critical_threshold: 0.50  # 50%
+      evaluation_period: 600  # 10 minutes
+      
+    database_connections:
+      warning_threshold: 80  # % of pool
+      critical_threshold: 95  # % of pool
+      evaluation_period: 120
+
+  notification:
+    channels:
+      - type: email
+        recipients:
+          - devops@lawstronaut.com
+          - alerts@optimizely.com
+        
+      - type: slack
+        webhook_url: "https://hooks.slack.com/services/xxx/yyy/zzz"
+        channels:
+          - "#alerts"
+          - "#devops"
+        
+      - type: pagerduty
+        service_key: "your-pagerduty-service-key"
+        
+    escalation:
+      warning:
+        initial_delay: 300  # 5 minutes
+        repeat_interval: 1800  # 30 minutes
+        
+      critical:
+        initial_delay: 60   # 1 minute
+        repeat_interval: 300  # 5 minutes
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  handlers:
+    console:
+      enabled: true
+      level: INFO
+      
+    file:
+      enabled: true
+      level: DEBUG
+      file_path: "/var/log/performance_monitor.log"
+      max_size_mb: 100
+      backup_count: 5
+      
+    elasticsearch:
+      enabled: true
+      level: WARNING
+      hosts:
+        - "elasticsearch-1.example.com:9200"
+        - "elasticsearch-2.example.com:9200"
+      index_pattern: "performance-logs-%Y.%m.%d"
+
+dashboards:
+  grafana:
+    enabled: true
+    url: "https://grafana.example.com"
+    
+    dashboards:
+      - name: "System Performance"
+        panels:
+          - cpu_usage_over_time
+          - memory_usage_over_time
+          - disk_io_rates
+          - network_throughput
+          
+      - name: "Application Performance"
+        panels:
+          - request_rate_by_endpoint
+          - response_time_percentiles
+          - error_rate_by_service
+          - cache_performance_metrics
+          
+      - name: "Database Performance"
+        panels:
+          - connection_pool_utilization
+          - query_execution_times
+          - slow_query_analysis
+          - shard_distribution
+          
+      - name: "Business Metrics"
+        panels:
+          - legal_documents_processed
+          - recommendation_accuracy
+          - user_engagement_metrics
+          - system_availability
+
+performance_profiles:
+  lawstronaut:
+    focus_metrics:
+      - document_processing_throughput
+      - legal_term_extraction_accuracy
+      - document_classification_latency
+      - search_query_performance
+      
+    thresholds:
+      document_processing_time_ms: 500
+      search_response_time_ms: 200
+      classification_accuracy: 0.95
+      
+    sampling:
+      enabled: true
+      rate: 0.1  # 10% of requests
+      
+  optimizely:
+    focus_metrics:
+      - recommendation_generation_time
+      - personalization_accuracy
+      - ab_test_conversion_rates
+      - real_time_feature_latency
+      
+    thresholds:
+      recommendation_time_ms: 100
+      personalization_accuracy: 0.85
+      feature_flag_latency_ms: 50
+      
+    sampling:
+      enabled: true
+      rate: 0.05  # 5% of requests
+
+data_retention:
+  raw_metrics: 7     # days
+  aggregated_1min: 30    # days  
+  aggregated_1hour: 90   # days
+  aggregated_1day: 365   # days
+
+export:
+  prometheus:
+    enabled: true
+    port: 9090
+    path: "/metrics"
+    
+  statsd:
+    enabled: true
+    host: "statsd.example.com"
+    port: 8125
+    
+  custom_webhooks:
+    - name: "performance_webhook"
+      url: "https://api.example.com/performance-data"
+      method: "POST"
+      headers:
+        Authorization: "Bearer your-api-token"
+      frequency: 300  # seconds

@@ -16,26 +16,30 @@ GitHub Pages automatically on every push to `main`.
   one interview. New tracks (new roles, new topic areas) get their own pages
   and `nav` entries rather than replacing what's here.
 
-## This repo is public — never add real client/employer-confidential details
+## This repo must stay PRIVATE — do not suggest making it public again
 
-Do not write real client names, real product/project names from client
-engagements, real employer-internal details, or any other identifying
-information about a specific employer's client into any tracked file under
-`docs/`.
+As of 2026-09-22 this repo holds real client/employer-confidential content
+alongside the original genericized material:
 
-Project stories on `docs/system-design.md` use generic, descriptive labels
-instead of real names — e.g. "Geospatial Data Platform (confidential
-client)" instead of a real product name. The **technical substance stays
-real** (stack, architecture decisions, metrics/outcomes) since that's not
-confidential — only the identifying name is genericized. If the user pastes
-new project details containing a real client/product name, genericize the
-name before writing it to a file, but keep the technical content.
+- `docs/*.md` (excluding `docs/manuscript/`) — the original public-safe
+  content (genericized project labels on `docs/system-design.md`, etc.).
+  This layer was written to survive being public.
+- `docs/manuscript/` — migrated from a separate private project
+  (`In-Prep`). Contains real company/target names (Lawstronaut, Optimizely,
+  Cefalo) and a real client case study (`docs/manuscript/appendix-a.md`,
+  the MeetingFlow system). **Not genericized.**
 
-The user's own name, email, and generic role/skill self-assessments are
-fine to publish — this is their personal prep site. The line is
-**client-identifying information**, not personal information.
+Both are now built into the same site by the same `zensical.toml`/GitHub
+Actions workflow, so the public/private boundary is enforced entirely at
+the **repo visibility** level (must be private), not per-file anymore. If
+asked to make this repo public again, flag `docs/manuscript/` explicitly
+first — it would need to be removed or genericized before that's safe.
 
-If unsure whether something is identifying, ask before publishing it.
+The user's own name, email, and real project details are fine here now —
+this is a private repo, not a public prep site anymore.
+
+If unsure whether something is safe to add given this repo's current
+privacy state, ask.
 
 ## Known Zensical/Markdown gotchas
 

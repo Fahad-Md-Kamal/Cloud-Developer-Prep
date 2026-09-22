@@ -1,0 +1,62 @@
+{
+  "cache_levels": {
+    "l1": {
+      "type": "in_memory",
+      "max_size": 10000,
+      "max_memory_mb": 100,
+      "default_ttl": 3600,
+      "cleanup_interval": 60
+    },
+    "l2": {
+      "type": "redis",
+      "redis_url": "redis://localhost:6379",
+      "key_prefix": "app:",
+      "default_ttl": 7200,
+      "connection_pool_size": 20,
+      "retry_attempts": 3
+    },
+    "l3": {
+      "type": "database",
+      "connection_string": "postgresql://user:pass@localhost/cache_db",
+      "table_name": "cache_entries",
+      "default_ttl": 86400,
+      "batch_size": 1000
+    }
+  },
+  "warming_strategy": {
+    "enabled": true,
+    "concurrent_warming_limit": 10,
+    "prediction_model": "access_frequency",
+    "warm_on_startup": true,
+    "warm_popular_threshold": 0.1
+  },
+  "invalidation": {
+    "strategies": ["dependency_based", "tag_based", "time_based"],
+    "dependency_tracking": true,
+    "tag_tracking": true,
+    "cascade_invalidation": true
+  },
+  "monitoring": {
+    "enabled": true,
+    "metrics_interval": 300,
+    "alert_thresholds": {
+      "hit_rate_min": 0.8,
+      "memory_usage_max": 0.9,
+      "response_time_max_ms": 100
+    }
+  },
+  "enterprise_configs": {
+    "lawstronaut": {
+      "document_cache_ttl": 7200,
+      "analysis_cache_ttl": 14400,
+      "legal_terms_cache_ttl": 86400,
+      "max_document_size_mb": 10
+    },
+    "optimizely": {
+      "user_profile_ttl": 1800,
+      "recommendations_ttl": 900,
+      "ab_test_results_ttl": 3600,
+      "real_time_features_ttl": 300
+    }
+  }
+}

@@ -5,15 +5,3 @@
 
 # Practice sandbox DB -- generated from schema.sql, not source
 practice/sql/practice.db
-
-# Private working files -- real employer/client details, raw JD text, resume --
-# never publish. Genericized, public versions of this content live in docs/.
-prep.md
-interview-prep.md
-preparation-guideline.md
-BJIT_Fahad_MD_Kamal_Senior_Software_Engineer_Python.docx
-*.docx
-
-# Private manuscript -- migrated from In-Prep (real company names: Lawstronaut,
-# Optimizely, Cefalo; client case studies). Local reference only, never public.
-/manuscript/
