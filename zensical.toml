@@ -41,24 +41,24 @@ features = [
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme)"
-primary = "indigo"
-accent = "indigo"
+primary = "teal"
+accent = "teal"
 toggle.icon = "lucide/sun-moon"
 toggle.name = "Switch to light mode"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: light)"
 scheme = "default"
-primary = "indigo"
-accent = "indigo"
+primary = "teal"
+accent = "teal"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 [[project.theme.palette]]
 media = "(prefers-color-scheme: dark)"
 scheme = "slate"
-primary = "indigo"
-accent = "indigo"
+primary = "teal"
+accent = "teal"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to system preference"
 
