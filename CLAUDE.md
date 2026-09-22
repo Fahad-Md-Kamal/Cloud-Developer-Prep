@@ -18,22 +18,19 @@ GitHub Pages automatically on every push to `main`.
 
 ## This repo must stay PRIVATE — do not suggest making it public again
 
-As of 2026-09-22 this repo holds real client/employer-confidential content
-alongside the original genericized material:
+As of 2026-09-22 this repo holds real client/employer-confidential content.
+All content lives flat under `docs/*.md` (plus `docs/chapter-36/` for the
+DSA sub-chapters) as one unified tree — there is no longer a separate
+public-safe layer vs. a private layer split by directory. Real
+company/target names (Lawstronaut, Optimizely, Cefalo) and a real client
+case study (`docs/appendix-a.md`, the MeetingFlow system) are mixed
+directly into the chapters. **Not genericized.**
 
-- `docs/*.md` (excluding `docs/manuscript/`) — the original public-safe
-  content (genericized project labels on `docs/system-design.md`, etc.).
-  This layer was written to survive being public.
-- `docs/manuscript/` — migrated from a separate private project
-  (`In-Prep`). Contains real company/target names (Lawstronaut, Optimizely,
-  Cefalo) and a real client case study (`docs/manuscript/appendix-a.md`,
-  the MeetingFlow system). **Not genericized.**
-
-Both are now built into the same site by the same `zensical.toml`/GitHub
-Actions workflow, so the public/private boundary is enforced entirely at
-the **repo visibility** level (must be private), not per-file anymore. If
-asked to make this repo public again, flag `docs/manuscript/` explicitly
-first — it would need to be removed or genericized before that's safe.
+The public/private boundary is enforced entirely at the **repo
+visibility** level (must be private), not per-file. If asked to make this
+repo public again, that requires a full pass over `docs/*.md` to
+genericize real names first — there's no longer a directory boundary to
+lean on.
 
 The user's own name, email, and real project details are fine here now —
 this is a private repo, not a public prep site anymore.
@@ -74,7 +71,7 @@ directly above the `| ... |` header, no blank line between), Python-Markdown
 doesn't recognize it as a table at all — the whole thing gets absorbed into
 the preceding paragraph as literal text with `<br />` tags instead of
 rendering a `<table>`. This was a real, confirmed bug found across 114
-occurrences in the migrated manuscript content (mostly Chapter 36's
+occurrences in the migrated chapter content (mostly Chapter 36's
 "Trace Table:" pattern), fixed by inserting a blank line before every
 such table. Always put a blank line between a preceding line and a
 table's header row.
