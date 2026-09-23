@@ -180,26 +180,6 @@
     "url": "chapter-30/"
   },
   {
-    "title": "31. Behavioral Interview Prep",
-    "url": "chapter-31/"
-  },
-  {
-    "title": "32. Technical Interview Deep Dives",
-    "url": "chapter-32/"
-  },
-  {
-    "title": "33. Mock Projects",
-    "url": "chapter-33/"
-  },
-  {
-    "title": "34. Resume & GitHub Optimization",
-    "url": "chapter-34/"
-  },
-  {
-    "title": "35. Final Review \u2014 30-Day Countdown",
-    "url": "chapter-35/"
-  },
-  {
     "title": "36. Blind 75 / Grind 75 / NeetCode 150",
     "url": "chapter-36/"
   },
@@ -318,5 +298,25 @@
   {
     "title": "MeetingFlow Case Study",
     "url": "meetingflow-case-study/"
+  },
+  {
+    "title": "31. Behavioral Interview Prep",
+    "url": "chapter-31/"
+  },
+  {
+    "title": "32. Technical Interview Deep Dives",
+    "url": "chapter-32/"
+  },
+  {
+    "title": "33. Mock Projects",
+    "url": "chapter-33/"
+  },
+  {
+    "title": "34. Resume & GitHub Optimization",
+    "url": "chapter-34/"
+  },
+  {
+    "title": "35. Final Review \u2014 30-Day Countdown",
+    "url": "chapter-35/"
   }
 ]

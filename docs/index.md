@@ -134,15 +134,7 @@ inside the relevant chapter, not on separate pages:
 - [Chapter 29: Leadership for Engineers](chapter-29.md)
 - [Chapter 30: Crafting the Staff Engineer Mindset](chapter-30.md)
 
-### Part VII — Interview & Portfolio Mastery (Chapters 31–35)
-
-- [Chapter 31: Behavioral Interview Prep](chapter-31.md)
-- [Chapter 32: Technical Interview Deep Dives](chapter-32.md)
-- [Chapter 33: Mock Projects](chapter-33.md)
-- [Chapter 34: Resume, GitHub, and Case Study Optimization](chapter-34.md)
-- [Chapter 35: Final Review — The 30-Day Countdown](chapter-35.md)
-
-### Part VIII — Data Structures & Algorithms Mastery (Chapter 36)
+### Part VII — Data Structures & Algorithms Mastery (Chapter 36)
 
 - [Chapter 36: Blind 75, Grind 75 & NeetCode 150](chapter-36.md)
     - [Arrays & Hashing](chapter-36/2-1-arrays-and-hashing.md)
@@ -159,7 +151,7 @@ inside the relevant chapter, not on separate pages:
     - [Dynamic Programming](chapter-36/2-12-dynamic-programming.md)
     - [Design](chapter-36/2-13-design.md)
 
-### Part IX — Cross-Stack & Multi-Language Mastery (Chapter 37)
+### Part VIII — Cross-Stack & Multi-Language Mastery (Chapter 37)
 
 - [Chapter 37: Go, TypeScript, Angular & Transferable AI Patterns](chapter-37.md)
 
@@ -213,6 +205,19 @@ domain gap, not yet an active application track.
 ### MeetingFlow Case Study
 
 - [MeetingFlow Case Study](meetingflow-case-study.md)
+
+### Part IX — Interview & Portfolio Mastery (Chapters 31–35)
+
+The capstone — behavioral prep, mock interviews, resume polish, and a
+final countdown review. Comes last: it's what you do right before the
+interview, after the technical material above and the project-story
+material it draws on for behavioral answers.
+
+- [Chapter 31: Behavioral Interview Prep](chapter-31.md)
+- [Chapter 32: Technical Interview Deep Dives](chapter-32.md)
+- [Chapter 33: Mock Projects](chapter-33.md)
+- [Chapter 34: Resume, GitHub, and Case Study Optimization](chapter-34.md)
+- [Chapter 35: Final Review — The 30-Day Countdown](chapter-35.md)
 
 ## A note on names
 

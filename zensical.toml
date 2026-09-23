@@ -83,13 +83,6 @@ nav = [
           { "29. Leadership for Engineers" = "chapter-29.md" },
           { "30. Staff Engineer Mindset" = "chapter-30.md" },
       ] },
-      { "Interview & Portfolio Mastery" = [
-          { "31. Behavioral Interview Prep" = "chapter-31.md" },
-          { "32. Technical Interview Deep Dives" = "chapter-32.md" },
-          { "33. Mock Projects" = "chapter-33.md" },
-          { "34. Resume & GitHub Optimization" = "chapter-34.md" },
-          { "35. Final Review — 30-Day Countdown" = "chapter-35.md" },
-      ] },
       { "Data Structures & Algorithms" = [
           { "36. Blind 75 / Grind 75 / NeetCode 150" = "chapter-36.md" },
           { "Arrays & Hashing" = "chapter-36/2-1-arrays-and-hashing.md" },
@@ -134,6 +127,13 @@ nav = [
       { "AWS Services Quick Reference" = "aws-services.md" },
       { "Personal Project Stories" = "project-stories.md" },
       { "MeetingFlow Case Study" = "meetingflow-case-study.md" },
+      { "Interview & Portfolio Mastery" = [
+          { "31. Behavioral Interview Prep" = "chapter-31.md" },
+          { "32. Technical Interview Deep Dives" = "chapter-32.md" },
+          { "33. Mock Projects" = "chapter-33.md" },
+          { "34. Resume & GitHub Optimization" = "chapter-34.md" },
+          { "35. Final Review — 30-Day Countdown" = "chapter-35.md" },
+      ] },
   ] },
 ]
 
