@@ -89,9 +89,11 @@ nav = [
           ] },
           { "FastAPI" = "fastapi.md" },
       ] },
-      { "Healthcare Data Engineering" = [
+      { "Big Data & Distributed Systems" = [
           { "Apache Spark & PySpark" = "spark-pyspark.md" },
           { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
+      ] },
+      { "Healthcare Interoperability" = [
           { "FHIR R4" = "fhir-r4.md" },
           { "HL7 v2.x & C-CDA" = "hl7-ccda.md" },
           { "Healthcare Terminology" = "healthcare-terminology.md" },

@@ -149,13 +149,20 @@ inside the relevant chapter, not on separate pages:
 - **[FastAPI](fastapi.md)** — dependency injection, background tasks,
   performance patterns
 
-### Healthcare Data Engineering
+### Big Data & Distributed Systems
 
-Added from the Intellias Staff Healthcare Data Engineer JD — a genuine
-domain gap (see the note below), not yet an active application track.
+Added from the Intellias Staff Healthcare Data Engineer JD, but
+general-purpose — not healthcare-specific, reusable for any future
+big-data-scale role.
 
 - [Apache Spark & PySpark](spark-pyspark.md)
 - [Databricks & Delta Lake](databricks-delta-lake.md)
+
+### Healthcare Interoperability
+
+The genuinely healthcare-specific content from that same JD — a real
+domain gap, not yet an active application track.
+
 - [FHIR R4](fhir-r4.md)
 - [HL7 v2.x & C-CDA](hl7-ccda.md)
 - [Healthcare Terminology](healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm
