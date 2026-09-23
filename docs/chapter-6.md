@@ -4,253 +4,256 @@ title: "Chapter 6: Microservices Design with FastAPI & Message Queues (Kafka/Red
 
 # Chapter 6: Microservices Design with FastAPI & Message Queues (Kafka/Redis)
 
-Master the design and implementation of scalable microservices architectures using FastAPI and modern message queue systems. This chapter focuses on building distributed systems that can handle enterprise-scale workloads like those required at Lawstronaut (legal document processing) and Optimizely (real-time personalization platforms).
+Service boundaries, inter-service communication, and the messaging
+patterns (Kafka, Redis) that hold a microservices system together — as
+questions you should be able to answer cold. FastAPI's own mechanics
+(dependency injection, background tasks, performance patterns) live in
+[FastAPI](fastapi.md) and aren't repeated here; general REST API design
+(resource modeling, versioning, caching) lives in
+[Chapter 3](chapter-3.md). This chapter is about the architecture
+*around* the services, not the framework inside any one of them.
 
-## Learning Objectives
+---
 
-- Design microservices using domain-driven design principles and bounded contexts
-- Implement robust service communication patterns with REST APIs and event-driven messaging
-- Master Kafka and Redis for high-throughput event streaming and task processing
-- Handle distributed data consistency, transactions, and eventual consistency patterns
-- Implement service discovery, load balancing, and resilience patterns for production systems
+## Part 1: Service Boundaries
 
-## 1. Microservices Architecture Fundamentals
+### 1. Domain-Driven Design and Bounded Contexts
 
-Modern enterprise applications require architectural approaches that support **independent deployment**, **technology diversity**, and **team autonomy**. Microservices architecture addresses these needs by decomposing monolithic applications into smaller, focused services that communicate over well-defined interfaces.
+**"How do you decide where one microservice ends and another begins?"**
 
-### 1.1 Domain-Driven Design and Service Boundaries
+```python
+# Wrong axis: split by technical layer
+class DocumentControllerService: ...
+class DocumentDatabaseService: ...
 
-**Domain-Driven Design (DDD)** provides the strategic framework for identifying service boundaries. In enterprise contexts, services should align with business capabilities rather than technical layers.
-
-For **Lawstronaut's legal document processing platform**, services might include:
-- **Document Ingestion Service**: Handles PDF uploads, OCR processing, and initial metadata extraction
-- **Legal Classification Service**: Applies ML models to categorize documents by legal domain
-- **Search Index Service**: Manages Elasticsearch indexing and query optimization
-- **Notification Service**: Handles client alerts and processing status updates
-
-For **Optimizely's personalization platform**, services could encompass:
-- **Experiment Management Service**: Manages A/B test configurations and audience targeting
-- **Real-time Decision Service**: Delivers personalized content with sub-100ms latency
-- **Analytics Collection Service**: Processes high-volume event streams for analysis
-- **User Profile Service**: Maintains unified customer profiles across touchpoints
-
-**Key Benefits for Enterprise Systems:**
-- **Independent scaling**: Each service scales based on its specific load patterns
-- **Technology flexibility**: Services can use optimal technology stacks for their domain
-- **Fault isolation**: Failures in one service don't cascade to others
-- **Team ownership**: Clear service boundaries enable autonomous development teams
-
-### 1.2 Service Decomposition Strategies
-
-**Decomposition by Business Capability** focuses on what the service does rather than how it's implemented. Each service owns a complete business function including data, logic, and user interface components.
-
-**Decomposition by Subdomain** aligns services with DDD subdomains:
-- **Core Domain**: Mission-critical services providing competitive advantage
-- **Supporting Domain**: Services required for core domain operation
-- **Generic Domain**: Common services like authentication, logging, monitoring
-
-**Database per Service Pattern** ensures services maintain independent data stores, preventing tight coupling through shared databases. This enables:
-- **Data model optimization** for specific service requirements
-- **Independent schema evolution** without cross-service coordination
-- **Technology diversity** in data storage (SQL, NoSQL, graph databases)
-
-### 1.3 API Gateway and Service Mesh Patterns
-
-**API Gateway** provides a single entry point for client requests, handling cross-cutting concerns like authentication, rate limiting, and request routing. In enterprise environments, API gateways also manage:
-- **Protocol translation** between external HTTP and internal gRPC
-- **Request/response transformation** for API versioning
-- **Circuit breaking** to prevent cascade failures
-- **Monitoring and analytics** for API usage patterns
-
-**Service Mesh** manages service-to-service communication within the microservices network, providing:
-- **Mutual TLS** for secure inter-service communication
-- **Load balancing** and failure detection
-- **Distributed tracing** across service boundaries
-- **Policy enforcement** for access control and resource limits
-
-## 2. FastAPI for Production Microservices
-
-FastAPI excels in microservices environments due to its **high performance**, **automatic API documentation**, and **built-in data validation**. Production microservices require careful attention to structure, configuration, and operational concerns.
-
-### 2.1 Service Structure and Project Organization
-
-**Hexagonal Architecture** (Ports and Adapters) provides clean separation between business logic and external concerns:
-
-```text
-# Typical FastAPI microservice structure
-src/
-├── domain/          # Business logic and entities
-├── infrastructure/  # External integrations (databases, queues)
-├── application/     # Use cases and orchestration
-└── presentation/    # FastAPI routers and schemas
+# Right axis: split by business capability (bounded context)
+class DocumentIngestionService: ...       # upload, OCR, initial metadata
+class DocumentClassificationService: ...  # ML categorization
+class SearchIndexService: ...             # indexing and query
 ```
 
-**Dependency Injection** enables testable, configurable services by injecting dependencies rather than hard-coding them. FastAPI's dependency system supports:
-- **Database connections** with connection pooling
-- **External service clients** with retry and circuit breaking
-- **Configuration objects** for environment-specific settings
-- **Authentication providers** for JWT validation
+**Answer:** Boundaries should follow business capabilities (bounded
+contexts, in DDD terms), not technical layers — "everything about
+ingesting a document" is a better seam than "everything that talks to
+the database." A capability-aligned service owns its data and its
+logic, and can be deployed, scaled, and staffed independently of the
+others. Splitting by technical layer instead (a "controller service"
+and a "database service") just recreates the monolith's coupling with
+network calls in between.
 
-### 2.2 Health Checks and Observability
+| Pros | Cons / Trade-offs |
+|---|---|
+| A team can own a capability end-to-end without cross-team coordination for every change | Getting the boundary wrong early is expensive to undo — data and contracts calcify fast |
+| Each service scales independently based on its own load pattern | Too many fine-grained services turns every feature into a multi-service change |
+| Failure in one capability doesn't take down unrelated ones | Requires real domain knowledge up front, not just a technical org chart |
 
-**Health Check Endpoints** enable load balancers and orchestration systems to determine service health:
-- **Liveness checks** verify the service process is running
-- **Readiness checks** confirm the service can handle requests
-- **Dependency checks** validate external service connectivity
+**Likely follow-up — "what's 'database per service' actually protecting
+against?"** Shared databases are the most common way service boundaries
+erode — two "independent" services silently coupled through the same
+tables can't evolve their schemas separately, and a slow query in one
+can degrade the other. Each service getting its own datastore (not
+necessarily its own database technology) is what makes the boundary
+real instead of nominal.
 
-**Structured Logging** provides consistent log formats for centralized analysis:
-- **Correlation IDs** for tracing requests across services
-- **Performance metrics** for response times and error rates  
-- **Business events** for audit trails and analytics
+### 2. API Gateway vs. Service Mesh
 
-### 2.3 Configuration Management
+**"What's the difference between an API Gateway and a service mesh —
+do you need both?"**
 
-**Environment-based Configuration** enables services to adapt to different deployment environments without code changes:
-- **Development**: Local databases and simplified authentication
-- **Staging**: Production-like infrastructure with test data
-- **Production**: Full security, monitoring, and performance optimization
+**Answer:** They solve traffic problems at different layers. An **API
+Gateway** sits at the edge, between external clients and the system —
+one entry point handling auth, rate limiting, request routing, and
+protocol translation (public HTTPS in, internal gRPC out). A **service
+mesh** (Envoy/Istio-style sidecars) handles *service-to-service* traffic
+inside the system — mutual TLS, retries, load balancing, and
+distributed tracing between internal services that never talk to an
+external client directly. A small system usually needs only the
+gateway; a mesh earns its operational overhead once there are enough
+internal services that "which service is slow" stops being answerable
+by reading logs.
 
-**Secret Management** protects sensitive configuration data:
-- **Database credentials** retrieved from secure vaults
-- **API keys** rotated automatically
-- **TLS certificates** managed by certificate authorities
+| Pros | Cons / Trade-offs |
+|---|---|
+| Gateway: one place to enforce auth/rate-limits instead of N | Gateway becomes a single point of failure and a latency hop for every request |
+| Mesh: uniform retries/mTLS/observability without each service reimplementing them | Mesh adds a sidecar proxy per service — real memory/CPU/operational cost |
+| Both: cross-cutting concerns move out of application code | Two extra systems to run, monitor, and debug when something's slow |
 
-## 3. Message Queue Integration and Event-Driven Architecture
+---
 
-Event-driven architecture enables **loose coupling** between services, allowing them to evolve independently while maintaining system-wide consistency through eventual consistency patterns.
+## Part 2: Messaging with Kafka and Redis
 
-### 3.1 Apache Kafka for Event Streaming
+### 3. Choosing Between Kafka and Redis
 
-**Kafka** excels at high-throughput event streaming with **durability guarantees** and **horizontal scalability**. In enterprise environments, Kafka enables:
+**"A service needs to hand work off asynchronously — when do you reach
+for Kafka, and when is Redis enough?"**
 
-**Event Sourcing** patterns where business events are stored as immutable facts:
-- **Legal document events** at Lawstronaut: document uploaded, OCR completed, classification assigned
-- **Experiment events** at Optimizely: experiment created, variant assigned, conversion recorded
+```python
+# Redis: simple task queue, fire-and-forget, short retention
+redis_queue.enqueue("process_document", doc_id=doc.id, priority="high")
 
-**Stream Processing** for real-time analytics and derived data:
-- **Real-time document classification** using streaming ML pipelines
-- **Live experiment analysis** for immediate optimization decisions
+# Kafka: durable event log, multiple independent consumers, replay
+producer.send("document.events", key=doc.id, value={"type": "UPLOADED", "doc_id": doc.id})
+```
 
-### 3.2 Redis for Task Queues and Caching
+**Answer:** Redis (as a queue, via RQ/Celery's broker) fits a
+straightforward task hand-off — one producer, one consumer group, work
+gets done once and the message is gone. Kafka fits when the *same
+event* needs to reach multiple independent consumers (analytics, search
+indexing, and notifications all reacting to "document uploaded" without
+knowing about each other), when messages need to be replayed or
+reprocessed, or when throughput and durability guarantees matter more
+than latency. Kafka's log is retained and replayable; a Redis queue's
+job disappears the moment it's consumed.
 
-**Redis** provides low-latency data structures ideal for:
+**Likely follow-up — "why not just use Kafka for everything, then?"**
+Operational weight. Kafka needs partitioning, consumer-group, and
+offset-management decisions Redis doesn't — reaching for it to send one
+background job (send this email) is solving a problem you don't have
+yet. For a single-process, no-fan-out background job, plain Celery
+([Chapter 1 §9](chapter-1.md#9-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+is often enough on its own.
 
-**Task Queues** with priority handling and retry mechanisms:
-- **Background document processing** jobs with different priority levels
-- **Personalization cache warming** for high-value user segments
+### 4. Schema Evolution for Long-Lived Event Streams
 
-**Distributed Caching** for frequently accessed data:
-- **User profiles** with sub-millisecond access times
-- **Legal document metadata** for fast search result assembly
+**"A Kafka topic has been running in production for a year. How do you
+change the event shape without breaking every consumer?"**
 
-### 3.3 Message Serialization and Schema Evolution
+```python
+# Additive change: safe -- old consumers ignore the new field
+{"type": "DOCUMENT_CLASSIFIED", "doc_id": "541", "tag": "Tax", "confidence": 0.94}
 
-**Schema Registry** manages message format evolution:
-- **Avro schemas** with backward and forward compatibility
-- **Automatic serialization/deserialization** with type safety
-- **Schema validation** preventing data corruption
+# Breaking change: needs a new event type/version, not an in-place rename
+{"type": "DOCUMENT_CLASSIFIED_V2", "doc_id": "541", "category": {"primary": "Tax"}}
+```
 
-**Event Versioning** strategies handle breaking changes:
-- **Additive changes** maintaining backward compatibility
-- **Event transformation** for format migrations
-- **Deprecation timelines** for removing old event formats
+**Answer:** A schema registry (Avro/Protobuf with backward/forward
+compatibility checks) enforces this at write time instead of
+discovering it in production. The safe changes are additive — new
+optional fields old consumers simply ignore. Renaming, retyping, or
+removing a field is a breaking change; it needs a new event type or
+version field, with both old and new shapes coexisting until every
+consumer has migrated, then a deprecation timeline for the old shape —
+the same dual-write discipline as a
+[database migration](refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
+applied to a message format instead of a table.
 
-## 4. Advanced Service Communication Patterns
+---
 
-### 4.1 Synchronous vs Asynchronous Communication
+## Part 3: Inter-Service Communication
 
-**Synchronous Communication** (REST APIs) provides immediate consistency and simple error handling but creates tight coupling and potential cascade failures.
+### 5. Synchronous vs. Asynchronous, and the Hybrid Middle Ground
 
-**Asynchronous Communication** (events) enables loose coupling and resilience but requires eventual consistency handling and more complex error scenarios.
+**"When would you use a REST call between two services instead of an
+event, and vice versa?"**
 
-**Hybrid Approaches** combine both patterns:
-- **Command operations** use synchronous APIs for immediate feedback
-- **Event notifications** use asynchronous messaging for downstream processing
+**Answer:** Synchronous REST gives immediate consistency and a simple
+failure mode (the caller knows right away if it failed) but couples the
+caller's availability to the callee's — if the downstream service is
+slow or down, the caller is too. Asynchronous events decouple that — the
+publisher doesn't wait, and a consumer being down just means a backlog,
+not an outage — at the cost of eventual consistency and harder-to-trace
+failures. Most real systems mix both: a synchronous call for anything
+the user is waiting on an answer for right now (place an order), and
+events for everything that can happen a moment later (send the
+confirmation email, update analytics, warm a cache).
 
-### 4.2 Saga Pattern for Distributed Transactions
+### 6. The Saga Pattern for Distributed Transactions
 
-**Choreography-based Sagas** coordinate distributed transactions through event chains:
-- Each service publishes events upon completion
-- Compensating actions handle partial failures
-- No central coordinator reduces single points of failure
+**"An order touches inventory, payment, and shipping services — none
+share a database. How do you keep that consistent, and what happens
+when payment fails after inventory is already reserved?"**
 
-**Orchestration-based Sagas** use a central coordinator:
-- Saga manager tracks transaction state
-- Explicit compensation logic for rollbacks
-- Better visibility into transaction progress
+```python
+class OrderSaga:
+    async def run(self, order: Order) -> None:
+        await inventory.reserve(order)
+        try:
+            await payment.charge(order)
+        except PaymentFailed:
+            await inventory.release(order)  # compensating action
+            raise
+        await shipping.schedule(order)
+```
 
-### 4.3 Service Discovery and Load Balancing
+**Answer:** There's no distributed transaction across independent
+databases, so a Saga breaks the operation into a sequence of local
+transactions, each with a **compensating action** that undoes it if a
+later step fails — `inventory.release` compensates `inventory.reserve`.
+**Choreography** lets each service publish an event and react to
+others' events with no central coordinator — simple for a few steps,
+but "what's the current state of this order?" gets hard to answer as
+steps grow. **Orchestration** uses a saga manager that explicitly calls
+each step and its compensation — more visibility and easier debugging,
+at the cost of a coordinator that's now a dependency (and needs its own
+high availability) for every saga it runs.
 
-**Service Discovery** mechanisms enable services to find and communicate with each other:
-- **Client-side discovery** with service registries
-- **Server-side discovery** through load balancers
-- **DNS-based discovery** for simpler networking
+| Pros | Cons / Trade-offs |
+|---|---|
+| Choreography: no single point of failure, services stay fully decoupled | Choreography: transaction state is implicit, spread across every participant's logs |
+| Orchestration: one place to see and debug the whole transaction's state | Orchestration: the coordinator is now a critical dependency for every saga |
+| Both: failures are recoverable instead of leaving half-applied state | Both: compensating actions must be idempotent — a saga step can be retried or replayed |
 
-**Load Balancing** strategies distribute requests across service instances:
-- **Round-robin** for uniform request distribution  
-- **Least connections** for varying request processing times
-- **Health-aware routing** avoiding failed instances
+### 7. Service Discovery and Inter-Service Load Balancing
 
-## Code Examples and Implementations
+**"Service A needs to call Service B, which has five replicas that
+scale up and down. How does A find a healthy instance?"**
 
-### Microservices Architecture Examples
+**Answer:** Client-side discovery (A queries a registry — Consul/etcd/
+Kubernetes DNS — and picks an instance itself) or server-side discovery
+(A always calls a fixed address; a load balancer or the service mesh
+resolves it to a live instance). Kubernetes' built-in Service
+abstraction is server-side discovery via DNS + iptables/IPVS, which is
+why most teams don't hand-roll this anymore. Whichever mechanism, it
+needs to be health-aware — a registry entry for an instance that's up
+but not ready to serve traffic is worse than no entry at all, since
+requests get routed straight into failures.
 
-**FastAPI Service Template**
-- File: `code_samples/chapter-6/service_template.py`
-- Demonstrates: Production-ready service structure, health checks, configuration management
+---
 
-**Event-Driven Order Processing**
-- File: `code_samples/chapter-6/event_driven_system.py`  
-- Demonstrates: Kafka integration, event sourcing, saga patterns
+## Code Samples
 
-**Message Queue Integration**
-- File: `code_samples/chapter-6/message_queues.py`
-- Demonstrates: Redis task queues, Kafka producers/consumers, error handling
+Runnable examples in `code_samples/chapter-6/`:
 
-**Service Communication Patterns**
-- File: `code_samples/chapter-6/service_communication.py`
-- Demonstrates: REST API patterns, async messaging, circuit breakers
-
-**Distributed System Observability**
-- File: `code_samples/chapter-6/observability.py`
-- Demonstrates: Distributed tracing, metrics collection, structured logging
-
-### Running the Examples
+- `service_template.py` — a production FastAPI service skeleton: health
+  checks, a `CircuitBreaker`, Postgres/Kafka dependency wiring, and
+  config via `ServiceConfig`
+- `service_communication.py` — `RoundRobinLoadBalancer`/
+  `WeightedRandomLoadBalancer`/`LeastConnectionsLoadBalancer`, a
+  `CircuitBreaker`, a retrying `ResilientHttpClient`, and an in-memory
+  `ServiceRegistry`
+- `event_driven_system.py` — `KafkaEventBus`, `EventStore`, and a full
+  `SagaOrchestrator` with compensating steps for document processing
+- `message_queues.py` — `KafkaMessageProducer`/`KafkaMessageConsumer`
+  and a `RedisTaskQueue`, side by side, sharing one `TaskWorker`
+- `observability.py` — a `Tracer`/`TraceSpan` pair, `MetricsCollector`,
+  `StructuredLogger`, and `HealthMonitor`
+- `docker-compose.yml` / `requirements.txt` — local Kafka + Redis for
+  running the examples above
 
 ```bash
-# Install dependencies
-pip install fastapi uvicorn kafka-python redis celery
-
-# Start Kafka and Redis (using Docker)
+pip install -r code_samples/chapter-6/requirements.txt
 docker-compose -f code_samples/chapter-6/docker-compose.yml up -d
-
-# Run the microservices examples
 python code_samples/chapter-6/service_template.py
 python code_samples/chapter-6/event_driven_system.py
 ```
 
-### Code Organization
-
-```
-code_samples/
-└── chapter-6/
-    ├── service_template.py
-    ├── event_driven_system.py
-    ├── message_queues.py
-    ├── service_communication.py
-    ├── observability.py
-    ├── docker-compose.yml
-    └── requirements.txt
-```
+---
 
 ## Summary
 
-This chapter covered the essential patterns and practices for building production-grade microservices using FastAPI and modern message queue systems. Key takeaways include:
-
-- **Domain-driven service boundaries** enable autonomous teams and independent deployment
-- **FastAPI's performance and developer experience** make it ideal for high-throughput microservices
-- **Event-driven architecture** provides loose coupling and resilience in distributed systems
-- **Kafka and Redis** offer complementary messaging patterns for different use cases
-- **Observability and monitoring** are critical for operating distributed systems at scale
-
-The combination of these technologies and patterns enables organizations like Lawstronaut and Optimizely to build systems that scale to millions of users while maintaining development velocity and operational reliability.
+1. **Service boundaries** follow business capabilities, not technical
+   layers — database-per-service is what makes a boundary real instead
+   of nominal.
+2. **API Gateway** handles edge traffic; a **service mesh** handles
+   service-to-service traffic — most systems need the former long
+   before they need the latter.
+3. **Kafka** fits durable, multi-consumer, replayable event streams;
+   **Redis** fits a simple task hand-off — reach for the heavier tool
+   only when fan-out or replay is a real requirement.
+4. **Schema evolution** needs the same additive-first, dual-shape
+   discipline as a database migration.
+5. **Sagas** replace distributed transactions with a sequence of local
+   transactions and explicit compensating actions — choreography and
+   orchestration trade decentralization for visibility.
+6. **Service discovery** must be health-aware, or a load balancer will
+   happily route traffic into an instance that's up but not ready.

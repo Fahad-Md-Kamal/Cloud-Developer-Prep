@@ -12,8 +12,20 @@
     "url": "chapter-1/"
   },
   {
-    "title": "2. Clean Code & Design Patterns",
-    "url": "chapter-2/"
+    "title": "SOLID Principles",
+    "url": "solid-principles/"
+  },
+  {
+    "title": "Design Patterns",
+    "url": "design-patterns/"
+  },
+  {
+    "title": "Clean Code Practices",
+    "url": "clean-code-practices/"
+  },
+  {
+    "title": "Refactoring Legacy Systems",
+    "url": "refactoring-legacy-systems/"
   },
   {
     "title": "3. Advanced REST API Design",

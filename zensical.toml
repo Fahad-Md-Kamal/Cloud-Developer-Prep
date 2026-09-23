@@ -16,7 +16,12 @@ nav = [
       { "Session Log" = "session-log.md" },
       { "Core Engineering Foundations" = [
           { "1. Modern Python Mastery" = "chapter-1.md" },
-          { "2. Clean Code & Design Patterns" = "chapter-2.md" },
+          { "2. Clean Code & Design Patterns" = [
+              { "SOLID Principles" = "solid-principles.md" },
+              { "Design Patterns" = "design-patterns.md" },
+              { "Clean Code Practices" = "clean-code-practices.md" },
+              { "Refactoring Legacy Systems" = "refactoring-legacy-systems.md" },
+          ] },
           { "3. Advanced REST API Design" = "chapter-3.md" },
           { "4. AuthN/AuthZ & Security" = "chapter-4.md" },
           { "5. Performance Profiling & Caching" = "chapter-5.md" },

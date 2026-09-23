@@ -62,7 +62,11 @@ inside the relevant chapter, not on separate pages:
 ### Part I — Core Engineering Foundations (Chapters 1–5)
 
 - [Chapter 1: Modern Python Mastery](chapter-1.md)
-- [Chapter 2: Clean Code, Design Patterns, and SOLID Principles](chapter-2.md)
+- Chapter 2: Clean Code, Design Patterns, and SOLID Principles
+    - [SOLID Principles](solid-principles.md)
+    - [Design Patterns](design-patterns.md)
+    - [Clean Code Practices](clean-code-practices.md)
+    - [Refactoring Legacy Systems](refactoring-legacy-systems.md)
 - [Chapter 3: REST API Design Principles](chapter-3.md)
 - [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
 - [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
