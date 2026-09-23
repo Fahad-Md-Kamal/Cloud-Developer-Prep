@@ -35,6 +35,12 @@ or `Any`?"** Both hide exactly the errors typing exists to catch. Bound
 it (`TypeVar('T', bound=BaseModel)`) once the generic needs to call a
 specific method on `T`.
 
+| Pros | Cons / Trade-offs |
+|---|---|
+| One implementation works for every model — no duplicated CRUD logic | Harder to read for developers unfamiliar with `TypeVar`/`Generic` |
+| Type checker still catches misuse (passing an `Order` where a `User` is expected) | Bounding a TypeVar adds coupling to a specific base class |
+| Refactoring a shared method updates every concrete repository at once | Overly generic abstractions can hide simple, one-off logic behind unnecessary machinery |
+
 ## 2. "Explain Protocols — how are they different from inheritance-based interfaces?"
 
 ```python
@@ -59,6 +65,12 @@ satisfy `Crawlable` just by having the right method signature.
 Swapping HTTP clients (`requests` for `httpx`) or mocking a dependency
 in a test — both work because they satisfy the same Protocol, without
 forcing every implementation through one base class.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| No shared base class needed — existing classes satisfy it retroactively | Less discoverable than inheritance — no simple "find subclasses" search |
+| Great for adapting third-party classes you don't control | `@runtime_checkable` + `isinstance()` only checks method names exist, not correct behavior |
+| Encourages small, role-based interfaces that are easy to mock in tests | Overuse can make it unclear which concrete types are actually expected at a call site |
 
 ## 3. "Write a decorator that takes an argument. Then explain why it works."
 
@@ -89,6 +101,12 @@ Python keeps it alive as long as `wrapper` exists, even though
 call, a timing decorator wrapped around a slow endpoint during a perf
 investigation.
 
+| Pros | Cons / Trade-offs |
+|---|---|
+| Cross-cutting concerns added without touching the function body | Stack traces get noisier — an error inside `wrapper` obscures the original call site |
+| Reusable across many functions with zero duplication | Debugging requires understanding closures — a real barrier for less experienced reviewers |
+| Composable — multiple decorators stack cleanly | Stacking order matters and is easy to get wrong |
+
 ## 4. "What are the two ways to build a context manager, and what does `__exit__`'s return value control?"
 
 ```python
@@ -116,6 +134,12 @@ specifically probe this.
 **Where you'd actually use this:** `with transaction.atomic():`,
 file/socket handling, temporarily overriding a setting in a test.
 
+| Pros | Cons / Trade-offs |
+|---|---|
+| Cleanup always runs, even on exception — no forgotten `f.close()` | `@contextmanager` generators can be tricky to debug if an exception crosses the `yield` |
+| `with` blocks make resource lifetime visible at the call site | A class-based version needs two extra methods for what a `finally` block could do inline |
+| Composable — multiple resources nest cleanly (`with a, b:`) | Swallowing exceptions via `__exit__` returning `True` is an easy, hard-to-spot bug |
+
 ## 5. "Explain the GIL. Then explain why threads still help I/O-bound code despite it."
 
 **Answer:** The GIL is a single mutex in CPython that prevents more than
@@ -133,6 +157,12 @@ actually scales, because separate processes each get their own GIL.
 
 **The one-liner to lead with:** "threads for I/O-bound, processes for
 CPU-bound" — then be ready to explain *why*, not just recite it.
+
+| Pros of the GIL's existence | Cons / Trade-offs |
+|---|---|
+| Simplifies CPython's internals — no fine-grained locking on every object | Wastes multi-core hardware for CPU-bound pure-Python code |
+| Makes single-threaded code fast — no lock overhead per operation | Real parallelism needs multiprocessing or a native extension that releases it |
+| C extensions can release it during I/O/blocking calls for real concurrency | A frequent source of confusion — many candidates think threads never help at all |
 
 ## 6. "A Django view calling three third-party APIs is slow. Walk me through fixing it."
 
@@ -160,6 +190,12 @@ client → thread pool around the blocking calls. CPU-dominated (parsing,
 number-crunching, ML inference) → multiprocessing, sized to core count.
 Never run CPU work directly inside an async event loop — it blocks
 *every* other task on that loop, not just the one doing the work.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| AsyncIO: thousands of concurrent tasks on one thread, low memory overhead | AsyncIO: one blocking or CPU-heavy call stalls the entire event loop |
+| Threading: works with existing blocking libraries with minimal code changes | Threading: no real CPU parallelism due to the GIL — bounded scalability (hundreds, not thousands) |
+| Multiprocessing: true parallel CPU execution, bypasses the GIL entirely | Multiprocessing: higher memory/startup cost, and data must be pickled across process boundaries |
 
 ## 7. "How would you process a file too large to fit in memory?"
 
@@ -196,6 +232,12 @@ attribute assignment.
 enough to name it and explain what it does; the deep profiling-tooling
 tour isn't interview material.
 
+| Pros | Cons / Trade-offs |
+|---|---|
+| Generators: memory stays flat regardless of input size | Generators: can only be iterated once — no random access or `len()` |
+| `__slots__`: real memory savings for classes instantiated millions of times | `__slots__`: no dynamic attributes, and multiple inheritance with slots gets awkward |
+| Both are "pay for what you use" — no cost when data is already small | Neither helps if the actual bottleneck is CPU, not memory |
+
 ## 8. "Implement an LRU cache. What data structures does it need, and why both?"
 
 ```python
@@ -217,6 +259,12 @@ side effects). `cache_info()` gives hit-rate stats.
 a doubly linked list for O(1) move-to-front and eviction. Be ready to
 explain *why both* are needed — a hash map alone can't cheaply track
 recency order, and a linked list alone can't do O(1) lookup by key.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| `functools.lru_cache`: one line, zero custom code, battle-tested | Only works for pure functions — hashable args, no side effects, no built-in TTL |
+| From-scratch hash map + linked list: full control (custom eviction, TTL, size limits) | More code to maintain — off-by-one bugs in eviction logic are easy to introduce |
+| Both give O(1) lookup and O(1) eviction | A cache never invalidated on write is a classic source of stale-data bugs |
 
 ## 9. "When do you reach for Celery instead of just handling something in the request?"
 
@@ -245,6 +293,12 @@ it up.
 mean it can. Add an idempotency key so a retried task doesn't
 double-process — "charge the customer twice" is the textbook version of
 this bug.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| Request/response stays fast — slow work doesn't block the HTTP response | Adds infrastructure (a broker, worker processes) that can itself fail or fall behind |
+| Built-in retry/backoff for transient failures | Retries mean tasks can run more than once — must be designed idempotent |
+| Workers scale independently from web servers | Debugging is harder — failures happen out-of-band, not in the request that triggered them |
 
 ---
 
