@@ -61,4 +61,10 @@
   #download-pdf-btn {
     display: none !important;
   }
+
+  /* Heading deep-link icons ("¶") are meant to be hover-only, but that
+     doesn't apply in print -- they'd otherwise show after every heading */
+  #print-all-pages .headerlink {
+    display: none !important;
+  }
 }

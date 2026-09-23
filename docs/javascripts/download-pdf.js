@@ -60,6 +60,18 @@
       btn.textContent = originalText;
       btn.disabled = false;
 
+      // Calling window.print() immediately after injecting this much DOM
+      // can capture the page before the browser has actually laid out
+      // and painted the new content (syntax-highlighted code especially),
+      // producing blank gaps in the printed output. Wait for web fonts
+      // plus a couple of paint cycles before printing.
+      await document.fonts.ready;
+      await new Promise(function (resolve) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(resolve);
+        });
+      });
+
       window.print();
     } catch (err) {
       console.error("PDF export failed:", err);
