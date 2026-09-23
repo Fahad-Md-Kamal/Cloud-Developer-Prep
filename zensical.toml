@@ -9,9 +9,6 @@ repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
 
 nav = [
   { "Home" = "index.md" },
-  { "Job Descriptions" = [
-      { "Intellias — Staff Healthcare Data Engineer" = "jd-intellias-staff-healthcare-data-engineer.md" },
-  ] },
   { "Study Materials" = [
       { "Session Log" = "session-log.md" },
       { "Core Engineering Foundations" = [
@@ -91,6 +88,15 @@ nav = [
               { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
           ] },
           { "FastAPI" = "fastapi.md" },
+      ] },
+      { "Healthcare Data Engineering" = [
+          { "Apache Spark & PySpark" = "spark-pyspark.md" },
+          { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
+          { "FHIR R4" = "fhir-r4.md" },
+          { "HL7 v2.x & C-CDA" = "hl7-ccda.md" },
+          { "Healthcare Terminology" = "healthcare-terminology.md" },
+          { "Patient Matching & MPI" = "patient-matching-mpi.md" },
+          { "HIPAA & PHI-Safe Engineering" = "hipaa-phi-safety.md" },
       ] },
       { "AWS Services Quick Reference" = "aws-services.md" },
       { "Personal Project Stories" = "project-stories.md" },
