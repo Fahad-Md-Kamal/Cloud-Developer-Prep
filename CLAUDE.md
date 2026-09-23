@@ -12,6 +12,13 @@ GitHub Pages automatically on every push to `main`.
   `zensical build --clean` (full rebuild, exits non-zero / warns on broken
   internal links) or `zensical serve` (local preview server with
   live-reload).
+- **Full-site PDF export**: Zensical has no built-in PDF export (unlike
+  Sphinx, which is what tools like Django's docs use for this). After a
+  `zensical build --clean`, run `python3 scripts/export_pdf.py` — it
+  renders every page in nav order with headless Chrome and merges them
+  with `pdfunite` into `Cloud-Developer-Prep.pdf` at the repo root
+  (gitignored, regenerate anytime). Requires `google-chrome` and
+  `pdfunite` (poppler-utils) on PATH.
 - This is meant to be an ongoing, evolving job-prep resource — not scoped to
   one interview. New tracks (new roles, new topic areas) get their own pages
   and `nav` entries rather than replacing what's here.
