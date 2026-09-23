@@ -111,20 +111,20 @@ inside the relevant chapter, not on separate pages:
 - [Kong API Gateway](kong-api-gateway.md)
 - [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
 
+**Agents & Prompting**
+
+- [Prompt Engineering & Context Management](prompt-engineering.md)
+- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, Autogen
+
+**RAG & Retrieval**
+
+- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+- [RAG & Vector Databases](rag-and-vector-databases.md)
+
 **LangChain**
 
 - [LangChain Agents](langchain-agents.md) — agent types, tools, memory, LCEL
 - [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
-
-**RAG & Retrieval**
-
-- [RAG & Vector Databases](rag-and-vector-databases.md)
-- [Embeddings & Semantic Search](embeddings-semantic-search.md)
-
-**Agents & Prompting**
-
-- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, Autogen
-- [Prompt Engineering & Context Management](prompt-engineering.md)
 
 ### Part VI — Advanced Software Architecture & Leadership (Chapters 26–30)
 

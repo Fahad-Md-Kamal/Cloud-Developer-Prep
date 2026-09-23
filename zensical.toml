@@ -63,17 +63,17 @@ nav = [
               { "Kong API Gateway" = "kong-api-gateway.md" },
               { "LLM Response Caching" = "llm-response-caching.md" },
           ] },
+          { "Agents & Prompting" = [
+              { "Prompt Engineering & Context Management" = "prompt-engineering.md" },
+              { "Multi-Agent Systems" = "multi-agent-systems.md" },
+          ] },
+          { "RAG & Retrieval" = [
+              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+              { "RAG & Vector Databases" = "rag-and-vector-databases.md" },
+          ] },
           { "LangChain" = [
               { "LangChain Agents" = "langchain-agents.md" },
               { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "langchain-ecosystem.md" },
-          ] },
-          { "RAG & Retrieval" = [
-              { "RAG & Vector Databases" = "rag-and-vector-databases.md" },
-              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
-          ] },
-          { "Agents & Prompting" = [
-              { "Multi-Agent Systems" = "multi-agent-systems.md" },
-              { "Prompt Engineering & Context Management" = "prompt-engineering.md" },
           ] },
       ] },
       { "Architecture & Leadership" = [
