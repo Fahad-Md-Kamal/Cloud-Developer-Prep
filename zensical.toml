@@ -9,6 +9,9 @@ repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
 
 nav = [
   { "Home" = "index.md" },
+  { "Job Descriptions" = [
+      { "Intellias — Staff Healthcare Data Engineer" = "jd-intellias-staff-healthcare-data-engineer.md" },
+  ] },
   { "Study Materials" = [
       { "Session Log" = "session-log.md" },
       { "Core Engineering Foundations" = [
