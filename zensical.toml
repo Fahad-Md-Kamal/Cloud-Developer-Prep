@@ -112,6 +112,7 @@ nav = [
           { "LLM Response Caching" = "llm-response-caching.md" },
           { "Autogen: Multi-Agent Orchestration" = "autogen-multi-agent.md" },
           { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+          { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "langchain-ecosystem.md" },
       ] },
       { "Data Preprocessing: Pandas & NumPy" = "data-preprocessing-pandas-numpy.md" },
       { "Big Data & Distributed Systems" = [

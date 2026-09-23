@@ -276,6 +276,10 @@
     "url": "embeddings-semantic-search/"
   },
   {
+    "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
+    "url": "langchain-ecosystem/"
+  },
+  {
     "title": "Data Preprocessing: Pandas & NumPy",
     "url": "data-preprocessing-pandas-numpy/"
   },

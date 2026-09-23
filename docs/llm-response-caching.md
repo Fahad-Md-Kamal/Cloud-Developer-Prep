@@ -6,7 +6,8 @@ title: "LLM Response Caching: Semantic & Hybrid Caching"
 
 Why exact-match caching mostly fails for LLM traffic, and the semantic/
 hybrid caching patterns that actually work — plus what "hybrid caching"
-means in this context.
+means in this context. For a concrete named product implementing this
+pattern, see [LangCache](langchain-ecosystem.md#4-langcache-the-named-product-behind-semantic-caching-for-llms).
 
 ## 1. "Why doesn't a normal Redis key-value cache work well for caching LLM responses?"
 

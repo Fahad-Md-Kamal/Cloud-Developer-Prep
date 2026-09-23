@@ -171,6 +171,7 @@ orchestration work.
 - [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
 - [Autogen: Multi-Agent Orchestration](autogen-multi-agent.md)
 - [Embeddings & Semantic Search](embeddings-semantic-search.md)
+- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
 
 ### Data Preprocessing: Pandas & NumPy
 
