@@ -6,9 +6,10 @@ title: "Chapter 6: Microservices Design with FastAPI & Message Queues (Kafka/Red
 
 Service boundaries, inter-service communication, and the messaging
 patterns (Kafka, Redis) that hold a microservices system together — as
-questions you should be able to answer cold. FastAPI's own mechanics
-(dependency injection, background tasks, performance patterns) live in
-[FastAPI](fastapi.md) and aren't repeated here; general REST API design
+questions you should be able to answer cold. FastAPI's own mechanics live in
+[Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
+and [Performance & Production Patterns](fastapi-performance-patterns.md)
+and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
 [API Design Fundamentals](api-design-fundamentals.md). This chapter is about the architecture
 *around* the services, not the framework inside any one of them.

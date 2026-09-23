@@ -13,8 +13,10 @@ appendices, plus a running practice log cross-linked into the specific
 chapter each round belongs to.
 
 !!! warning "Private content — repo must stay private"
-    Contains real company names (Lawstronaut, Optimizely, Cefalo) and a
-    client case study (the [MeetingFlow Case Study](meetingflow-case-study.md)).
+    Contains real company names (Lawstronaut, Optimizely, Cefalo). The
+    [Meeting-Intelligence System Case Study](meeting-intelligence-case-study.md)
+    has been anonymized (no client/project name, no domain-identifying
+    details) but the repo should still stay private.
 
 ## About this book
 
@@ -59,13 +61,12 @@ inside the relevant chapter, not on separate pages:
 - **[Session Log](session-log.md)** — running, dated record of live
   practice Q&A, cross-linked into the chapters below.
 
-### Part I — Core Engineering Foundations (Chapters 1–5)
+### Core Engineering Foundations (Chapters 2–5)
 
-- Chapter 1: Modern Python Mastery
-    - [Typing & Generics](typing-and-generics.md)
-    - [Concurrency & AsyncIO](concurrency-and-asyncio.md)
-    - [Memory & Caching](memory-and-caching.md)
-    - [Practical Patterns](practical-patterns.md)
+Framework-agnostic principles — apply regardless of which language or
+framework sits underneath. Python and its frameworks now live in their
+own section below.
+
 - Chapter 2: Clean Code, Design Patterns, and SOLID Principles
     - [SOLID Principles](solid-principles.md)
     - [Design Patterns](design-patterns.md)
@@ -78,63 +79,47 @@ inside the relevant chapter, not on separate pages:
 - [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
 - [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
 
-### Part II — Scalable Backend Architecture (Chapters 6–10)
+### Python & Frameworks
 
-- [Chapter 6: Microservices Design with FastAPI & Message Queues](chapter-6.md)
-- [Chapter 7: Distributed System Design](chapter-7.md)
-- [Chapter 8: Database Architecture for Scale](chapter-8.md)
-- [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](chapter-9.md)
-- [Chapter 10: Observability with Prometheus & Grafana](chapter-10.md)
+Everything language-and-framework-specific in one place, instead of
+Python fundamentals and its frameworks living in two disconnected
+sections. Generic name on purpose — covers any Python framework added
+here later (web, desktop, or otherwise), not just Django/FastAPI.
 
-### Part III — Web Crawling & Data Engineering (Chapters 11–15)
+- Chapter 1: Modern Python Mastery
+    - [Typing & Generics](typing-and-generics.md)
+    - [Concurrency & AsyncIO](concurrency-and-asyncio.md)
+    - [Memory & Caching](memory-and-caching.md)
+    - [Practical Patterns](practical-patterns.md)
+    - [Python Internals & Advanced OOP](python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
+- [Choosing a Python Web Framework](choosing-a-python-web-framework.md) —
+  Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
+- **Django & DRF**
+    - [Django ORM Query Cheat Sheet](django-orm.md)
+    - [Django & DRF Deep Dive](django-drf.md) — serializers, permissions,
+      auth, signals, migrations, testing, caching
+- **FastAPI**
+    - [Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
+    - [Performance & Production Patterns](fastapi-performance-patterns.md)
+- [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —
+  normalization, keys, JOINs, denormalization, DB-level constraints
 
-- [Chapter 11: Web Crawling at Scale](chapter-11.md)
-- [Chapter 12: HTML Parsing and Data Pipelines](chapter-12.md)
-- [Chapter 13: Distributed Crawling Architecture](chapter-13.md)
-- [Chapter 14: Data Cleaning, Normalization, and Deduplication](chapter-14.md)
-- [Chapter 15: Building and Managing Large MongoDB Clusters](chapter-15.md)
+### Frontend & Developer Tooling
 
-### Part IV — Cloud, DevOps & CI/CD Mastery (Chapters 16–20)
+Gaps flagged from the Svea Solar Senior Fullstack Engineer (Django) JD
+(2026-09-23) — placeholders with the topics to cover, not yet given
+the full Q&A treatment.
 
-- [Chapter 16: Docker and Docker Compose for Production](chapter-16.md)
-- [Chapter 17: Kubernetes & Container Orchestration](chapter-17.md)
-- [Chapter 18: Infrastructure as Code with Terraform](chapter-18.md)
-- [Chapter 19: CI/CD Pipelines](chapter-19.md)
-- [Chapter 20: Observability, Monitoring, and On-Call Readiness](chapter-20.md)
+- [Frontend Fundamentals](frontend-fundamentals.md)
+- [CSS & Styling Frameworks](css-styling-frameworks.md)
+- [CMS Platforms](cms-platforms.md)
+- [AI-Assisted Development Tools & Workflows](ai-assisted-development.md)
 
-### Part V — AI & LLM System Integration
+### Data Structures & Algorithms Mastery (Chapter 36)
 
-**LLM APIs & Gateway**
-
-- [LLM APIs & Providers](llm-apis-and-providers.md) — provider selection, auth, cost, async clients
-- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
-- [Kong API Gateway](kong-api-gateway.md)
-- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
-
-**Agents & Prompting**
-
-- [Prompt Engineering & Context Management](prompt-engineering.md)
-- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, Autogen
-
-**RAG & Retrieval**
-
-- [Embeddings & Semantic Search](embeddings-semantic-search.md)
-- [RAG & Vector Databases](rag-and-vector-databases.md)
-
-**LangChain**
-
-- [LangChain Agents](langchain-agents.md) — agent types, tools, memory, LCEL
-- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
-
-### Part VI — Advanced Software Architecture & Leadership (Chapters 26–30)
-
-- [Chapter 26: System Design Interviews](chapter-26.md)
-- [Chapter 27: Event-Driven Architectures and Async Workflows](chapter-27.md)
-- [Chapter 28: Building for Resilience](chapter-28.md)
-- [Chapter 29: Leadership for Engineers](chapter-29.md)
-- [Chapter 30: Crafting the Staff Engineer Mindset](chapter-30.md)
-
-### Part VII — Data Structures & Algorithms Mastery (Chapter 36)
+A parallel-track universal skill, not backend-architecture-specific —
+placed early since it's usually practiced alongside everything else,
+not saved for last.
 
 - [Chapter 36: Blind 75, Grind 75 & NeetCode 150](chapter-36.md)
     - [Arrays & Hashing](chapter-36/2-1-arrays-and-hashing.md)
@@ -151,28 +136,30 @@ inside the relevant chapter, not on separate pages:
     - [Dynamic Programming](chapter-36/2-12-dynamic-programming.md)
     - [Design](chapter-36/2-13-design.md)
 
-### Part VIII — Cross-Stack & Multi-Language Mastery (Chapter 37)
+### Backend & Distributed Systems Architecture (Chapters 6–10)
 
-- [Chapter 37: Go, TypeScript, Angular & Transferable AI Patterns](chapter-37.md)
+- [Chapter 6: Microservices Design with FastAPI & Message Queues](chapter-6.md)
+- [Chapter 7: Distributed System Design](chapter-7.md)
+- [Chapter 8: Database Architecture for Scale](chapter-8.md)
+- [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](chapter-9.md)
+- [Kong API Gateway](kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
+- [Chapter 10: Observability with Prometheus & Grafana](chapter-10.md)
 
-### Additional
+### Data Engineering & Big Data
 
-- [Chapter 38: Python Standard Library for Enterprise Systems](chapter-38.md)
+General-purpose data engineering — web crawling/pipelines, distributed
+big-data compute, and preprocessing — grouped together instead of
+scattered across three disconnected sections.
 
-### Frameworks
+**Web Crawling & Pipelines**
 
-- **Django & DRF**
-    - [Django ORM Query Cheat Sheet](django-orm.md)
-    - [Django & DRF Deep Dive](django-drf.md) — serializers, permissions,
-      auth, signals, migrations, testing, caching
-- **[FastAPI](fastapi.md)** — dependency injection, background tasks,
-  performance patterns
+- [Chapter 11: Web Crawling at Scale](chapter-11.md)
+- [Chapter 12: HTML Parsing and Data Pipelines](chapter-12.md)
+- [Chapter 13: Distributed Crawling Architecture](chapter-13.md)
+- [Chapter 14: Data Cleaning, Normalization, and Deduplication](chapter-14.md)
+- [Chapter 15: Building and Managing Large MongoDB Clusters](chapter-15.md)
 
-### Data Preprocessing: Pandas & NumPy
-
-- [Data Preprocessing: Pandas & NumPy](data-preprocessing-pandas-numpy.md)
-
-### Big Data & Distributed Systems
+**Big Data & Distributed Compute**
 
 Added from the Intellias Staff Healthcare Data Engineer JD, but
 general-purpose — not healthcare-specific, reusable for any future
@@ -181,10 +168,55 @@ big-data-scale role.
 - [Apache Spark & PySpark](spark-pyspark.md)
 - [Databricks & Delta Lake](databricks-delta-lake.md)
 
-### Healthcare Interoperability
+**Data Preprocessing**
 
-The genuinely healthcare-specific content from that same JD — a real
-domain gap, not yet an active application track.
+- [Data Preprocessing: Pandas & NumPy](data-preprocessing-pandas-numpy.md)
+
+### Cloud, DevOps & Infrastructure (Chapters 16–20)
+
+- [Chapter 16: Docker and Docker Compose for Production](chapter-16.md)
+- [Chapter 17: Kubernetes & Container Orchestration](chapter-17.md)
+- [Chapter 18: Infrastructure as Code with Terraform](chapter-18.md)
+- [Chapter 19: CI/CD Pipelines](chapter-19.md)
+- [Chapter 20: Observability, Monitoring, and On-Call Readiness](chapter-20.md)
+- [AWS Services Quick Reference](aws-services.md) — current job-search
+  track's AWS gap review (ECS, Aurora RDS, DynamoDB)
+
+### AI & LLM System Integration
+
+**LLM APIs & Gateway**
+
+- [LLM APIs & Providers](llm-apis-and-providers.md) — provider selection, auth, cost, async clients
+- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
+- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
+
+**Agents & Prompting**
+
+- [Prompt Engineering & Context Management](prompt-engineering.md)
+- [Agentic AI Fundamentals](agentic-ai-fundamentals.md) — the agent loop, and how to actually build agents with API access
+- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, debugging
+- [Autogen: Multi-Agent Orchestration](autogen-orchestration.md)
+
+**RAG & Retrieval**
+
+- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+- [RAG & Vector Databases](rag-and-vector-databases.md)
+
+**LangChain**
+
+- [LangChain Agents](langchain-agents.md) — agent types, tools, memory, LCEL
+- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
+
+### Domain-Specific Verticals
+
+Kept separate from the general-purpose tech above — where any future
+JD's narrow industry-specific content nests, instead of getting lumped
+into whichever section it was added from.
+
+**Healthcare Interoperability**
+
+The genuinely healthcare-specific content from the Intellias JD — a
+real domain gap, not yet an active application track.
 
 - [FHIR R4](fhir-r4.md)
 - [HL7 v2.x & C-CDA](hl7-ccda.md)
@@ -192,21 +224,32 @@ domain gap, not yet an active application track.
 - [Patient Matching & MPI](patient-matching-mpi.md)
 - [HIPAA & PHI-Safe Engineering](hipaa-phi-safety.md)
 
-### AWS Services Quick Reference
+### Architecture & Leadership (Chapters 26–30)
 
-- [AWS Services Quick Reference](aws-services.md) — current job-search
-  track's AWS gap review (ECS, Aurora RDS, DynamoDB)
+- [Chapter 26: System Design Interviews](chapter-26.md)
+- [Chapter 27: Event-Driven Architectures and Async Workflows](chapter-27.md)
+- [Chapter 28: Building for Resilience](chapter-28.md)
+- [Chapter 29: Leadership for Engineers](chapter-29.md)
+- [Chapter 30: Crafting the Staff Engineer Mindset](chapter-30.md)
 
-### Personal Project Stories
+### Supplementary Language & Stdlib Topics (Chapters 37–38)
+
+Gap-review material grouped together rather than left as two
+unrelated stray entries.
+
+- [Chapter 37: Go, TypeScript, Angular & Transferable AI Patterns](chapter-37.md)
+- [Chapter 38: Python Standard Library for Enterprise Systems](chapter-38.md)
+
+### Reference & Case Studies
+
+Behavioral/system-design source material — a distinct category from
+the skill curriculum above.
 
 - [Personal Project Stories](project-stories.md) — real project STAR stories
   for system-design/behavioral questions
+- [Meeting-Intelligence System Case Study](meeting-intelligence-case-study.md)
 
-### MeetingFlow Case Study
-
-- [MeetingFlow Case Study](meetingflow-case-study.md)
-
-### Part IX — Interview & Portfolio Mastery (Chapters 31–35)
+### Interview & Portfolio Mastery (Chapters 31–35)
 
 The capstone — behavioral prep, mock interviews, resume polish, and a
 final countdown review. Comes last: it's what you do right before the

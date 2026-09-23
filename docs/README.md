@@ -62,4 +62,6 @@ This repo holds real client/employer-confidential content directly in
 That's only safe as long as the repo's GitHub visibility stays private —
 if you're ever asked to make it public again, that requires a full pass
 over `docs/*.md` to genericize real names first, starting with
-`docs/project-stories.md` and `docs/meetingflow-case-study.md`.
+`docs/project-stories.md`. `docs/meeting-intelligence-case-study.md` is
+already anonymized (no real project name or client-identifying detail)
+and doesn't need that pass.

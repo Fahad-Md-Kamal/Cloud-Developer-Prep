@@ -37,15 +37,96 @@ GitHub Pages automatically on every push to `main`.
   one interview. New tracks (new roles, new topic areas) get their own pages
   and `nav` entries rather than replacing what's here.
 
+## Content writing style
+
+Write `**Answer:**` sections (and explanations generally, including chat
+replies) as multiple short list items, not large paragraphs. Each item
+should carry one idea, not several sentences chained together.
+
+Turn this:
+
+> **Answer:** The GIL is a single mutex in CPython that prevents more than
+> one thread from executing Python bytecode at a time. Threads still help
+> I/O-bound work because a thread releases the GIL while blocked on I/O
+> (network call, file read, DB query) — another thread runs during that
+> wait. CPU-bound work gets no benefit from threads at all, since only one
+> thread can be executing Python at any instant no matter how many exist.
+
+Into this:
+
+**Answer:**
+
+- The GIL is a single mutex in CPython that prevents more than one thread
+  from executing Python bytecode at a time.
+- Threads still help I/O-bound work — a thread releases the GIL while
+  blocked on I/O (network call, file read, DB query), so another thread
+  runs during that wait.
+- CPU-bound work gets no benefit from threads at all, since only one
+  thread can be executing Python at any instant no matter how many exist.
+
+Notes:
+
+- Nested sub-bullets are fine for grouping related short points.
+- Pros/Cons tables (the site's existing convention) already satisfy this —
+  keep using them.
+- A short 1-2 sentence lead-in before the bullets is fine when a concept
+  needs a little connective framing; the rule is against large paragraphs
+  as the default, not against any prose ever appearing.
+- Existing pages written before this rule (most current chapter content)
+  don't need retroactive rewriting unless asked — this governs new
+  content and answers going forward.
+
+## Splitting large chapters into nested nav files
+
+When a chapter/page grows too large or covers several genuinely distinct
+sub-topics, split it into its own nested nav group instead of leaving it
+as one long file — don't just add Pros/Cons tables or reorganize headings
+within a single file and call it done.
+
+**Pattern** (already applied to chapters 1, 2, 3, and the AI & LLM
+System Integration section): one top-level entry becomes an expandable
+group in `zensical.toml`, wrapping several standalone `docs/*.md` files,
+one per sub-topic:
+
+```toml
+{ "1. Modern Python Mastery" = [
+    { "Typing & Generics" = "typing-and-generics.md" },
+    { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
+    { "Memory & Caching" = "memory-and-caching.md" },
+    { "Practical Patterns" = "practical-patterns.md" },
+] },
+```
+
+**How to apply:**
+
+- Each sub-topic gets its own real file (own `title:` frontmatter, own
+  nav entry) — not a heading inside one giant page.
+- Mirror the same nested structure in `docs/index.md`'s Contents section.
+- Regenerate `docs/nav-order.json` after any `nav` change:
+  `python3 scripts/generate_nav_manifest.py`.
+- Fix any internal cross-references that pointed at the old single-file
+  anchors (`old-chapter.md#some-heading` → `new-topic-file.md#...`) —
+  `zensical build --clean` will flag broken ones as anchor warnings.
+- This is about navigability (letting the user jump straight to the
+  sub-topic they want from the sidebar), not about shortening content —
+  don't cut material to avoid splitting; split it instead.
+
 ## This repo must stay PRIVATE — do not suggest making it public again
 
 As of 2026-09-22 this repo holds real client/employer-confidential content.
 All content lives flat under `docs/*.md` (plus `docs/chapter-36/` for the
 DSA sub-chapters) as one unified tree — there is no longer a separate
 public-safe layer vs. a private layer split by directory. Real
-company/target names (Lawstronaut, Optimizely, Cefalo) and a real client
-case study (`docs/meetingflow-case-study.md`) are mixed directly into
-the chapters. **Not genericized.**
+company/target names (Lawstronaut, Optimizely, Cefalo) are mixed
+directly into the chapters. **Not genericized.**
+
+`docs/meeting-intelligence-case-study.md` (formerly
+`meetingflow-case-study.md`) is the one exception — as of 2026-09-23 it
+was rewritten to remove the real project name, the specific business
+domain/language framing, literal source-language prompts, and real file
+paths, so it can't be traced back to the actual client/project even if
+this repo were ever exposed. Keep it that way: don't reintroduce the
+real project name or domain specifics into that file.
 
 The public/private boundary is enforced entirely at the **repo
 visibility** level (must be private), not per-file. If asked to make this

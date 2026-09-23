@@ -23,15 +23,19 @@ class APIResponse(Generic[T]):
 user_response = APIResponse[User](user_data, 200)
 ```
 
-**Answer:** `Generic[T]` lets a class work with any type while the type
-checker still tracks *which* type — a `Repository[T]` base class works
-for `UserRepository` and `OrderRepository` without duplicating CRUD
-logic or falling back to untyped `Any`.
+**Answer:**
 
-**Likely follow-up — "what's wrong with just using `TypeVar` unbounded,
-or `Any`?"** Both hide exactly the errors typing exists to catch. Bound
-it (`TypeVar('T', bound=BaseModel)`) once the generic needs to call a
-specific method on `T`.
+- `Generic[T]` lets a class work with any type while the type checker
+  still tracks *which* type.
+- A `Repository[T]` base class works for `UserRepository` and
+  `OrderRepository` without duplicating CRUD logic or falling back to
+  untyped `Any`.
+
+**Likely follow-up — "what's wrong with just using `TypeVar` unbounded, or `Any`?"**
+
+- Both hide exactly the errors typing exists to catch.
+- Bound it (`TypeVar('T', bound=BaseModel)`) once the generic needs to
+  call a specific method on `T`.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -54,15 +58,20 @@ class APICrawler:
     def fetch(self, url: str) -> str: ...  # so does this
 ```
 
-**Answer:** A `Protocol` checks structurally — "anything with this
-method counts" — instead of requiring a shared base class. It's duck
-typing with static verification: `WebCrawler` and `APICrawler` both
-satisfy `Crawlable` just by having the right method signature.
+**Answer:**
+
+- A `Protocol` checks structurally — "anything with this method
+  counts" — instead of requiring a shared base class.
+- It's duck typing with static verification: `WebCrawler` and
+  `APICrawler` both satisfy `Crawlable` just by having the right
+  method signature.
 
 **Likely follow-up — "when would you reach for this over inheritance?"**
-Swapping HTTP clients (`requests` for `httpx`) or mocking a dependency
-in a test — both work because they satisfy the same Protocol, without
-forcing every implementation through one base class.
+
+- Swapping HTTP clients (`requests` for `httpx`) or mocking a
+  dependency in a test — both work because they satisfy the same
+  Protocol, without forcing every implementation through one base
+  class.
 
 | Pros | Cons / Trade-offs |
 |---|---|

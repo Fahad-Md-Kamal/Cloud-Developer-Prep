@@ -15,12 +15,6 @@ nav = [
   { "Study Materials" = [
       { "Session Log" = "session-log.md" },
       { "Core Engineering Foundations" = [
-          { "1. Modern Python Mastery" = [
-              { "Typing & Generics" = "typing-and-generics.md" },
-              { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
-              { "Memory & Caching" = "memory-and-caching.md" },
-              { "Practical Patterns" = "practical-patterns.md" },
-          ] },
           { "2. Clean Code & Design Patterns" = [
               { "SOLID Principles" = "solid-principles.md" },
               { "Design Patterns" = "design-patterns.md" },
@@ -35,53 +29,30 @@ nav = [
           { "4. AuthN/AuthZ & Security" = "chapter-4.md" },
           { "5. Performance Profiling & Caching" = "chapter-5.md" },
       ] },
-      { "Scalable Backend Architecture" = [
-          { "6. Microservices & Message Queues" = "chapter-6.md" },
-          { "7. Distributed System Design" = "chapter-7.md" },
-          { "8. Database Architecture for Scale" = "chapter-8.md" },
-          { "9. API Gateway & Rate Limiting" = "chapter-9.md" },
-          { "10. Observability" = "chapter-10.md" },
-      ] },
-      { "Web Crawling & Data Engineering" = [
-          { "11. Web Crawling at Scale" = "chapter-11.md" },
-          { "12. HTML Parsing & Data Pipelines" = "chapter-12.md" },
-          { "13. Distributed Crawling Architecture" = "chapter-13.md" },
-          { "14. Data Cleaning & Deduplication" = "chapter-14.md" },
-          { "15. Large MongoDB Clusters" = "chapter-15.md" },
-      ] },
-      { "Cloud, DevOps & CI/CD" = [
-          { "16. Docker & Docker Compose" = "chapter-16.md" },
-          { "17. Kubernetes & Orchestration" = "chapter-17.md" },
-          { "18. Terraform (IaC)" = "chapter-18.md" },
-          { "19. CI/CD Pipelines" = "chapter-19.md" },
-          { "20. Observability & On-Call" = "chapter-20.md" },
-      ] },
-      { "AI & LLM System Integration" = [
-          { "LLM APIs & Gateway" = [
-              { "LLM APIs & Providers" = "llm-apis-and-providers.md" },
-              { "LLM Gateway & Multi-Provider Integration" = "llm-gateway-multi-provider.md" },
-              { "Kong API Gateway" = "kong-api-gateway.md" },
-              { "LLM Response Caching" = "llm-response-caching.md" },
+      { "Python & Frameworks" = [
+          { "1. Modern Python Mastery" = [
+              { "Typing & Generics" = "typing-and-generics.md" },
+              { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
+              { "Memory & Caching" = "memory-and-caching.md" },
+              { "Practical Patterns" = "practical-patterns.md" },
+              { "Python Internals & Advanced OOP" = "python-internals-and-advanced-oop.md" },
           ] },
-          { "Agents & Prompting" = [
-              { "Prompt Engineering & Context Management" = "prompt-engineering.md" },
-              { "Multi-Agent Systems" = "multi-agent-systems.md" },
+          { "Choosing a Python Web Framework" = "choosing-a-python-web-framework.md" },
+          { "Django & DRF" = [
+              { "ORM Query Cheat Sheet" = "django-orm.md" },
+              { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
           ] },
-          { "RAG & Retrieval" = [
-              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
-              { "RAG & Vector Databases" = "rag-and-vector-databases.md" },
+          { "FastAPI" = [
+              { "Dependency Injection & Background Tasks" = "fastapi-dependency-injection.md" },
+              { "Performance & Production Patterns" = "fastapi-performance-patterns.md" },
           ] },
-          { "LangChain" = [
-              { "LangChain Agents" = "langchain-agents.md" },
-              { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "langchain-ecosystem.md" },
-          ] },
+          { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
       ] },
-      { "Architecture & Leadership" = [
-          { "26. System Design Interviews" = "chapter-26.md" },
-          { "27. Event-Driven Architectures" = "chapter-27.md" },
-          { "28. Building for Resilience" = "chapter-28.md" },
-          { "29. Leadership for Engineers" = "chapter-29.md" },
-          { "30. Staff Engineer Mindset" = "chapter-30.md" },
+      { "Frontend & Developer Tooling" = [
+          { "Frontend Fundamentals" = "frontend-fundamentals.md" },
+          { "CSS & Styling Frameworks" = "css-styling-frameworks.md" },
+          { "CMS Platforms" = "cms-platforms.md" },
+          { "AI-Assisted Development Tools & Workflows" = "ai-assisted-development.md" },
       ] },
       { "Data Structures & Algorithms" = [
           { "36. Blind 75 / Grind 75 / NeetCode 150" = "chapter-36.md" },
@@ -99,34 +70,83 @@ nav = [
           { "Dynamic Programming" = "chapter-36/2-12-dynamic-programming.md" },
           { "Design" = "chapter-36/2-13-design.md" },
       ] },
-      { "Cross-Stack & Multi-Language" = [
-          { "37. Go, TypeScript, Angular & AI Patterns" = "chapter-37.md" },
+      { "Backend & Distributed Systems Architecture" = [
+          { "6. Microservices & Message Queues" = "chapter-6.md" },
+          { "7. Distributed System Design" = "chapter-7.md" },
+          { "8. Database Architecture for Scale" = "chapter-8.md" },
+          { "9. API Gateway & Rate Limiting" = "chapter-9.md" },
+          { "Kong API Gateway" = "kong-api-gateway.md" },
+          { "10. Observability" = "chapter-10.md" },
       ] },
-      { "Additional" = [
+      { "Data Engineering & Big Data" = [
+          { "Web Crawling & Pipelines" = [
+              { "11. Web Crawling at Scale" = "chapter-11.md" },
+              { "12. HTML Parsing & Data Pipelines" = "chapter-12.md" },
+              { "13. Distributed Crawling Architecture" = "chapter-13.md" },
+              { "14. Data Cleaning & Deduplication" = "chapter-14.md" },
+              { "15. Large MongoDB Clusters" = "chapter-15.md" },
+          ] },
+          { "Big Data & Distributed Compute" = [
+              { "Apache Spark & PySpark" = "spark-pyspark.md" },
+              { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
+          ] },
+          { "Data Preprocessing: Pandas & NumPy" = "data-preprocessing-pandas-numpy.md" },
+      ] },
+      { "Cloud, DevOps & Infrastructure" = [
+          { "16. Docker & Docker Compose" = "chapter-16.md" },
+          { "17. Kubernetes & Orchestration" = "chapter-17.md" },
+          { "18. Terraform (IaC)" = "chapter-18.md" },
+          { "19. CI/CD Pipelines" = "chapter-19.md" },
+          { "20. Observability & On-Call" = "chapter-20.md" },
+          { "AWS Services Quick Reference" = "aws-services.md" },
+      ] },
+      { "AI & LLM System Integration" = [
+          { "LLM APIs & Gateway" = [
+              { "LLM APIs & Providers" = "llm-apis-and-providers.md" },
+              { "LLM Gateway & Multi-Provider Integration" = "llm-gateway-multi-provider.md" },
+              { "LLM Response Caching" = "llm-response-caching.md" },
+          ] },
+          { "Agents & Prompting" = [
+              { "Prompt Engineering & Context Management" = "prompt-engineering.md" },
+              { "Agentic AI Fundamentals" = "agentic-ai-fundamentals.md" },
+              { "Multi-Agent Systems" = [
+                  { "Coordination Patterns & Debugging" = "multi-agent-systems.md" },
+                  { "Autogen: Multi-Agent Orchestration" = "autogen-orchestration.md" },
+              ] },
+          ] },
+          { "RAG & Retrieval" = [
+              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+              { "RAG & Vector Databases" = "rag-and-vector-databases.md" },
+          ] },
+          { "LangChain" = [
+              { "LangChain Agents" = "langchain-agents.md" },
+              { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "langchain-ecosystem.md" },
+          ] },
+      ] },
+      { "Domain-Specific Verticals" = [
+          { "Healthcare Interoperability" = [
+              { "FHIR R4" = "fhir-r4.md" },
+              { "HL7 v2.x & C-CDA" = "hl7-ccda.md" },
+              { "Healthcare Terminology" = "healthcare-terminology.md" },
+              { "Patient Matching & MPI" = "patient-matching-mpi.md" },
+              { "HIPAA & PHI-Safe Engineering" = "hipaa-phi-safety.md" },
+          ] },
+      ] },
+      { "Architecture & Leadership" = [
+          { "26. System Design Interviews" = "chapter-26.md" },
+          { "27. Event-Driven Architectures" = "chapter-27.md" },
+          { "28. Building for Resilience" = "chapter-28.md" },
+          { "29. Leadership for Engineers" = "chapter-29.md" },
+          { "30. Staff Engineer Mindset" = "chapter-30.md" },
+      ] },
+      { "Supplementary Language & Stdlib Topics" = [
+          { "37. Go, TypeScript, Angular & AI Patterns" = "chapter-37.md" },
           { "38. Python Standard Library" = "chapter-38.md" },
       ] },
-      { "Frameworks" = [
-          { "Django & DRF" = [
-              { "ORM Query Cheat Sheet" = "django-orm.md" },
-              { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
-          ] },
-          { "FastAPI" = "fastapi.md" },
+      { "Reference & Case Studies" = [
+          { "Personal Project Stories" = "project-stories.md" },
+          { "Meeting-Intelligence System Case Study" = "meeting-intelligence-case-study.md" },
       ] },
-      { "Data Preprocessing: Pandas & NumPy" = "data-preprocessing-pandas-numpy.md" },
-      { "Big Data & Distributed Systems" = [
-          { "Apache Spark & PySpark" = "spark-pyspark.md" },
-          { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
-      ] },
-      { "Healthcare Interoperability" = [
-          { "FHIR R4" = "fhir-r4.md" },
-          { "HL7 v2.x & C-CDA" = "hl7-ccda.md" },
-          { "Healthcare Terminology" = "healthcare-terminology.md" },
-          { "Patient Matching & MPI" = "patient-matching-mpi.md" },
-          { "HIPAA & PHI-Safe Engineering" = "hipaa-phi-safety.md" },
-      ] },
-      { "AWS Services Quick Reference" = "aws-services.md" },
-      { "Personal Project Stories" = "project-stories.md" },
-      { "MeetingFlow Case Study" = "meetingflow-case-study.md" },
       { "Interview & Portfolio Mastery" = [
           { "31. Behavioral Interview Prep" = "chapter-31.md" },
           { "32. Technical Interview Deep Dives" = "chapter-32.md" },

@@ -11,7 +11,7 @@ window functions), see the
 [Django ORM Query Cheat Sheet](django-orm.md). For general REST API
 design principles and versioning, see
 [API Design Fundamentals](api-design-fundamentals.md); for the FastAPI
-comparison, see [FastAPI](fastapi.md).
+comparison, see [FastAPI](fastapi-dependency-injection.md).
 
 ---
 

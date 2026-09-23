@@ -1,18 +1,18 @@
 ---
-title: "MeetingFlow: Enterprise AI System Architecture Case Study"
+title: "Enterprise Meeting-Intelligence Pipeline: A Multi-Modal AI System Case Study"
 ---
 
-# MeetingFlow: Enterprise AI System Architecture Case Study
+# Enterprise Meeting-Intelligence Pipeline: A Multi-Modal AI System Case Study
 
 ## Overview
 
-This appendix presents a comprehensive technical analysis of MeetingFlow, a production-grade enterprise AI system specifically designed for Japanese investor relations operations. This real-world case study demonstrates the practical application of advanced concepts covered throughout this book, including multi-modal AI architecture, distributed systems design, API development with FastAPI, and enterprise-scale data processing.
+This appendix presents a technical case study of a production-grade enterprise AI system built to automate structured meeting-minutes and Q&A generation for large, multilingual corporate meetings. Identifying details (client, project name, and business-domain specifics) have been generalized to protect confidentiality; the architecture, AI-service-selection reasoning, and engineering lessons are preserved as-is. This case study demonstrates the practical application of concepts covered throughout this book, including multi-modal AI architecture, distributed systems design, API development with FastAPI, and enterprise-scale data processing.
 
 ## Executive Summary
 
-MeetingFlow represents a sophisticated enterprise-grade AI system specifically designed for Japanese investor relations operations. This comprehensive analysis reveals a multi-modal AI architecture that strategically combines **Azure Speech Services**, **OpenAI GPT-4**, **Anthropic Claude**, and **Local Whisper models** to create an end-to-end automated IR meeting processing pipeline.
+The system combines multiple AI services — a cloud speech-recognition service, a locally-hosted transcription model, and two large-language-model providers — into an end-to-end pipeline that turns recorded corporate meetings into structured, categorized business documentation.
 
-**Core Achievement**: Transforms 4-6 hours of manual IR documentation into 15-30 minutes of automated, structured business intelligence with superior accuracy and consistency.
+**Core Achievement**: Transforms 4-6 hours of manual documentation work into 15-30 minutes of automated, structured business intelligence with superior accuracy and consistency.
 
 ---
 
@@ -41,15 +41,15 @@ graph TB
         AP[Audio Processing]
     end
     
-    subgraph "Azure Speech Services"
+    subgraph "Cloud Speech Service"
         AST[Speech-to-Text]
         ASD[Speaker Diarization]
-        JL[Japanese Language]
+        JL[Target-Language Optimization]
     end
     
     subgraph "Cloud LLM APIs"
-        GPT[OpenAI GPT-4o]
-        CL[Anthropic Claude]
+        GPT[Primary LLM: GPT-4o]
+        CL[Secondary LLM: Claude]
         CA[Content Analysis]
         JG[JSON Generation]
     end
@@ -69,21 +69,21 @@ graph TB
 
 ## **Why Each AI Component Was Chosen:**
 
-### **Azure Speech Services**
-**Purpose**: Primary speech-to-text with Japanese language optimization
+### **Cloud Speech Service**
+**Purpose**: Primary speech-to-text with target-language optimization
 **Why Used**:
-- **Enterprise-grade reliability** for production IR meetings
-- **Native Japanese language support** with high accuracy
+- **Enterprise-grade reliability** for production meetings
+- **Strong non-English language support** with high accuracy
 - **Built-in speaker diarization** for multi-speaker meetings
-- **Azure ecosystem integration** for corporate environments
-- **Conversation transcription API** specifically designed for meeting scenarios
+- **Cloud-platform ecosystem integration** for corporate environments
+- **A conversation-transcription API** specifically designed for meeting scenarios
 
-**Implementation Location**: `minutesgen/transcribe_with_azure_speech.py`
+**Implementation Location**: `services/cloud_transcription.py`
 ```python
 # Primary fallback for enterprise-grade transcription
-def speech_to_text_azure(original_audio_path):
+def speech_to_text_cloud(original_audio_path):
     speech_config = speechsdk.SpeechConfig(subscription=os.environ.get('SPEECH_API_KEY'))
-    speech_config.speech_recognition_language = "ja-JP"
+    speech_config.speech_recognition_language = TARGET_LANGUAGE
     speech_config.set_property_by_name('DifferentiateGuestSpeakers', 'true')
 ```
 
@@ -96,7 +96,7 @@ def speech_to_text_azure(original_audio_path):
 - **Speaker diarization pipeline** using HuggingFace models
 - **Cost control** for high-volume processing
 
-**Implementation Location**: `local_ai_server/audio_ai.py`
+**Implementation Location**: `services/local_transcription.py`
 ```python
 def transcribe_audio_local(audio_path, prompt, with_timestamps=False):
     model_id = "openai/whisper-large-v3"
@@ -104,33 +104,33 @@ def transcribe_audio_local(audio_path, prompt, with_timestamps=False):
     prompt_ids = processor.get_prompt_ids(prompt, return_tensors="pt")
 ```
 
-### **OpenAI GPT-4 Turbo**
+### **Primary LLM (GPT-4 Turbo)**
 **Purpose**: Primary language understanding and content analysis engine
 **Why Used**:
-- **Superior Japanese language comprehension** for business contexts
+- **Strong comprehension of business context** in the target language
 - **Complex reasoning capabilities** for speaker classification
 - **JSON structure generation** with high reliability
-- **Context understanding** for IR-specific terminology
+- **Context understanding** for domain-specific terminology
 - **Consistent output formatting** across all processing stages
 
 **Key Applications**:
-1. **Speaker Classification** (`minutesgen/classify_ir_meeting_speakers.py`)
-2. **Transcript Error Correction** (`minutesgen/ir_fix_speaker_id_issues.py`)
-3. **Comment Extraction** (`minutesgen/ir_extract_comments.py`)
-4. **Q&A Grouping** (`minutesgen/ir_group_into_questions.py`)
-5. **Topic Identification** (`minutesgen/extract_qa_topic.py`)
-6. **Report Transformation** (`minutesgen/qa_spoken_to_report.py`)
+1. **Speaker Classification** (`services/classify_speakers.py`)
+2. **Transcript Error Correction** (`services/fix_speaker_attribution.py`)
+3. **Comment Extraction** (`services/extract_comments.py`)
+4. **Q&A Grouping** (`services/group_into_qa_pairs.py`)
+5. **Topic Identification** (`services/extract_topic.py`)
+6. **Report Transformation** (`services/spoken_to_report_style.py`)
 
-### **Anthropic Claude 3.5 Sonnet**
+### **Secondary LLM (Claude 3.5 Sonnet)**
 **Purpose**: Specialized document analysis and Q&A generation
 **Why Used**:
-- **Superior document comprehension** for PDF analysis
-- **Large context window** for processing entire earnings reports
-- **Structured output generation** for expected Q&A creation
-- **Professional investor perspective** simulation
+- **Superior document comprehension** for long-form PDF analysis
+- **Large context window** for processing entire source documents in one pass
+- **Structured output generation** for anticipated Q&A creation
+- **External-stakeholder perspective** simulation
 - **JSON schema compliance** for automated processing
 
-**Implementation Location**: `expected_QA.py`
+**Implementation Location**: `services/document_qa_generator.py`
 ```python
 class LLMService:
     def __init__(self):
@@ -141,46 +141,46 @@ class LLMService:
 
 ## 2. Detailed AI Processing Pipeline Analysis
 
-### 2.1 Meeting Minutes Generation (GIJIROKU) - 9-Stage AI Pipeline
+### 2.1 Meeting Minutes Generation — 9-Stage AI Pipeline
 
 **Complete Processing Flow**:
 
 #### Stage 1: Audio Preprocessing
 ```python
-# File: processing_manager.py - MeetingFlowTaskType.CONVERT_TO_WAV
+# File: processing_manager.py - TaskType.CONVERT_TO_WAV
 def convert_to_wav_task():
     # FFmpeg-based audio format standardization
     extract_audio_track(audio_path, audio_path + ".wav")
 ```
 
 #### Stage 2: Speech Recognition with Diarization
-**AI Service**: Local Whisper-V3 (Primary) / Azure Speech (Fallback)
+**AI Service**: Local Whisper-V3 (Primary) / Cloud Speech Service (Fallback)
 ```python
-# File: minutesgen/transcribe_with_azure_speech.py
-def speech_to_text(original_audio_path, with_diarization=True, prompt=_IR_DEFAULT_PROMPT):
+# File: services/cloud_transcription.py
+def speech_to_text(original_audio_path, with_diarization=True, prompt=DEFAULT_PROMPT):
     if health_check_local_server():
         return transcribe_audio_cloud(original_audio_path, with_diarization, prompt)
     else:
-        return speech_to_text_azure(original_audio_path)
+        return speech_to_text_cloud(original_audio_path)
 ```
 
 #### Stage 3: Speaker Classification
-**AI Service**: OpenAI GPT-4 Turbo
-**Purpose**: Classify each speaker as "IR" (company representative) or "Investor"
+**AI Service**: Primary LLM
+**Purpose**: Classify each speaker into one of two organizational roles (e.g. internal team member vs. external stakeholder)
 ```python
-# File: minutesgen/classify_ir_meeting_speakers.py
-system_prompt = """You are an assistant of the investor relations team of a large company.
-Your task is to process transcribed meetings between the company's IR team and investors."""
+# File: services/classify_speakers.py
+system_prompt = """You are an assistant supporting a business team.
+Your task is to process transcribed meetings between the internal team and external stakeholders."""
 
-user_prompt = """Classify each speaker as either a member of the IR team or an investor.
-The investors are people who are interested in the company's financial performance..."""
+user_prompt = """Classify each speaker as either a member of the internal team or an external
+stakeholder. External stakeholders are people interested in the organization's performance..."""
 ```
 
 #### Stage 4: Transcript Error Correction
-**AI Service**: OpenAI GPT-4 Turbo
+**AI Service**: Primary LLM
 **Purpose**: Fix automatic transcription errors and speaker attribution issues
 ```python
-# File: minutesgen/ir_fix_speaker_id_issues.py
+# File: services/fix_speaker_attribution.py
 # Corrects:
 # - Incorrect speaker changes during single-person speech
 # - Inaccurate speaker transitions
@@ -189,41 +189,41 @@ The investors are people who are interested in the company's financial performan
 ```
 
 #### Stage 5: Comment Extraction & Categorization
-**AI Service**: OpenAI GPT-4 Turbo
+**AI Service**: Primary LLM
 **Purpose**: Extract structured feedback in predefined categories
 ```python
-# File: minutesgen/ir_extract_comments.py
+# File: services/extract_comments.py
 COMMENT_CATEGORIES = {
-    "performance_and_outlook": "実績・見通し",
-    "business_strategy": "事業戦略",
-    "financial_structure": "財務構造",
-    "recommendations_to_management": "経営陣への提言"
+    "performance_and_outlook": "Performance & Outlook",
+    "business_strategy": "Business Strategy",
+    "financial_structure": "Financial Structure",
+    "recommendations_to_management": "Recommendations to Leadership",
 }
 ```
 
 #### Stage 6: Q&A Pair Extraction
-**AI Service**: OpenAI GPT-4 Turbo
+**AI Service**: Primary LLM
 **Purpose**: Group conversation into structured question-answer pairs
 ```python
-# File: minutesgen/ir_group_into_questions.py
+# File: services/group_into_qa_pairs.py
 # Processes conversation in 20-item chunks with context preservation
 # Maintains exact information integrity while structuring dialogue
 ```
 
 #### Stage 7: Topic Identification
-**AI Service**: OpenAI GPT-4 Turbo
+**AI Service**: Primary LLM
 **Purpose**: Assign relevant business topics to each Q&A pair
 ```python
-# File: minutesgen/extract_qa_topic.py
-user_prompt = f"""Your job is to give the topic of the question in a few words.
-The topic should be relevant from the perspective of the investor relations team."""
+# File: services/extract_topic.py
+user_prompt = """Your job is to give the topic of the question in a few words.
+The topic should be relevant from the perspective of the team reviewing it."""
 ```
 
 #### Stage 8: Report Style Transformation
-**AI Service**: OpenAI GPT-4 Turbo
+**AI Service**: Primary LLM
 **Purpose**: Convert spoken language to professional written format
 ```python
-# File: minutesgen/qa_spoken_to_report.py
+# File: services/spoken_to_report_style.py
 user_prompt = """Your job is to reformulate the question and answer into a written report style.
 If the answer consists of multiple parts, separate them."""
 ```
@@ -231,65 +231,65 @@ If the answer consists of multiple parts, separate them."""
 #### Stage 9: Result Consolidation
 **Purpose**: Combine all extracted data into structured output format
 
-### 2.2 Expected Q&A Generation - Advanced Document Analysis
+### 2.2 Expected Q&A Generation — Advanced Document Analysis
 
-**AI Service**: Anthropic Claude 3.5 Sonnet
-**Why Claude**: Superior document comprehension and investor perspective simulation
+**AI Service**: Claude 3.5 Sonnet
+**Why Claude**: Superior document comprehension and external-stakeholder perspective simulation
 
 #### Processing Stages:
 
-1. **PDF Content Analysis**
+1. **Source Document Analysis**
 ```python
-# File: expected_QA.py - LLMService.generate_qa()
-system_prompt = """あなたはプロの機関投資家です。
-投資継続の判断のために質問を作成してください。"""
+# File: services/document_qa_generator.py - LLMService.generate_qa()
+system_prompt = """You are simulating a professional external stakeholder.
+Generate questions relevant to evaluating whether to continue supporting this organization."""
 ```
 
 2. **Category-Specific Question Generation**
 **Categories**:
-- Overall Performance Forecast (全体の業績予測)
-- Segment Performance (セグメント別の業績予測)
-- Focus Business Performance (注力事業の業績予測)
-- Timely Disclosure (適時開示)
-- Management Foundation (経営基盤)
-- Human Resources (人事)
+- Overall Performance Forecast
+- Segment-Level Performance
+- Focus-Area Performance
+- Public Disclosure
+- Organizational Foundation
+- Human Resources
 
 3. **Duplicate Detection & Merging**
 ```python
-def check_duplicate(self, qa: str, pdf):
+def check_duplicate(self, qa: str, source_doc):
     # Cross-category duplicate identification
     # Quality assurance through LLM review
 ```
 
 4. **Quality Assurance & Refinement**
 ```python
-def pre_marge_check(self, qa_list):
+def pre_merge_check(self, qa_list):
     # Identify related questions for merging
-    # Maintain 10 questions per category target
+    # Maintain a fixed target question count per category
 ```
 
-### 2.3 GA Meeting Q&A Processing - Specialized Board Meeting Analysis
+### 2.3 Specialized Board-Meeting Q&A Processing
 
-**Optimized Pipeline for General Assembly Meetings**:
+**Optimized Pipeline for Large Governance Meetings**:
 
 1. **Specialized Transcription** (No Speaker Diarization)
 ```python
-# File: minutesgen/extract_comments_and_qa.py
-transcript_text = transcribe_audio_cloud(video_file_path, 
-    with_diarization=False, 
-    prompt="以下は取締役会の文字起こしになります。")
+# File: services/extract_comments_and_qa.py
+transcript_text = transcribe_audio_cloud(video_file_path,
+    with_diarization=False,
+    prompt="The following is a transcript of a board/governance meeting.")
 ```
 
-2. **Direct Q&A Structuring** 
+2. **Direct Q&A Structuring**
 ```python
-# File: minutesgen/divide_transcript_into_qa.py
+# File: services/divide_transcript_into_qa.py
 # AI converts continuous transcript into Q&A format
-# Handles Japanese business meeting patterns
+# Handles domain-specific meeting conventions
 ```
 
 3. **Content Refinement**
 ```python
-# File: minutesgen/divide_transcript_into_qa.py - refine_qa_into_json()
+# File: services/divide_transcript_into_qa.py - refine_qa_into_json()
 # Improves clarity and removes transcription artifacts
 # Combines related follow-up questions
 ```
@@ -299,16 +299,16 @@ transcript_text = transcribe_audio_cloud(video_file_path,
 ## 3. Database Architecture & File Management System
 
 ### 3.1 Encrypted File-Based Database
-**Implementation**: `database.py - MeetingFlowDatabase`
+**Implementation**: `database.py - EncryptedMeetingDatabase`
 
 **Design Rationale**:
 - **JSON-based metadata storage** for flexibility and debugging
-- **AES encryption** for sensitive IR audio data
+- **AES encryption** for sensitive audio data
 - **File-system organization** by unique file IDs
 - **Automatic backup threading** for data persistence
 
 ```python
-class MeetingFlowDatabase:
+class EncryptedMeetingDatabase:
     def __init__(self, db_dir="data"):
         self.db_dir = db_dir
         self.encryption_key = self._load_or_generate_key()
@@ -329,8 +329,8 @@ class MeetingFlowDatabase:
 ```python
 # File: main.py - FastAPI Application Structure
 app = FastAPI(
-    title="MeetingFlow",
-    description="Enterprise AI System for Investor Relations",
+    title="Meeting Intelligence Platform",
+    description="Enterprise AI System for Automated Meeting Documentation",
     version="1.0.0"
 )
 
@@ -385,7 +385,7 @@ def select_transcription_service(audio_characteristics):
     if is_high_quality_audio(audio_characteristics):
         return "local_whisper"
     elif requires_enterprise_grade():
-        return "azure_speech"
+        return "cloud_speech_service"
     else:
         return "fallback_service"
 ```
@@ -417,8 +417,8 @@ class AIServiceCircuitBreaker:
 
 **Asynchronous Pipeline Design**:
 ```python
-async def process_ir_meeting(file_id: str):
-    """Complete IR meeting processing pipeline"""
+async def process_meeting(file_id: str):
+    """Complete meeting-documentation processing pipeline"""
     tasks = [
         convert_audio_format(file_id),
         transcribe_with_diarization(file_id),
@@ -482,11 +482,11 @@ async def process_ir_meeting(file_id: str):
 
 ## Conclusion
 
-MeetingFlow demonstrates how advanced AI systems can be successfully integrated into enterprise environments to create significant business value. This case study showcases practical applications of concepts covered throughout this book, including:
+This case study demonstrates how advanced AI systems can be successfully integrated into enterprise environments to create significant business value. It showcases practical applications of concepts covered throughout this book, including:
 
-- **Multi-modal AI Architecture** (Chapters 21-25)
+- **Multi-modal AI Architecture** ([AI & LLM System Integration](index.md#ai-llm-system-integration))
 - **Microservices Design** (Chapters 6-10)
-- **FastAPI Development** (Chapter 3)
+- **FastAPI Development** ([FastAPI](fastapi-dependency-injection.md))
 - **Security Implementation** (Chapter 4)
 - **Performance Optimization** (Chapter 5)
 - **System Design at Scale** (Chapters 26-30)
@@ -501,4 +501,4 @@ The system's success lies in its strategic combination of different AI services,
 4. **Performance Monitoring**: Continuous optimization is essential
 5. **User Experience**: Complex systems must remain user-friendly
 
-This real-world implementation proves that sophisticated AI can be practically deployed to transform traditional business processes while maintaining the quality, security, and reliability required in corporate environments.
+This case study proves that sophisticated AI can be practically deployed to transform traditional business processes while maintaining the quality, security, and reliability required in corporate environments.

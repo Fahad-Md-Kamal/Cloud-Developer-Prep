@@ -10,18 +10,24 @@ interview, since one explains the other.
 
 ## 1. "Explain the GIL. Then explain why threads still help I/O-bound code despite it."
 
-**Answer:** The GIL is a single mutex in CPython that prevents more than
-one thread from executing Python bytecode at a time. Threads still help
-I/O-bound work because a thread **releases** the GIL while blocked on
-I/O (network call, file read, DB query) — another thread runs during
-that wait. CPU-bound work gets no benefit from threads at all, since
-only one thread can be *executing* Python at any instant no matter how
-many exist.
+**Answer:**
 
-**If asked to demonstrate it live:** run the same CPU-bound loop three
-ways — sequential, threaded, multiprocessed. Threaded comes out roughly
-equal to sequential (no real parallelism gained); multiprocessed
-actually scales, because separate processes each get their own GIL.
+- The GIL is a single mutex in CPython that prevents more than one
+  thread from executing Python bytecode at a time.
+- Threads still help I/O-bound work because a thread **releases** the
+  GIL while blocked on I/O (network call, file read, DB query) —
+  another thread runs during that wait.
+- CPU-bound work gets no benefit from threads at all, since only one
+  thread can be *executing* Python at any instant no matter how many
+  exist.
+
+**If asked to demonstrate it live:**
+
+- Run the same CPU-bound loop three ways — sequential, threaded,
+  multiprocessed.
+- Threaded comes out roughly equal to sequential (no real parallelism
+  gained); multiprocessed actually scales, because separate processes
+  each get their own GIL.
 
 **The one-liner to lead with:** "threads for I/O-bound, processes for
 CPU-bound" — then be ready to explain *why*, not just recite it.
@@ -46,18 +52,23 @@ async def main():
     results = await asyncio.gather(*tasks)  # all concurrent, one thread
 ```
 
-**Answer:** If the calls are sequential — awaiting each one in turn —
-they're slow because the total time is the *sum* of three round trips
-instead of the *max*. `asyncio.gather` (or a thread pool, in sync
-Django) runs them concurrently instead.
+**Answer:**
 
-**Likely follow-up — "when would you reach for threading or
-multiprocessing instead of asyncio here?"** Decision rule: mostly
-network-bound → AsyncIO. Must call a blocking library with no async
-client → thread pool around the blocking calls. CPU-dominated (parsing,
-number-crunching, ML inference) → multiprocessing, sized to core count.
-Never run CPU work directly inside an async event loop — it blocks
-*every* other task on that loop, not just the one doing the work.
+- If the calls are sequential — awaiting each one in turn — they're
+  slow because the total time is the *sum* of three round trips
+  instead of the *max*.
+- `asyncio.gather` (or a thread pool, in sync Django) runs them
+  concurrently instead.
+
+**Likely follow-up — "when would you reach for threading or multiprocessing instead of asyncio here?"**
+
+- Decision rule: mostly network-bound → AsyncIO.
+- Must call a blocking library with no async client → thread pool
+  around the blocking calls.
+- CPU-dominated (parsing, number-crunching, ML inference) →
+  multiprocessing, sized to core count.
+- Never run CPU work directly inside an async event loop — it blocks
+  *every* other task on that loop, not just the one doing the work.
 
 | Pros | Cons / Trade-offs |
 |---|---|

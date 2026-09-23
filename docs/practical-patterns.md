@@ -24,18 +24,25 @@ def say_hello(name: str):
     print(f"Hello, {name}!")
 ```
 
-**Answer:** Three nested levels — `outer(args) → decorator(func) →
-wrapper(*a, **kw)`. Be able to draw that shape cold.
+**Answer:**
 
-**Likely follow-up — "why can `wrapper` still see `n` after `repeat(3)`
-already returned?"** It's a closure — `wrapper` references `n`, so
-Python keeps it alive as long as `wrapper` exists, even though
-`repeat`'s own stack frame is long gone.
+- Three nested levels — `outer(args) → decorator(func) →
+  wrapper(*a, **kw)`.
+- Be able to draw that shape cold.
 
-**Where you'd actually use this:** `@login_required`,
-`@transaction.atomic`, `@retry(max_attempts=3)` around a flaky external
-call, a timing decorator wrapped around a slow endpoint during a perf
-investigation.
+**Likely follow-up — "why can `wrapper` still see `n` after `repeat(3)` already returned?"**
+
+- It's a closure — `wrapper` references `n`, so Python keeps it alive
+  as long as `wrapper` exists, even though `repeat`'s own stack frame
+  is long gone.
+
+**Where you'd actually use this:**
+
+- `@login_required`
+- `@transaction.atomic`
+- `@retry(max_attempts=3)` around a flaky external call
+- A timing decorator wrapped around a slow endpoint during a perf
+  investigation
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -57,18 +64,25 @@ def managed_file(path: str, mode: str):
         f.close()
 ```
 
-**Answer:** A class with `__enter__`/`__exit__`, or (simpler, most of
-the time) a generator wrapped in `@contextmanager`. The point is
-deterministic cleanup — `finally` runs whether the block succeeded or
-raised.
+**Answer:**
 
-**The part people miss:** `__exit__` returning `True` **swallows** an
-exception raised inside the `with` block instead of propagating it.
-Rarely what you actually want — know it's there because interviewers
-specifically probe this.
+- A class with `__enter__`/`__exit__`, or (simpler, most of the time)
+  a generator wrapped in `@contextmanager`.
+- The point is deterministic cleanup — `finally` runs whether the
+  block succeeded or raised.
 
-**Where you'd actually use this:** `with transaction.atomic():`,
-file/socket handling, temporarily overriding a setting in a test.
+**The part people miss:**
+
+- `__exit__` returning `True` **swallows** an exception raised inside
+  the `with` block instead of propagating it.
+- Rarely what you actually want — know it's there because interviewers
+  specifically probe this.
+
+**Where you'd actually use this:**
+
+- `with transaction.atomic():`
+- File/socket handling
+- Temporarily overriding a setting in a test
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -93,16 +107,19 @@ def process_document(self, doc_id, doc_content):
 process_document.delay(doc_id, content)  # runs in a worker, not this request
 ```
 
-**Answer:** Anything slow or non-critical to the immediate HTTP response
-— sending an email, processing an upload, calling a slow third-party
-API — moves out of the request/response cycle into a task, backed by
-Redis or RabbitMQ. `.delay()` queues it; a separate worker process picks
-it up.
+**Answer:**
 
-**Likely follow-up — "what breaks if this task runs twice?"** Retries
-mean it can. Add an idempotency key so a retried task doesn't
-double-process — "charge the customer twice" is the textbook version of
-this bug.
+- Anything slow or non-critical to the immediate HTTP response —
+  sending an email, processing an upload, calling a slow third-party
+  API — moves out of the request/response cycle into a task, backed by
+  Redis or RabbitMQ.
+- `.delay()` queues it; a separate worker process picks it up.
+
+**Likely follow-up — "what breaks if this task runs twice?"**
+
+- Retries mean it can.
+- Add an idempotency key so a retried task doesn't double-process —
+  "charge the customer twice" is the textbook version of this bug.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -134,12 +151,13 @@ print(add_item("b"))
 ['a', 'b']
 ```
 
-Default arguments are evaluated **once, at function definition time**,
-not on each call. `items=[]` creates a single list object bound to the
-parameter default, and it persists (and gets mutated) across every call
-that doesn't pass its own `items` — it's not "reusing the parameter
-value" so much as "there's only ever one default object, mutated in
-place."
+- Default arguments are evaluated **once, at function definition
+  time**, not on each call.
+- `items=[]` creates a single list object bound to the parameter
+  default, and it persists (and gets mutated) across every call that
+  doesn't pass its own `items`.
+- It's not "reusing the parameter value" so much as "there's only ever
+  one default object, mutated in place."
 
 **Fix — the standard idiom:**
 
@@ -151,10 +169,11 @@ def add_item(item, items=None):
     return items
 ```
 
-Default to `None` (immutable, safe to reuse), then create a fresh mutable
-object inside the function body on each call if none was passed. Same
-pattern applies to any mutable default (`{}`, `[]`, or a custom mutable
-object).
+- Default to `None` (immutable, safe to reuse), then create a fresh
+  mutable object inside the function body on each call if none was
+  passed.
+- Same pattern applies to any mutable default (`{}`, `[]`, or a custom
+  mutable object).
 
 !!! note "Session note"
     Covered in the [session log](session-log.md#2026-09-22) — answered

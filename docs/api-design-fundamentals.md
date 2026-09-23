@@ -8,7 +8,7 @@ Resource modeling, HTTP semantics, and versioning — framework-agnostic,
 applies whether the implementation is Django, FastAPI, or anything
 else. For framework-specific depth, see
 [Frameworks → Django & DRF](django-orm.md) or
-[Frameworks → FastAPI](fastapi.md).
+[Frameworks → FastAPI](fastapi-dependency-injection.md).
 
 ## 1. Resource Modeling
 

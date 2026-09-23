@@ -103,7 +103,7 @@ endpoint, non-standard response shaping, or integrating the chain as
 just one piece of a larger endpoint that also does other work. LangServe
 is fastest when the chain *is* the endpoint; once the endpoint needs to
 do meaningfully more than invoke the chain, plain FastAPI (see
-[FastAPI](fastapi.md)) gives more control.
+[FastAPI](fastapi-dependency-injection.md)) gives more control.
 
 | Pros | Cons / Trade-offs |
 |---|---|

@@ -23,21 +23,23 @@ def process_streaming(filename):
             yield process_line(line)
 ```
 
-**Answer:** A generator — trade "have the whole result ready
-immediately" for "produce one item at a time." Memory stays flat
-whether the file is 1MB or 10GB.
+**Answer:**
 
-**Likely follow-up — "how would you cut memory further for a class
-you're instantiating millions of times?"**
+- A generator — trade "have the whole result ready immediately" for
+  "produce one item at a time."
+- Memory stays flat whether the file is 1MB or 10GB.
+
+**Likely follow-up — "how would you cut memory further for a class you're instantiating millions of times?"**
 
 ```python
 class Document:
     __slots__ = ['id', 'title', 'content']  # no per-instance __dict__
 ```
 
-`__slots__` removes the per-instance `__dict__` a normal Python object
-carries — real memory savings at scale, at the cost of losing dynamic
-attribute assignment.
+- `__slots__` removes the per-instance `__dict__` a normal Python
+  object carries.
+- Real memory savings at scale, at the cost of losing dynamic
+  attribute assignment.
 
 **If asked how you'd actually measure it:** `tracemalloc` (built in) —
 enough to name it and explain what it does; the deep profiling-tooling
@@ -62,14 +64,19 @@ get_user_data(123)  # hits the DB
 get_user_data(123)  # cache hit, no DB call
 ```
 
-**Answer for the built-in version:** `functools.lru_cache` for
-memoizing an expensive, pure function (same input → same output, no
-side effects). `cache_info()` gives hit-rate stats.
+**Answer for the built-in version:**
 
-**Answer for "build it from scratch":** a hash map for O(1) lookup, plus
-a doubly linked list for O(1) move-to-front and eviction. Be ready to
-explain *why both* are needed — a hash map alone can't cheaply track
-recency order, and a linked list alone can't do O(1) lookup by key.
+- `functools.lru_cache` for memoizing an expensive, pure function
+  (same input → same output, no side effects).
+- `cache_info()` gives hit-rate stats.
+
+**Answer for "build it from scratch":**
+
+- A hash map for O(1) lookup, plus a doubly linked list for O(1)
+  move-to-front and eviction.
+- Be ready to explain *why both* are needed — a hash map alone can't
+  cheaply track recency order, and a linked list alone can't do O(1)
+  lookup by key.
 
 | Pros | Cons / Trade-offs |
 |---|---|
