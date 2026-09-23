@@ -36,6 +36,18 @@ here for anyone (or any agent) editing content.
 3. **(Optional) Link it from `docs/index.md`** too, matching the existing
    topic bullets, so it shows up on the hub page.
 
+4. **Regenerate the PDF-export nav manifest** whenever `nav` changes:
+
+   ```bash
+   python3 scripts/generate_nav_manifest.py
+   ```
+
+   This writes `docs/nav-order.json`, which the in-browser "Download PDF"
+   button (`docs/javascripts/download-pdf.js`) fetches to know every page
+   and the order to assemble them in. It's regenerated automatically in
+   CI before every deploy, but a stale local copy means the button won't
+   include a page you just added when testing with `zensical serve`.
+
 ## Verify before pushing
 
 ```bash
@@ -43,10 +55,11 @@ zensical build --clean   # full rebuild; warns on broken internal links
 zensical serve           # local preview, live-reloads on save
 ```
 
-## Genericizing client/employer content — read before adding project stories
+## This repo is private — see CLAUDE.md before adding real names
 
-This site is public. Real client names, product names, and any
-client-confidential details are **not** to be published here — see the root
-`CLAUDE.md` for the specific rule and the labels already in use for existing
-projects. When adding a new project story (e.g. after a new engagement),
-apply the same treatment before writing it into `docs/system-design.md`.
+This repo holds real client/employer-confidential content directly in
+`docs/*.md` (see the root `CLAUDE.md`, "This repo must stay PRIVATE").
+That's only safe as long as the repo's GitHub visibility stays private —
+if you're ever asked to make it public again, that requires a full pass
+over `docs/*.md` to genericize real names first, starting with
+`docs/project-stories.md` and `docs/meetingflow-case-study.md`.

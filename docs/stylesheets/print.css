@@ -1,0 +1,64 @@
+/* "Download PDF" button, floating over normal page content */
+#download-pdf-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  padding: 0.6em 1.2em;
+  background: var(--md-primary-fg-color, #009485);
+  color: var(--md-primary-bg-color, #fff);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: inherit;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#download-pdf-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Off-screen (not display:none -- needs real layout to paginate
+   correctly once printing starts) until the export actually runs */
+#print-all-pages {
+  position: fixed;
+  top: -999999px;
+  left: -999999px;
+  width: 800px;
+}
+
+@media print {
+  /* Hide every normal page chrome element -- nav, header, footer,
+     sidebar, ToC -- leaving only the assembled multi-page content */
+  body.print-pdf-mode > *:not(#print-all-pages) {
+    display: none !important;
+  }
+
+  #print-all-pages {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto !important;
+  }
+
+  .print-page {
+    break-after: page;
+    break-inside: avoid-page;
+  }
+
+  .print-page:last-child {
+    break-after: auto;
+  }
+
+  pre,
+  table,
+  figure {
+    break-inside: avoid;
+  }
+
+  #download-pdf-btn {
+    display: none !important;
+  }
+}

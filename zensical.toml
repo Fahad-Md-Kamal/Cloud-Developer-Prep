@@ -7,6 +7,9 @@ site_author = "Fahad Md Kamal"
 repo_url = "https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep"
 repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
 
+extra_javascript = ["javascripts/download-pdf.js"]
+extra_css = ["stylesheets/print.css"]
+
 nav = [
   { "Home" = "index.md" },
   { "Study Materials" = [

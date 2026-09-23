@@ -1,0 +1,266 @@
+[
+  {
+    "title": "Home",
+    "url": "./"
+  },
+  {
+    "title": "Session Log",
+    "url": "session-log/"
+  },
+  {
+    "title": "1. Modern Python Mastery",
+    "url": "chapter-1/"
+  },
+  {
+    "title": "2. Clean Code & Design Patterns",
+    "url": "chapter-2/"
+  },
+  {
+    "title": "3. Advanced REST API Design",
+    "url": "chapter-3/"
+  },
+  {
+    "title": "4. AuthN/AuthZ & Security",
+    "url": "chapter-4/"
+  },
+  {
+    "title": "5. Performance Profiling & Caching",
+    "url": "chapter-5/"
+  },
+  {
+    "title": "6. Microservices & Message Queues",
+    "url": "chapter-6/"
+  },
+  {
+    "title": "7. Distributed System Design",
+    "url": "chapter-7/"
+  },
+  {
+    "title": "8. Database Architecture for Scale",
+    "url": "chapter-8/"
+  },
+  {
+    "title": "9. API Gateway & Rate Limiting",
+    "url": "chapter-9/"
+  },
+  {
+    "title": "10. Observability",
+    "url": "chapter-10/"
+  },
+  {
+    "title": "11. Web Crawling at Scale",
+    "url": "chapter-11/"
+  },
+  {
+    "title": "12. HTML Parsing & Data Pipelines",
+    "url": "chapter-12/"
+  },
+  {
+    "title": "13. Distributed Crawling Architecture",
+    "url": "chapter-13/"
+  },
+  {
+    "title": "14. Data Cleaning & Deduplication",
+    "url": "chapter-14/"
+  },
+  {
+    "title": "15. Large MongoDB Clusters",
+    "url": "chapter-15/"
+  },
+  {
+    "title": "16. Docker & Docker Compose",
+    "url": "chapter-16/"
+  },
+  {
+    "title": "17. Kubernetes & Orchestration",
+    "url": "chapter-17/"
+  },
+  {
+    "title": "18. Terraform (IaC)",
+    "url": "chapter-18/"
+  },
+  {
+    "title": "19. CI/CD Pipelines",
+    "url": "chapter-19/"
+  },
+  {
+    "title": "20. Observability & On-Call",
+    "url": "chapter-20/"
+  },
+  {
+    "title": "21. LLM APIs",
+    "url": "chapter-21/"
+  },
+  {
+    "title": "22. Conversational AI Agents",
+    "url": "chapter-22/"
+  },
+  {
+    "title": "23. RAG & Vector Databases",
+    "url": "chapter-23/"
+  },
+  {
+    "title": "24. Prompt Engineering & Multi-Agent",
+    "url": "chapter-24/"
+  },
+  {
+    "title": "25. Workflow Automation",
+    "url": "chapter-25/"
+  },
+  {
+    "title": "26. System Design Interviews",
+    "url": "chapter-26/"
+  },
+  {
+    "title": "27. Event-Driven Architectures",
+    "url": "chapter-27/"
+  },
+  {
+    "title": "28. Building for Resilience",
+    "url": "chapter-28/"
+  },
+  {
+    "title": "29. Leadership for Engineers",
+    "url": "chapter-29/"
+  },
+  {
+    "title": "30. Staff Engineer Mindset",
+    "url": "chapter-30/"
+  },
+  {
+    "title": "31. Behavioral Interview Prep",
+    "url": "chapter-31/"
+  },
+  {
+    "title": "32. Technical Interview Deep Dives",
+    "url": "chapter-32/"
+  },
+  {
+    "title": "33. Mock Projects",
+    "url": "chapter-33/"
+  },
+  {
+    "title": "34. Resume & GitHub Optimization",
+    "url": "chapter-34/"
+  },
+  {
+    "title": "35. Final Review \u2014 30-Day Countdown",
+    "url": "chapter-35/"
+  },
+  {
+    "title": "36. Blind 75 / Grind 75 / NeetCode 150",
+    "url": "chapter-36/"
+  },
+  {
+    "title": "Arrays & Hashing",
+    "url": "chapter-36/2-1-arrays-and-hashing/"
+  },
+  {
+    "title": "Two Pointers",
+    "url": "chapter-36/2-2-two-pointers/"
+  },
+  {
+    "title": "Sliding Window",
+    "url": "chapter-36/2-3-sliding-window/"
+  },
+  {
+    "title": "Stack",
+    "url": "chapter-36/2-4-stack/"
+  },
+  {
+    "title": "Binary Search",
+    "url": "chapter-36/2-5-binary-search/"
+  },
+  {
+    "title": "Linked List",
+    "url": "chapter-36/2-6-linked-list/"
+  },
+  {
+    "title": "Trees",
+    "url": "chapter-36/2-7-trees/"
+  },
+  {
+    "title": "Tries / Prefix Tree",
+    "url": "chapter-36/2-8-tries-prefix-tree/"
+  },
+  {
+    "title": "Heap / Priority Queue",
+    "url": "chapter-36/2-9-heap-priority-queue/"
+  },
+  {
+    "title": "Backtracking",
+    "url": "chapter-36/2-10-backtracking/"
+  },
+  {
+    "title": "Graphs",
+    "url": "chapter-36/2-11-graphs/"
+  },
+  {
+    "title": "Dynamic Programming",
+    "url": "chapter-36/2-12-dynamic-programming/"
+  },
+  {
+    "title": "Design",
+    "url": "chapter-36/2-13-design/"
+  },
+  {
+    "title": "37. Go, TypeScript, Angular & AI Patterns",
+    "url": "chapter-37/"
+  },
+  {
+    "title": "38. Python Standard Library",
+    "url": "chapter-38/"
+  },
+  {
+    "title": "ORM Query Cheat Sheet",
+    "url": "django-orm/"
+  },
+  {
+    "title": "Deep Dive: Serializers, Auth, Signals, Testing",
+    "url": "django-drf/"
+  },
+  {
+    "title": "FastAPI",
+    "url": "fastapi/"
+  },
+  {
+    "title": "Apache Spark & PySpark",
+    "url": "spark-pyspark/"
+  },
+  {
+    "title": "Databricks & Delta Lake",
+    "url": "databricks-delta-lake/"
+  },
+  {
+    "title": "FHIR R4",
+    "url": "fhir-r4/"
+  },
+  {
+    "title": "HL7 v2.x & C-CDA",
+    "url": "hl7-ccda/"
+  },
+  {
+    "title": "Healthcare Terminology",
+    "url": "healthcare-terminology/"
+  },
+  {
+    "title": "Patient Matching & MPI",
+    "url": "patient-matching-mpi/"
+  },
+  {
+    "title": "HIPAA & PHI-Safe Engineering",
+    "url": "hipaa-phi-safety/"
+  },
+  {
+    "title": "AWS Services Quick Reference",
+    "url": "aws-services/"
+  },
+  {
+    "title": "Personal Project Stories",
+    "url": "project-stories/"
+  },
+  {
+    "title": "MeetingFlow Case Study",
+    "url": "meetingflow-case-study/"
+  }
+]
