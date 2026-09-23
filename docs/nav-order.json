@@ -40,8 +40,16 @@
     "url": "refactoring-legacy-systems/"
   },
   {
-    "title": "3. Advanced REST API Design",
-    "url": "chapter-3/"
+    "title": "API Design Fundamentals",
+    "url": "api-design-fundamentals/"
+  },
+  {
+    "title": "API Production Readiness",
+    "url": "api-production-readiness/"
+  },
+  {
+    "title": "API Paradigms & Patterns",
+    "url": "api-paradigms-and-patterns/"
   },
   {
     "title": "4. AuthN/AuthZ & Security",

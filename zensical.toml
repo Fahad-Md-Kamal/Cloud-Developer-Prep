@@ -27,7 +27,11 @@ nav = [
               { "Clean Code Practices" = "clean-code-practices.md" },
               { "Refactoring Legacy Systems" = "refactoring-legacy-systems.md" },
           ] },
-          { "3. Advanced REST API Design" = "chapter-3.md" },
+          { "3. REST API Design" = [
+              { "API Design Fundamentals" = "api-design-fundamentals.md" },
+              { "API Production Readiness" = "api-production-readiness.md" },
+              { "API Paradigms & Patterns" = "api-paradigms-and-patterns.md" },
+          ] },
           { "4. AuthN/AuthZ & Security" = "chapter-4.md" },
           { "5. Performance Profiling & Caching" = "chapter-5.md" },
       ] },

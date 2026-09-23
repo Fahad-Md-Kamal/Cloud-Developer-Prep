@@ -9,8 +9,9 @@ permissions, auth, signals, migrations, testing, caching. For query
 optimization and ORM patterns (`select_related`, `F()`, `Subquery`,
 window functions), see the
 [Django ORM Query Cheat Sheet](django-orm.md). For general REST API
-design principles, versioning, and the FastAPI comparison, see
-[Chapter 3: Advanced REST API Design](chapter-3.md).
+design principles and versioning, see
+[API Design Fundamentals](api-design-fundamentals.md); for the FastAPI
+comparison, see [FastAPI](fastapi.md).
 
 ---
 

@@ -71,7 +71,10 @@ inside the relevant chapter, not on separate pages:
     - [Design Patterns](design-patterns.md)
     - [Clean Code Practices](clean-code-practices.md)
     - [Refactoring Legacy Systems](refactoring-legacy-systems.md)
-- [Chapter 3: REST API Design Principles](chapter-3.md)
+- Chapter 3: REST API Design
+    - [API Design Fundamentals](api-design-fundamentals.md)
+    - [API Production Readiness](api-production-readiness.md)
+    - [API Paradigms & Patterns](api-paradigms-and-patterns.md)
 - [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
 - [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
 

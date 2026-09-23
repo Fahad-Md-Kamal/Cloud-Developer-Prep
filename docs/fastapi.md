@@ -8,7 +8,8 @@ Async-first, automatic request validation via Pydantic, and dependency
 injection as the core extensibility mechanism. For general REST API
 design principles (resource modeling, versioning, caching, rate
 limiting) that apply regardless of framework, see
-[Chapter 3: REST API Design Principles](chapter-3.md). For Django/DRF,
+[API Design Fundamentals](api-design-fundamentals.md) and
+[API Production Readiness](api-production-readiness.md). For Django/DRF,
 see [Frameworks → Django & DRF](django-orm.md).
 
 ## Dependency Injection

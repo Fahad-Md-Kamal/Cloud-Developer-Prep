@@ -10,7 +10,7 @@ questions you should be able to answer cold. FastAPI's own mechanics
 (dependency injection, background tasks, performance patterns) live in
 [FastAPI](fastapi.md) and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
-[Chapter 3](chapter-3.md). This chapter is about the architecture
+[API Design Fundamentals](api-design-fundamentals.md). This chapter is about the architecture
 *around* the services, not the framework inside any one of them.
 
 ---
