@@ -140,6 +140,30 @@
     "url": "chapter-25/"
   },
   {
+    "title": "LLM Gateway & Multi-Provider Integration",
+    "url": "llm-gateway-multi-provider/"
+  },
+  {
+    "title": "Kong API Gateway",
+    "url": "kong-api-gateway/"
+  },
+  {
+    "title": "LLM Response Caching",
+    "url": "llm-response-caching/"
+  },
+  {
+    "title": "Autogen: Multi-Agent Orchestration",
+    "url": "autogen-multi-agent/"
+  },
+  {
+    "title": "Embeddings & Semantic Search",
+    "url": "embeddings-semantic-search/"
+  },
+  {
+    "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
+    "url": "langchain-ecosystem/"
+  },
+  {
     "title": "26. System Design Interviews",
     "url": "chapter-26/"
   },
@@ -254,30 +278,6 @@
   {
     "title": "FastAPI",
     "url": "fastapi/"
-  },
-  {
-    "title": "LLM Gateway & Multi-Provider Integration",
-    "url": "llm-gateway-multi-provider/"
-  },
-  {
-    "title": "Kong API Gateway",
-    "url": "kong-api-gateway/"
-  },
-  {
-    "title": "LLM Response Caching",
-    "url": "llm-response-caching/"
-  },
-  {
-    "title": "Autogen: Multi-Agent Orchestration",
-    "url": "autogen-multi-agent/"
-  },
-  {
-    "title": "Embeddings & Semantic Search",
-    "url": "embeddings-semantic-search/"
-  },
-  {
-    "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
-    "url": "langchain-ecosystem/"
   },
   {
     "title": "Data Preprocessing: Pandas & NumPy",

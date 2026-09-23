@@ -102,13 +102,26 @@ inside the relevant chapter, not on separate pages:
 - [Chapter 19: CI/CD Pipelines](chapter-19.md)
 - [Chapter 20: Observability, Monitoring, and On-Call Readiness](chapter-20.md)
 
-### Part V — AI & LLM System Integration (Chapters 21–25)
+### Part V — AI & LLM System Integration
+
+**Core Concepts** (Chapters 21–25)
 
 - [Chapter 21: Introduction to LLM APIs](chapter-21.md)
 - [Chapter 22: Building Conversational AI Agents with LangChain](chapter-22.md)
 - [Chapter 23: Retrieval-Augmented Generation (RAG) & Vector Databases](chapter-23.md)
 - [Chapter 24: Prompt Engineering, Context Management, Multi-Agent Systems](chapter-24.md)
 - [Chapter 25: Workflow Automation and AI-Driven Orchestration](chapter-25.md)
+
+**Platform Engineering** — added from a "Software Engineer, AI & Python
+Development" JD (unified LLM gateway, multi-provider integration,
+multi-agent orchestration)
+
+- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
+- [Kong API Gateway](kong-api-gateway.md)
+- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
+- [Autogen: Multi-Agent Orchestration](autogen-multi-agent.md)
+- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
 
 ### Part VI — Advanced Software Architecture & Leadership (Chapters 26–30)
 
@@ -159,19 +172,6 @@ inside the relevant chapter, not on separate pages:
       auth, signals, migrations, testing, caching
 - **[FastAPI](fastapi.md)** — dependency injection, background tasks,
   performance patterns
-
-### LLM Platform Engineering
-
-Added from a "Software Engineer, AI & Python Development" JD —
-unified LLM gateway, multi-provider integration, and multi-agent
-orchestration work.
-
-- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
-- [Kong API Gateway](kong-api-gateway.md)
-- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
-- [Autogen: Multi-Agent Orchestration](autogen-multi-agent.md)
-- [Embeddings & Semantic Search](embeddings-semantic-search.md)
-- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
 
 ### Data Preprocessing: Pandas & NumPy
 
