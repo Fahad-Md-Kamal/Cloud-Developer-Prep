@@ -37,6 +37,15 @@ once here instead.
   [Concurrency & AsyncIO](concurrency-and-asyncio.md) for what async
   actually buys you and when it doesn't matter.
 
+!!! success "Critical insight"
+
+    **Batteries-included vs. micro-framework is not a maturity or
+    skill signal.** Neither approach is "more advanced" than the
+    other — plenty of senior engineers correctly choose either, for
+    different reasons. Django and FastAPI can, and routinely do,
+    coexist in the same organization; picking one for a given service
+    isn't a referendum on the other.
+
 ## 1. "Django vs. FastAPI — how do you decide which one to reach for on a new service?"
 
 **Answer:**
