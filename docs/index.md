@@ -160,6 +160,22 @@ inside the relevant chapter, not on separate pages:
 - **[FastAPI](fastapi.md)** — dependency injection, background tasks,
   performance patterns
 
+### LLM Platform Engineering
+
+Added from a "Software Engineer, AI & Python Development" JD —
+unified LLM gateway, multi-provider integration, and multi-agent
+orchestration work.
+
+- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
+- [Kong API Gateway](kong-api-gateway.md)
+- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
+- [Autogen: Multi-Agent Orchestration](autogen-multi-agent.md)
+- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+
+### Data Preprocessing: Pandas & NumPy
+
+- [Data Preprocessing: Pandas & NumPy](data-preprocessing-pandas-numpy.md)
+
 ### Big Data & Distributed Systems
 
 Added from the Intellias Staff Healthcare Data Engineer JD, but

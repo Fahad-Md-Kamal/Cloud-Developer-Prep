@@ -256,6 +256,30 @@
     "url": "fastapi/"
   },
   {
+    "title": "LLM Gateway & Multi-Provider Integration",
+    "url": "llm-gateway-multi-provider/"
+  },
+  {
+    "title": "Kong API Gateway",
+    "url": "kong-api-gateway/"
+  },
+  {
+    "title": "LLM Response Caching",
+    "url": "llm-response-caching/"
+  },
+  {
+    "title": "Autogen: Multi-Agent Orchestration",
+    "url": "autogen-multi-agent/"
+  },
+  {
+    "title": "Embeddings & Semantic Search",
+    "url": "embeddings-semantic-search/"
+  },
+  {
+    "title": "Data Preprocessing: Pandas & NumPy",
+    "url": "data-preprocessing-pandas-numpy/"
+  },
+  {
     "title": "Apache Spark & PySpark",
     "url": "spark-pyspark/"
   },

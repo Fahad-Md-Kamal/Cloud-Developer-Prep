@@ -106,6 +106,14 @@ nav = [
           ] },
           { "FastAPI" = "fastapi.md" },
       ] },
+      { "LLM Platform Engineering" = [
+          { "LLM Gateway & Multi-Provider Integration" = "llm-gateway-multi-provider.md" },
+          { "Kong API Gateway" = "kong-api-gateway.md" },
+          { "LLM Response Caching" = "llm-response-caching.md" },
+          { "Autogen: Multi-Agent Orchestration" = "autogen-multi-agent.md" },
+          { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+      ] },
+      { "Data Preprocessing: Pandas & NumPy" = "data-preprocessing-pandas-numpy.md" },
       { "Big Data & Distributed Systems" = [
           { "Apache Spark & PySpark" = "spark-pyspark.md" },
           { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
