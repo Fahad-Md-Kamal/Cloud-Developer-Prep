@@ -37,7 +37,7 @@ object, not "reused per call." Fix (the `None` sentinel idiom) required a
 prompt but was then given correctly.
 
 **Status:** ✅ solid after one nudge. Full writeup:
-[Chapter 1: Modern Python Mastery](chapter-1.md#practice-notes-from-live-session).
+[Practical Patterns](practical-patterns.md#practice-notes-from-live-session).
 
 ### Q2 — N+1 queries / `select_related` vs `prefetch_related` (Django ORM)
 

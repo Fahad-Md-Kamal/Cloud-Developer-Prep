@@ -15,7 +15,12 @@ nav = [
   { "Study Materials" = [
       { "Session Log" = "session-log.md" },
       { "Core Engineering Foundations" = [
-          { "1. Modern Python Mastery" = "chapter-1.md" },
+          { "1. Modern Python Mastery" = [
+              { "Typing & Generics" = "typing-and-generics.md" },
+              { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
+              { "Memory & Caching" = "memory-and-caching.md" },
+              { "Practical Patterns" = "practical-patterns.md" },
+          ] },
           { "2. Clean Code & Design Patterns" = [
               { "SOLID Principles" = "solid-principles.md" },
               { "Design Patterns" = "design-patterns.md" },

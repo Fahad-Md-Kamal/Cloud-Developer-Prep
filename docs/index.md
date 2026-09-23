@@ -47,7 +47,7 @@ building on the previous one.
 Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
-- Mutable default arguments → [Chapter 1: Modern Python Mastery](chapter-1.md#practice-notes-from-live-session)
+- Mutable default arguments → [Practical Patterns](practical-patterns.md#practice-notes-from-live-session)
 - `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [Chapter 8: Database Architecture for Scale](chapter-8.md#practice-notes-from-live-session)
 - AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](aws-services.md)
@@ -61,7 +61,11 @@ inside the relevant chapter, not on separate pages:
 
 ### Part I — Core Engineering Foundations (Chapters 1–5)
 
-- [Chapter 1: Modern Python Mastery](chapter-1.md)
+- Chapter 1: Modern Python Mastery
+    - [Typing & Generics](typing-and-generics.md)
+    - [Concurrency & AsyncIO](concurrency-and-asyncio.md)
+    - [Memory & Caching](memory-and-caching.md)
+    - [Practical Patterns](practical-patterns.md)
 - Chapter 2: Clean Code, Design Patterns, and SOLID Principles
     - [SOLID Principles](solid-principles.md)
     - [Design Patterns](design-patterns.md)

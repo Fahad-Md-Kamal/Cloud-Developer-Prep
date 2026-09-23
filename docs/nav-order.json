@@ -8,8 +8,20 @@
     "url": "session-log/"
   },
   {
-    "title": "1. Modern Python Mastery",
-    "url": "chapter-1/"
+    "title": "Typing & Generics",
+    "url": "typing-and-generics/"
+  },
+  {
+    "title": "Concurrency & AsyncIO",
+    "url": "concurrency-and-asyncio/"
+  },
+  {
+    "title": "Memory & Caching",
+    "url": "memory-and-caching/"
+  },
+  {
+    "title": "Practical Patterns",
+    "url": "practical-patterns/"
   },
   {
     "title": "SOLID Principles",
