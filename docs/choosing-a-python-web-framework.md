@@ -15,36 +15,37 @@ see [Django & DRF](django-orm.md) and
 Jargon this page uses without stopping to define inline — explained
 once here instead.
 
-- **Batteries-included** — the framework ships with almost everything
-  built in and pre-integrated (ORM, admin, auth, forms), instead of
-  making you assemble it from separate third-party packages. The term
-  comes from Python's own tagline for its standard library.
-- **Micro-framework** — the opposite: a minimal core, usually just
-  routing, where everything else (ORM, auth, admin) is a separate
-  package you choose and wire up yourself. Flask and FastAPI both
-  start here, though FastAPI adds validation and docs generation as
-  part of its core.
-- **Convention over configuration** — the framework has one "expected"
-  way to do something (where files go, how a model maps to a table)
-  and just does it, instead of asking you to configure every decision
-  explicitly. Faster to start, harder to deviate from once a project
-  needs something the convention doesn't anticipate.
-- **Async-first** — built from the ground up around `async`/`await`
-  (non-blocking I/O), rather than having async support bolted onto a
-  framework originally designed as synchronous. FastAPI is
-  async-first; Django's async support arrived later and is still
-  partial in places — see
-  [Concurrency & AsyncIO](concurrency-and-asyncio.md) for what async
-  actually buys you and when it doesn't matter.
+!!! info "Batteries-included"
 
-!!! success "Critical insight"
+    The framework ships with almost everything built in and
+    pre-integrated (ORM, admin, auth, forms), instead of making you
+    assemble it from separate third-party packages. The term comes
+    from Python's own tagline for its standard library.
 
-    **Batteries-included vs. micro-framework is not a maturity or
-    skill signal.** Neither approach is "more advanced" than the
-    other — plenty of senior engineers correctly choose either, for
-    different reasons. Django and FastAPI can, and routinely do,
-    coexist in the same organization; picking one for a given service
-    isn't a referendum on the other.
+!!! info "Micro-framework"
+
+    The opposite: a minimal core, usually just routing, where
+    everything else (ORM, auth, admin) is a separate package you
+    choose and wire up yourself. Flask and FastAPI both start here,
+    though FastAPI adds validation and docs generation as part of its
+    core.
+
+!!! info "Convention over configuration"
+
+    The framework has one "expected" way to do something (where files
+    go, how a model maps to a table) and just does it, instead of
+    asking you to configure every decision explicitly. Faster to
+    start, harder to deviate from once a project needs something the
+    convention doesn't anticipate.
+
+!!! info "Async-first"
+
+    Built from the ground up around `async`/`await` (non-blocking
+    I/O), rather than having async support bolted onto a framework
+    originally designed as synchronous. FastAPI is async-first;
+    Django's async support arrived later and is still partial in
+    places — see [Concurrency & AsyncIO](concurrency-and-asyncio.md)
+    for what async actually buys you and when it doesn't matter.
 
 ## 1. "Django vs. FastAPI — how do you decide which one to reach for on a new service?"
 
