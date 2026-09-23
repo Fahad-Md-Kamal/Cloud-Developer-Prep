@@ -120,24 +120,8 @@
     "url": "chapter-20/"
   },
   {
-    "title": "21. LLM APIs",
-    "url": "chapter-21/"
-  },
-  {
-    "title": "22. Conversational AI Agents",
-    "url": "chapter-22/"
-  },
-  {
-    "title": "23. RAG & Vector Databases",
-    "url": "chapter-23/"
-  },
-  {
-    "title": "24. Prompt Engineering & Multi-Agent",
-    "url": "chapter-24/"
-  },
-  {
-    "title": "25. Workflow Automation",
-    "url": "chapter-25/"
+    "title": "LLM APIs & Providers",
+    "url": "llm-apis-and-providers/"
   },
   {
     "title": "LLM Gateway & Multi-Provider Integration",
@@ -152,16 +136,28 @@
     "url": "llm-response-caching/"
   },
   {
-    "title": "Autogen: Multi-Agent Orchestration",
-    "url": "autogen-multi-agent/"
+    "title": "LangChain Agents",
+    "url": "langchain-agents/"
+  },
+  {
+    "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
+    "url": "langchain-ecosystem/"
+  },
+  {
+    "title": "RAG & Vector Databases",
+    "url": "rag-and-vector-databases/"
   },
   {
     "title": "Embeddings & Semantic Search",
     "url": "embeddings-semantic-search/"
   },
   {
-    "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
-    "url": "langchain-ecosystem/"
+    "title": "Multi-Agent Systems",
+    "url": "multi-agent-systems/"
+  },
+  {
+    "title": "Prompt Engineering & Context Management",
+    "url": "prompt-engineering/"
   },
   {
     "title": "26. System Design Interviews",

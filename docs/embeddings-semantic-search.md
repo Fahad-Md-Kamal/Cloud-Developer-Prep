@@ -8,7 +8,7 @@ What an embedding actually is, how similarity search works on top of
 them, and where embedding-focused models (Sentence-Transformers, MiniLM)
 fit next to generative models (Mistral, LLaMA, Gemma, T5) in a
 pre-trained-model landscape. For the retrieval/vector-database side of
-this, see [Chapter 23: RAG & Vector Databases](chapter-23.md).
+this, see [RAG & Vector Databases](rag-and-vector-databases.md).
 
 ## 1. "What is an embedding, concretely?"
 
@@ -46,8 +46,8 @@ length) rather than meaning. A cosine similarity near 1 means "nearly
 the same meaning," near 0 means "unrelated," negative means "opposite."
 At scale, this comparison runs inside a vector database's approximate
 nearest-neighbor index (see
-[Chapter 23](chapter-23.md)) rather than a brute-force loop over every
-stored vector.
+[RAG & Vector Databases](rag-and-vector-databases.md#4-how-do-you-choose-a-vector-database-and-what-actually-differs-between-them))
+rather than a brute-force loop over every stored vector.
 
 ## 3. "Sentence-Transformers/MiniLM vs. a full LLM like Mistral/LLaMA for generating embeddings — what's the difference?"
 
@@ -76,6 +76,63 @@ a vendor handling it.
 | Purpose-built embedding models (MiniLM, Sentence-Transformers) are small, fast, and cheap to self-host | Smaller models can lag larger/hosted models on nuanced or domain-specific semantic tasks |
 | Self-hosting avoids per-call API cost and keeps data in your own infrastructure | You own serving, scaling, and model-update work a hosted API would otherwise handle |
 | Cosine similarity search is cheap and well-supported by every vector database | Embedding quality is only as good as the model's training data — domain mismatch degrades results silently |
+
+## 4. "General-purpose embeddings aren't retrieving well for a specialized domain (legal, medical, internal jargon) — what do you do before reaching for a bigger model?"
+
+```python
+class EmbeddingStrategy:
+    def __init__(self, model_name: str, batch_size: int = 32):
+        self.model = SentenceTransformer(model_name)
+        self.batch_size = batch_size
+
+    def embed_documents(self, documents: list[str]) -> np.ndarray:
+        embeddings = []
+        for i in range(0, len(documents), self.batch_size):
+            batch = documents[i:i + self.batch_size]
+            embeddings.extend(self.model.encode(batch, show_progress_bar=False))
+        return np.array(embeddings)
+```
+
+**Answer:** A general-purpose model like MiniLM is trained on broad,
+generic text, so it can genuinely under-perform on vocabulary it rarely
+saw in training — legal citation formats, medical terminology, a
+company's internal product/acronym jargon — because words that are
+semantically distinct in that domain may not have been pushed apart in
+the model's training data. Two options, in order of how much effort
+they cost: first, try a domain-specific *pre-trained* model if one
+exists (Legal-BERT-derived sentence encoders for legal text, PubMedBERT-based
+encoders for biomedical text) — someone already did the domain adaptation
+work. If nothing suitable exists for your domain, fine-tune a
+general-purpose sentence-embedding model on domain pairs (contrastive
+fine-tuning on "these two chunks mean the same thing in our domain"
+examples) — meaningfully more effort than swapping models, but it directly
+teaches the embedding space your domain's actual semantic distinctions
+instead of hoping a bigger general model happens to have learned them.
+The batching in the snippet above is a separate, purely operational
+concern from model choice — encoding documents in batches instead of one
+at a time is what makes embedding a large corpus computationally
+practical, regardless of which model you're running.
+
+**Likely follow-up — "you fine-tuned or swapped the embedding model in
+production — what breaks if you're not careful?"** Every vector already
+in the index was produced by the *old* model's embedding space, and a
+new model's vectors are not comparable to the old ones — mixing them in
+one index silently corrupts similarity search, because "close" in the
+new model's space has no defined relationship to "close" in the old
+one's. Migrating requires re-embedding the entire corpus with the new
+model and treating the switch as a full reindex, not an incremental
+update — this is the same blue-green reindexing concern covered in
+[RAG & Vector Databases](rag-and-vector-databases.md#8-the-knowledge-base-needs-to-reflect-new-documents-within-minutes-not-after-a-nightly-batch-job-how-do-you-support-that-without-downtime),
+and it's why production systems track which model version produced a
+given set of vectors rather than assuming the index is always
+homogeneous.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| A domain-specific pre-trained model is a drop-in swap if one already exists for your domain | Rarely exists for narrow/internal jargon — most teams end up fine-tuning instead |
+| Fine-tuning on domain pairs directly teaches the semantic distinctions that matter for your data | Needs labeled/contrastive training pairs and real ML iteration, not just a config change |
+| Batched encoding makes embedding large corpora computationally practical regardless of model choice | Batch size is a memory/throughput trade-off that needs tuning per model and hardware |
+| — | Swapping or fine-tuning the embedding model invalidates the existing index — requires a full re-embed, not an incremental update |
 
 ---
 

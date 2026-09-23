@@ -86,10 +86,51 @@ prompt content.
 | Cuts LLM API cost and latency for genuinely repeated intent | Adds an embedding call + vector search to the cache-lookup path itself |
 | Hybrid approach keeps exact-match's safety for literal repeats | Invalidation is harder than a simple key delete — needs a TTL or tagging strategy |
 
+## 4. "Is every LLM response worth caching, and how do you pick a TTL?"
+
+```python
+def cache_ttl_seconds(request_cost: float, content_volatility: str) -> int:
+    # Expensive requests earn a longer TTL -- a cache miss on them is costly.
+    # Volatile content (news, prices, anything time-sensitive) earns a
+    # shorter one regardless of cost, since a stale answer is actively wrong.
+    base_ttl = {"static": 86400, "moderate": 3600, "volatile": 60}[content_volatility]
+    if request_cost > 0.10:  # dollars per request
+        return base_ttl * 4
+    return base_ttl
+```
+
+**Answer:** Not automatically — caching is a cost/staleness trade-off,
+not a free win. Two independent factors decide the TTL: **request
+cost** (an expensive request, e.g. a large-context call against a
+premium model, is worth caching longer because a miss is expensive to
+recompute) and **content volatility** (a summary of a static
+legal-clause template can be cached for days; anything referencing
+current events, prices, or user-specific state shouldn't be cached long
+regardless of how expensive it was to generate, because a stale
+answer isn't just slower — it's wrong). The two factors can conflict —
+an expensive *and* volatile request is exactly the case that needs the
+most judgment, not just "cache everything expensive."
+
+**Likely follow-up — "what's cache warming, and when is it worth
+doing?"** Proactively populating the cache with responses for known
+high-frequency queries (common FAQ-style prompts, a fixed set of
+report templates run on a schedule) *before* traffic hits them, instead
+of waiting for the first real request to pay the cache-miss cost. Worth
+doing when a query pattern is predictable and high-volume enough that
+the first-request latency/cost hit matters (e.g. right after a deploy
+or cache flush) — not worth building for genuinely long-tail,
+unpredictable traffic where warming would just be guessing.
+
+| Pros | Cons / Trade-offs |
+|---|---|
+| Cost-based TTL keeps expensive responses cached longer, cutting spend where it matters most | Requires tracking per-request cost, not just a flat TTL config |
+| Volatility-aware TTL avoids serving confidently-wrong stale answers | Volatility classification is often a manual/heuristic judgment call per request type |
+| Cache warming eliminates cold-start latency for known-common queries | Warming is only worth building for predictable, high-volume patterns — wasted effort on long-tail traffic |
+
 ---
 
 ## Code Samples
 
-No dedicated code samples yet for this section — flag if you want a
-runnable semantic-cache example (embedding + vector similarity lookup)
-added under `code_samples/`.
+- `code_samples/chapter-21/intelligent_caching.py` — multi-layer
+  (memory + Redis) caching, semantic similarity matching, cost-aware
+  eviction, cache warming

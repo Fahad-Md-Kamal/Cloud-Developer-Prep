@@ -104,24 +104,27 @@ inside the relevant chapter, not on separate pages:
 
 ### Part V — AI & LLM System Integration
 
-**Core Concepts** (Chapters 21–25)
+**LLM APIs & Gateway**
 
-- [Chapter 21: Introduction to LLM APIs](chapter-21.md)
-- [Chapter 22: Building Conversational AI Agents with LangChain](chapter-22.md)
-- [Chapter 23: Retrieval-Augmented Generation (RAG) & Vector Databases](chapter-23.md)
-- [Chapter 24: Prompt Engineering, Context Management, Multi-Agent Systems](chapter-24.md)
-- [Chapter 25: Workflow Automation and AI-Driven Orchestration](chapter-25.md)
-
-**Platform Engineering** — added from a "Software Engineer, AI & Python
-Development" JD (unified LLM gateway, multi-provider integration,
-multi-agent orchestration)
-
+- [LLM APIs & Providers](llm-apis-and-providers.md) — provider selection, auth, cost, async clients
 - [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
 - [Kong API Gateway](kong-api-gateway.md)
 - [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
-- [Autogen: Multi-Agent Orchestration](autogen-multi-agent.md)
-- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+
+**LangChain**
+
+- [LangChain Agents](langchain-agents.md) — agent types, tools, memory, LCEL
 - [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
+
+**RAG & Retrieval**
+
+- [RAG & Vector Databases](rag-and-vector-databases.md)
+- [Embeddings & Semantic Search](embeddings-semantic-search.md)
+
+**Agents & Prompting**
+
+- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, Autogen
+- [Prompt Engineering & Context Management](prompt-engineering.md)
 
 ### Part VI — Advanced Software Architecture & Leadership (Chapters 26–30)
 

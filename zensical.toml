@@ -57,20 +57,23 @@ nav = [
           { "20. Observability & On-Call" = "chapter-20.md" },
       ] },
       { "AI & LLM System Integration" = [
-          { "Core Concepts" = [
-              { "21. LLM APIs" = "chapter-21.md" },
-              { "22. Conversational AI Agents" = "chapter-22.md" },
-              { "23. RAG & Vector Databases" = "chapter-23.md" },
-              { "24. Prompt Engineering & Multi-Agent" = "chapter-24.md" },
-              { "25. Workflow Automation" = "chapter-25.md" },
-          ] },
-          { "Platform Engineering" = [
+          { "LLM APIs & Gateway" = [
+              { "LLM APIs & Providers" = "llm-apis-and-providers.md" },
               { "LLM Gateway & Multi-Provider Integration" = "llm-gateway-multi-provider.md" },
               { "Kong API Gateway" = "kong-api-gateway.md" },
               { "LLM Response Caching" = "llm-response-caching.md" },
-              { "Autogen: Multi-Agent Orchestration" = "autogen-multi-agent.md" },
-              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+          ] },
+          { "LangChain" = [
+              { "LangChain Agents" = "langchain-agents.md" },
               { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "langchain-ecosystem.md" },
+          ] },
+          { "RAG & Retrieval" = [
+              { "RAG & Vector Databases" = "rag-and-vector-databases.md" },
+              { "Embeddings & Semantic Search" = "embeddings-semantic-search.md" },
+          ] },
+          { "Agents & Prompting" = [
+              { "Multi-Agent Systems" = "multi-agent-systems.md" },
+              { "Prompt Engineering & Context Management" = "prompt-engineering.md" },
           ] },
       ] },
       { "Architecture & Leadership" = [
