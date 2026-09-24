@@ -3,14 +3,18 @@ title: Home
 icon: lucide/house
 ---
 
-# Engineering for Scale: Python, AI, and System Design Mastery
+# Engineering for Scale: Backend, AI, and System Design Mastery
 
 **A Comprehensive Interview Preparation Guide** — by Fahad Md Kamal
 
 A living backend/cloud interview-prep guide, built from real practice
-sessions rather than a static checklist. One unified tree — 38 chapters +
-appendices, plus a running practice log cross-linked into the specific
-chapter each round belongs to.
+sessions rather than a static checklist. Most of it is
+**language-agnostic** — system design, data structures & algorithms,
+distributed architecture, cloud/DevOps, databases, security, and
+behavioral prep apply whether the primary stack is Python, Go, Ruby,
+Rust, or anything else. One unified tree — 38 chapters + appendices,
+plus a running practice log cross-linked into the specific chapter
+each round belongs to.
 
 !!! warning "Private content — repo must stay private"
     Contains real company names (Lawstronaut, Optimizely, Cefalo). The
@@ -20,23 +24,37 @@ chapter each round belongs to.
 
 ## About this book
 
-A guide for senior Python engineers with 5+ years of experience targeting
-Staff/Senior roles, covering modern backend engineering, AI system
-integration, and technical leadership.
+A guide for senior backend engineers with 5+ years of experience
+targeting Staff/Senior roles, covering system design, distributed
+architecture, cloud, AI system integration, and technical leadership
+— usable regardless of primary language. Python and Django get the
+deepest, most detailed coverage since that's the author's own
+specialization and current job search, but that lives in its own
+[Programming Languages](#programming-languages) section rather than
+being baked into the rest of the guide. A Go, Ruby, or Rust engineer
+gets full value from everything else and can treat
+[Programming Languages](#programming-languages) as the one section to
+skim past or eventually fill in with their own language's track.
 
 ## Who should read this
 
-- Senior Python developers preparing for interviews
-- Engineers targeting roles in legaltech, AI/ML, and distributed systems
+- Senior backend engineers preparing for interviews, in any primary
+  language
+- Engineers targeting roles in AI/ML, distributed systems, or
+  fullstack platforms
 - Technical leads advancing toward Staff Engineer positions
-- Backend engineers mastering modern architectures and patterns
+- Python/Django engineers specifically, where this guide's deepest,
+  most detailed track lives
 
 ## What this covers
 
-- Advanced Python patterns, AsyncIO, and performance optimization
-- Large-scale system design and microservices architecture
-- Web crawling and data engineering at enterprise scale
+- System design, distributed architecture, and microservices at scale
+  — language-agnostic
+- Data structures & algorithms, databases, and cloud/DevOps —
+  language-agnostic
 - AI/LLM integration and conversational agent development
+- A deep Python/Django track, plus early Go and TypeScript/Angular
+  material
 - Technical leadership and interview mastery
 
 ## Study timeline

@@ -1,7 +1,7 @@
 [project]
 site_url = "https://fahad-md-kamal.github.io/Cloud-Developer-Prep/"
 site_name = "Cloud Developer Prep"
-site_description = "A living Python/Django/AWS backend interview-prep guide — core language and framework depth, SQL, cloud services, system design, and a running log of practice sessions."
+site_description = "A living backend engineering interview-prep guide — system design, data structures & algorithms, architecture, cloud, databases, and behavioral prep that apply regardless of primary language, plus a deep Python/Django track and a running log of practice sessions."
 site_author = "Fahad Md Kamal"
 
 repo_url = "https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep"
