@@ -265,6 +265,8 @@ mistakes and fixes kept in as teaching material.
 
 - [Prompt Engineering & Context Management](ai-llm/prompt-engineering.md)
 - [Agentic AI Fundamentals](ai-llm/agentic-ai-fundamentals.md) — the agent loop, and how to actually build agents with API access
+- [Designing Adaptive AI Interview Systems](ai-llm/adaptive-ai-interview-systems.md) —
+  LLM-driven question generation, answer scoring, and Computerized Adaptive Testing
 - [Multi-Agent Systems](ai-llm/multi-agent-systems.md) — coordination topologies, debugging
 - [Autogen: Multi-Agent Orchestration](ai-llm/autogen-orchestration.md)
 

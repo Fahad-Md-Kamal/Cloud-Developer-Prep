@@ -372,6 +372,10 @@
     "url": "ai-llm/agentic-ai-fundamentals/"
   },
   {
+    "title": "Designing Adaptive AI Interview Systems",
+    "url": "ai-llm/adaptive-ai-interview-systems/"
+  },
+  {
     "title": "Coordination Patterns & Debugging",
     "url": "ai-llm/multi-agent-systems/"
   },

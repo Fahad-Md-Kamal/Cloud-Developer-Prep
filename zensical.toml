@@ -157,6 +157,7 @@ nav = [
           { "Agents & Prompting" = [
               { "Prompt Engineering & Context Management" = "ai-llm/prompt-engineering.md" },
               { "Agentic AI Fundamentals" = "ai-llm/agentic-ai-fundamentals.md" },
+              { "Designing Adaptive AI Interview Systems" = "ai-llm/adaptive-ai-interview-systems.md" },
               { "Multi-Agent Systems" = [
                   { "Coordination Patterns & Debugging" = "ai-llm/multi-agent-systems.md" },
                   { "Autogen: Multi-Agent Orchestration" = "ai-llm/autogen-orchestration.md" },
