@@ -154,6 +154,8 @@ placed early since it's usually practiced alongside everything else,
 not saved for last.
 
 - [Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
+- [Visualizing Algorithms with AI](dsa/ai-assisted-algorithm-visualization.md) —
+  a reusable prompt for generating a NeetCode-style step-through visualizer for your own solution
     - [Arrays & Hashing](dsa/2-1-arrays-and-hashing.md)
     - [Two Pointers](dsa/2-2-two-pointers.md)
     - [Sliding Window](dsa/2-3-sliding-window.md)

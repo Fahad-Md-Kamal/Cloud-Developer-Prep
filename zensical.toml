@@ -70,6 +70,7 @@ nav = [
       ] },
       { "Data Structures & Algorithms" = [
           { "Blind 75 / Grind 75 / NeetCode 150" = "dsa/chapter-36.md" },
+          { "Visualizing Algorithms with AI" = "dsa/ai-assisted-algorithm-visualization.md" },
           { "Arrays & Hashing" = "dsa/2-1-arrays-and-hashing.md" },
           { "Two Pointers" = "dsa/2-2-two-pointers.md" },
           { "Sliding Window" = "dsa/2-3-sliding-window.md" },

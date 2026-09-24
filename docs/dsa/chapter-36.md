@@ -226,6 +226,12 @@ For maximum preparation efficiency:
 
 This section breaks down the Blind 75 and Grind 75 lists into their core underlying patterns. For each pattern, we will discuss the core idea, identify key problem indicators, and walk through canonical examples.
 
+**Practice technique:** once you've solved a problem from any pattern
+below, see [Visualizing Algorithms with AI](ai-assisted-algorithm-visualization.md)
+for a reusable prompt that turns your own solution into an
+interactive, NeetCode-style step-through visualizer — genuinely useful
+for spatial patterns like Two Pointers, Trees, and Graphs.
+
 - [Arrays & Hashing](2-1-arrays-and-hashing.md)
 - [Two Pointers](2-2-two-pointers.md)
 - [Sliding Window](2-3-sliding-window.md)
