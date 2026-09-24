@@ -36,11 +36,11 @@
     "url": "core-engineering-foundations/api-paradigms-and-patterns/"
   },
   {
-    "title": "4. AuthN/AuthZ & Security",
+    "title": "AuthN/AuthZ & Security",
     "url": "core-engineering-foundations/chapter-4/"
   },
   {
-    "title": "5. Performance Profiling & Caching",
+    "title": "Performance Profiling & Caching",
     "url": "core-engineering-foundations/chapter-5/"
   },
   {
@@ -128,7 +128,7 @@
     "url": "frontend-and-tooling/ai-assisted-development/"
   },
   {
-    "title": "36. Blind 75 / Grind 75 / NeetCode 150",
+    "title": "Blind 75 / Grind 75 / NeetCode 150",
     "url": "dsa/chapter-36/"
   },
   {
@@ -184,15 +184,15 @@
     "url": "dsa/2-13-design/"
   },
   {
-    "title": "6. Microservices & Message Queues",
+    "title": "Microservices & Message Queues",
     "url": "backend-architecture/chapter-6/"
   },
   {
-    "title": "7. Distributed System Design",
+    "title": "Distributed System Design",
     "url": "backend-architecture/chapter-7/"
   },
   {
-    "title": "9. API Gateway & Rate Limiting",
+    "title": "API Gateway & Rate Limiting",
     "url": "backend-architecture/chapter-9/"
   },
   {
@@ -200,7 +200,7 @@
     "url": "backend-architecture/kong-api-gateway/"
   },
   {
-    "title": "10. Observability",
+    "title": "Observability",
     "url": "backend-architecture/chapter-10/"
   },
   {
@@ -228,23 +228,23 @@
     "url": "data-and-engineering/sql-data-modeling-fundamentals/"
   },
   {
-    "title": "11. Web Crawling at Scale",
+    "title": "Web Crawling at Scale",
     "url": "data-and-engineering/chapter-11/"
   },
   {
-    "title": "12. HTML Parsing & Data Pipelines",
+    "title": "HTML Parsing & Data Pipelines",
     "url": "data-and-engineering/chapter-12/"
   },
   {
-    "title": "13. Distributed Crawling Architecture",
+    "title": "Distributed Crawling Architecture",
     "url": "data-and-engineering/chapter-13/"
   },
   {
-    "title": "14. Data Cleaning & Deduplication",
+    "title": "Data Cleaning & Deduplication",
     "url": "data-and-engineering/chapter-14/"
   },
   {
-    "title": "15. Large MongoDB Clusters",
+    "title": "Large MongoDB Clusters",
     "url": "data-and-engineering/chapter-15/"
   },
   {
@@ -432,19 +432,19 @@
     "url": "architecture-leadership/scalability-case-studies/"
   },
   {
-    "title": "27. Event-Driven Architectures",
+    "title": "Event-Driven Architectures",
     "url": "architecture-leadership/chapter-27/"
   },
   {
-    "title": "28. Building for Resilience",
+    "title": "Building for Resilience",
     "url": "architecture-leadership/chapter-28/"
   },
   {
-    "title": "29. Leadership for Engineers",
+    "title": "Leadership for Engineers",
     "url": "architecture-leadership/chapter-29/"
   },
   {
-    "title": "30. Staff Engineer Mindset",
+    "title": "Staff Engineer Mindset",
     "url": "architecture-leadership/chapter-30/"
   },
   {
@@ -456,15 +456,15 @@
     "url": "reference-case-studies/meeting-intelligence-case-study/"
   },
   {
-    "title": "31. Behavioral Interview Prep",
+    "title": "Behavioral Interview Prep",
     "url": "interview-portfolio/chapter-31/"
   },
   {
-    "title": "32. Technical Interview Deep Dives",
+    "title": "Technical Interview Deep Dives",
     "url": "interview-portfolio/chapter-32/"
   },
   {
-    "title": "33. Mock Projects",
+    "title": "Mock Projects",
     "url": "interview-portfolio/chapter-33/"
   },
   {
@@ -472,7 +472,7 @@
     "url": "interview-portfolio/take-home-and-live-coding-exercises/"
   },
   {
-    "title": "34. Resume & GitHub Optimization",
+    "title": "Resume & GitHub Optimization",
     "url": "interview-portfolio/chapter-34/"
   },
   {
@@ -480,7 +480,7 @@
     "url": "interview-portfolio/validating-your-skill-level/"
   },
   {
-    "title": "35. Final Review \u2014 30-Day Countdown",
+    "title": "Final Review \u2014 30-Day Countdown",
     "url": "interview-portfolio/chapter-35/"
   }
 ]

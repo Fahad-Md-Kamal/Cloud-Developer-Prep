@@ -79,23 +79,23 @@ inside the relevant chapter, not on separate pages:
 - **[Session Log](session-log.md)** — running, dated record of live
   practice Q&A, cross-linked into the chapters below.
 
-### Core Engineering Foundations (Chapters 2–5)
+### Core Engineering Foundations
 
 Framework-agnostic principles — apply regardless of which language or
 framework sits underneath. Python and its frameworks now live in their
 own section below.
 
-- Chapter 2: Clean Code, Design Patterns, and SOLID Principles
+- Clean Code, Design Patterns, and SOLID Principles
     - [SOLID Principles](core-engineering-foundations/solid-principles.md)
     - [Design Patterns](core-engineering-foundations/design-patterns.md)
     - [Clean Code Practices](core-engineering-foundations/clean-code-practices.md)
     - [Refactoring Legacy Systems](core-engineering-foundations/refactoring-legacy-systems.md)
-- Chapter 3: REST API Design
+- REST API Design
     - [API Design Fundamentals](core-engineering-foundations/api-design-fundamentals.md)
     - [API Production Readiness](core-engineering-foundations/api-production-readiness.md)
     - [API Paradigms & Patterns](core-engineering-foundations/api-paradigms-and-patterns.md)
-- [Chapter 4: Authentication, Authorization, and Security](core-engineering-foundations/chapter-4.md)
-- [Chapter 5: Performance Profiling, Optimization, and Caching](core-engineering-foundations/chapter-5.md)
+- [Authentication, Authorization, and Security](core-engineering-foundations/chapter-4.md)
+- [Performance Profiling, Optimization, and Caching](core-engineering-foundations/chapter-5.md)
 
 ### Programming Languages
 
@@ -106,7 +106,7 @@ scattered by when each topic was added.
 framework added here later (web, desktop, or otherwise), not just
 Django/FastAPI.
 
-- Chapter 1: Modern Python Mastery
+- Modern Python Mastery
     - [Typing & Generics](programming-languages/python/typing-and-generics.md)
     - [Concurrency & AsyncIO](programming-languages/python/concurrency-and-asyncio.md)
     - [Memory & Caching](programming-languages/python/memory-and-caching.md)
@@ -121,7 +121,7 @@ Django/FastAPI.
 - **FastAPI**
     - [Dependency Injection & Background Tasks](programming-languages/python/fastapi-dependency-injection.md)
     - [Performance & Production Patterns](programming-languages/python/fastapi-performance-patterns.md)
-- Chapter 38: Python Standard Library
+- Python Standard Library
     - [Pathlib & File Operations](programming-languages/python/pathlib-and-file-operations.md)
     - [Collections & Itertools](programming-languages/python/collections-and-itertools.md)
     - [Configuration & CLI Tools](programming-languages/python/config-and-cli-tools.md)
@@ -147,13 +147,13 @@ the full Q&A treatment.
 - [CMS Platforms](frontend-and-tooling/cms-platforms.md)
 - [AI-Assisted Development Tools & Workflows](frontend-and-tooling/ai-assisted-development.md)
 
-### Data Structures & Algorithms Mastery (Chapter 36)
+### Data Structures & Algorithms Mastery
 
 A parallel-track universal skill, not backend-architecture-specific —
 placed early since it's usually practiced alongside everything else,
 not saved for last.
 
-- [Chapter 36: Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
+- [Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
     - [Arrays & Hashing](dsa/2-1-arrays-and-hashing.md)
     - [Two Pointers](dsa/2-2-two-pointers.md)
     - [Sliding Window](dsa/2-3-sliding-window.md)
@@ -168,13 +168,13 @@ not saved for last.
     - [Dynamic Programming](dsa/2-12-dynamic-programming.md)
     - [Design](dsa/2-13-design.md)
 
-### Backend & Distributed Systems Architecture (Chapters 6–10)
+### Backend & Distributed Systems Architecture
 
-- [Chapter 6: Microservices Design with FastAPI & Message Queues](backend-architecture/chapter-6.md)
-- [Chapter 7: Distributed System Design](backend-architecture/chapter-7.md)
-- [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](backend-architecture/chapter-9.md)
+- [Microservices Design with FastAPI & Message Queues](backend-architecture/chapter-6.md)
+- [Distributed System Design](backend-architecture/chapter-7.md)
+- [API Gateway, Rate Limiting, and Circuit Breaking](backend-architecture/chapter-9.md)
 - [Kong API Gateway](backend-architecture/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
-- [Chapter 10: Observability with Prometheus & Grafana](backend-architecture/chapter-10.md)
+- [Observability with Prometheus & Grafana](backend-architecture/chapter-10.md)
 
 ### Data & Engineering
 
@@ -184,7 +184,7 @@ web crawling/pipelines, distributed big-data compute, and
 preprocessing — instead of scattered across three disconnected
 sections.
 
-- Chapter 8: Database Architecture for Scale
+- Database Architecture for Scale
     - [PostgreSQL for Scale](data-and-engineering/postgresql-for-scale.md)
     - [MongoDB for Scale](data-and-engineering/mongodb-for-scale.md)
     - [Elasticsearch Architecture](data-and-engineering/elasticsearch-architecture.md)
@@ -196,11 +196,11 @@ sections.
 
 **Web Crawling & Pipelines**
 
-- [Chapter 11: Web Crawling at Scale](data-and-engineering/chapter-11.md)
-- [Chapter 12: HTML Parsing and Data Pipelines](data-and-engineering/chapter-12.md)
-- [Chapter 13: Distributed Crawling Architecture](data-and-engineering/chapter-13.md)
-- [Chapter 14: Data Cleaning, Normalization, and Deduplication](data-and-engineering/chapter-14.md)
-- [Chapter 15: Building and Managing Large MongoDB Clusters](data-and-engineering/chapter-15.md)
+- [Web Crawling at Scale](data-and-engineering/chapter-11.md)
+- [HTML Parsing and Data Pipelines](data-and-engineering/chapter-12.md)
+- [Distributed Crawling Architecture](data-and-engineering/chapter-13.md)
+- [Data Cleaning, Normalization, and Deduplication](data-and-engineering/chapter-14.md)
+- [Building and Managing Large MongoDB Clusters](data-and-engineering/chapter-15.md)
 
 **Big Data & Distributed Compute**
 
@@ -295,17 +295,17 @@ real domain gap, not yet an active application track.
 - [Patient Matching & MPI](domain-verticals/healthcare/patient-matching-mpi.md)
 - [HIPAA & PHI-Safe Engineering](domain-verticals/healthcare/hipaa-phi-safety.md)
 
-### Architecture & Leadership (Chapters 26–30)
+### Architecture & Leadership
 
-- Chapter 26: System Design Interviews
+- System Design Interviews
     - [System Design Methodology](architecture-leadership/system-design-methodology.md)
     - [Architecture Diagramming & Communication](architecture-leadership/architecture-diagramming-and-communication.md) — includes the C4 model
     - [Common System Design Patterns](architecture-leadership/system-design-patterns.md)
     - [Scalability Case Studies](architecture-leadership/scalability-case-studies.md)
-- [Chapter 27: Event-Driven Architectures and Async Workflows](architecture-leadership/chapter-27.md)
-- [Chapter 28: Building for Resilience](architecture-leadership/chapter-28.md)
-- [Chapter 29: Leadership for Engineers](architecture-leadership/chapter-29.md)
-- [Chapter 30: Crafting the Staff Engineer Mindset](architecture-leadership/chapter-30.md)
+- [Event-Driven Architectures and Async Workflows](architecture-leadership/chapter-27.md)
+- [Building for Resilience](architecture-leadership/chapter-28.md)
+- [Leadership for Engineers](architecture-leadership/chapter-29.md)
+- [Crafting the Staff Engineer Mindset](architecture-leadership/chapter-30.md)
 
 ### Reference & Case Studies
 
@@ -316,22 +316,22 @@ the skill curriculum above.
   for system-design/behavioral questions
 - [Meeting-Intelligence System Case Study](reference-case-studies/meeting-intelligence-case-study.md)
 
-### Interview & Portfolio Mastery (Chapters 31–35)
+### Interview & Portfolio Mastery
 
 The capstone — behavioral prep, mock interviews, resume polish, and a
 final countdown review. Comes last: it's what you do right before the
 interview, after the technical material above and the project-story
 material it draws on for behavioral answers.
 
-- [Chapter 31: Behavioral Interview Prep](interview-portfolio/chapter-31.md)
-- [Chapter 32: Technical Interview Deep Dives](interview-portfolio/chapter-32.md)
-- [Chapter 33: Mock Projects](interview-portfolio/chapter-33.md)
+- [Behavioral Interview Prep](interview-portfolio/chapter-31.md)
+- [Technical Interview Deep Dives](interview-portfolio/chapter-32.md)
+- [Mock Projects](interview-portfolio/chapter-33.md)
 - [Take-Home & Live-Coding Exercises](interview-portfolio/take-home-and-live-coding-exercises.md) —
   real, scoped coding tasks recalled from interviews, e.g. a weather CLI
-- [Chapter 34: Resume, GitHub, and Case Study Optimization](interview-portfolio/chapter-34.md)
+- [Resume, GitHub, and Case Study Optimization](interview-portfolio/chapter-34.md)
 - [Validating Your Skill Level](interview-portfolio/validating-your-skill-level.md) —
   backing up a self-rated "expert" claim with something external
-- [Chapter 35: Final Review — The 30-Day Countdown](interview-portfolio/chapter-35.md)
+- [Final Review — The 30-Day Countdown](interview-portfolio/chapter-35.md)
 
 ## A note on names
 
