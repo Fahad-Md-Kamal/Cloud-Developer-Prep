@@ -84,10 +84,6 @@
     "url": "fastapi-performance-patterns/"
   },
   {
-    "title": "SQL & Relational Data Modeling",
-    "url": "sql-data-modeling-fundamentals/"
-  },
-  {
     "title": "Pathlib & File Operations",
     "url": "pathlib-and-file-operations/"
   },
@@ -196,14 +192,6 @@
     "url": "chapter-7/"
   },
   {
-    "title": "8. Database Architecture for Scale",
-    "url": "chapter-8/"
-  },
-  {
-    "title": "Database Security & Breach Prevention",
-    "url": "database-security-and-breach-prevention/"
-  },
-  {
     "title": "9. API Gateway & Rate Limiting",
     "url": "chapter-9/"
   },
@@ -214,6 +202,18 @@
   {
     "title": "10. Observability",
     "url": "chapter-10/"
+  },
+  {
+    "title": "8. Database Architecture for Scale",
+    "url": "chapter-8/"
+  },
+  {
+    "title": "Database Security & Breach Prevention",
+    "url": "database-security-and-breach-prevention/"
+  },
+  {
+    "title": "SQL & Relational Data Modeling",
+    "url": "sql-data-modeling-fundamentals/"
   },
   {
     "title": "11. Web Crawling at Scale",

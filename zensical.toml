@@ -47,7 +47,6 @@ nav = [
                   { "Dependency Injection & Background Tasks" = "fastapi-dependency-injection.md" },
                   { "Performance & Production Patterns" = "fastapi-performance-patterns.md" },
               ] },
-              { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
               { "38. Python Standard Library" = [
                   { "Pathlib & File Operations" = "pathlib-and-file-operations.md" },
                   { "Collections & Itertools" = "collections-and-itertools.md" },
@@ -88,13 +87,14 @@ nav = [
       { "Backend & Distributed Systems Architecture" = [
           { "6. Microservices & Message Queues" = "chapter-6.md" },
           { "7. Distributed System Design" = "chapter-7.md" },
-          { "8. Database Architecture for Scale" = "chapter-8.md" },
-          { "Database Security & Breach Prevention" = "database-security-and-breach-prevention.md" },
           { "9. API Gateway & Rate Limiting" = "chapter-9.md" },
           { "Kong API Gateway" = "kong-api-gateway.md" },
           { "10. Observability" = "chapter-10.md" },
       ] },
-      { "Data Engineering & Big Data" = [
+      { "Data & Engineering" = [
+          { "8. Database Architecture for Scale" = "chapter-8.md" },
+          { "Database Security & Breach Prevention" = "database-security-and-breach-prevention.md" },
+          { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
           { "Web Crawling & Pipelines" = [
               { "11. Web Crawling at Scale" = "chapter-11.md" },
               { "12. HTML Parsing & Data Pipelines" = "chapter-12.md" },

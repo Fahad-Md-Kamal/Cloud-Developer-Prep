@@ -103,8 +103,6 @@ Django/FastAPI.
 - **FastAPI**
     - [Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
     - [Performance & Production Patterns](fastapi-performance-patterns.md)
-- [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —
-  normalization, keys, JOINs, denormalization, DB-level constraints
 - Chapter 38: Python Standard Library
     - [Pathlib & File Operations](pathlib-and-file-operations.md)
     - [Collections & Itertools](collections-and-itertools.md)
@@ -156,18 +154,23 @@ not saved for last.
 
 - [Chapter 6: Microservices Design with FastAPI & Message Queues](chapter-6.md)
 - [Chapter 7: Distributed System Design](chapter-7.md)
-- [Chapter 8: Database Architecture for Scale](chapter-8.md)
-- [Database Security & Breach Prevention](database-security-and-breach-prevention.md) —
-  network isolation, PII encryption, secure backup handling
 - [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](chapter-9.md)
 - [Kong API Gateway](kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
 - [Chapter 10: Observability with Prometheus & Grafana](chapter-10.md)
 
-### Data Engineering & Big Data
+### Data & Engineering
 
-General-purpose data engineering — web crawling/pipelines, distributed
-big-data compute, and preprocessing — grouped together instead of
-scattered across three disconnected sections.
+Everything database- and data-engineering-related in one place —
+database architecture, database security, SQL/relational modeling,
+web crawling/pipelines, distributed big-data compute, and
+preprocessing — instead of scattered across three disconnected
+sections.
+
+- [Chapter 8: Database Architecture for Scale](chapter-8.md)
+- [Database Security & Breach Prevention](database-security-and-breach-prevention.md) —
+  network isolation, PII encryption, secure backup handling
+- [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —
+  normalization, keys, JOINs, denormalization, DB-level constraints
 
 **Web Crawling & Pipelines**
 
