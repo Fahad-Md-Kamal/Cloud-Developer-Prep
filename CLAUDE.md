@@ -3,9 +3,12 @@
 ## Site architecture
 
 This site is built with [Zensical](https://zensical.org/) (a Markdown-based
-static site generator). Content lives in `docs/*.md`, config in
-`zensical.toml`, and `.github/workflows/docs.yml` builds and deploys it to
-GitHub Pages automatically on every push to `main`.
+static site generator). Content lives in `docs/**/*.md`, organized into
+subdirectories mirroring `zensical.toml`'s nav (e.g.
+`docs/data-and-engineering/postgresql-for-scale.md`) — only `index.md`
+and `session-log.md` sit at `docs/` root. Config in `zensical.toml`, and
+`.github/workflows/docs.yml` builds and deploys it to GitHub Pages
+automatically on every push to `main`.
 
 - **To add or edit a page**: see `docs/README.md`.
 - **Local build/preview**: `pip install -r requirements.txt`, then
@@ -85,15 +88,15 @@ within a single file and call it done.
 
 **Pattern** (already applied to chapters 1, 2, 3, and the AI & LLM
 System Integration section): one top-level entry becomes an expandable
-group in `zensical.toml`, wrapping several standalone `docs/*.md` files,
-one per sub-topic:
+group in `zensical.toml`, wrapping several standalone files under the
+same subdirectory, one per sub-topic:
 
 ```toml
 { "1. Modern Python Mastery" = [
-    { "Typing & Generics" = "typing-and-generics.md" },
-    { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
-    { "Memory & Caching" = "memory-and-caching.md" },
-    { "Practical Patterns" = "practical-patterns.md" },
+    { "Typing & Generics" = "programming-languages/python/typing-and-generics.md" },
+    { "Concurrency & AsyncIO" = "programming-languages/python/concurrency-and-asyncio.md" },
+    { "Memory & Caching" = "programming-languages/python/memory-and-caching.md" },
+    { "Practical Patterns" = "programming-languages/python/practical-patterns.md" },
 ] },
 ```
 
@@ -113,15 +116,15 @@ one per sub-topic:
 
 ## This repo must stay PRIVATE — do not suggest making it public again
 
-As of 2026-09-22 this repo holds real client/employer-confidential content.
-All content lives flat under `docs/*.md` (plus `docs/chapter-36/` for the
-DSA sub-chapters) as one unified tree — there is no longer a separate
-public-safe layer vs. a private layer split by directory. Real
-company/target names (Lawstronaut, Optimizely, Cefalo) are mixed
-directly into the chapters. **Not genericized.**
+As of 2026-09-22 this repo holds real client/employer-confidential content,
+now organized under `docs/**/*.md` in subdirectories mirroring the nav
+(see "Site architecture" above) — there is no separate public-safe layer
+vs. a private layer; the subdirectory split is purely topical, not a
+privacy boundary. Real company/target names (Lawstronaut, Optimizely,
+Cefalo) are mixed directly into the chapters. **Not genericized.**
 
-`docs/meeting-intelligence-case-study.md` (formerly
-`meetingflow-case-study.md`) is the one exception — as of 2026-09-23 it
+`docs/reference-case-studies/meeting-intelligence-case-study.md`
+(formerly `meetingflow-case-study.md`) is the one exception — as of 2026-09-23 it
 was rewritten to remove the real project name, the specific business
 domain/language framing, literal source-language prompts, and real file
 paths, so it can't be traced back to the actual client/project even if
@@ -129,10 +132,10 @@ this repo were ever exposed. Keep it that way: don't reintroduce the
 real project name or domain specifics into that file.
 
 The public/private boundary is enforced entirely at the **repo
-visibility** level (must be private), not per-file. If asked to make this
-repo public again, that requires a full pass over `docs/*.md` to
-genericize real names first — there's no longer a directory boundary to
-lean on.
+visibility** level (must be private), not per-file or per-directory —
+the topical subdirectories under `docs/` are purely organizational, not
+a privacy split. If asked to make this repo public again, that requires
+a full pass over `docs/**/*.md` to genericize real names first.
 
 The user's own name, email, and real project details are fine here now —
 this is a private repo, not a public prep site anymore.
