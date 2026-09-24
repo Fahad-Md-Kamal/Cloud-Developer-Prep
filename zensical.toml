@@ -155,7 +155,12 @@ nav = [
           ] },
       ] },
       { "Architecture & Leadership" = [
-          { "26. System Design Interviews" = "architecture-leadership/chapter-26.md" },
+          { "26. System Design Interviews" = [
+              { "System Design Methodology" = "architecture-leadership/system-design-methodology.md" },
+              { "Architecture Diagramming & Communication" = "architecture-leadership/architecture-diagramming-and-communication.md" },
+              { "Common System Design Patterns" = "architecture-leadership/system-design-patterns.md" },
+              { "Scalability Case Studies" = "architecture-leadership/scalability-case-studies.md" },
+          ] },
           { "27. Event-Driven Architectures" = "architecture-leadership/chapter-27.md" },
           { "28. Building for Resilience" = "architecture-leadership/chapter-28.md" },
           { "29. Leadership for Engineers" = "architecture-leadership/chapter-29.md" },

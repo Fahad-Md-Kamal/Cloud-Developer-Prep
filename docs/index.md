@@ -271,7 +271,11 @@ real domain gap, not yet an active application track.
 
 ### Architecture & Leadership (Chapters 26–30)
 
-- [Chapter 26: System Design Interviews](architecture-leadership/chapter-26.md)
+- Chapter 26: System Design Interviews
+    - [System Design Methodology](architecture-leadership/system-design-methodology.md)
+    - [Architecture Diagramming & Communication](architecture-leadership/architecture-diagramming-and-communication.md) — includes the C4 model
+    - [Common System Design Patterns](architecture-leadership/system-design-patterns.md)
+    - [Scalability Case Studies](architecture-leadership/scalability-case-studies.md)
 - [Chapter 27: Event-Driven Architectures and Async Workflows](architecture-leadership/chapter-27.md)
 - [Chapter 28: Building for Resilience](architecture-leadership/chapter-28.md)
 - [Chapter 29: Leadership for Engineers](architecture-leadership/chapter-29.md)

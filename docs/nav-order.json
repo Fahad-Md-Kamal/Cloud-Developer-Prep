@@ -352,8 +352,20 @@
     "url": "domain-verticals/healthcare/hipaa-phi-safety/"
   },
   {
-    "title": "26. System Design Interviews",
-    "url": "architecture-leadership/chapter-26/"
+    "title": "System Design Methodology",
+    "url": "architecture-leadership/system-design-methodology/"
+  },
+  {
+    "title": "Architecture Diagramming & Communication",
+    "url": "architecture-leadership/architecture-diagramming-and-communication/"
+  },
+  {
+    "title": "Common System Design Patterns",
+    "url": "architecture-leadership/system-design-patterns/"
+  },
+  {
+    "title": "Scalability Case Studies",
+    "url": "architecture-leadership/scalability-case-studies/"
   },
   {
     "title": "27. Event-Driven Architectures",
