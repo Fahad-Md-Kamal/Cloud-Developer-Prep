@@ -141,7 +141,13 @@ nav = [
       ] },
       { "Supplementary Language & Stdlib Topics" = [
           { "37. Go, TypeScript, Angular & AI Patterns" = "chapter-37.md" },
-          { "38. Python Standard Library" = "chapter-38.md" },
+          { "38. Python Standard Library" = [
+              { "Pathlib & File Operations" = "pathlib-and-file-operations.md" },
+              { "Collections & Itertools" = "collections-and-itertools.md" },
+              { "Configuration & CLI Tools" = "config-and-cli-tools.md" },
+              { "Functools: Caching & Decorators" = "functools-patterns.md" },
+              { "Regex & Text Processing" = "regex-and-text-processing.md" },
+          ] },
       ] },
       { "Reference & Case Studies" = [
           { "Personal Project Stories" = "project-stories.md" },

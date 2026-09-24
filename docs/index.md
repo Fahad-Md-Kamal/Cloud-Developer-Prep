@@ -238,7 +238,12 @@ Gap-review material grouped together rather than left as two
 unrelated stray entries.
 
 - [Chapter 37: Go, TypeScript, Angular & Transferable AI Patterns](chapter-37.md)
-- [Chapter 38: Python Standard Library for Enterprise Systems](chapter-38.md)
+- Chapter 38: Python Standard Library
+    - [Pathlib & File Operations](pathlib-and-file-operations.md)
+    - [Collections & Itertools](collections-and-itertools.md)
+    - [Configuration & CLI Tools](config-and-cli-tools.md)
+    - [Functools: Caching & Decorators](functools-patterns.md)
+    - [Regex & Text Processing](regex-and-text-processing.md)
 
 ### Reference & Case Studies
 

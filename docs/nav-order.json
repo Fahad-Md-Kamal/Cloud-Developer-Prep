@@ -328,8 +328,24 @@
     "url": "chapter-37/"
   },
   {
-    "title": "38. Python Standard Library",
-    "url": "chapter-38/"
+    "title": "Pathlib & File Operations",
+    "url": "pathlib-and-file-operations/"
+  },
+  {
+    "title": "Collections & Itertools",
+    "url": "collections-and-itertools/"
+  },
+  {
+    "title": "Configuration & CLI Tools",
+    "url": "config-and-cli-tools/"
+  },
+  {
+    "title": "Functools: Caching & Decorators",
+    "url": "functools-patterns/"
+  },
+  {
+    "title": "Regex & Text Processing",
+    "url": "regex-and-text-processing/"
   },
   {
     "title": "Personal Project Stories",
