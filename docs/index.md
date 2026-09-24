@@ -264,6 +264,8 @@ material it draws on for behavioral answers.
 - [Chapter 31: Behavioral Interview Prep](chapter-31.md)
 - [Chapter 32: Technical Interview Deep Dives](chapter-32.md)
 - [Chapter 33: Mock Projects](chapter-33.md)
+- [Take-Home & Live-Coding Exercises](take-home-and-live-coding-exercises.md) —
+  real, scoped coding tasks recalled from interviews, e.g. a weather CLI
 - [Chapter 34: Resume, GitHub, and Case Study Optimization](chapter-34.md)
 - [Chapter 35: Final Review — The 30-Day Countdown](chapter-35.md)
 
