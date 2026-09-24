@@ -204,8 +204,20 @@
     "url": "chapter-10/"
   },
   {
-    "title": "8. Database Architecture for Scale",
-    "url": "chapter-8/"
+    "title": "PostgreSQL for Scale",
+    "url": "postgresql-for-scale/"
+  },
+  {
+    "title": "MongoDB for Scale",
+    "url": "mongodb-for-scale/"
+  },
+  {
+    "title": "Elasticsearch Architecture",
+    "url": "elasticsearch-architecture/"
+  },
+  {
+    "title": "Cross-Store Architecture Patterns",
+    "url": "cross-store-architecture-patterns/"
   },
   {
     "title": "Database Security & Breach Prevention",

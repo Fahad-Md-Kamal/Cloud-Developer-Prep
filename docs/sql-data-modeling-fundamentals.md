@@ -6,7 +6,7 @@ title: "SQL & Relational Data Modeling"
 
 Schema design fundamentals — normalization, keys, relationships, JOIN
 types, and constraints — as distinct from
-[Database Architecture for Scale](chapter-8.md), which covers indexing,
+[PostgreSQL for Scale](postgresql-for-scale.md), which covers indexing,
 replication, and sharding for a schema that's already well-designed.
 Flagged from the BJIT Senior Python Developer JD's "Proficient in SQL
 (data modeling and structuring relational databases)" requirement.
@@ -204,7 +204,7 @@ JOIN employees e2 ON e1.manager_id = e2.manager_id AND e1.id <> e2.id;
   table on every page load. Trades a small write-time cost (updating
   one extra column) for a much cheaper read.
 - This is the same territory as
-  [Chapter 8's JSONB question](chapter-8.md#5-when-does-jsonb-in-postgres-make-sense-vs-a-normalized-column-or-vs-reaching-for-mongo) —
+  [the JSONB question in PostgreSQL for Scale](postgresql-for-scale.md#5-when-does-jsonb-in-postgres-make-sense-vs-a-normalized-column-or-vs-reaching-for-mongo) —
   denormalization and "store it as JSONB instead of a normalized
   column" are the same underlying trade-off (read simplicity vs. write
   correctness/queryability) at different scales.

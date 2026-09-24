@@ -82,7 +82,7 @@ differences.
 **Status:** ❌ gap — window functions are not yet solid. This was called
 out ahead of time as "common in senior-level tests," so it's a priority
 for more reps before the real interview, not just a one-off review. Full
-writeup: [Chapter 8: Database Architecture for Scale](chapter-8.md#worked-example-rank-within-a-group-window-functions).
+writeup: [PostgreSQL for Scale](postgresql-for-scale.md#worked-example-rank-within-a-group-window-functions).
 
 ### Q4 — Practice sandbox problem 1: warm-up join (SQL)
 

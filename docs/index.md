@@ -51,7 +51,7 @@ inside the relevant chapter, not on separate pages:
 
 - Mutable default arguments → [Practical Patterns](practical-patterns.md#practice-notes-from-live-session)
 - `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session)
-- SQL window functions + practice sandbox → [Chapter 8: Database Architecture for Scale](chapter-8.md#practice-notes-from-live-session)
+- SQL window functions + practice sandbox → [PostgreSQL for Scale](postgresql-for-scale.md#practice-notes-from-live-session)
 - AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](aws-services.md)
 - Project stories for system-design questions → [Personal Project Stories](project-stories.md)
 - Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](django-drf.md)
@@ -166,7 +166,11 @@ web crawling/pipelines, distributed big-data compute, and
 preprocessing — instead of scattered across three disconnected
 sections.
 
-- [Chapter 8: Database Architecture for Scale](chapter-8.md)
+- Chapter 8: Database Architecture for Scale
+    - [PostgreSQL for Scale](postgresql-for-scale.md)
+    - [MongoDB for Scale](mongodb-for-scale.md)
+    - [Elasticsearch Architecture](elasticsearch-architecture.md)
+    - [Cross-Store Architecture Patterns](cross-store-architecture-patterns.md)
 - [Database Security & Breach Prevention](database-security-and-breach-prevention.md) —
   network isolation, PII encryption, secure backup handling
 - [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —

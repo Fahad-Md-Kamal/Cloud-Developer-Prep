@@ -92,7 +92,12 @@ nav = [
           { "10. Observability" = "chapter-10.md" },
       ] },
       { "Data & Engineering" = [
-          { "8. Database Architecture for Scale" = "chapter-8.md" },
+          { "8. Database Architecture for Scale" = [
+              { "PostgreSQL for Scale" = "postgresql-for-scale.md" },
+              { "MongoDB for Scale" = "mongodb-for-scale.md" },
+              { "Elasticsearch Architecture" = "elasticsearch-architecture.md" },
+              { "Cross-Store Architecture Patterns" = "cross-store-architecture-patterns.md" },
+          ] },
           { "Database Security & Breach Prevention" = "database-security-and-breach-prevention.md" },
           { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
           { "Web Crawling & Pipelines" = [
