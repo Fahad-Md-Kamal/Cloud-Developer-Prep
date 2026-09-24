@@ -281,6 +281,153 @@ version which one you'd pick, and being ready to defend it.
   you stop that?" — the redundant-state design smell above, as a live
   question.
 
+## Exercise 3: Helpdesk / Support Ticket API
+
+**Source:** self-directed practice project — designed to exercise ORM
+query optimization, RBAC permissions, a status state machine, and
+async task handling in one deliberately small build, rather than
+waiting for an interviewer to hand out a task covering all four.
+
+**The task:**
+
+- **Models**: `Ticket` (title, description, status, priority,
+  `created_by`, `assigned_to`, timestamps), `Comment` (ticket FK,
+  author, body, timestamp).
+- **API**: a DRF `ModelViewSet` for tickets, with comments nested
+  under each ticket.
+- **Permissions (RBAC)**: a regular user only sees/creates their
+  *own* tickets; staff can see and manage all tickets — real
+  object-level permission logic, not just `IsAuthenticated`.
+- **A status state machine**: `Open → In Progress → Resolved →
+  Closed`, with invalid transitions rejected (e.g. can't jump
+  straight from `Open` to `Closed`).
+- **Query optimization**: the ticket-list endpoint must avoid N+1 on
+  `assigned_to`, `created_by`, and `comments`.
+- **One async task**: fire a notification (a real email, or just a
+  log line for practice) when a ticket is created or commented on,
+  off the request/response cycle.
+
+**Suggested time box:** 3–5 hours for the MVP above.
+
+**Design decisions worth making explicit before coding** — the same
+discipline as asking clarifying questions in a real interview, just
+self-directed here:
+
+- Where does the state machine live — a method on the `Ticket` model,
+  or a separate service function? (Model method is simpler; a service
+  function separates "business rule" from "persistence" more
+  cleanly — a real trade-off worth having an opinion on.)
+- Does "staff" mean `is_staff`, a dedicated `Agent` role, or a
+  group/permission-based scheme? Pick one and be ready to justify it.
+- Synchronous notification now, Celery task later — or Celery from
+  the start? Building it synchronous first and then converting is a
+  legitimate way to isolate the two concerns, as long as you actually
+  do the conversion.
+
+**What a strong solution demonstrates:**
+
+- The N+1 query actually gets hit first (comment it, don't just
+  skip straight to the optimized version) — then fixed with
+  `select_related`/`prefetch_related`, so you can articulate *why*
+  each one applies to *which* relation. See
+  [Django ORM Query Cheat Sheet §1](../programming-languages/python/django-orm.md#1-query-loading-patterns)
+  for the forward/one-to-one vs. reverse/many-to-many distinction that
+  decides which one to use where.
+- The state machine actually rejects invalid transitions with a real
+  error, not just a silently-ignored no-op update.
+- Permission checks happen at the object level
+  (`has_object_permission`), not just at the view/route level — a
+  regular user hitting `/tickets/<id>/` for someone else's ticket
+  should get a `403` or `404`, not the data.
+- The async task is genuinely fire-and-forget — the API response
+  doesn't wait on the notification actually sending.
+
+**A starter structure to practice against:**
+
+```python
+# models.py
+from django.conf import settings
+from django.db import models
+
+class Ticket(models.Model):
+    class Status(models.TextChoices):
+        OPEN = "OPEN", "Open"
+        IN_PROGRESS = "IN_PROGRESS", "In Progress"
+        RESOLVED = "RESOLVED", "Resolved"
+        CLOSED = "CLOSED", "Closed"
+
+    VALID_TRANSITIONS = {
+        Status.OPEN: {Status.IN_PROGRESS},
+        Status.IN_PROGRESS: {Status.RESOLVED, Status.OPEN},
+        Status.RESOLVED: {Status.CLOSED, Status.IN_PROGRESS},
+        Status.CLOSED: set(),
+    }
+
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.OPEN)
+    priority = models.CharField(max_length=20, default="normal")
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="tickets_created", on_delete=models.CASCADE)
+    assigned_to = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="tickets_assigned", null=True, blank=True, on_delete=models.SET_NULL)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def transition_to(self, new_status: str) -> None:
+        if new_status not in self.VALID_TRANSITIONS[self.status]:
+            raise ValueError(f"Cannot move ticket from {self.status} to {new_status}")
+        self.status = new_status
+        self.save(update_fields=["status", "updated_at"])
+
+
+class Comment(models.Model):
+    ticket = models.ForeignKey(Ticket, related_name="comments", on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+# permissions.py
+from rest_framework import permissions
+
+class IsOwnerOrStaff(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user.is_staff or obj.created_by == request.user
+
+
+# views.py
+class TicketViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
+    serializer_class = TicketSerializer
+
+    def get_queryset(self):
+        qs = (
+            Ticket.objects
+            .select_related("created_by", "assigned_to")
+            .prefetch_related("comments")
+        )
+        if self.request.user.is_staff:
+            return qs
+        return qs.filter(created_by=self.request.user)
+```
+
+**Likely follow-up questions an interviewer asks about this kind of task:**
+
+- "What happens if two agents try to change the same ticket's status
+  at the same time?" — tests whether you'd reach for
+  `select_for_update()` or optimistic locking (a version field), or
+  whether you'd previously never considered the race at all.
+- "How would you test the state machine without hitting the database
+  for every transition?" — tests whether the transition logic is
+  actually unit-testable in isolation, or tightly coupled to Django's
+  ORM/save cycle.
+- "Your notification task is failing silently in production — how do
+  you find out?" — tests whether you'd reach for Celery task retry
+  policies and monitoring, not just "it should just work."
+- "A user is both the ticket creator and later promoted to staff —
+  does your permission check still work correctly?" — probes whether
+  the permission logic was actually designed around roles, or
+  accidentally hardcoded around a single user's initial state.
+
 ---
 
 *More exercises get added here as they come up in real interviews —
