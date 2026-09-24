@@ -4,7 +4,7 @@ title: "Django ORM Query Cheat Sheet for Senior Engineers"
 
 # Django ORM Query Cheat Sheet for Senior Engineers
 
-This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops.
+This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops. For the PostgreSQL-side concepts behind these patterns — index selection, reading `EXPLAIN`, partitioning — see [PostgreSQL for Scale](postgresql-for-scale.md).
 
 ## 1. Query Loading Patterns
 
@@ -253,6 +253,14 @@ with transaction.atomic():
 ```
 
 **Interview point:** pair `transaction.atomic()` with `select_for_update()` when concurrent writers must not step on each other.
+
+**Likely follow-up — "what's the cost of `select_for_update` under contention?"** It
+serializes access to the locked rows — every other transaction wanting
+the same row blocks until the lock is released, which is correct but
+throttles throughput hard on a hot row. Scope it to the narrowest row
+set and the shortest transaction possible; reach for it only where
+correctness genuinely requires it, since it trades throughput for
+consistency.
 
 ## 10. Query Shaping and Memory Control
 

@@ -4,9 +4,11 @@ title: "PostgreSQL for Scale"
 
 # PostgreSQL for Scale
 
-Indexing, query diagnosis, partitioning, replication, JSONB, and
-Django ORM query cost — the PostgreSQL questions that come up cold in
-a senior interview, each with the trade-offs named explicitly.
+Indexing, query diagnosis, partitioning, replication, and JSONB — the
+PostgreSQL questions that come up cold in a senior interview, each
+with the trade-offs named explicitly. For pushing computation into
+SQL from Django specifically (query count, `F()` expressions, row
+locking), see [Django ORM Query Cheat Sheet](django-orm.md).
 
 ## 1. "Walk me through choosing an index — B-tree vs. GIN vs. GiST."
 
@@ -121,53 +123,6 @@ SELECT * FROM orders WHERE metadata @> '{"source": "mobile_app"}';
   which is a different trade-off than moving the data to a separate
   store entirely.
 
-## 6. "How do you keep Django ORM query count and SQL cost under control at scale?"
-
-In Django systems, database performance problems usually come from
-the boundary between ORM usage and PostgreSQL execution — reasoning
-about both layers together is the actual skill being tested.
-
-```python
-from django.db.models import Count, F, Q
-
-accounts = (
-    Account.objects
-    .filter(is_active=True)
-    .annotate(
-        open_invoice_count=Count(
-            "invoices",
-            filter=Q(invoices__status="open")
-        ),
-        available_credit=F("credit_limit") - F("used_credit"),
-    )
-    .order_by("-available_credit")
-)
-```
-
-**Answer:**
-
-- Push computation into SQL instead of looping in Python — the query
-  above combines filtering, an aggregate with its own `Q` filter, and
-  a computed field (`F` expressions) without ever pulling raw rows
-  into Python to do that math.
-- `select_related` (SQL `JOIN`, for forward/one-to-one relations) and
-  `prefetch_related` (a second query, for reverse/many-to-many
-  relations) are what actually fix the classic N+1 pattern — one query
-  per related object accessed in a loop.
-- Choose indexes based on the filters/joins/ordering a query
-  *actually* uses, confirm with `EXPLAIN` rather than guessing.
-- Reach for row locks (`select_for_update`) only where correctness
-  genuinely requires them, since they trade throughput for
-  consistency.
-
-**Likely follow-up — "what's the cost of `select_for_update` under contention?"**
-
-- It serializes access to the locked rows — every other transaction
-  wanting the same row blocks until the lock is released, which is
-  correct but throttles throughput hard on a hot row.
-- Scope it to the narrowest row set and the shortest transaction
-  possible.
-
 ---
 
 ## Summary
@@ -175,9 +130,9 @@ accounts = (
 - Index type follows the actual query shape, not a default habit;
   `EXPLAIN ANALYZE` replaces guessing; partitioning and replication
   both trade real operational complexity for real scaling headroom.
-- Django ORM: push aggregation and computed fields into SQL, fix N+1
-  with `select_related`/`prefetch_related`, and reach for row locks
-  only when correctness genuinely demands them.
+- Pushing computation into SQL instead of Python, fixing N+1, and
+  scoping row locks correctly is Django-ORM-specific — see
+  [Django ORM Query Cheat Sheet](django-orm.md) for that.
 
 ---
 
