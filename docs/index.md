@@ -217,13 +217,39 @@ big-data-scale role.
 - [Large-Scale Report Generation](data-and-engineering/large-scale-report-generation.md) —
   memory-efficient PDF/XLSX export from 10+GB source data
 
-### Cloud, DevOps & Infrastructure (Chapters 16–20)
+### Cloud, DevOps & Infrastructure
 
-- [Chapter 16: Docker and Docker Compose for Production](cloud-devops/chapter-16.md)
-- [Chapter 17: Kubernetes & Container Orchestration](cloud-devops/chapter-17.md)
-- [Chapter 18: Infrastructure as Code with Terraform](cloud-devops/chapter-18.md)
-- [Chapter 19: CI/CD Pipelines](cloud-devops/chapter-19.md)
-- [Chapter 20: Observability, Monitoring, and On-Call Readiness](cloud-devops/chapter-20.md)
+A hands-on AWS/DevOps ramp plan — real CLI commands, a real Terraform
+codebase, and a real Jenkins pipeline deploying a real application,
+mistakes and fixes kept in as teaching material.
+
+- [DevOps Principles & Delivery](cloud-devops/devops-principles-and-delivery.md) —
+  The Three Ways, DORA metrics, SLOs/error budgets, deployment strategies
+- [AWS Accounts & IAM](cloud-devops/aws-accounts-and-iam.md)
+- **AWS Networking (VPC)**
+    - [VPC & Subnet Design](cloud-devops/aws-networking-vpc.md)
+    - [Security Groups, Gateways & Flow Logs](cloud-devops/vpc-security-groups-and-flow-logs.md)
+- **Compute & Scaling**
+    - [EC2, AMIs & Launch Templates](cloud-devops/compute-and-scaling.md)
+    - [Auto Scaling Groups & Scaling Policies](cloud-devops/auto-scaling-groups.md)
+- [Load Balancing & DNS](cloud-devops/load-balancing-and-dns.md)
+- [Databases: RDS Operations](cloud-devops/databases-rds-operations.md)
+- [Storage & Observability](cloud-devops/storage-and-observability.md)
+- **Containers**
+    - [Docker: Production Container Images](cloud-devops/docker-production-images.md)
+    - [Container Orchestration: ECS & EKS](cloud-devops/container-orchestration-ecs-eks.md)
+- **Terraform (IaC)**
+    - [Terraform Fundamentals](cloud-devops/terraform-fundamentals.md)
+    - [Iteration, Modules & Advanced HCL](cloud-devops/terraform-modules-and-advanced-hcl.md)
+    - [State, Environments & Regions](cloud-devops/terraform-state-environments-and-regions.md)
+    - [Building a Platform in Code](cloud-devops/terraform-building-a-platform.md)
+    - [EKS, Worked Examples & Lambda](cloud-devops/terraform-eks-and-lambda.md)
+    - [Operating Terraform in Production](cloud-devops/terraform-operating-in-production.md)
+- **CI/CD & Jenkins**
+    - [Jenkins: Setup & Pipeline Configuration](cloud-devops/jenkins-setup-and-pipeline-configuration.md)
+    - [Jenkins: Production Deployment Pipelines](cloud-devops/jenkins-production-deployment-pipelines.md)
+    - [Jenkins: Security, Hardening & Production Patterns](cloud-devops/jenkins-security-hardening-and-production-patterns.md)
+    - [CI/CD & Progressive Delivery](cloud-devops/cicd-and-progressive-delivery.md)
 - [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 

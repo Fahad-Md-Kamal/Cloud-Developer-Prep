@@ -115,11 +115,37 @@ nav = [
           { "Large-Scale Report Generation" = "data-and-engineering/large-scale-report-generation.md" },
       ] },
       { "Cloud, DevOps & Infrastructure" = [
-          { "16. Docker & Docker Compose" = "cloud-devops/chapter-16.md" },
-          { "17. Kubernetes & Orchestration" = "cloud-devops/chapter-17.md" },
-          { "18. Terraform (IaC)" = "cloud-devops/chapter-18.md" },
-          { "19. CI/CD Pipelines" = "cloud-devops/chapter-19.md" },
-          { "20. Observability & On-Call" = "cloud-devops/chapter-20.md" },
+          { "DevOps Principles & Delivery" = "cloud-devops/devops-principles-and-delivery.md" },
+          { "AWS Accounts & IAM" = "cloud-devops/aws-accounts-and-iam.md" },
+          { "AWS Networking (VPC)" = [
+              { "VPC & Subnet Design" = "cloud-devops/aws-networking-vpc.md" },
+              { "Security Groups, Gateways & Flow Logs" = "cloud-devops/vpc-security-groups-and-flow-logs.md" },
+          ] },
+          { "Compute & Scaling" = [
+              { "EC2, AMIs & Launch Templates" = "cloud-devops/compute-and-scaling.md" },
+              { "Auto Scaling Groups & Scaling Policies" = "cloud-devops/auto-scaling-groups.md" },
+          ] },
+          { "Load Balancing & DNS" = "cloud-devops/load-balancing-and-dns.md" },
+          { "Databases: RDS Operations" = "cloud-devops/databases-rds-operations.md" },
+          { "Storage & Observability" = "cloud-devops/storage-and-observability.md" },
+          { "Containers" = [
+              { "Docker: Production Container Images" = "cloud-devops/docker-production-images.md" },
+              { "Container Orchestration: ECS & EKS" = "cloud-devops/container-orchestration-ecs-eks.md" },
+          ] },
+          { "Terraform (IaC)" = [
+              { "Terraform Fundamentals" = "cloud-devops/terraform-fundamentals.md" },
+              { "Iteration, Modules & Advanced HCL" = "cloud-devops/terraform-modules-and-advanced-hcl.md" },
+              { "State, Environments & Regions" = "cloud-devops/terraform-state-environments-and-regions.md" },
+              { "Building a Platform in Code" = "cloud-devops/terraform-building-a-platform.md" },
+              { "EKS, Worked Examples & Lambda" = "cloud-devops/terraform-eks-and-lambda.md" },
+              { "Operating Terraform in Production" = "cloud-devops/terraform-operating-in-production.md" },
+          ] },
+          { "CI/CD & Jenkins" = [
+              { "Jenkins: Setup & Pipeline Configuration" = "cloud-devops/jenkins-setup-and-pipeline-configuration.md" },
+              { "Jenkins: Production Deployment Pipelines" = "cloud-devops/jenkins-production-deployment-pipelines.md" },
+              { "Jenkins: Security, Hardening & Production Patterns" = "cloud-devops/jenkins-security-hardening-and-production-patterns.md" },
+              { "CI/CD & Progressive Delivery" = "cloud-devops/cicd-and-progressive-delivery.md" },
+          ] },
           { "AWS Services Quick Reference" = "cloud-devops/aws-services.md" },
       ] },
       { "AI & LLM System Integration" = [

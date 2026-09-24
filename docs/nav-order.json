@@ -264,24 +264,88 @@
     "url": "data-and-engineering/large-scale-report-generation/"
   },
   {
-    "title": "16. Docker & Docker Compose",
-    "url": "cloud-devops/chapter-16/"
+    "title": "DevOps Principles & Delivery",
+    "url": "cloud-devops/devops-principles-and-delivery/"
   },
   {
-    "title": "17. Kubernetes & Orchestration",
-    "url": "cloud-devops/chapter-17/"
+    "title": "AWS Accounts & IAM",
+    "url": "cloud-devops/aws-accounts-and-iam/"
   },
   {
-    "title": "18. Terraform (IaC)",
-    "url": "cloud-devops/chapter-18/"
+    "title": "VPC & Subnet Design",
+    "url": "cloud-devops/aws-networking-vpc/"
   },
   {
-    "title": "19. CI/CD Pipelines",
-    "url": "cloud-devops/chapter-19/"
+    "title": "Security Groups, Gateways & Flow Logs",
+    "url": "cloud-devops/vpc-security-groups-and-flow-logs/"
   },
   {
-    "title": "20. Observability & On-Call",
-    "url": "cloud-devops/chapter-20/"
+    "title": "EC2, AMIs & Launch Templates",
+    "url": "cloud-devops/compute-and-scaling/"
+  },
+  {
+    "title": "Auto Scaling Groups & Scaling Policies",
+    "url": "cloud-devops/auto-scaling-groups/"
+  },
+  {
+    "title": "Load Balancing & DNS",
+    "url": "cloud-devops/load-balancing-and-dns/"
+  },
+  {
+    "title": "Databases: RDS Operations",
+    "url": "cloud-devops/databases-rds-operations/"
+  },
+  {
+    "title": "Storage & Observability",
+    "url": "cloud-devops/storage-and-observability/"
+  },
+  {
+    "title": "Docker: Production Container Images",
+    "url": "cloud-devops/docker-production-images/"
+  },
+  {
+    "title": "Container Orchestration: ECS & EKS",
+    "url": "cloud-devops/container-orchestration-ecs-eks/"
+  },
+  {
+    "title": "Terraform Fundamentals",
+    "url": "cloud-devops/terraform-fundamentals/"
+  },
+  {
+    "title": "Iteration, Modules & Advanced HCL",
+    "url": "cloud-devops/terraform-modules-and-advanced-hcl/"
+  },
+  {
+    "title": "State, Environments & Regions",
+    "url": "cloud-devops/terraform-state-environments-and-regions/"
+  },
+  {
+    "title": "Building a Platform in Code",
+    "url": "cloud-devops/terraform-building-a-platform/"
+  },
+  {
+    "title": "EKS, Worked Examples & Lambda",
+    "url": "cloud-devops/terraform-eks-and-lambda/"
+  },
+  {
+    "title": "Operating Terraform in Production",
+    "url": "cloud-devops/terraform-operating-in-production/"
+  },
+  {
+    "title": "Jenkins: Setup & Pipeline Configuration",
+    "url": "cloud-devops/jenkins-setup-and-pipeline-configuration/"
+  },
+  {
+    "title": "Jenkins: Production Deployment Pipelines",
+    "url": "cloud-devops/jenkins-production-deployment-pipelines/"
+  },
+  {
+    "title": "Jenkins: Security, Hardening & Production Patterns",
+    "url": "cloud-devops/jenkins-security-hardening-and-production-patterns/"
+  },
+  {
+    "title": "CI/CD & Progressive Delivery",
+    "url": "cloud-devops/cicd-and-progressive-delivery/"
   },
   {
     "title": "AWS Services Quick Reference",
