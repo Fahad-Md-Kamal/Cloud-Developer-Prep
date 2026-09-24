@@ -29,24 +29,39 @@ nav = [
           { "4. AuthN/AuthZ & Security" = "chapter-4.md" },
           { "5. Performance Profiling & Caching" = "chapter-5.md" },
       ] },
-      { "Python & Frameworks" = [
-          { "1. Modern Python Mastery" = [
-              { "Typing & Generics" = "typing-and-generics.md" },
-              { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
-              { "Memory & Caching" = "memory-and-caching.md" },
-              { "Practical Patterns" = "practical-patterns.md" },
-              { "Python Internals & Advanced OOP" = "python-internals-and-advanced-oop.md" },
+      { "Programming Languages" = [
+          { "Python & Frameworks" = [
+              { "1. Modern Python Mastery" = [
+                  { "Typing & Generics" = "typing-and-generics.md" },
+                  { "Concurrency & AsyncIO" = "concurrency-and-asyncio.md" },
+                  { "Memory & Caching" = "memory-and-caching.md" },
+                  { "Practical Patterns" = "practical-patterns.md" },
+                  { "Python Internals & Advanced OOP" = "python-internals-and-advanced-oop.md" },
+              ] },
+              { "Choosing a Python Web Framework" = "choosing-a-python-web-framework.md" },
+              { "Django & DRF" = [
+                  { "ORM Query Cheat Sheet" = "django-orm.md" },
+                  { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
+              ] },
+              { "FastAPI" = [
+                  { "Dependency Injection & Background Tasks" = "fastapi-dependency-injection.md" },
+                  { "Performance & Production Patterns" = "fastapi-performance-patterns.md" },
+              ] },
+              { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
+              { "38. Python Standard Library" = [
+                  { "Pathlib & File Operations" = "pathlib-and-file-operations.md" },
+                  { "Collections & Itertools" = "collections-and-itertools.md" },
+                  { "Configuration & CLI Tools" = "config-and-cli-tools.md" },
+                  { "Functools: Caching & Decorators" = "functools-patterns.md" },
+                  { "Regex & Text Processing" = "regex-and-text-processing.md" },
+              ] },
           ] },
-          { "Choosing a Python Web Framework" = "choosing-a-python-web-framework.md" },
-          { "Django & DRF" = [
-              { "ORM Query Cheat Sheet" = "django-orm.md" },
-              { "Deep Dive: Serializers, Auth, Signals, Testing" = "django-drf.md" },
+          { "Go & Frameworks" = [
+              { "Go for Python Developers" = "go-for-python-developers.md" },
           ] },
-          { "FastAPI" = [
-              { "Dependency Injection & Background Tasks" = "fastapi-dependency-injection.md" },
-              { "Performance & Production Patterns" = "fastapi-performance-patterns.md" },
+          { "JS/TS" = [
+              { "TypeScript & Angular for Backend Leads" = "typescript-and-angular-for-backend-leads.md" },
           ] },
-          { "SQL & Relational Data Modeling" = "sql-data-modeling-fundamentals.md" },
       ] },
       { "Frontend & Developer Tooling" = [
           { "Frontend Fundamentals" = "frontend-fundamentals.md" },
@@ -138,16 +153,6 @@ nav = [
           { "28. Building for Resilience" = "chapter-28.md" },
           { "29. Leadership for Engineers" = "chapter-29.md" },
           { "30. Staff Engineer Mindset" = "chapter-30.md" },
-      ] },
-      { "Supplementary Language & Stdlib Topics" = [
-          { "37. Go, TypeScript, Angular & AI Patterns" = "chapter-37.md" },
-          { "38. Python Standard Library" = [
-              { "Pathlib & File Operations" = "pathlib-and-file-operations.md" },
-              { "Collections & Itertools" = "collections-and-itertools.md" },
-              { "Configuration & CLI Tools" = "config-and-cli-tools.md" },
-              { "Functools: Caching & Decorators" = "functools-patterns.md" },
-              { "Regex & Text Processing" = "regex-and-text-processing.md" },
-          ] },
       ] },
       { "Reference & Case Studies" = [
           { "Personal Project Stories" = "project-stories.md" },

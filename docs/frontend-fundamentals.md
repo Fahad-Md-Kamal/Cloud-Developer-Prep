@@ -8,8 +8,9 @@ title: "Frontend Fundamentals"
 Engineer (Django) JD gap analysis (2026-09-23) — "solid frontend
 development skills, specific framework not required." The only
 existing frontend content on this site is Angular-specific (inside
-[Chapter 37](chapter-37.md), aimed at backend leads talking to an
-Angular team), not framework-agnostic fundamentals, and not React —
+[TypeScript & Angular for Backend Leads](typescript-and-angular-for-backend-leads.md),
+aimed at backend leads talking to an Angular team), not
+framework-agnostic fundamentals, and not React —
 which pairs with Django at least as often as Angular in practice. Not
 yet given the full Q&A deep-dive treatment this site's other chapters
 have.
@@ -28,7 +29,7 @@ have.
   store (Redux/Zustand/Context) vs. server-state libraries (React
   Query/SWR).
 - Consuming a REST API from the frontend — mirrors the existing
-  ["API Design Patterns Frontend Teams Love"](chapter-37.md#25-api-design-patterns-angular-teams-love)
+  ["API Design Patterns Angular Teams Love"](typescript-and-angular-for-backend-leads.md#api-design-patterns-angular-teams-love)
   angle already written for Angular, generalized.
 - Accessibility basics: semantic HTML, ARIA, keyboard navigation.
 - Build tooling at a conceptual level (Vite/Webpack) — enough to

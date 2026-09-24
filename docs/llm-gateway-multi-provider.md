@@ -169,6 +169,40 @@ scrutiny.
 | Bandit approach limits cost/quality exposure to the losing variant | Bandit's faster convergence trades off some statistical rigor |
 | Catches provider-specific quality differences a benchmark might miss | Output-quality metrics for LLMs are inherently harder to define than latency/cost |
 
+## 6. "Beyond routing by provider health or cost, how do you cut spend on queries that don't need your best model?"
+
+```python
+async def generate(query: str, complexity: str = "auto"):
+    if complexity == "auto":
+        # Cheap model classifies the query cheaply before the real call
+        complexity = await cheap_model.classify_complexity(query)
+
+    model = "gpt-3.5-turbo" if complexity == "simple" else "gpt-4"
+    return await llm.generate(query, model=model)
+```
+
+**Answer:**
+
+- Not every request needs the most capable (and most expensive) model
+  — route by **query complexity**, not just by provider health/cost.
+- A cheap, fast model can act as a triage step: classify whether a
+  query is simple enough for a cheap model or genuinely needs the
+  expensive one, before the real generation call happens.
+- This is a distinct dimension from the provider-level load balancing
+  in question 4 — that routes *between providers* for the same
+  request; this routes *between model tiers* based on what the
+  request actually needs.
+
+**Likely follow-up — "what's the risk of getting the triage step wrong?"**
+
+- A misclassified complex query routed to the cheap model produces a
+  worse answer than the user would have gotten otherwise — the triage
+  step itself needs monitoring (sampling misclassified cases, not
+  just trusting it silently).
+- The triage call itself has a cost and adds latency — worth it only
+  when the cheap/expensive split is skewed enough (most traffic is
+  genuinely simple) that the savings outweigh the extra call.
+
 ---
 
 ## Code Samples

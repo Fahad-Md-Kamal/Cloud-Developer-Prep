@@ -79,12 +79,14 @@ own section below.
 - [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
 - [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
 
-### Python & Frameworks
+### Programming Languages
 
-Everything language-and-framework-specific in one place, instead of
-Python fundamentals and its frameworks living in two disconnected
-sections. Generic name on purpose — covers any Python framework added
-here later (web, desktop, or otherwise), not just Django/FastAPI.
+Every language this site covers, grouped by language instead of
+scattered by when each topic was added.
+
+**Python & Frameworks** — generic name on purpose, covers any Python
+framework added here later (web, desktop, or otherwise), not just
+Django/FastAPI.
 
 - Chapter 1: Modern Python Mastery
     - [Typing & Generics](typing-and-generics.md)
@@ -103,6 +105,20 @@ here later (web, desktop, or otherwise), not just Django/FastAPI.
     - [Performance & Production Patterns](fastapi-performance-patterns.md)
 - [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —
   normalization, keys, JOINs, denormalization, DB-level constraints
+- Chapter 38: Python Standard Library
+    - [Pathlib & File Operations](pathlib-and-file-operations.md)
+    - [Collections & Itertools](collections-and-itertools.md)
+    - [Configuration & CLI Tools](config-and-cli-tools.md)
+    - [Functools: Caching & Decorators](functools-patterns.md)
+    - [Regex & Text Processing](regex-and-text-processing.md)
+
+**Go & Frameworks**
+
+- [Go for Python Developers](go-for-python-developers.md)
+
+**JS/TS**
+
+- [TypeScript & Angular for Backend Leads](typescript-and-angular-for-backend-leads.md)
 
 ### Frontend & Developer Tooling
 
@@ -231,19 +247,6 @@ real domain gap, not yet an active application track.
 - [Chapter 28: Building for Resilience](chapter-28.md)
 - [Chapter 29: Leadership for Engineers](chapter-29.md)
 - [Chapter 30: Crafting the Staff Engineer Mindset](chapter-30.md)
-
-### Supplementary Language & Stdlib Topics (Chapters 37–38)
-
-Gap-review material grouped together rather than left as two
-unrelated stray entries.
-
-- [Chapter 37: Go, TypeScript, Angular & Transferable AI Patterns](chapter-37.md)
-- Chapter 38: Python Standard Library
-    - [Pathlib & File Operations](pathlib-and-file-operations.md)
-    - [Collections & Itertools](collections-and-itertools.md)
-    - [Configuration & CLI Tools](config-and-cli-tools.md)
-    - [Functools: Caching & Decorators](functools-patterns.md)
-    - [Regex & Text Processing](regex-and-text-processing.md)
 
 ### Reference & Case Studies
 

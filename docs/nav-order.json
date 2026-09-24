@@ -88,6 +88,34 @@
     "url": "sql-data-modeling-fundamentals/"
   },
   {
+    "title": "Pathlib & File Operations",
+    "url": "pathlib-and-file-operations/"
+  },
+  {
+    "title": "Collections & Itertools",
+    "url": "collections-and-itertools/"
+  },
+  {
+    "title": "Configuration & CLI Tools",
+    "url": "config-and-cli-tools/"
+  },
+  {
+    "title": "Functools: Caching & Decorators",
+    "url": "functools-patterns/"
+  },
+  {
+    "title": "Regex & Text Processing",
+    "url": "regex-and-text-processing/"
+  },
+  {
+    "title": "Go for Python Developers",
+    "url": "go-for-python-developers/"
+  },
+  {
+    "title": "TypeScript & Angular for Backend Leads",
+    "url": "typescript-and-angular-for-backend-leads/"
+  },
+  {
     "title": "Frontend Fundamentals",
     "url": "frontend-fundamentals/"
   },
@@ -322,30 +350,6 @@
   {
     "title": "30. Staff Engineer Mindset",
     "url": "chapter-30/"
-  },
-  {
-    "title": "37. Go, TypeScript, Angular & AI Patterns",
-    "url": "chapter-37/"
-  },
-  {
-    "title": "Pathlib & File Operations",
-    "url": "pathlib-and-file-operations/"
-  },
-  {
-    "title": "Collections & Itertools",
-    "url": "collections-and-itertools/"
-  },
-  {
-    "title": "Configuration & CLI Tools",
-    "url": "config-and-cli-tools/"
-  },
-  {
-    "title": "Functools: Caching & Decorators",
-    "url": "functools-patterns/"
-  },
-  {
-    "title": "Regex & Text Processing",
-    "url": "regex-and-text-processing/"
   },
   {
     "title": "Personal Project Stories",
