@@ -8,7 +8,7 @@ A real 2026 breach: a 4.15GB uncompressed SQL dump from a major
 e-commerce platform — 42+ lakh records, ~6 lakh customers' names,
 phone numbers, delivery addresses, and order logs — surfaced on the
 dark web. This isn't the auth-bypass or XSS class of bug covered in
-[Chapter 4](chapter-4.md); it's a database-architecture failure. What
+[Chapter 4](../core-engineering-foundations/chapter-4.md); it's a database-architecture failure. What
 actually causes this, and how you architect against it.
 
 ## 1. "A clean, complete SQL dump ends up on the dark web — what failure classes actually produce this?"
@@ -134,7 +134,7 @@ actually causes this, and how you architect against it.
   question, not a syntax question, and it's exactly the gap between
   "the code runs" and "the system is secure."
 - This is the same distinction covered in
-  [AI-Assisted Development Tools & Workflows](ai-assisted-development.md):
+  [AI-Assisted Development Tools & Workflows](../frontend-and-tooling/ai-assisted-development.md):
   reviewing AI-generated code for its *security and architectural
   implications*, not just whether it does what was asked, is a
   distinct skill from prompting the assistant well.

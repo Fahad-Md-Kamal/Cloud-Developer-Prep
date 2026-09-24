@@ -21,7 +21,7 @@ anywhere in the pipeline.
   functions) rather than pulling raw rows and summing them in Python.
   Same principle as
   [PostgreSQL for Scale](postgresql-for-scale.md) and
-  [Django ORM Query Cheat Sheet](django-orm.md).
+  [Django ORM Query Cheat Sheet](../programming-languages/python/django-orm.md).
 - If the transform genuinely needs to touch the full 10GB (multiple
   joins/aggregations across all of it), that's out-of-core/distributed
   territory — [Apache Spark & PySpark](spark-pyspark.md) — not a
@@ -162,7 +162,7 @@ def generate_report(self, filters: dict):
 - This doesn't belong inline in an HTTP request — a 10GB report can
   take minutes, far beyond any reasonable request timeout. Run it as a
   background job (Celery), the same pattern as
-  [Practical Patterns §3](practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request).
+  [Practical Patterns §3](../programming-languages/python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request).
 - Stream progress back (`update_state`) so the client can show real
   progress instead of a spinner with no information for several
   minutes.
@@ -181,7 +181,7 @@ def generate_report(self, filters: dict):
 **Likely follow-up — "how do you verify the pipeline is actually streaming, not just assumed to be?"**
 
 - Measure it — `tracemalloc` (see
-  [Memory & Caching](memory-and-caching.md)) or `memory-profiler`
+  [Memory & Caching](../programming-languages/python/memory-and-caching.md)) or `memory-profiler`
   against a realistic-size test run, rather than trusting a library's
   "streaming mode" flag blindly. A subtly wrong configuration (e.g.
   accidentally calling `.fetchall()` somewhere in a supposedly

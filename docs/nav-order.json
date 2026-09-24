@@ -9,402 +9,402 @@
   },
   {
     "title": "SOLID Principles",
-    "url": "solid-principles/"
+    "url": "core-engineering-foundations/solid-principles/"
   },
   {
     "title": "Design Patterns",
-    "url": "design-patterns/"
+    "url": "core-engineering-foundations/design-patterns/"
   },
   {
     "title": "Clean Code Practices",
-    "url": "clean-code-practices/"
+    "url": "core-engineering-foundations/clean-code-practices/"
   },
   {
     "title": "Refactoring Legacy Systems",
-    "url": "refactoring-legacy-systems/"
+    "url": "core-engineering-foundations/refactoring-legacy-systems/"
   },
   {
     "title": "API Design Fundamentals",
-    "url": "api-design-fundamentals/"
+    "url": "core-engineering-foundations/api-design-fundamentals/"
   },
   {
     "title": "API Production Readiness",
-    "url": "api-production-readiness/"
+    "url": "core-engineering-foundations/api-production-readiness/"
   },
   {
     "title": "API Paradigms & Patterns",
-    "url": "api-paradigms-and-patterns/"
+    "url": "core-engineering-foundations/api-paradigms-and-patterns/"
   },
   {
     "title": "4. AuthN/AuthZ & Security",
-    "url": "chapter-4/"
+    "url": "core-engineering-foundations/chapter-4/"
   },
   {
     "title": "5. Performance Profiling & Caching",
-    "url": "chapter-5/"
+    "url": "core-engineering-foundations/chapter-5/"
   },
   {
     "title": "Typing & Generics",
-    "url": "typing-and-generics/"
+    "url": "programming-languages/python/typing-and-generics/"
   },
   {
     "title": "Concurrency & AsyncIO",
-    "url": "concurrency-and-asyncio/"
+    "url": "programming-languages/python/concurrency-and-asyncio/"
   },
   {
     "title": "Memory & Caching",
-    "url": "memory-and-caching/"
+    "url": "programming-languages/python/memory-and-caching/"
   },
   {
     "title": "Practical Patterns",
-    "url": "practical-patterns/"
+    "url": "programming-languages/python/practical-patterns/"
   },
   {
     "title": "Python Internals & Advanced OOP",
-    "url": "python-internals-and-advanced-oop/"
+    "url": "programming-languages/python/python-internals-and-advanced-oop/"
   },
   {
     "title": "Choosing a Python Web Framework",
-    "url": "choosing-a-python-web-framework/"
+    "url": "programming-languages/python/choosing-a-python-web-framework/"
   },
   {
     "title": "ORM Query Cheat Sheet",
-    "url": "django-orm/"
+    "url": "programming-languages/python/django-orm/"
   },
   {
     "title": "Deep Dive: Serializers, Auth, Signals, Testing",
-    "url": "django-drf/"
+    "url": "programming-languages/python/django-drf/"
   },
   {
     "title": "Dependency Injection & Background Tasks",
-    "url": "fastapi-dependency-injection/"
+    "url": "programming-languages/python/fastapi-dependency-injection/"
   },
   {
     "title": "Performance & Production Patterns",
-    "url": "fastapi-performance-patterns/"
+    "url": "programming-languages/python/fastapi-performance-patterns/"
   },
   {
     "title": "Pathlib & File Operations",
-    "url": "pathlib-and-file-operations/"
+    "url": "programming-languages/python/pathlib-and-file-operations/"
   },
   {
     "title": "Collections & Itertools",
-    "url": "collections-and-itertools/"
+    "url": "programming-languages/python/collections-and-itertools/"
   },
   {
     "title": "Configuration & CLI Tools",
-    "url": "config-and-cli-tools/"
+    "url": "programming-languages/python/config-and-cli-tools/"
   },
   {
     "title": "Functools: Caching & Decorators",
-    "url": "functools-patterns/"
+    "url": "programming-languages/python/functools-patterns/"
   },
   {
     "title": "Regex & Text Processing",
-    "url": "regex-and-text-processing/"
+    "url": "programming-languages/python/regex-and-text-processing/"
   },
   {
     "title": "Go for Python Developers",
-    "url": "go-for-python-developers/"
+    "url": "programming-languages/go/go-for-python-developers/"
   },
   {
     "title": "TypeScript & Angular for Backend Leads",
-    "url": "typescript-and-angular-for-backend-leads/"
+    "url": "programming-languages/js-ts/typescript-and-angular-for-backend-leads/"
   },
   {
     "title": "Frontend Fundamentals",
-    "url": "frontend-fundamentals/"
+    "url": "frontend-and-tooling/frontend-fundamentals/"
   },
   {
     "title": "CSS & Styling Frameworks",
-    "url": "css-styling-frameworks/"
+    "url": "frontend-and-tooling/css-styling-frameworks/"
   },
   {
     "title": "CMS Platforms",
-    "url": "cms-platforms/"
+    "url": "frontend-and-tooling/cms-platforms/"
   },
   {
     "title": "AI-Assisted Development Tools & Workflows",
-    "url": "ai-assisted-development/"
+    "url": "frontend-and-tooling/ai-assisted-development/"
   },
   {
     "title": "36. Blind 75 / Grind 75 / NeetCode 150",
-    "url": "chapter-36/"
+    "url": "dsa/chapter-36/"
   },
   {
     "title": "Arrays & Hashing",
-    "url": "chapter-36/2-1-arrays-and-hashing/"
+    "url": "dsa/2-1-arrays-and-hashing/"
   },
   {
     "title": "Two Pointers",
-    "url": "chapter-36/2-2-two-pointers/"
+    "url": "dsa/2-2-two-pointers/"
   },
   {
     "title": "Sliding Window",
-    "url": "chapter-36/2-3-sliding-window/"
+    "url": "dsa/2-3-sliding-window/"
   },
   {
     "title": "Stack",
-    "url": "chapter-36/2-4-stack/"
+    "url": "dsa/2-4-stack/"
   },
   {
     "title": "Binary Search",
-    "url": "chapter-36/2-5-binary-search/"
+    "url": "dsa/2-5-binary-search/"
   },
   {
     "title": "Linked List",
-    "url": "chapter-36/2-6-linked-list/"
+    "url": "dsa/2-6-linked-list/"
   },
   {
     "title": "Trees",
-    "url": "chapter-36/2-7-trees/"
+    "url": "dsa/2-7-trees/"
   },
   {
     "title": "Tries / Prefix Tree",
-    "url": "chapter-36/2-8-tries-prefix-tree/"
+    "url": "dsa/2-8-tries-prefix-tree/"
   },
   {
     "title": "Heap / Priority Queue",
-    "url": "chapter-36/2-9-heap-priority-queue/"
+    "url": "dsa/2-9-heap-priority-queue/"
   },
   {
     "title": "Backtracking",
-    "url": "chapter-36/2-10-backtracking/"
+    "url": "dsa/2-10-backtracking/"
   },
   {
     "title": "Graphs",
-    "url": "chapter-36/2-11-graphs/"
+    "url": "dsa/2-11-graphs/"
   },
   {
     "title": "Dynamic Programming",
-    "url": "chapter-36/2-12-dynamic-programming/"
+    "url": "dsa/2-12-dynamic-programming/"
   },
   {
     "title": "Design",
-    "url": "chapter-36/2-13-design/"
+    "url": "dsa/2-13-design/"
   },
   {
     "title": "6. Microservices & Message Queues",
-    "url": "chapter-6/"
+    "url": "backend-architecture/chapter-6/"
   },
   {
     "title": "7. Distributed System Design",
-    "url": "chapter-7/"
+    "url": "backend-architecture/chapter-7/"
   },
   {
     "title": "9. API Gateway & Rate Limiting",
-    "url": "chapter-9/"
+    "url": "backend-architecture/chapter-9/"
   },
   {
     "title": "Kong API Gateway",
-    "url": "kong-api-gateway/"
+    "url": "backend-architecture/kong-api-gateway/"
   },
   {
     "title": "10. Observability",
-    "url": "chapter-10/"
+    "url": "backend-architecture/chapter-10/"
   },
   {
     "title": "PostgreSQL for Scale",
-    "url": "postgresql-for-scale/"
+    "url": "data-and-engineering/postgresql-for-scale/"
   },
   {
     "title": "MongoDB for Scale",
-    "url": "mongodb-for-scale/"
+    "url": "data-and-engineering/mongodb-for-scale/"
   },
   {
     "title": "Elasticsearch Architecture",
-    "url": "elasticsearch-architecture/"
+    "url": "data-and-engineering/elasticsearch-architecture/"
   },
   {
     "title": "Cross-Store Architecture Patterns",
-    "url": "cross-store-architecture-patterns/"
+    "url": "data-and-engineering/cross-store-architecture-patterns/"
   },
   {
     "title": "Database Security & Breach Prevention",
-    "url": "database-security-and-breach-prevention/"
+    "url": "data-and-engineering/database-security-and-breach-prevention/"
   },
   {
     "title": "SQL & Relational Data Modeling",
-    "url": "sql-data-modeling-fundamentals/"
+    "url": "data-and-engineering/sql-data-modeling-fundamentals/"
   },
   {
     "title": "11. Web Crawling at Scale",
-    "url": "chapter-11/"
+    "url": "data-and-engineering/chapter-11/"
   },
   {
     "title": "12. HTML Parsing & Data Pipelines",
-    "url": "chapter-12/"
+    "url": "data-and-engineering/chapter-12/"
   },
   {
     "title": "13. Distributed Crawling Architecture",
-    "url": "chapter-13/"
+    "url": "data-and-engineering/chapter-13/"
   },
   {
     "title": "14. Data Cleaning & Deduplication",
-    "url": "chapter-14/"
+    "url": "data-and-engineering/chapter-14/"
   },
   {
     "title": "15. Large MongoDB Clusters",
-    "url": "chapter-15/"
+    "url": "data-and-engineering/chapter-15/"
   },
   {
     "title": "Apache Spark & PySpark",
-    "url": "spark-pyspark/"
+    "url": "data-and-engineering/spark-pyspark/"
   },
   {
     "title": "Databricks & Delta Lake",
-    "url": "databricks-delta-lake/"
+    "url": "data-and-engineering/databricks-delta-lake/"
   },
   {
     "title": "Data Preprocessing: Pandas & NumPy",
-    "url": "data-preprocessing-pandas-numpy/"
+    "url": "data-and-engineering/data-preprocessing-pandas-numpy/"
   },
   {
     "title": "Large-Scale Report Generation",
-    "url": "large-scale-report-generation/"
+    "url": "data-and-engineering/large-scale-report-generation/"
   },
   {
     "title": "16. Docker & Docker Compose",
-    "url": "chapter-16/"
+    "url": "cloud-devops/chapter-16/"
   },
   {
     "title": "17. Kubernetes & Orchestration",
-    "url": "chapter-17/"
+    "url": "cloud-devops/chapter-17/"
   },
   {
     "title": "18. Terraform (IaC)",
-    "url": "chapter-18/"
+    "url": "cloud-devops/chapter-18/"
   },
   {
     "title": "19. CI/CD Pipelines",
-    "url": "chapter-19/"
+    "url": "cloud-devops/chapter-19/"
   },
   {
     "title": "20. Observability & On-Call",
-    "url": "chapter-20/"
+    "url": "cloud-devops/chapter-20/"
   },
   {
     "title": "AWS Services Quick Reference",
-    "url": "aws-services/"
+    "url": "cloud-devops/aws-services/"
   },
   {
     "title": "LLM APIs & Providers",
-    "url": "llm-apis-and-providers/"
+    "url": "ai-llm/llm-apis-and-providers/"
   },
   {
     "title": "LLM Gateway & Multi-Provider Integration",
-    "url": "llm-gateway-multi-provider/"
+    "url": "ai-llm/llm-gateway-multi-provider/"
   },
   {
     "title": "LLM Response Caching",
-    "url": "llm-response-caching/"
+    "url": "ai-llm/llm-response-caching/"
   },
   {
     "title": "Prompt Engineering & Context Management",
-    "url": "prompt-engineering/"
+    "url": "ai-llm/prompt-engineering/"
   },
   {
     "title": "Agentic AI Fundamentals",
-    "url": "agentic-ai-fundamentals/"
+    "url": "ai-llm/agentic-ai-fundamentals/"
   },
   {
     "title": "Coordination Patterns & Debugging",
-    "url": "multi-agent-systems/"
+    "url": "ai-llm/multi-agent-systems/"
   },
   {
     "title": "Autogen: Multi-Agent Orchestration",
-    "url": "autogen-orchestration/"
+    "url": "ai-llm/autogen-orchestration/"
   },
   {
     "title": "Embeddings & Semantic Search",
-    "url": "embeddings-semantic-search/"
+    "url": "ai-llm/embeddings-semantic-search/"
   },
   {
     "title": "RAG & Vector Databases",
-    "url": "rag-and-vector-databases/"
+    "url": "ai-llm/rag-and-vector-databases/"
   },
   {
     "title": "LangChain Agents",
-    "url": "langchain-agents/"
+    "url": "ai-llm/langchain-agents/"
   },
   {
     "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
-    "url": "langchain-ecosystem/"
+    "url": "ai-llm/langchain-ecosystem/"
   },
   {
     "title": "FHIR R4",
-    "url": "fhir-r4/"
+    "url": "domain-verticals/healthcare/fhir-r4/"
   },
   {
     "title": "HL7 v2.x & C-CDA",
-    "url": "hl7-ccda/"
+    "url": "domain-verticals/healthcare/hl7-ccda/"
   },
   {
     "title": "Healthcare Terminology",
-    "url": "healthcare-terminology/"
+    "url": "domain-verticals/healthcare/healthcare-terminology/"
   },
   {
     "title": "Patient Matching & MPI",
-    "url": "patient-matching-mpi/"
+    "url": "domain-verticals/healthcare/patient-matching-mpi/"
   },
   {
     "title": "HIPAA & PHI-Safe Engineering",
-    "url": "hipaa-phi-safety/"
+    "url": "domain-verticals/healthcare/hipaa-phi-safety/"
   },
   {
     "title": "26. System Design Interviews",
-    "url": "chapter-26/"
+    "url": "architecture-leadership/chapter-26/"
   },
   {
     "title": "27. Event-Driven Architectures",
-    "url": "chapter-27/"
+    "url": "architecture-leadership/chapter-27/"
   },
   {
     "title": "28. Building for Resilience",
-    "url": "chapter-28/"
+    "url": "architecture-leadership/chapter-28/"
   },
   {
     "title": "29. Leadership for Engineers",
-    "url": "chapter-29/"
+    "url": "architecture-leadership/chapter-29/"
   },
   {
     "title": "30. Staff Engineer Mindset",
-    "url": "chapter-30/"
+    "url": "architecture-leadership/chapter-30/"
   },
   {
     "title": "Personal Project Stories",
-    "url": "project-stories/"
+    "url": "reference-case-studies/project-stories/"
   },
   {
     "title": "Meeting-Intelligence System Case Study",
-    "url": "meeting-intelligence-case-study/"
+    "url": "reference-case-studies/meeting-intelligence-case-study/"
   },
   {
     "title": "31. Behavioral Interview Prep",
-    "url": "chapter-31/"
+    "url": "interview-portfolio/chapter-31/"
   },
   {
     "title": "32. Technical Interview Deep Dives",
-    "url": "chapter-32/"
+    "url": "interview-portfolio/chapter-32/"
   },
   {
     "title": "33. Mock Projects",
-    "url": "chapter-33/"
+    "url": "interview-portfolio/chapter-33/"
   },
   {
     "title": "Take-Home & Live-Coding Exercises",
-    "url": "take-home-and-live-coding-exercises/"
+    "url": "interview-portfolio/take-home-and-live-coding-exercises/"
   },
   {
     "title": "34. Resume & GitHub Optimization",
-    "url": "chapter-34/"
+    "url": "interview-portfolio/chapter-34/"
   },
   {
     "title": "Validating Your Skill Level",
-    "url": "validating-your-skill-level/"
+    "url": "interview-portfolio/validating-your-skill-level/"
   },
   {
     "title": "35. Final Review \u2014 30-Day Countdown",
-    "url": "chapter-35/"
+    "url": "interview-portfolio/chapter-35/"
   }
 ]

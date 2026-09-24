@@ -11,8 +11,8 @@ LangServe](langchain-ecosystem.md), or multi-agent coordination as its own
 topic (framework-agnostic patterns, with Autogen as a concrete example),
 covered in [Multi-Agent Systems](multi-agent-systems.md). For general
 FastAPI patterns that apply regardless of what's behind the endpoint,
-see [Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
-and [Performance & Production Patterns](fastapi-performance-patterns.md)
+see [Dependency Injection & Background Tasks](../programming-languages/python/fastapi-dependency-injection.md)
+and [Performance & Production Patterns](../programming-languages/python/fastapi-performance-patterns.md)
 — this page only covers what's specific to serving a LangChain agent.
 
 ## 1. Agent Types and Execution Patterns — "ReAct vs Plan-and-Execute vs a plain conversational chain — when do you pick which?"
@@ -250,8 +250,8 @@ agent with routed tools/sub-chains, see
 
 For general FastAPI patterns — dependency injection, background tasks,
 connection pooling, `asyncio.gather` for concurrent calls — see
-[Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
-and [Performance & Production Patterns](fastapi-performance-patterns.md);
+[Dependency Injection & Background Tasks](../programming-languages/python/fastapi-dependency-injection.md)
+and [Performance & Production Patterns](../programming-languages/python/fastapi-performance-patterns.md);
 none of that is specific to serving an agent. What
 *is* agent-specific is what you stream and how a stateful conversation
 maps onto stateless HTTP/WebSocket connections.

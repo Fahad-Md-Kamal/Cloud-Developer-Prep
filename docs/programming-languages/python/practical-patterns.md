@@ -176,5 +176,5 @@ def add_item(item, items=None):
   mutable object).
 
 !!! note "Session note"
-    Covered in the [session log](session-log.md#2026-09-22) — answered
+    Covered in the [session log](../../session-log.md#2026-09-22) — answered
     correctly, including the fix, after a nudge on the "why."

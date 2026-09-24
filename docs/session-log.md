@@ -37,7 +37,7 @@ object, not "reused per call." Fix (the `None` sentinel idiom) required a
 prompt but was then given correctly.
 
 **Status:** ✅ solid after one nudge. Full writeup:
-[Practical Patterns](practical-patterns.md#practice-notes-from-live-session).
+[Practical Patterns](programming-languages/python/practical-patterns.md#practice-notes-from-live-session).
 
 ### Q2 — N+1 queries / `select_related` vs `prefetch_related` (Django ORM)
 
@@ -58,7 +58,7 @@ relations. Correct fix:
 **Status:** ⚠️ needs another rep — N+1 diagnosis is solid, but
 `select_related`/`prefetch_related` choice needs to become automatic, not
 a "which one was it again" pause under interview pressure. Full writeup:
-[Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session).
+[Django ORM Query Cheat Sheet](programming-languages/python/django-orm.md#practice-notes-from-live-session).
 
 ### Q3 — Rank within a group / window functions (SQL)
 
@@ -82,7 +82,7 @@ differences.
 **Status:** ❌ gap — window functions are not yet solid. This was called
 out ahead of time as "common in senior-level tests," so it's a priority
 for more reps before the real interview, not just a one-off review. Full
-writeup: [PostgreSQL for Scale](postgresql-for-scale.md#worked-example-rank-within-a-group-window-functions).
+writeup: [PostgreSQL for Scale](data-and-engineering/postgresql-for-scale.md#worked-example-rank-within-a-group-window-functions).
 
 ### Q4 — Practice sandbox problem 1: warm-up join (SQL)
 
@@ -115,5 +115,5 @@ error message to lean on there.
 
 *Next session: continue through the practice sandbox problems (2–8:
 aggregates, HAVING, then window functions), then AWS gap topics
-(ECS/Aurora/DynamoDB — [AWS Services Quick Reference](aws-services.md))
+(ECS/Aurora/DynamoDB — [AWS Services Quick Reference](cloud-devops/aws-services.md))
 and a full mock run-through.*

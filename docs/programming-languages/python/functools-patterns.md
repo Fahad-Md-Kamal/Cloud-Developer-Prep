@@ -42,7 +42,7 @@ def expensive_computation(text: str) -> dict:
   effects — don't force it to do a job it wasn't built for.
 - Reach for a real cache (Redis, a custom TTL wrapper) instead. This
   is the same territory as
-  [LLM Response Caching](llm-response-caching.md), just applied at
+  [LLM Response Caching](../../ai-llm/llm-response-caching.md), just applied at
   function-call scale instead of API-response scale.
 
 | Pros | Cons / Trade-offs |

@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
 - "How would you add caching so re-selecting the same city within a
   minute doesn't re-hit the API?" — same TTL-based pattern as
-  [LLM Response Caching §4](llm-response-caching.md#4-is-every-llm-response-worth-caching-and-how-do-you-pick-a-ttl),
+  [LLM Response Caching §4](../ai-llm/llm-response-caching.md#4-is-every-llm-response-worth-caching-and-how-do-you-pick-a-ttl),
   just at CLI scale instead of an API-response scale.
 - "How would you test this without making real network calls in CI?"
   — the `WeatherClient(session=...)` constructor above exists

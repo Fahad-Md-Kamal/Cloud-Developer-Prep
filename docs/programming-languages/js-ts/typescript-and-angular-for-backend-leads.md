@@ -8,7 +8,7 @@ Enough Angular and TypeScript to design APIs frontend teams can
 actually move fast against, and to hold a credible conversation about
 enterprise frontend architecture — not a claim of frontend
 specialization. For framework-agnostic frontend fundamentals and
-React, see [Frontend Fundamentals](frontend-fundamentals.md).
+React, see [Frontend Fundamentals](../../frontend-and-tooling/frontend-fundamentals.md).
 
 ## Why Backend Engineers Need This
 

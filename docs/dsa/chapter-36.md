@@ -226,19 +226,19 @@ For maximum preparation efficiency:
 
 This section breaks down the Blind 75 and Grind 75 lists into their core underlying patterns. For each pattern, we will discuss the core idea, identify key problem indicators, and walk through canonical examples.
 
-- [Arrays & Hashing](chapter-36/2-1-arrays-and-hashing.md)
-- [Two Pointers](chapter-36/2-2-two-pointers.md)
-- [Sliding Window](chapter-36/2-3-sliding-window.md)
-- [Stack](chapter-36/2-4-stack.md)
-- [Binary Search](chapter-36/2-5-binary-search.md)
-- [Linked List](chapter-36/2-6-linked-list.md)
-- [Trees](chapter-36/2-7-trees.md)
-- [Tries / Prefix Tree](chapter-36/2-8-tries-prefix-tree.md)
-- [Heap / Priority Queue](chapter-36/2-9-heap-priority-queue.md)
-- [Backtracking](chapter-36/2-10-backtracking.md)
-- [Graphs](chapter-36/2-11-graphs.md)
-- [Dynamic Programming](chapter-36/2-12-dynamic-programming.md)
-- [Design](chapter-36/2-13-design.md)
+- [Arrays & Hashing](2-1-arrays-and-hashing.md)
+- [Two Pointers](2-2-two-pointers.md)
+- [Sliding Window](2-3-sliding-window.md)
+- [Stack](2-4-stack.md)
+- [Binary Search](2-5-binary-search.md)
+- [Linked List](2-6-linked-list.md)
+- [Trees](2-7-trees.md)
+- [Tries / Prefix Tree](2-8-tries-prefix-tree.md)
+- [Heap / Priority Queue](2-9-heap-priority-queue.md)
+- [Backtracking](2-10-backtracking.md)
+- [Graphs](2-11-graphs.md)
+- [Dynamic Programming](2-12-dynamic-programming.md)
+- [Design](2-13-design.md)
 
 ---
 

@@ -171,7 +171,7 @@ case <-time.After(1 * time.Second):
 - Goroutines are lighter-weight than OS threads, and the runtime
   schedules them across available cores — real parallelism, not just
   concurrency on one thread the way Python's asyncio is (see
-  [Concurrency & AsyncIO](concurrency-and-asyncio.md) for what the GIL
+  [Concurrency & AsyncIO](../python/concurrency-and-asyncio.md) for what the GIL
   specifically restricts in Python).
 - Channels are the idiomatic way goroutines communicate — "don't
   communicate by sharing memory, share memory by communicating" is

@@ -89,7 +89,7 @@ word, roughly ordered by how credible/effort-worthy each option is.
 **Answer:**
 
 - Some hiring platforms (e.g. Alva Labs, used in the Svea Solar JD
-  covered in [Choosing a Python Web Framework](choosing-a-python-web-framework.md))
+  covered in [Choosing a Python Web Framework](../programming-languages/python/choosing-a-python-web-framework.md))
   return a structured or percentile score as part of the assessment —
   a retroactive third-party rating, even if it arrives after the
   process is already over.

@@ -18,7 +18,7 @@ each round belongs to.
 
 !!! warning "Private content — repo must stay private"
     Contains real company names (Lawstronaut, Optimizely, Cefalo). The
-    [Meeting-Intelligence System Case Study](meeting-intelligence-case-study.md)
+    [Meeting-Intelligence System Case Study](reference-case-studies/meeting-intelligence-case-study.md)
     has been anonymized (no client/project name, no domain-identifying
     details) but the repo should still stay private.
 
@@ -67,12 +67,12 @@ building on the previous one.
 Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
-- Mutable default arguments → [Practical Patterns](practical-patterns.md#practice-notes-from-live-session)
-- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](django-orm.md#practice-notes-from-live-session)
-- SQL window functions + practice sandbox → [PostgreSQL for Scale](postgresql-for-scale.md#practice-notes-from-live-session)
-- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](aws-services.md)
-- Project stories for system-design questions → [Personal Project Stories](project-stories.md)
-- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](django-drf.md)
+- Mutable default arguments → [Practical Patterns](programming-languages/python/practical-patterns.md#practice-notes-from-live-session)
+- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](programming-languages/python/django-orm.md#practice-notes-from-live-session)
+- SQL window functions + practice sandbox → [PostgreSQL for Scale](data-and-engineering/postgresql-for-scale.md#practice-notes-from-live-session)
+- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](cloud-devops/aws-services.md)
+- Project stories for system-design questions → [Personal Project Stories](reference-case-studies/project-stories.md)
+- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](programming-languages/python/django-drf.md)
 
 ## Contents
 
@@ -86,16 +86,16 @@ framework sits underneath. Python and its frameworks now live in their
 own section below.
 
 - Chapter 2: Clean Code, Design Patterns, and SOLID Principles
-    - [SOLID Principles](solid-principles.md)
-    - [Design Patterns](design-patterns.md)
-    - [Clean Code Practices](clean-code-practices.md)
-    - [Refactoring Legacy Systems](refactoring-legacy-systems.md)
+    - [SOLID Principles](core-engineering-foundations/solid-principles.md)
+    - [Design Patterns](core-engineering-foundations/design-patterns.md)
+    - [Clean Code Practices](core-engineering-foundations/clean-code-practices.md)
+    - [Refactoring Legacy Systems](core-engineering-foundations/refactoring-legacy-systems.md)
 - Chapter 3: REST API Design
-    - [API Design Fundamentals](api-design-fundamentals.md)
-    - [API Production Readiness](api-production-readiness.md)
-    - [API Paradigms & Patterns](api-paradigms-and-patterns.md)
-- [Chapter 4: Authentication, Authorization, and Security](chapter-4.md)
-- [Chapter 5: Performance Profiling, Optimization, and Caching](chapter-5.md)
+    - [API Design Fundamentals](core-engineering-foundations/api-design-fundamentals.md)
+    - [API Production Readiness](core-engineering-foundations/api-production-readiness.md)
+    - [API Paradigms & Patterns](core-engineering-foundations/api-paradigms-and-patterns.md)
+- [Chapter 4: Authentication, Authorization, and Security](core-engineering-foundations/chapter-4.md)
+- [Chapter 5: Performance Profiling, Optimization, and Caching](core-engineering-foundations/chapter-5.md)
 
 ### Programming Languages
 
@@ -107,34 +107,34 @@ framework added here later (web, desktop, or otherwise), not just
 Django/FastAPI.
 
 - Chapter 1: Modern Python Mastery
-    - [Typing & Generics](typing-and-generics.md)
-    - [Concurrency & AsyncIO](concurrency-and-asyncio.md)
-    - [Memory & Caching](memory-and-caching.md)
-    - [Practical Patterns](practical-patterns.md)
-    - [Python Internals & Advanced OOP](python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
-- [Choosing a Python Web Framework](choosing-a-python-web-framework.md) —
+    - [Typing & Generics](programming-languages/python/typing-and-generics.md)
+    - [Concurrency & AsyncIO](programming-languages/python/concurrency-and-asyncio.md)
+    - [Memory & Caching](programming-languages/python/memory-and-caching.md)
+    - [Practical Patterns](programming-languages/python/practical-patterns.md)
+    - [Python Internals & Advanced OOP](programming-languages/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
+- [Choosing a Python Web Framework](programming-languages/python/choosing-a-python-web-framework.md) —
   Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
 - **Django & DRF**
-    - [Django ORM Query Cheat Sheet](django-orm.md)
-    - [Django & DRF Deep Dive](django-drf.md) — serializers, permissions,
+    - [Django ORM Query Cheat Sheet](programming-languages/python/django-orm.md)
+    - [Django & DRF Deep Dive](programming-languages/python/django-drf.md) — serializers, permissions,
       auth, signals, migrations, testing, caching
 - **FastAPI**
-    - [Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
-    - [Performance & Production Patterns](fastapi-performance-patterns.md)
+    - [Dependency Injection & Background Tasks](programming-languages/python/fastapi-dependency-injection.md)
+    - [Performance & Production Patterns](programming-languages/python/fastapi-performance-patterns.md)
 - Chapter 38: Python Standard Library
-    - [Pathlib & File Operations](pathlib-and-file-operations.md)
-    - [Collections & Itertools](collections-and-itertools.md)
-    - [Configuration & CLI Tools](config-and-cli-tools.md)
-    - [Functools: Caching & Decorators](functools-patterns.md)
-    - [Regex & Text Processing](regex-and-text-processing.md)
+    - [Pathlib & File Operations](programming-languages/python/pathlib-and-file-operations.md)
+    - [Collections & Itertools](programming-languages/python/collections-and-itertools.md)
+    - [Configuration & CLI Tools](programming-languages/python/config-and-cli-tools.md)
+    - [Functools: Caching & Decorators](programming-languages/python/functools-patterns.md)
+    - [Regex & Text Processing](programming-languages/python/regex-and-text-processing.md)
 
 **Go & Frameworks**
 
-- [Go for Python Developers](go-for-python-developers.md)
+- [Go for Python Developers](programming-languages/go/go-for-python-developers.md)
 
 **JS/TS**
 
-- [TypeScript & Angular for Backend Leads](typescript-and-angular-for-backend-leads.md)
+- [TypeScript & Angular for Backend Leads](programming-languages/js-ts/typescript-and-angular-for-backend-leads.md)
 
 ### Frontend & Developer Tooling
 
@@ -142,10 +142,10 @@ Gaps flagged from the Svea Solar Senior Fullstack Engineer (Django) JD
 (2026-09-23) — placeholders with the topics to cover, not yet given
 the full Q&A treatment.
 
-- [Frontend Fundamentals](frontend-fundamentals.md)
-- [CSS & Styling Frameworks](css-styling-frameworks.md)
-- [CMS Platforms](cms-platforms.md)
-- [AI-Assisted Development Tools & Workflows](ai-assisted-development.md)
+- [Frontend Fundamentals](frontend-and-tooling/frontend-fundamentals.md)
+- [CSS & Styling Frameworks](frontend-and-tooling/css-styling-frameworks.md)
+- [CMS Platforms](frontend-and-tooling/cms-platforms.md)
+- [AI-Assisted Development Tools & Workflows](frontend-and-tooling/ai-assisted-development.md)
 
 ### Data Structures & Algorithms Mastery (Chapter 36)
 
@@ -153,28 +153,28 @@ A parallel-track universal skill, not backend-architecture-specific —
 placed early since it's usually practiced alongside everything else,
 not saved for last.
 
-- [Chapter 36: Blind 75, Grind 75 & NeetCode 150](chapter-36.md)
-    - [Arrays & Hashing](chapter-36/2-1-arrays-and-hashing.md)
-    - [Two Pointers](chapter-36/2-2-two-pointers.md)
-    - [Sliding Window](chapter-36/2-3-sliding-window.md)
-    - [Stack](chapter-36/2-4-stack.md)
-    - [Binary Search](chapter-36/2-5-binary-search.md)
-    - [Linked List](chapter-36/2-6-linked-list.md)
-    - [Trees](chapter-36/2-7-trees.md)
-    - [Tries / Prefix Tree](chapter-36/2-8-tries-prefix-tree.md)
-    - [Heap / Priority Queue](chapter-36/2-9-heap-priority-queue.md)
-    - [Backtracking](chapter-36/2-10-backtracking.md)
-    - [Graphs](chapter-36/2-11-graphs.md)
-    - [Dynamic Programming](chapter-36/2-12-dynamic-programming.md)
-    - [Design](chapter-36/2-13-design.md)
+- [Chapter 36: Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
+    - [Arrays & Hashing](dsa/2-1-arrays-and-hashing.md)
+    - [Two Pointers](dsa/2-2-two-pointers.md)
+    - [Sliding Window](dsa/2-3-sliding-window.md)
+    - [Stack](dsa/2-4-stack.md)
+    - [Binary Search](dsa/2-5-binary-search.md)
+    - [Linked List](dsa/2-6-linked-list.md)
+    - [Trees](dsa/2-7-trees.md)
+    - [Tries / Prefix Tree](dsa/2-8-tries-prefix-tree.md)
+    - [Heap / Priority Queue](dsa/2-9-heap-priority-queue.md)
+    - [Backtracking](dsa/2-10-backtracking.md)
+    - [Graphs](dsa/2-11-graphs.md)
+    - [Dynamic Programming](dsa/2-12-dynamic-programming.md)
+    - [Design](dsa/2-13-design.md)
 
 ### Backend & Distributed Systems Architecture (Chapters 6–10)
 
-- [Chapter 6: Microservices Design with FastAPI & Message Queues](chapter-6.md)
-- [Chapter 7: Distributed System Design](chapter-7.md)
-- [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](chapter-9.md)
-- [Kong API Gateway](kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
-- [Chapter 10: Observability with Prometheus & Grafana](chapter-10.md)
+- [Chapter 6: Microservices Design with FastAPI & Message Queues](backend-architecture/chapter-6.md)
+- [Chapter 7: Distributed System Design](backend-architecture/chapter-7.md)
+- [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](backend-architecture/chapter-9.md)
+- [Kong API Gateway](backend-architecture/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
+- [Chapter 10: Observability with Prometheus & Grafana](backend-architecture/chapter-10.md)
 
 ### Data & Engineering
 
@@ -185,22 +185,22 @@ preprocessing — instead of scattered across three disconnected
 sections.
 
 - Chapter 8: Database Architecture for Scale
-    - [PostgreSQL for Scale](postgresql-for-scale.md)
-    - [MongoDB for Scale](mongodb-for-scale.md)
-    - [Elasticsearch Architecture](elasticsearch-architecture.md)
-    - [Cross-Store Architecture Patterns](cross-store-architecture-patterns.md)
-- [Database Security & Breach Prevention](database-security-and-breach-prevention.md) —
+    - [PostgreSQL for Scale](data-and-engineering/postgresql-for-scale.md)
+    - [MongoDB for Scale](data-and-engineering/mongodb-for-scale.md)
+    - [Elasticsearch Architecture](data-and-engineering/elasticsearch-architecture.md)
+    - [Cross-Store Architecture Patterns](data-and-engineering/cross-store-architecture-patterns.md)
+- [Database Security & Breach Prevention](data-and-engineering/database-security-and-breach-prevention.md) —
   network isolation, PII encryption, secure backup handling
-- [SQL & Relational Data Modeling](sql-data-modeling-fundamentals.md) —
+- [SQL & Relational Data Modeling](data-and-engineering/sql-data-modeling-fundamentals.md) —
   normalization, keys, JOINs, denormalization, DB-level constraints
 
 **Web Crawling & Pipelines**
 
-- [Chapter 11: Web Crawling at Scale](chapter-11.md)
-- [Chapter 12: HTML Parsing and Data Pipelines](chapter-12.md)
-- [Chapter 13: Distributed Crawling Architecture](chapter-13.md)
-- [Chapter 14: Data Cleaning, Normalization, and Deduplication](chapter-14.md)
-- [Chapter 15: Building and Managing Large MongoDB Clusters](chapter-15.md)
+- [Chapter 11: Web Crawling at Scale](data-and-engineering/chapter-11.md)
+- [Chapter 12: HTML Parsing and Data Pipelines](data-and-engineering/chapter-12.md)
+- [Chapter 13: Distributed Crawling Architecture](data-and-engineering/chapter-13.md)
+- [Chapter 14: Data Cleaning, Normalization, and Deduplication](data-and-engineering/chapter-14.md)
+- [Chapter 15: Building and Managing Large MongoDB Clusters](data-and-engineering/chapter-15.md)
 
 **Big Data & Distributed Compute**
 
@@ -208,49 +208,49 @@ Added from the Intellias Staff Healthcare Data Engineer JD, but
 general-purpose — not healthcare-specific, reusable for any future
 big-data-scale role.
 
-- [Apache Spark & PySpark](spark-pyspark.md)
-- [Databricks & Delta Lake](databricks-delta-lake.md)
+- [Apache Spark & PySpark](data-and-engineering/spark-pyspark.md)
+- [Databricks & Delta Lake](data-and-engineering/databricks-delta-lake.md)
 
 **Data Preprocessing**
 
-- [Data Preprocessing: Pandas & NumPy](data-preprocessing-pandas-numpy.md)
-- [Large-Scale Report Generation](large-scale-report-generation.md) —
+- [Data Preprocessing: Pandas & NumPy](data-and-engineering/data-preprocessing-pandas-numpy.md)
+- [Large-Scale Report Generation](data-and-engineering/large-scale-report-generation.md) —
   memory-efficient PDF/XLSX export from 10+GB source data
 
 ### Cloud, DevOps & Infrastructure (Chapters 16–20)
 
-- [Chapter 16: Docker and Docker Compose for Production](chapter-16.md)
-- [Chapter 17: Kubernetes & Container Orchestration](chapter-17.md)
-- [Chapter 18: Infrastructure as Code with Terraform](chapter-18.md)
-- [Chapter 19: CI/CD Pipelines](chapter-19.md)
-- [Chapter 20: Observability, Monitoring, and On-Call Readiness](chapter-20.md)
-- [AWS Services Quick Reference](aws-services.md) — current job-search
+- [Chapter 16: Docker and Docker Compose for Production](cloud-devops/chapter-16.md)
+- [Chapter 17: Kubernetes & Container Orchestration](cloud-devops/chapter-17.md)
+- [Chapter 18: Infrastructure as Code with Terraform](cloud-devops/chapter-18.md)
+- [Chapter 19: CI/CD Pipelines](cloud-devops/chapter-19.md)
+- [Chapter 20: Observability, Monitoring, and On-Call Readiness](cloud-devops/chapter-20.md)
+- [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 
 ### AI & LLM System Integration
 
 **LLM APIs & Gateway**
 
-- [LLM APIs & Providers](llm-apis-and-providers.md) — provider selection, auth, cost, async clients
-- [LLM Gateway & Multi-Provider Integration](llm-gateway-multi-provider.md) — LiteLLM, provider fallback
-- [LLM Response Caching](llm-response-caching.md) — semantic & hybrid caching
+- [LLM APIs & Providers](ai-llm/llm-apis-and-providers.md) — provider selection, auth, cost, async clients
+- [LLM Gateway & Multi-Provider Integration](ai-llm/llm-gateway-multi-provider.md) — LiteLLM, provider fallback
+- [LLM Response Caching](ai-llm/llm-response-caching.md) — semantic & hybrid caching
 
 **Agents & Prompting**
 
-- [Prompt Engineering & Context Management](prompt-engineering.md)
-- [Agentic AI Fundamentals](agentic-ai-fundamentals.md) — the agent loop, and how to actually build agents with API access
-- [Multi-Agent Systems](multi-agent-systems.md) — coordination topologies, debugging
-- [Autogen: Multi-Agent Orchestration](autogen-orchestration.md)
+- [Prompt Engineering & Context Management](ai-llm/prompt-engineering.md)
+- [Agentic AI Fundamentals](ai-llm/agentic-ai-fundamentals.md) — the agent loop, and how to actually build agents with API access
+- [Multi-Agent Systems](ai-llm/multi-agent-systems.md) — coordination topologies, debugging
+- [Autogen: Multi-Agent Orchestration](ai-llm/autogen-orchestration.md)
 
 **RAG & Retrieval**
 
-- [Embeddings & Semantic Search](embeddings-semantic-search.md)
-- [RAG & Vector Databases](rag-and-vector-databases.md)
+- [Embeddings & Semantic Search](ai-llm/embeddings-semantic-search.md)
+- [RAG & Vector Databases](ai-llm/rag-and-vector-databases.md)
 
 **LangChain**
 
-- [LangChain Agents](langchain-agents.md) — agent types, tools, memory, LCEL
-- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](langchain-ecosystem.md) — plus LangCache
+- [LangChain Agents](ai-llm/langchain-agents.md) — agent types, tools, memory, LCEL
+- [LangChain Ecosystem: LangGraph, LangSmith, LangServe](ai-llm/langchain-ecosystem.md) — plus LangCache
 
 ### Domain-Specific Verticals
 
@@ -263,28 +263,28 @@ into whichever section it was added from.
 The genuinely healthcare-specific content from the Intellias JD — a
 real domain gap, not yet an active application track.
 
-- [FHIR R4](fhir-r4.md)
-- [HL7 v2.x & C-CDA](hl7-ccda.md)
-- [Healthcare Terminology](healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm
-- [Patient Matching & MPI](patient-matching-mpi.md)
-- [HIPAA & PHI-Safe Engineering](hipaa-phi-safety.md)
+- [FHIR R4](domain-verticals/healthcare/fhir-r4.md)
+- [HL7 v2.x & C-CDA](domain-verticals/healthcare/hl7-ccda.md)
+- [Healthcare Terminology](domain-verticals/healthcare/healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm
+- [Patient Matching & MPI](domain-verticals/healthcare/patient-matching-mpi.md)
+- [HIPAA & PHI-Safe Engineering](domain-verticals/healthcare/hipaa-phi-safety.md)
 
 ### Architecture & Leadership (Chapters 26–30)
 
-- [Chapter 26: System Design Interviews](chapter-26.md)
-- [Chapter 27: Event-Driven Architectures and Async Workflows](chapter-27.md)
-- [Chapter 28: Building for Resilience](chapter-28.md)
-- [Chapter 29: Leadership for Engineers](chapter-29.md)
-- [Chapter 30: Crafting the Staff Engineer Mindset](chapter-30.md)
+- [Chapter 26: System Design Interviews](architecture-leadership/chapter-26.md)
+- [Chapter 27: Event-Driven Architectures and Async Workflows](architecture-leadership/chapter-27.md)
+- [Chapter 28: Building for Resilience](architecture-leadership/chapter-28.md)
+- [Chapter 29: Leadership for Engineers](architecture-leadership/chapter-29.md)
+- [Chapter 30: Crafting the Staff Engineer Mindset](architecture-leadership/chapter-30.md)
 
 ### Reference & Case Studies
 
 Behavioral/system-design source material — a distinct category from
 the skill curriculum above.
 
-- [Personal Project Stories](project-stories.md) — real project STAR stories
+- [Personal Project Stories](reference-case-studies/project-stories.md) — real project STAR stories
   for system-design/behavioral questions
-- [Meeting-Intelligence System Case Study](meeting-intelligence-case-study.md)
+- [Meeting-Intelligence System Case Study](reference-case-studies/meeting-intelligence-case-study.md)
 
 ### Interview & Portfolio Mastery (Chapters 31–35)
 
@@ -293,19 +293,19 @@ final countdown review. Comes last: it's what you do right before the
 interview, after the technical material above and the project-story
 material it draws on for behavioral answers.
 
-- [Chapter 31: Behavioral Interview Prep](chapter-31.md)
-- [Chapter 32: Technical Interview Deep Dives](chapter-32.md)
-- [Chapter 33: Mock Projects](chapter-33.md)
-- [Take-Home & Live-Coding Exercises](take-home-and-live-coding-exercises.md) —
+- [Chapter 31: Behavioral Interview Prep](interview-portfolio/chapter-31.md)
+- [Chapter 32: Technical Interview Deep Dives](interview-portfolio/chapter-32.md)
+- [Chapter 33: Mock Projects](interview-portfolio/chapter-33.md)
+- [Take-Home & Live-Coding Exercises](interview-portfolio/take-home-and-live-coding-exercises.md) —
   real, scoped coding tasks recalled from interviews, e.g. a weather CLI
-- [Chapter 34: Resume, GitHub, and Case Study Optimization](chapter-34.md)
-- [Validating Your Skill Level](validating-your-skill-level.md) —
+- [Chapter 34: Resume, GitHub, and Case Study Optimization](interview-portfolio/chapter-34.md)
+- [Validating Your Skill Level](interview-portfolio/validating-your-skill-level.md) —
   backing up a self-rated "expert" claim with something external
-- [Chapter 35: Final Review — The 30-Day Countdown](chapter-35.md)
+- [Chapter 35: Final Review — The 30-Day Countdown](interview-portfolio/chapter-35.md)
 
 ## A note on names
 
-[Personal Project Stories](project-stories.md) uses generic project labels
+[Personal Project Stories](reference-case-studies/project-stories.md) uses generic project labels
 ("geospatial data platform client", "cybersecurity risk platform
 client") left over from when this content lived on a public site. The
 repo is private now, so these could be restored to the real project

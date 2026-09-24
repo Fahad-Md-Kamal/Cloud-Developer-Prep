@@ -8,7 +8,7 @@ Indexing, query diagnosis, partitioning, replication, and JSONB — the
 PostgreSQL questions that come up cold in a senior interview, each
 with the trade-offs named explicitly. For pushing computation into
 SQL from Django specifically (query count, `F()` expressions, row
-locking), see [Django ORM Query Cheat Sheet](django-orm.md).
+locking), see [Django ORM Query Cheat Sheet](../programming-languages/python/django-orm.md).
 
 ## 1. "Walk me through choosing an index — B-tree vs. GIN vs. GiST."
 
@@ -132,7 +132,7 @@ SELECT * FROM orders WHERE metadata @> '{"source": "mobile_app"}';
   both trade real operational complexity for real scaling headroom.
 - Pushing computation into SQL instead of Python, fixing N+1, and
   scoping row locks correctly is Django-ORM-specific — see
-  [Django ORM Query Cheat Sheet](django-orm.md) for that.
+  [Django ORM Query Cheat Sheet](../programming-languages/python/django-orm.md) for that.
 
 ---
 
@@ -231,7 +231,7 @@ inside the `OVER (...)` clause then ranks rows within each partition.
 | `DENSE_RANK()` | same rank | **doesn't skip** (1,1,2,3) |
 
 !!! note "Session note"
-    Covered in the [session log](session-log.md#2026-09-22) — first
+    Covered in the [session log](../session-log.md#2026-09-22) — first
     attempt used `GROUP BY` (wrong tool: collapses rows instead of
     ranking within them) with no join and no window function. Flagged
     for another rep before the real interview.

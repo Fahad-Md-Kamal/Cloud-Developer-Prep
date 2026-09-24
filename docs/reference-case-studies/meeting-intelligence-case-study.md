@@ -484,9 +484,9 @@ async def process_meeting(file_id: str):
 
 This case study demonstrates how advanced AI systems can be successfully integrated into enterprise environments to create significant business value. It showcases practical applications of concepts covered throughout this book, including:
 
-- **Multi-modal AI Architecture** ([AI & LLM System Integration](index.md#ai-llm-system-integration))
+- **Multi-modal AI Architecture** ([AI & LLM System Integration](../index.md#ai-llm-system-integration))
 - **Microservices Design** (Chapters 6-10)
-- **FastAPI Development** ([FastAPI](fastapi-dependency-injection.md))
+- **FastAPI Development** ([FastAPI](../programming-languages/python/fastapi-dependency-injection.md))
 - **Security Implementation** (Chapter 4)
 - **Performance Optimization** (Chapter 5)
 - **System Design at Scale** (Chapters 26-30)

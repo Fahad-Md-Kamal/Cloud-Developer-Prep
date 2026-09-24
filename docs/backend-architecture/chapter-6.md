@@ -7,11 +7,11 @@ title: "Chapter 6: Microservices Design with FastAPI & Message Queues (Kafka/Red
 Service boundaries, inter-service communication, and the messaging
 patterns (Kafka, Redis) that hold a microservices system together — as
 questions you should be able to answer cold. FastAPI's own mechanics live in
-[Dependency Injection & Background Tasks](fastapi-dependency-injection.md)
-and [Performance & Production Patterns](fastapi-performance-patterns.md)
+[Dependency Injection & Background Tasks](../programming-languages/python/fastapi-dependency-injection.md)
+and [Performance & Production Patterns](../programming-languages/python/fastapi-performance-patterns.md)
 and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
-[API Design Fundamentals](api-design-fundamentals.md). This chapter is about the architecture
+[API Design Fundamentals](../core-engineering-foundations/api-design-fundamentals.md). This chapter is about the architecture
 *around* the services, not the framework inside any one of them.
 
 ---
@@ -111,7 +111,7 @@ Operational weight. Kafka needs partitioning, consumer-group, and
 offset-management decisions Redis doesn't — reaching for it to send one
 background job (send this email) is solving a problem you don't have
 yet. For a single-process, no-fan-out background job, plain Celery
-([Practical Patterns §3](practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+([Practical Patterns §3](../programming-languages/python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
 is often enough on its own.
 
 ### 4. Schema Evolution for Long-Lived Event Streams
@@ -135,7 +135,7 @@ removing a field is a breaking change; it needs a new event type or
 version field, with both old and new shapes coexisting until every
 consumer has migrated, then a deprecation timeline for the old shape —
 the same dual-write discipline as a
-[database migration](refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
+[database migration](../core-engineering-foundations/refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
 applied to a message format instead of a table.
 
 ---

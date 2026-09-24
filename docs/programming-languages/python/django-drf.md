@@ -10,7 +10,7 @@ optimization and ORM patterns (`select_related`, `F()`, `Subquery`,
 window functions), see the
 [Django ORM Query Cheat Sheet](django-orm.md). For general REST API
 design principles and versioning, see
-[API Design Fundamentals](api-design-fundamentals.md); for the FastAPI
+[API Design Fundamentals](../../core-engineering-foundations/api-design-fundamentals.md); for the FastAPI
 comparison, see [FastAPI](fastapi-dependency-injection.md).
 
 ---

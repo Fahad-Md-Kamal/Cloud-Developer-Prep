@@ -9,7 +9,7 @@ Engineer (Django) JD gap analysis (2026-09-23) — the JD calls this out
 twice ("we embrace AI-assisted development," bonus point for
 "curious about AI-assisted development tools and workflows"). This is
 distinct from the existing
-[AI & LLM System Integration](index.md#ai-llm-system-integration)
+[AI & LLM System Integration](../index.md#ai-llm-system-integration)
 section, which is about *building* AI-powered products — this is
 about *using* AI coding assistants (Copilot, Cursor, Claude Code) as
 your own development practice. Nothing on the site currently covers

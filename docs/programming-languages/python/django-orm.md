@@ -4,7 +4,7 @@ title: "Django ORM Query Cheat Sheet for Senior Engineers"
 
 # Django ORM Query Cheat Sheet for Senior Engineers
 
-This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops. For the PostgreSQL-side concepts behind these patterns — index selection, reading `EXPLAIN`, partitioning — see [PostgreSQL for Scale](postgresql-for-scale.md).
+This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops. For the PostgreSQL-side concepts behind these patterns — index selection, reading `EXPLAIN`, partitioning — see [PostgreSQL for Scale](../../data-and-engineering/postgresql-for-scale.md).
 
 ## 1. Query Loading Patterns
 
@@ -353,6 +353,6 @@ without ever going "backwards" through a `ForeignKey`/`M2M`, use
 FK, M2M), use `prefetch_related`.
 
 !!! note "Session note"
-    Covered in the [session log](session-log.md#2026-09-22) — N+1
+    Covered in the [session log](../../session-log.md#2026-09-22) — N+1
     correctly diagnosed; initial fix used `prefetch_related`, corrected to
     `select_related` after discussion of the to-one/to-many distinction.

@@ -67,7 +67,7 @@ find the step that produced the bad output" instead of guessing.
 **Where this actually shows up:** the JD-level requirement "monitor
 backend performance, debug production issues, improve observability"
 applied specifically to LLM/agent systems — traditional APM tools
-(Prometheus/Grafana, see [Chapter 10](chapter-10.md)) show you latency
+(Prometheus/Grafana, see [Chapter 10](../backend-architecture/chapter-10.md)) show you latency
 and error rates, but not *why* an agent produced a specific wrong
 answer. LangSmith fills that gap specifically for LLM call chains.
 
@@ -103,7 +103,7 @@ endpoint, non-standard response shaping, or integrating the chain as
 just one piece of a larger endpoint that also does other work. LangServe
 is fastest when the chain *is* the endpoint; once the endpoint needs to
 do meaningfully more than invoke the chain, plain FastAPI (see
-[FastAPI](fastapi-dependency-injection.md)) gives more control.
+[FastAPI](../programming-languages/python/fastapi-dependency-injection.md)) gives more control.
 
 | Pros | Cons / Trade-offs |
 |---|---|
