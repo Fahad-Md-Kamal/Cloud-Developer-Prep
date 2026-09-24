@@ -302,3 +302,14 @@ module "order_service" {
     `payments-service`, is a second `module` block with different
     values for those five inputs, not a second copy of the
     task-definition JSON.
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/day02-modules/` — the network/security/
+  compute/loadbalancing module split referenced throughout this page
+- `code_samples/terraform/ecs-alb/` — ALB, listeners and target group
+  in front of an ECS service
+- `code_samples/terraform/ecs-cluster-service/` — the reusable ECS
+  service module itself

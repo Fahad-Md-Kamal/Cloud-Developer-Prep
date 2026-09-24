@@ -400,6 +400,13 @@ were left untouched and still showing 2 Healthy in the target group.
 Zero downtime, precisely because ECS never drains an old task until a
 new one has actually replaced it.
 
+[![ECS service deployment screen mid-failure: CannotPullContainerError, pull image manifest retried 7 times, New task launch progress 0 running/1 pending/1 remaining, Old task drain progress 0 stopped/2 remaining, Health check Targets 2 Healthy/0 Unhealthy](../images/aws-ecs-task-error.png)](../images/aws-ecs-task-error.png){ target="_blank" rel="noopener" }
+
+*`learning-app:3` can't pull its (deliberately broken) image and keeps
+retrying, while "Old task drain progress" stays at 0 stopped — the two
+`learning-app:2` tasks are untouched and still showing 2 Healthy in the
+target group.*
+
 !!! success "The circuit breaker is what ends this, one way or another"
 
     - Left alone, this deployment doesn't hang forever — the deployment
@@ -424,6 +431,13 @@ ECS, and nothing below touches them automatically:
   first. It runs service deletion, container instance deregistration (a
   no-op under Fargate, since there are no EC2 instances to deregister),
   and cluster deletion as three tracked steps in one dialog.
+
+[![Delete cluster learning-cluster confirmation dialog: Service deletion — Successfully deleted 1 service; Container instance deregistration — No container instances to deregister; Cluster deletion — Successfully deleted learning-cluster](../images/ecs-cluster-closed.png)](../images/ecs-cluster-closed.png){ target="_blank" rel="noopener" }
+
+*One "Delete cluster" click, three cascaded steps confirmed — service
+deletion, container instance deregistration (nothing to do on Fargate),
+and the cluster itself, gone in a single dialog.*
+
 - Task definition revisions cost nothing to leave behind — this step is
   pure tidiness, not a cost saver. Deleting one is a two-step process,
   since a revision can't be deleted while it's **Active**:

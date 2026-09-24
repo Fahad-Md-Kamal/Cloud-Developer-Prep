@@ -466,3 +466,15 @@ tfsec .
     (Jenkins, GitHub Actions) should run on every Terraform PR —
     running them locally is rehearsal for wiring the identical commands
     into CI, not a separate step.
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/tf-state/` — a remote S3 backend with
+  locking
+- `code_samples/terraform/tf-state-locking/` — two independent
+  projects (`project-1/`, `project-2/`) sharing one backend, to see
+  locking actually block a concurrent apply
+- `code_samples/terraform/tf-workspace/` — environment isolation via
+  `terraform workspace`

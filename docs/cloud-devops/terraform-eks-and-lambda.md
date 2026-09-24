@@ -1018,3 +1018,15 @@ resource "aws_volume_attachment" "jenkins_home" {
       Production](terraform-operating-in-production.md)) — the data
       that actually matters shouldn't share a lifecycle with the
       compute that happens to be running it this week.
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/tf-eks/` — the EKS cluster, node group, and
+  the `vpc`/`igw`/`nat`/`routes`/`subnet` networking modules underneath
+  it
+- `code_samples/terraform/tf-aws-lambda/` — the Lambda function, its
+  IAM role/policy, and the packaged deployment artifact
+- `code_samples/terraform/tf-jenkins/` — provisioning a Jenkins
+  controller with `JENKINS_HOME` on a separate EBS volume

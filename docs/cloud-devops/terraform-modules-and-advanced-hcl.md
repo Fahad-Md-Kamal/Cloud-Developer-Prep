@@ -1144,3 +1144,21 @@ resource "aws_instance" "app" {
   is often possible and stays correct automatically through future
   refactors, where a `depends_on` entry has to be remembered and kept in
   sync by hand
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/basics/count-items/`,
+  `count-for_each-map/`, `dynamic-blocks/`, `modules/` — count vs.
+  for_each, dynamic blocks, and a two-module composition
+- `code_samples/terraform/tf-depends/` — provisioners
+  (file/remote-exec) and explicit `depends_on`
+- `code_samples/terraform/tf-ssh/` — a Terraform-generated keypair
+  used by a provisioner
+- `code_samples/terraform/tf-template/` — `templatefile()` with a
+  `.tpl` policy document
+- `code_samples/terraform/tf-user-data/` — a provisioner-driven EC2
+  bootstrap
+- `code_samples/terraform/tf-null_resource/` — `null_resource` with no
+  real infrastructure attached

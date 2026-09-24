@@ -653,3 +653,13 @@ variable "app_env" {}
     - Always give a variable a `type`, even one as loose as `any` —
       that's still a deliberate choice, not an accident of leaving the
       argument out.
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/basics/` — variable/output/tfvars patterns
+  from this page (`var-file/`, `var-tfvar/`, `var-multi-tfvars/`,
+  `output/`), plus a plain `main.tf`/`variable.tf` starting point
+- `code_samples/terraform/day-1/` — a minimal first `init`/`plan`/`apply`
+  project

@@ -476,3 +476,17 @@ exam, current as of late 2026 (the prior 003 version retired January
     Given a diagram, produce working, readable, reproducible code
     inside the session, and perform state operations without notes —
     then hand over the repository.
+
+---
+
+## Code Samples
+
+- `code_samples/terraform/tf-controle-existing-instances/` — bringing
+  infrastructure created outside Terraform under its control
+- `code_samples/terraform/tf-import-existing-s3/` — importing an
+  existing S3 bucket by address
+- `code_samples/terraform/tf-datasources/` — reading existing
+  infrastructure via `data` blocks instead of managing it
+- `code_samples/terraform/tf-aws-iam-policy/` — the IAM
+  import/policy-management example referenced in this page's
+  real-name-check

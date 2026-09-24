@@ -378,3 +378,11 @@ pipeline{
 !!! success "What "point-to-point" actually means here"
 
     Starting from a bare EC2 instance with only the install script's tools on it (Java, git, Docker, Compose, Buildx, make) and an empty Jenkins workspace, this pipeline alone produces a running FastAPI app, a healthy Postgres database, and a fully populated dataset — no manual SSH step, no console click beyond pressing Build. Every stage above exists because a version without it was tried first and failed in exactly the way the earlier sections describe.
+
+---
+
+## Code Samples
+
+- `code_samples/jenkins/deployment-pipeline.gvy` — the full
+  Code/Test/Deploy/Setup-Data/Ingest declarative pipeline this page
+  walks through

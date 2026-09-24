@@ -51,6 +51,11 @@ matches what's being stored, instead of defaulting to whichever type was
 used last, is what makes the credential usable the way a step actually
 expects it.
 
+[![Jenkins Add Credentials dialog: Select a type of credential — Username with password, GitHub App, SSH Username with private key, Secret file, Secret text, Certificate](../images/credential-types.png)](../images/credential-types.png){ target="_blank" rel="noopener" }
+
+*The credential-type picker — six distinct shapes, each exposed
+differently to a pipeline step.*
+
 | Credential type | Use it for | Real-world tradeoff |
 |---|---|---|
 | Username with password | Any username+token/password pair — git over HTTPS (`github-pat`), Docker Hub (`dockerhub-creds`), most registries and REST APIs | The most universally supported type and the simplest to set up; a genuinely long-lived static secret unless the "password" field actually holds a scoped, revocable token rather than a real account password |
@@ -431,6 +436,12 @@ agent covered in this material assumes a controller that's actually
 locked down — an open one turns every trick above into something an
 anonymous visitor could also do.
 
+[![Jenkins Manage Jenkins Security page: Authentication (Security Realm, Authorization), Markup Formatter, Agents (TCP port for inbound agents), CSRF Protection, Git plugin notifyCommit access tokens, Content Security Policy, Git Host Key Verification Configuration, Sandbox Configuration](../images/jenkins-Security-management.png)](../images/jenkins-Security-management.png){ target="_blank" rel="noopener" }
+
+*The full Security page on a fresh controller — mostly still at
+Jenkins' own defaults. Every field below is covered individually
+regardless of screen size.*
+
 ### Authentication: who can even log in
 
 Security Realm
@@ -679,3 +690,10 @@ flowchart LR
 !!! success "This is what a genuinely complex, real pipeline looks like"
 
     Not one Jenkinsfile with twenty stages, but several small, single-purpose pipelines, each on a differently-scoped agent, connected by explicit `build job:` triggers instead of implicit sequential stages — the same "which comes after which" question [CI/CD & Progressive Delivery](cicd-and-progressive-delivery.md)'s end-to-end diagram answers at the level of logical steps, now answered at the level of which machine does which part, and what each one is and isn't trusted with.
+
+---
+
+## Code Samples
+
+- `code_samples/jenkins/pipeline/docker-image-push-pipeline.gvy` — the
+  alternate push-to-Docker-Hub pipeline shape covered above

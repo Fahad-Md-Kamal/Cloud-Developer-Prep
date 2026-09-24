@@ -175,6 +175,11 @@ build.
 A permanent agent node's Configure screen has these key fields (SSH launch
 method, pointed at one EC2 instance):
 
+![Jenkins node Configure screen: Name agent-one, Remote root directory /home/ec2-user, Labels agent-one, Launch method Launch agents via SSH, with Host and Credentials fields](../images/agent-connecting-configs.png)
+
+*A permanent agent node's Configure screen — SSH launch method, pointed
+at one EC2 instance.*
+
 Name
 :   The node's identity inside Jenkins — shown in build history and node listings, independent of the label used to target it.
 
