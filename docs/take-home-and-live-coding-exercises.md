@@ -7,8 +7,10 @@ title: "Take-Home & Live-Coding Exercises"
 Real, scoped coding exercises recalled from actual interviews —
 attempt each one cold under a time box, then check your approach
 against the "what a strong solution demonstrates" list. Distinct from
-[Mock Projects](chapter-33.md): these are bite-sized, interview-scoped
-tasks (30-90 minutes), not portfolio-scale builds.
+[Mock Projects](chapter-33.md): these are interview-scoped tasks
+(30 minutes to a few hours), not portfolio-scale builds. Not all of
+them are greenfield either — Exercise 2 is a debug-and-extend task,
+a genuinely different skill from building from scratch.
 
 ## Exercise 1: Weather CLI from a City Directory
 
@@ -153,6 +155,131 @@ if __name__ == "__main__":
   whether selection logic silently picks the wrong one, or handles the
   ambiguity (e.g. disambiguating by showing lat/lng, or requiring a
   unique identifier).
+
+## Exercise 2: Movie Database API — Debug & Extend (Django REST Framework)
+
+**Source:** a real SELISE Python Developer take-home assessment. Full
+solution: [movie-database-assessment](https://github.com/Fahad-Md-Kamal/movie-database-assessment)
+(private-repo submission, now public).
+
+**What makes this one different from Exercise 1:** the assessment
+hands you a partially-built, partially-*broken* Django REST Framework
+codebase and a feature spec — not a blank file. The skill being tested
+is reading unfamiliar code, finding bugs that don't announce
+themselves, and correctly extending existing patterns, not typing
+from scratch.
+
+**The task, as given:**
+
+- **Auth**: log in with either username+password or email+password, no
+  forgot-password needed. Unauthenticated users get zero access to
+  anything.
+- **Movies**: authenticated-only viewing (list + detail). Authenticated
+  users can create movies; a movie is always linked to its creator;
+  only the creator can update it. All movies are visible to any
+  authenticated user, not just the creator's own.
+- **Ratings**: a 1–5 score, authenticated only. A user can change their
+  *own* rating repeatedly. The movie's `avg_rating` recomputes
+  automatically on every rating create/update — but the movie's
+  `updated_at` must **not** change when only `avg_rating` changes (it
+  should only change on an actual movie edit).
+- **Reports**: authenticated users can report a movie as inappropriate.
+  Only SuperAdmins can list reports. Reports start `Unresolved`, and a
+  SuperAdmin resolves each one to either "mark movie as inappropriate"
+  or "reject report" — implemented as a **state machine**. An
+  inappropriate movie is hidden from everyone *except* its creator (who
+  still sees it, marked inappropriate). A SuperAdmin can reverse a
+  prior decision at any time.
+- Swagger/OpenAPI docs for every endpoint.
+- **Acceptance criteria**: 2 regular users + 1 SuperAdmin, 2 movies per
+  user, ratings from every user on every movie, one report rejected,
+  one report accepted.
+
+**Suggested time box:** 3–5 hours — this is a full formal take-home,
+not a short live-coding prompt.
+
+**Real bugs found in this specific assessment** — worth internalizing
+as a general checklist for *any* Django/DRF take-home, not just this
+one:
+
+- A model missing from `INSTALLED_APPS` — Django raises `Model class
+  doesn't declare an explicit app_label`. The fix is in settings, not
+  the model file; don't go looking in the wrong place.
+- **A validation condition inverted**: the original code raised
+  "passwords didn't match" when `password == password2` — exactly
+  backwards. This is the single most valuable bug to internalize:
+  **read a conditional for what it actually checks, not for what the
+  variable or error-message names imply it checks.**
+- Write-only serializer fields (`password`, `password2`) mistakenly
+  marked `read_only=True` — silently breaks registration, since DRF
+  then ignores incoming values for those fields entirely. No error,
+  just quietly-wrong behavior.
+- A model field (`avg_rating`) added to the model with no migration
+  generated for it — a classic "forgot `makemigrations`" gap that only
+  surfaces as a runtime DB error, not at code review.
+- The wrong permission class wired to an endpoint — `IsAuthenticated`
+  where `IsOwnerOrReadOnly` was actually required, silently letting
+  any authenticated user edit someone else's movie.
+- A URL-ordering bug — a dynamic path parameter route declared
+  *before* a static route in `urls.py`, so Django matches the dynamic
+  pattern first and the static route becomes unreachable. URL routers
+  generally match in declaration order — specific/static routes need
+  to come before catch-all/dynamic ones.
+- A serializer's `source=` pointed at the wrong related field
+  (`source='username'` instead of `source='creator.username'`) —
+  returns the wrong data silently, no error raised anywhere.
+- `avg_rating` not recalculated when a rating was created/updated — a
+  business-rule bug, not a crash; only caught by actually testing the
+  acceptance criteria end-to-end, not by reading the code.
+
+**What a strong solution demonstrates:**
+
+- Reading unfamiliar code methodically before changing it — the
+  inverted-password-check bug above is invisible from a diff alone;
+  it only surfaces by tracing what the code *actually does* against
+  what the spec says it should do.
+- Correctly updating `avg_rating` without touching `updated_at` —
+  Django's `auto_now=True` fires on *any* `.save()` call, so this
+  specifically requires `.save(update_fields=[...])` or a targeted
+  `.update()` call, not a full `.save()`.
+- A real state machine for the report lifecycle — even implemented
+  simply (an enum plus a guarded transition method, not a full
+  state-machine library), the discipline matters: an invalid
+  transition should raise, not silently no-op.
+- Consistent visibility filtering — an "inappropriate" movie has to
+  disappear from *every* list/detail endpoint except its creator's own
+  view. That's a rule that has to be applied uniformly across every
+  queryset returning movies, not patched into one view and forgotten
+  in another.
+- Usable Swagger/OpenAPI docs (e.g. `drf-spectacular`) that accurately
+  reflect auth requirements and response shapes, not just "present."
+
+**A design smell worth noticing in this exact assessment, as a
+discussion point:** the `Report` model in this codebase has both a
+`report_state` enum (`UNRESOLVED`/`REJECTED`/`ACCEPTED`) *and* a
+separate `is_closed` boolean. Two fields tracking overlapping state
+can drift out of sync — nothing stops code from setting
+`report_state='ACCEPTED'` while forgetting to also set
+`is_closed=True`. The more robust design derives closed-ness from the
+state (`is_closed` as a property: `report_state != UNRESOLVED`) rather
+than storing it redundantly. Worth deciding *before* writing your own
+version which one you'd pick, and being ready to defend it.
+
+**Likely follow-up questions an interviewer asks about this kind of task:**
+
+- "Walk me through how you found bug X." — tests whether you debugged
+  systematically (reading error messages, tracing code, writing a
+  failing test first) versus guessing and getting lucky.
+- "Why does `auto_now=True` fire on every save, and how did that
+  affect your `avg_rating` update?" — a direct test of understanding
+  Django's field internals, not just having copy-pasted a fix.
+- "How would you enforce that a report can't move from `Rejected` back
+  to `Unresolved` directly?" — tests whether the state machine
+  actually *rejects* invalid transitions, or just happens to never be
+  asked to make one during the acceptance tests.
+- "The `is_closed` boolean and the state enum can disagree — how do
+  you stop that?" — the redundant-state design smell above, as a live
+  question.
 
 ---
 
