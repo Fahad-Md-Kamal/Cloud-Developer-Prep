@@ -214,6 +214,8 @@ big-data-scale role.
 **Data Preprocessing**
 
 - [Data Preprocessing: Pandas & NumPy](data-preprocessing-pandas-numpy.md)
+- [Large-Scale Report Generation](large-scale-report-generation.md) —
+  memory-efficient PDF/XLSX export from 10+GB source data
 
 ### Cloud, DevOps & Infrastructure (Chapters 16–20)
 

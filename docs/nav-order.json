@@ -260,6 +260,10 @@
     "url": "data-preprocessing-pandas-numpy/"
   },
   {
+    "title": "Large-Scale Report Generation",
+    "url": "large-scale-report-generation/"
+  },
+  {
     "title": "16. Docker & Docker Compose",
     "url": "chapter-16/"
   },

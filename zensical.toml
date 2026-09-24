@@ -112,6 +112,7 @@ nav = [
               { "Databricks & Delta Lake" = "databricks-delta-lake.md" },
           ] },
           { "Data Preprocessing: Pandas & NumPy" = "data-preprocessing-pandas-numpy.md" },
+          { "Large-Scale Report Generation" = "large-scale-report-generation.md" },
       ] },
       { "Cloud, DevOps & Infrastructure" = [
           { "16. Docker & Docker Compose" = "chapter-16.md" },
