@@ -157,6 +157,8 @@ not saved for last.
 - [Chapter 6: Microservices Design with FastAPI & Message Queues](chapter-6.md)
 - [Chapter 7: Distributed System Design](chapter-7.md)
 - [Chapter 8: Database Architecture for Scale](chapter-8.md)
+- [Database Security & Breach Prevention](database-security-and-breach-prevention.md) —
+  network isolation, PII encryption, secure backup handling
 - [Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking](chapter-9.md)
 - [Kong API Gateway](kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
 - [Chapter 10: Observability with Prometheus & Grafana](chapter-10.md)
