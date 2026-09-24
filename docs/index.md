@@ -299,6 +299,8 @@ material it draws on for behavioral answers.
 - [Take-Home & Live-Coding Exercises](take-home-and-live-coding-exercises.md) —
   real, scoped coding tasks recalled from interviews, e.g. a weather CLI
 - [Chapter 34: Resume, GitHub, and Case Study Optimization](chapter-34.md)
+- [Validating Your Skill Level](validating-your-skill-level.md) —
+  backing up a self-rated "expert" claim with something external
 - [Chapter 35: Final Review — The 30-Day Countdown](chapter-35.md)
 
 ## A note on names
