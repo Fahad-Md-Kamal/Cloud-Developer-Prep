@@ -34,6 +34,12 @@ nav = [
               { "Modern Python Mastery" = [
                   { "Typing & Generics" = "programming-languages/python/typing-and-generics.md" },
                   { "Concurrency & AsyncIO" = "programming-languages/python/concurrency-and-asyncio.md" },
+                  { "Concurrency & Worker Pools: Hands-On Practice" = [
+                      { "Threading in Practice" = "programming-languages/python/threading-in-practice.md" },
+                      { "Multiprocessing in Practice" = "programming-languages/python/multiprocessing-in-practice.md" },
+                      { "Building Worker Pools From Scratch" = "programming-languages/python/building-worker-pools.md" },
+                      { "Capstone: A Concurrent Data Pipeline" = "programming-languages/python/concurrent-data-pipeline-capstone.md" },
+                  ] },
                   { "Memory & Caching" = "programming-languages/python/memory-and-caching.md" },
                   { "Practical Patterns" = "programming-languages/python/practical-patterns.md" },
                   { "Python Internals & Advanced OOP" = "programming-languages/python/python-internals-and-advanced-oop.md" },

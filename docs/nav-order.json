@@ -52,6 +52,22 @@
     "url": "programming-languages/python/concurrency-and-asyncio/"
   },
   {
+    "title": "Threading in Practice",
+    "url": "programming-languages/python/threading-in-practice/"
+  },
+  {
+    "title": "Multiprocessing in Practice",
+    "url": "programming-languages/python/multiprocessing-in-practice/"
+  },
+  {
+    "title": "Building Worker Pools From Scratch",
+    "url": "programming-languages/python/building-worker-pools/"
+  },
+  {
+    "title": "Capstone: A Concurrent Data Pipeline",
+    "url": "programming-languages/python/concurrent-data-pipeline-capstone/"
+  },
+  {
     "title": "Memory & Caching",
     "url": "programming-languages/python/memory-and-caching/"
   },
