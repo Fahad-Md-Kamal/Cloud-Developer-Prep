@@ -23,12 +23,15 @@ class DocumentStorage:
     def save(self, doc: ParsedDocument) -> str: ...
 ```
 
-**Answer:** A class should have exactly one reason to change. The
-practical test isn't counting methods — it's asking "if the business
-requirement for parsing changes, does this class also change for an
-unrelated reason like storage format?" If yes, it's doing too much.
-Splitting `DocumentParser`/`DocumentValidator`/`DocumentStorage` means a
-new storage backend never touches parsing logic.
+**Answer:**
+
+- A class should have exactly one reason to change.
+- The practical test isn't counting methods — it's asking "if the
+  business requirement for parsing changes, does this class also
+  change for an unrelated reason like storage format?" If yes, it's
+  doing too much.
+- Splitting `DocumentParser`/`DocumentValidator`/`DocumentStorage`
+  means a new storage backend never touches parsing logic.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -57,10 +60,12 @@ class WebCrawler:
 class JavaScriptCrawler(CrawlerStrategy): ...  # new capability, zero changes above
 ```
 
-**Answer:** Open for extension, closed for modification — new behavior
-comes from adding a new class that implements the existing interface,
-not editing code that's already shipped and tested. `WebCrawler` never
-changes when `JavaScriptCrawler` is added.
+**Answer:**
+
+- Open for extension, closed for modification — new behavior comes
+  from adding a new class that implements the existing interface, not
+  editing code that's already shipped and tested.
+- `WebCrawler` never changes when `JavaScriptCrawler` is added.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -85,11 +90,13 @@ class StrictProcessor(DocumentProcessor):
         return self._parse(content)
 ```
 
-**Answer:** Subtypes must be substitutable for their base type without
-the caller noticing — same accepted inputs, same guarantees, no
-surprise exceptions the base type never advertised. `StrictProcessor`
-above type-checks fine but breaks any code written against
-`DocumentProcessor` that happily passes empty strings.
+**Answer:**
+
+- Subtypes must be substitutable for their base type without the
+  caller noticing — same accepted inputs, same guarantees, no
+  surprise exceptions the base type never advertised.
+- `StrictProcessor` above type-checks fine but breaks any code written
+  against `DocumentProcessor` that happily passes empty strings.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -115,12 +122,14 @@ class DocumentReader:
         self.source = source
 ```
 
-**Answer:** A client shouldn't be forced to depend on methods it never
-calls. A single `DocumentStorage` interface with `read`, `write`,
-`delete`, `search` forces every consumer — including one that only ever
-reads — to depend on (and mock, in tests) the whole surface. Splitting
-into `Readable`/`Writable` means `DocumentReader` only depends on
-`read`.
+**Answer:**
+
+- A client shouldn't be forced to depend on methods it never calls.
+- A single `DocumentStorage` interface with `read`, `write`, `delete`,
+  `search` forces every consumer — including one that only ever reads
+  — to depend on (and mock, in tests) the whole surface.
+- Splitting into `Readable`/`Writable` means `DocumentReader` only
+  depends on `read`.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -144,14 +153,18 @@ class DocumentService:
 service = DocumentService(repo=PostgreSQLDocumentRepository())
 ```
 
-**Answer:** They're related but not identical. **DIP** is the design
-principle: high-level modules (`DocumentService`) shouldn't depend on
-low-level details (`PostgreSQLDocumentRepository`) — both should depend
-on an abstraction (`DocumentRepository`). **Dependency injection** is
-one *technique* for achieving that — passing the concrete implementation
-in from outside rather than constructing it internally. You can follow
-DIP without a DI framework (plain constructor injection, like above); a
-DI framework just automates the wiring.
+**Answer:**
+
+- They're related but not identical.
+- **DIP** is the design principle: high-level modules
+  (`DocumentService`) shouldn't depend on low-level details
+  (`PostgreSQLDocumentRepository`) — both should depend on an
+  abstraction (`DocumentRepository`).
+- **Dependency injection** is one *technique* for achieving that —
+  passing the concrete implementation in from outside rather than
+  constructing it internally.
+- You can follow DIP without a DI framework (plain constructor
+  injection, like above); a DI framework just automates the wiring.
 
 | Pros | Cons / Trade-offs |
 |---|---|
