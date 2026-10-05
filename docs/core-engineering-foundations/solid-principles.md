@@ -33,6 +33,16 @@ class DocumentStorage:
 - Splitting `DocumentParser`/`DocumentValidator`/`DocumentStorage`
   means a new storage backend never touches parsing logic.
 
+!!! example "Real-world analogy: a restaurant kitchen"
+    - The chef cooks, the dishwasher cleans, and the cashier handles
+      payment — three different roles because each changes for a
+      different reason: a new recipe only touches the chef, a new POS
+      system only touches the cashier.
+    - If one person did all three — "a chef who also handles billing"
+      — a change to the payment process would force them to stop
+      cooking, the same "unrelated reason to change" smell SRP flags
+      in code.
+
 | Pros | Cons / Trade-offs |
 |---|---|
 | Each piece is independently testable in isolation | More classes/files to navigate for a simple change |
@@ -67,6 +77,14 @@ class JavaScriptCrawler(CrawlerStrategy): ...  # new capability, zero changes ab
   editing code that's already shipped and tested.
 - `WebCrawler` never changes when `JavaScriptCrawler` is added.
 
+!!! example "Real-world analogy: a car's sound system"
+    - You can add a new amplifier, swap in better speakers, or plug in
+      a phone via Bluetooth — all without redesigning the car's
+      chassis or rewiring the frame.
+    - The car is open for extension (new accessories plug into a
+      standard port) but closed for modification (nobody
+      re-engineers the chassis every time a new speaker ships).
+
 | Pros | Cons / Trade-offs |
 |---|---|
 | Existing, tested code stays untouched and stable | Requires designing the right abstraction *up front* — hard to retrofit cleanly |
@@ -97,6 +115,16 @@ class StrictProcessor(DocumentProcessor):
   surprise exceptions the base type never advertised.
 - `StrictProcessor` above type-checks fine but breaks any code written
   against `DocumentProcessor` that happily passes empty strings.
+
+!!! example "Real-world analogy: cake recipes baked by the same instructions"
+    - A recipe book's "pour batter, bake at 350°F for 30 minutes"
+      assumes any cake you pour in can be baked that way — vanilla,
+      chocolate, and marble all honor it.
+    - An "icebox cake" that actually has to be frozen, not baked, to
+      set breaks that substitutability — anyone following the book's
+      standard instructions on it ruins the dessert, the same way a
+      subclass that quietly changes the contract breaks callers
+      written against the base type.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -130,6 +158,16 @@ class DocumentReader:
   — to depend on (and mock, in tests) the whole surface.
 - Splitting into `Readable`/`Writable` means `DocumentReader` only
   depends on `read`.
+
+!!! example "Real-world analogy: a factory floor, not a Swiss Army knife of certifications"
+    - A worker operating one stamping press doesn't need to be
+      trained on every machine in the building — they depend on the
+      interface for their one machine, not the whole factory's
+      capability.
+    - Forcing every new hire through "full certification on all 40
+      machines" before they can use any single one is the real-world
+      version of a fat interface — most of what they're forced to
+      learn, they'll never touch.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -166,66 +204,19 @@ service = DocumentService(repo=PostgreSQLDocumentRepository())
 - You can follow DIP without a DI framework (plain constructor
   injection, like above); a DI framework just automates the wiring.
 
+!!! example "Real-world analogy: electrical outlets, not hardwired appliances"
+    - A lamp doesn't get wired directly into a building's electrical
+      system — both the lamp and the building depend on a standard
+      outlet (the abstraction) instead of on each other directly.
+    - Any lamp from any manufacturer plugs into any outlet; the
+      building was never designed around one specific lamp brand, and
+      swapping lamps never requires an electrician.
+
 | Pros | Cons / Trade-offs |
 |---|---|
 | Swap PostgreSQL for a test double or a different DB with zero changes to business logic | Adds a layer of indirection that can make "what actually runs" harder to trace |
 | High-level policy code stays testable without a real database | Over-abstracting a dependency that will *never* realistically change is wasted ceremony |
 | Different environments (dev/test/prod) wire different concrete implementations | Constructor signatures grow as dependencies accumulate — needs its own discipline |
-
-## Real-World Analogies (No Code)
-
-SOLID is a design discipline, not a Python-specific one — the same
-five ideas show up anywhere a system has to tolerate change: a
-kitchen, a factory, a toolbox.
-
-**SRP — a restaurant kitchen**
-
-- The chef cooks, the dishwasher cleans, and the cashier handles
-  payment — three different roles because each changes for a
-  different reason: a new recipe only touches the chef, a new POS
-  system only touches the cashier.
-- If one person did all three — "a chef who also handles billing" —
-  a change to the payment process would force them to stop cooking,
-  the same "unrelated reason to change" smell SRP flags in code.
-
-**OCP — a car's sound system**
-
-- You can add a new amplifier, swap in better speakers, or plug in a
-  phone via Bluetooth — all without redesigning the car's chassis or
-  rewiring the frame.
-- The car is open for extension (new accessories plug into a
-  standard port) but closed for modification (nobody re-engineers
-  the chassis every time a new speaker ships).
-
-**LSP — cake recipes baked by the same instructions**
-
-- A recipe book's "pour batter, bake at 350°F for 30 minutes" assumes
-  any cake you pour in can be baked that way — vanilla, chocolate,
-  and marble all honor it.
-- An "icebox cake" that actually has to be frozen, not baked, to set
-  breaks that substitutability — anyone following the book's standard
-  instructions on it ruins the dessert, the same way a subclass that
-  quietly changes the contract breaks callers written against the
-  base type.
-
-**ISP — a factory floor, not a Swiss Army knife of certifications**
-
-- A worker operating one stamping press doesn't need to be trained on
-  every machine in the building — they depend on the interface for
-  their one machine, not the whole factory's capability.
-- Forcing every new hire through "full certification on all 40
-  machines" before they can use any single one is the real-world
-  version of a fat interface — most of what they're forced to learn,
-  they'll never touch.
-
-**DIP — electrical outlets, not hardwired appliances**
-
-- A lamp doesn't get wired directly into a building's electrical
-  system — both the lamp and the building depend on a standard outlet
-  (the abstraction) instead of on each other directly.
-- Any lamp from any manufacturer plugs into any outlet; the building
-  was never designed around one specific lamp brand, and swapping
-  lamps never requires an electrician.
 
 ## All Five Together
 
