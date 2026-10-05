@@ -22,10 +22,26 @@ class ModelFactory:
         raise ValueError(f"Unknown provider: {provider}")
 ```
 
-**Answer:** When *which* concrete class to instantiate depends on
-runtime data (a config value, a feature flag, a request parameter) —
-centralizing that decision means the `if/elif` chain lives in exactly
-one place instead of scattered through the codebase.
+**Answer:**
+
+- Use it when *which* concrete class to instantiate depends on
+  runtime data — a config value, a feature flag, a request parameter
+  — not something known at the time the code was written.
+- Centralizing that decision means the `if/elif` chain lives in
+  exactly one place instead of scattered through the codebase
+  everywhere a new instance is needed.
+
+!!! example "Real-world analogy: ordering at a coffee shop"
+    - You tell the barista "a latte" — you don't hand them steamed
+      milk, espresso shots, and instructions for exactly how to
+      combine them.
+    - The barista (the factory) owns the decision of which drink-making
+      procedure to run based on the one word you gave them; you only
+      ever interact with the menu, never the recipe book behind the
+      counter.
+    - A new drink added to the menu (a new provider) means the barista
+      learns one more recipe — it never changes how you place an
+      order.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -50,10 +66,25 @@ class DocumentProcessor:
         return await self.strategy.process(content)
 ```
 
-**Answer:** Functionally similar for two or three cases — the payoff
-shows up as the number of variants grows, or when they need independent
-testing/deployment. Each strategy is isolated, swappable at runtime, and
-addable without editing a growing conditional.
+**Answer:**
+
+- Functionally similar for two or three cases — the payoff shows up
+  as the number of variants grows, or when they need independent
+  testing/deployment.
+- Each strategy is isolated, swappable at runtime, and addable without
+  editing a growing conditional.
+
+!!! example "Real-world analogy: a GPS choosing a route algorithm"
+    - You pick "fastest route," "shortest route," or "avoid tolls" —
+      the GPS device itself never changes; only the route-calculating
+      algorithm behind that one choice does.
+    - Each routing algorithm is swappable mid-trip (switch from
+      fastest to avoid-tolls without restarting the device) and can be
+      developed/tested independently of the GPS hardware.
+    - A plain `if traffic_mode == "fastest": ... elif ...` buried
+      inside the GPS firmware is exactly the conditional Strategy
+      replaces — the same device logic, but every new routing mode
+      means re-flashing the whole firmware.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -79,12 +110,25 @@ class DocumentProcessor:
             await observer.on_processed(doc)
 ```
 
-**Answer:** When one event needs to trigger several independent,
-unrelated reactions (analytics, billing, cache invalidation) and the
-publisher shouldn't need to know any of them exist. A direct function
-call would mean `DocumentProcessor` importing and calling analytics,
-billing, and caching code directly — tight coupling to things that have
-nothing to do with document processing.
+**Answer:**
+
+- Use it when one event needs to trigger several independent,
+  unrelated reactions — analytics, billing, cache invalidation — and
+  the publisher shouldn't need to know any of them exist.
+- A direct function call would mean `DocumentProcessor` importing and
+  calling analytics, billing, and caching code directly — tight
+  coupling to things that have nothing to do with document processing.
+
+!!! example "Real-world analogy: a smoke detector"
+    - The smoke detector's only job is to detect smoke and raise an
+      alarm signal — it has no idea that signal will trigger
+      sprinklers, flash alarm lights, and dial the fire department.
+    - Each of those reactions (sprinkler system, alarm panel,
+      monitoring service) subscribed to the same signal independently
+      — the detector was never modified to "know about" any of them.
+    - Add a new reaction — auto-unlocking the front door for
+      responders — and the detector itself still doesn't change; a
+      new subscriber just starts listening for the same alarm.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -102,10 +146,24 @@ class DocumentRepository(Protocol):
     async def find_by_id(self, doc_id: str) -> Document | None: ...
 ```
 
-**Answer:** The fact that "save a document" might mean a SQL `INSERT`
-today and a call to Elasticsearch plus S3 tomorrow. Business logic calls
-`repo.save(doc)` and never needs to know which storage technology is
-behind it, or that it might be more than one.
+**Answer:**
+
+- It abstracts away the fact that "save a document" might mean a SQL
+  `INSERT` today and a call to Elasticsearch plus S3 tomorrow.
+- Business logic calls `repo.save(doc)` and never needs to know which
+  storage technology is behind it, or that it might be more than one.
+
+!!! example "Real-world analogy: asking a librarian for a book"
+    - You ask the librarian "do you have *Dune*?" — you never say
+      "check the third shelf in the east wing" or "call the off-site
+      archive." You don't even know if it's on this building's
+      shelves, in storage, or on loan from a partner branch.
+    - The librarian (the repository) is the one interface for
+      "get me this book," regardless of which physical storage system
+      actually holds it today.
+    - If the library switches to a new off-site storage vendor
+      tomorrow, you — the patron — ask for books exactly the same way
+      you always have.
 
 | Pros | Cons / Trade-offs |
 |---|---|
