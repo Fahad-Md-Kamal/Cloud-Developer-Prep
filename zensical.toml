@@ -17,6 +17,7 @@ nav = [
       { "Core Engineering Foundations" = [
           { "Clean Code & Design Patterns" = [
               { "SOLID Principles" = "core-engineering-foundations/solid-principles.md" },
+              { "Cohesion & Coupling" = "core-engineering-foundations/cohesion-and-coupling.md" },
               { "Design Patterns" = "core-engineering-foundations/design-patterns.md" },
               { "Clean Code Practices" = "core-engineering-foundations/clean-code-practices.md" },
               { "Refactoring Legacy Systems" = "core-engineering-foundations/refactoring-legacy-systems.md" },

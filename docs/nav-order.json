@@ -12,6 +12,10 @@
     "url": "core-engineering-foundations/solid-principles/"
   },
   {
+    "title": "Cohesion & Coupling",
+    "url": "core-engineering-foundations/cohesion-and-coupling/"
+  },
+  {
     "title": "Design Patterns",
     "url": "core-engineering-foundations/design-patterns/"
   },
