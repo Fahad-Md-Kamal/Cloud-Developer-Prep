@@ -1,3 +1,2 @@
 query.sql
-*.py
-__pycache__
+__pycache__/
