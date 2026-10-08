@@ -73,3 +73,22 @@ for clients to work with and harder to debug from a raw request log.
 Communicate deprecation via `Deprecation`/`Sunset` headers with a real
 timeline, and run contract tests between versions so a breaking change
 gets caught in CI, not by a client in production.
+
+## 4. "What's the actual purpose of using REST?"
+
+**Answer:**
+
+- A uniform, resource-oriented interface that lets client and server
+  evolve independently — the client only needs to understand
+  resources, URIs, and a small, standard set of HTTP verbs/status
+  codes, not a bespoke contract per endpoint.
+- Statelessness — each request carries everything needed to
+  understand it, with no server-side session required to interpret
+  it — is the real enabler of horizontal scaling: any server instance
+  can handle any request, so load balancing never needs sticky
+  sessions.
+- The RPC-style alternative (§1's "Bad" example) works too, but
+  couples client and server to a growing list of bespoke method names
+  instead of a small, predictable set of verbs applied consistently
+  across every resource — the thing that makes a well-designed REST
+  API's next endpoint guessable without reading its docs.

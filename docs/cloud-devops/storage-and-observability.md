@@ -326,6 +326,27 @@ fields @timestamp, @message
 | limit 50
 ```
 
+## CloudWatch vs. Prometheus, Grafana & Nagios
+
+A real interview question: "Do you have experience with Grafana,
+Nagios, and Prometheus?" — worth knowing how they actually relate to
+CloudWatch above, not just whether you've used them.
+
+| | What it actually is | Where it fits |
+|---|---|---|
+| **CloudWatch** | AWS-native metrics/logs/alarms store | The default when everything already runs on AWS — zero extra infrastructure to run yourself |
+| **Prometheus** | Open-source metrics store, pull-based (it scrapes targets on an interval) | The de facto standard for Kubernetes/self-hosted stacks — but it's infrastructure you run and scale yourself, unlike CloudWatch |
+| **Grafana** | A visualization/dashboard layer — **not** a metrics store | Queries one or more data sources (CloudWatch, Prometheus, or both at once) and renders them — commonly layered on top of whichever store(s) a team already has |
+| **Nagios** | Older, check-based alerting ("is this service up or down") | Common in legacy/on-prem infra; a binary up/down check model rather than the continuous time-series metrics the other three are built around |
+
+**Interview point:** Grafana is frequently misunderstood as a
+competitor to CloudWatch or Prometheus — it's a visualization layer
+that reads *from* them, not a replacement for either. A team running
+both AWS-native services and a self-hosted Kubernetes cluster commonly
+points one Grafana instance at both CloudWatch and Prometheus as data
+sources, giving a single dashboard pane over infrastructure that
+otherwise has two separate metrics stores.
+
 ## X-Ray Distributed Tracing
 
 X-Ray traces a request as it flows through the entire system — from the

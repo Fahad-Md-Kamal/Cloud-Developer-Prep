@@ -516,6 +516,24 @@ they're actually probing.
   since `Exists` stops at the first match instead of counting all
   rows.
 
+**ORM fundamentals & security**
+
+- "What is the actual purpose of an ORM?" — expects: it maps
+  application objects to relational rows/tables so code manipulates
+  objects instead of hand-writing SQL for every operation, while still
+  allowing an escape hatch ([§16](#16-raw-sql-escape-hatches)) when it
+  doesn't fit. The value isn't "avoiding SQL" — it's a consistent,
+  composable way to build queries, plus one place where cross-cutting
+  concerns (connection handling, query building, migrations) live
+  once instead of being reimplemented per query.
+- "Are there security reasons to use an ORM? Name some." — expects:
+  the ORM parameterizes query values by default (bound parameters, not
+  string interpolation into SQL), which closes off the most common SQL
+  injection vector automatically. The risk reappears exactly where the
+  ORM is bypassed — [§16](#16-raw-sql-escape-hatches)'s raw SQL escape
+  hatch, if that code path f-strings/formats user input into the query
+  instead of parameterizing it.
+
 **Design judgment**
 
 - "When would you *not* use the ORM at all for a query?" — expects

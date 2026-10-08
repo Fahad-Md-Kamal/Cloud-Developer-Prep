@@ -29,6 +29,7 @@ nav = [
           ] },
           { "AuthN/AuthZ & Security" = "core-engineering-foundations/chapter-4.md" },
           { "Performance Profiling & Caching" = "core-engineering-foundations/chapter-5.md" },
+          { "Version Control & Git Workflows" = "core-engineering-foundations/version-control-and-git-workflows.md" },
       ] },
       { "Programming Languages" = [
           { "Python & Frameworks" = [

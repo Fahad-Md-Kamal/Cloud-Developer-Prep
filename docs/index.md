@@ -97,6 +97,7 @@ own section below.
     - [API Paradigms & Patterns](core-engineering-foundations/api-paradigms-and-patterns.md)
 - [Authentication, Authorization, and Security](core-engineering-foundations/chapter-4.md)
 - [Performance Profiling, Optimization, and Caching](core-engineering-foundations/chapter-5.md)
+- [Version Control & Git Workflows](core-engineering-foundations/version-control-and-git-workflows.md)
 
 ### Programming Languages
 

@@ -76,6 +76,57 @@ async def main():
 | Threading: works with existing blocking libraries with minimal code changes | Threading: no real CPU parallelism due to the GIL — bounded scalability (hundreds, not thousands) |
 | Multiprocessing: true parallel CPU execution, bypasses the GIL entirely | Multiprocessing: higher memory/startup cost, and data must be pickled across process boundaries |
 
+## 3. "How do you prevent deadlocks? And if you don't know how long a task will take or when another thread releases a lock you need, how do you stop two threads from locking each other out?"
+
+**Answer:**
+
+- A deadlock needs two things at once: more than one lock, and
+  threads acquiring them in *different orders* — thread 1 holds lock
+  A and waits for lock B, while thread 2 holds lock B and waits for
+  lock A. Neither ever releases.
+- **Consistent lock ordering** is the real fix: if every thread in the
+  codebase always acquires lock A before lock B, the circular-wait
+  condition above can't happen — one of them will always get both
+  locks free and proceed.
+- **Timeouts** (`lock.acquire(timeout=5)`) turn an infinite wait into
+  a failure the code can actually handle — give up, log it, retry —
+  instead of hanging forever. This directly answers "I don't know how
+  long a task will take": don't wait unboundedly on a lock whose
+  hold time you can't predict.
+- **Avoid nested locks entirely where possible** — the queue-based
+  handoff from
+  [Building Worker Pools](building-worker-pools.md#task-1-a-minimal-worker-pool-class)
+  sidesteps the whole problem: a single worker owns a piece of state
+  and everyone else communicates with it by putting work on a queue,
+  so no two threads ever need to hold each other's locks at all.
+- Always use `with lock:` rather than manual `lock.acquire()`/
+  `lock.release()` pairs — a `with` block releases the lock even if an
+  exception is raised inside it; a manual pair that forgets the
+  `finally` leaves the lock held forever on the exception path, which
+  is its own, very common way to manufacture a deadlock.
+
+## 4. "AsyncIO runs on a single thread — how does `asyncio.gather()` get concurrency out of that?"
+
+**Answer:**
+
+- Single-threaded concurrency here means **cooperative** scheduling,
+  not parallelism — only one coroutine is ever actually executing
+  Python bytecode at a time, same as the GIL already implies.
+- `asyncio.gather(*tasks)` schedules every task on the one event loop.
+  Each task runs until it hits its own `await` (an I/O wait), at
+  which point it voluntarily yields control back to the loop — the
+  loop then resumes whichever other task is ready to make progress.
+- The speedup comes entirely from *overlapping waits*: three HTTP
+  calls that each take 1 second run as roughly 1 second total under
+  `gather()`, not 3, because all three are "waiting" at the same time
+  instead of one after another — see the worked example in
+  [§2 above](#2-a-django-view-calling-three-third-party-apis-is-slow-walk-me-through-fixing-it).
+- This is exactly why a CPU-bound or blocking (non-async) call inside
+  one of the gathered coroutines is so damaging — it never hits an
+  `await` to yield control, so it blocks the single thread running the
+  entire event loop, stalling every other task in the `gather()` too,
+  not just the one doing the work.
+
 ---
 
 ## Code Samples

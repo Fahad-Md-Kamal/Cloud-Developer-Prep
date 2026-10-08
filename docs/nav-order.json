@@ -48,6 +48,10 @@
     "url": "core-engineering-foundations/chapter-5/"
   },
   {
+    "title": "Version Control & Git Workflows",
+    "url": "core-engineering-foundations/version-control-and-git-workflows/"
+  },
+  {
     "title": "Typing & Generics",
     "url": "programming-languages/python/typing-and-generics/"
   },

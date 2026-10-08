@@ -152,3 +152,46 @@ checklist, not padding to make it look longer.
   environment-driven configuration that production expects can be
   verified locally first, against the same image that would actually
   ship.
+
+## Data Persistence: Volumes vs. Container Lifecycle
+
+- A container's writable layer is ephemeral — stop and remove the
+  container (or shut down the host it's running on) and anything
+  written inside it that isn't in a volume is gone. This is the direct
+  answer to "how do you prevent data loss when your database container
+  shuts down."
+- A named volume (or a bind mount to the host filesystem) persists
+  independently of the container's lifecycle:
+  `docker volume create pgdata` then mounting
+  `-v pgdata:/var/lib/postgresql/data` means the container itself can
+  be destroyed and recreated while the actual data survives untouched.
+- Treat the container as disposable — it's the volume that actually
+  needs backing up, not the container.
+- At real production scale, a volume on a single host is itself a
+  single point of failure. The actual fix isn't "trust Docker volumes
+  harder" — it's a managed, durable data store (RDS, a replicated
+  EBS-backed volume) or simply not running the production database
+  inside a container on a single machine at all.
+
+## Containers vs. Virtual Machines
+
+- From the OS's perspective, a container is just another process on
+  the host — it shares the host's kernel. "Containment" comes from
+  kernel features (Linux namespaces for an isolated view of processes/
+  network/filesystem, cgroups for resource limits), not from running a
+  separate operating system.
+- This is why containers start in milliseconds and a VM takes tens of
+  seconds: a VM boots an entire kernel and OS inside a
+  hypervisor-managed virtual machine; a container just starts a
+  process with a restricted view of a kernel that was already running.
+- Containers existed, as a concept, before Docker (`chroot`, Solaris
+  Zones, LXC) — Docker's actual contribution was packaging (the image
+  format and Dockerfile) and a developer-friendly interface on top of
+  kernel primitives that already existed. Docker didn't invent
+  containment.
+- The trade-off: a VM's full kernel isolation is a meaningfully
+  stronger security boundary (a VM escape is far rarer and harder than
+  a container escape) at the cost of far more overhead per instance —
+  the reason containers and VMs are usually combined rather than
+  treated as a strict either/or, as in ECS/EKS worker nodes, which are
+  themselves EC2 VMs running containers on top.
