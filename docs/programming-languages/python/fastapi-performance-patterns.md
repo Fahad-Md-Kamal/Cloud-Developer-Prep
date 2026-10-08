@@ -39,7 +39,7 @@ async def get_dashboard(user_id: int):
   for no reason — `asyncio.gather` runs them concurrently since none
   depends on another's result.
 - This is the same "why is this endpoint slow" diagnostic covered in
-  [Concurrency & AsyncIO §2](concurrency-and-asyncio.md#2-a-django-view-calling-three-third-party-apis-is-slow-walk-me-through-fixing-it),
+  [Concurrency & AsyncIO §2](concurrency-and-asyncio.md#2-a-function-calling-three-third-party-apis-sequentially-is-slow-walk-me-through-fixing-it),
   applied specifically to a FastAPI handler.
 
 ---

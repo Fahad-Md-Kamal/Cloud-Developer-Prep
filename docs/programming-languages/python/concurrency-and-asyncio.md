@@ -38,7 +38,7 @@ CPU-bound" — then be ready to explain *why*, not just recite it.
 | Makes single-threaded code fast — no lock overhead per operation | Real parallelism needs multiprocessing or a native extension that releases it |
 | C extensions can release it during I/O/blocking calls for real concurrency | A frequent source of confusion — many candidates think threads never help at all |
 
-## 2. "A Django view calling three third-party APIs is slow. Walk me through fixing it."
+## 2. "A function calling three third-party APIs sequentially is slow. Walk me through fixing it."
 
 ```python
 import asyncio
@@ -57,7 +57,7 @@ async def main():
 - If the calls are sequential — awaiting each one in turn — they're
   slow because the total time is the *sum* of three round trips
   instead of the *max*.
-- `asyncio.gather` (or a thread pool, in sync Django) runs them
+- `asyncio.gather` (or a thread pool, in synchronous code) runs them
   concurrently instead.
 
 **Likely follow-up — "when would you reach for threading or multiprocessing instead of asyncio here?"**
@@ -120,7 +120,7 @@ async def main():
   calls that each take 1 second run as roughly 1 second total under
   `gather()`, not 3, because all three are "waiting" at the same time
   instead of one after another — see the worked example in
-  [§2 above](#2-a-django-view-calling-three-third-party-apis-is-slow-walk-me-through-fixing-it).
+  [§2 above](#2-a-function-calling-three-third-party-apis-sequentially-is-slow-walk-me-through-fixing-it).
 - This is exactly why a CPU-bound or blocking (non-async) call inside
   one of the gathered coroutines is so damaging — it never hits an
   `await` to yield control, so it blocks the single thread running the
