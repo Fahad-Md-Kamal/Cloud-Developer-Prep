@@ -33,6 +33,13 @@ for t in threads:
 print(counter)  # you'd expect 400_000 — do you get it?
 ```
 
+!!! warning "On modern CPython, you might actually get 400,000"
+    On CPython 3.11+/3.12, this *exact* loop shape often prints the
+    correct `400000` every single time, which looks like proof the
+    race doesn't exist. It isn't proof of that — see
+    ["Why this specific loop doesn't reliably show the race"](#why-this-specific-loop-doesnt-reliably-show-the-race)
+    below before concluding the GIL made this safe.
+
 **What's actually happening:**
 
 - `counter += 1` looks like one operation but isn't — it's
@@ -77,6 +84,112 @@ print(counter)  # now reliably 400_000
   make multi-step operations atomic. "The GIL means I don't need
   locks" is a genuinely common, genuinely wrong belief — this exercise
   is the concrete counterexample.
+
+### Why this specific loop doesn't reliably show the race
+
+If you ran Task 1's first snippet and got exactly `400000` every time,
+you haven't disproven the race — you've hit a CPython implementation
+detail. `dis.dis` on the loop body shows why:
+
+```
+>>   24 FOR_ITER      11 (to 50)
+     28 STORE_FAST     0 (_)
+     30 LOAD_GLOBAL    2 (counter)
+     40 LOAD_CONST     2 (1)
+     42 BINARY_OP     13 (+=)
+     46 STORE_GLOBAL   1 (counter)
+     48 JUMP_BACKWARD 13 (to 24)
+```
+
+- CPython doesn't check whether it should switch threads at *every*
+  bytecode instruction — only at specific checkpoints: loop backedges
+  (`JUMP_BACKWARD`), function calls (`CALL`), and a few others.
+- `counter`'s entire read-modify-write (`LOAD_GLOBAL` →
+  `BINARY_OP` → `STORE_GLOBAL`) sits *between* two checkpoints
+  (`FOR_ITER` and `JUMP_BACKWARD`) with no checkpoint inside it — so a
+  thread that starts one increment is guaranteed to finish it before
+  the GIL can be taken away. The read-modify-write ends up accidentally
+  atomic for *this specific loop shape*, not because Python promises
+  that anywhere.
+- Proof the race is still real: insert a function call between the
+  read and the write — a `CALL` *is* a checkpoint, so now a thread can
+  be interrupted mid-increment:
+
+```python
+def identity(x):  # a plain call forces a bytecode CALL checkpoint
+    return x
+
+def increment():
+    global counter
+    for _ in range(100_000):
+        counter = counter + identity(1)  # now races reliably
+```
+
+- Run that version across 4 threads and the final count comes in
+  under 400,000, inconsistently, every run — the hazard was always
+  there; this loop shape just happened not to expose it.
+- **Don't rely on this.** Which instructions count as a "checkpoint"
+  is a CPython implementation detail, not a language guarantee — it
+  has changed across Python versions before and can again. The lock
+  from the fix above is the only thing that's actually guaranteed.
+
+### Seeing the race happen, not just the wrong number
+
+A wrong final number proves *that* updates were lost, but not *how*.
+Slowing the read-modify-write down with a deliberate delay — and
+printing every step — makes the lost update itself visible:
+
+```python
+import threading
+import time
+
+def visual_race_demo():
+    shared = 0
+    print("--- Visual race condition demo (2 threads, 5 increments each) ---\n")
+
+    def worker(name):
+        nonlocal shared
+        for _ in range(5):
+            read_value = shared
+            print(f"[{name}] READ  counter = {read_value}")
+            time.sleep(0.05)  # widen the window so both threads read before either writes
+            new_value = read_value + 1
+            shared = new_value
+            print(f"[{name}] WRITE counter = {new_value}")
+            time.sleep(0.05)
+
+    t1 = threading.Thread(target=worker, args=("Thread-A",))
+    t2 = threading.Thread(target=worker, args=("Thread-B",))
+    t1.start()
+    t2.start()
+    t1.join()
+    t2.join()
+
+    print(f"\nFinal counter = {shared}  (expected 10 if no updates were lost)")
+```
+
+Output — both threads consistently read the same stale value before
+either writes back, so every single increment is lost, not just some:
+
+```
+[Thread-A] READ  counter = 4
+[Thread-B] READ  counter = 4     <- both read the same stale value
+[Thread-A] WRITE counter = 5
+[Thread-B] WRITE counter = 5     <- Thread-A's increment is silently lost
+...
+Final counter = 5  (expected 10 if no updates were lost)
+```
+
+- The symmetric `time.sleep(0.05)` on both sides of the read-modify-write
+  is what makes this 100% reproducible instead of relying on a race
+  that may or may not happen to occur — both threads are pushed through
+  the same read-then-sleep-then-write rhythm in lockstep, so they
+  collide on every iteration rather than occasionally.
+- The fix is the same as above: wrap the read-modify-write in
+  `with lock:` and every increment lands correctly, because now only
+  one thread can be between `READ` and `WRITE` at a time — try it and
+  rerun to see the output change from losing updates to a clean count
+  of `10`.
 
 ## Task 2: Build a bounded worker pool for I/O-bound work
 
