@@ -11,7 +11,7 @@ questions you should be able to answer cold. FastAPI's own mechanics live in
 and [Performance & Production Patterns](python/fastapi-performance-patterns.md)
 and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
-[API Design Fundamentals](../architecture/api-design-fundamentals.md). This chapter is about the architecture
+[REST Deep Dive](../architecture/rest-deep-dive.md). This chapter is about the architecture
 *around* the services, not the framework inside any one of them.
 
 ---

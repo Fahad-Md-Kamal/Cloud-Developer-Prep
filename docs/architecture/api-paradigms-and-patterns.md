@@ -19,9 +19,7 @@ POST /api/v1/orders
 **What it is:** Resources (nouns) manipulated via standard HTTP verbs
 (`GET`/`POST`/`PUT`/`PATCH`/`DELETE`), JSON payloads, stateless
 requests. The default choice for most public and internal HTTP APIs
-today. For the practical side of actually building one — resource
-modeling, status codes, versioning — see
-[API Design Fundamentals](api-design-fundamentals.md).
+today.
 
 **Benefits:** Supported by every language and HTTP client already in
 use; cacheable by default via standard HTTP features (`ETag`,
@@ -45,7 +43,10 @@ you actually have.
 |---|---|
 | Simple mental model, huge ecosystem, cacheable | Over-fetching/under-fetching — a client often gets more or less than it needs |
 | Stateless — easy to scale horizontally | Multiple round trips for related resources (N+1 at the API level) |
-| Human-debuggable with just a browser or `curl` | No built-in schema/contract — API docs (OpenAPI) are a separate, often-stale artifact |
+| Human-debuggable with just a browser or `curl` | No built-in schema/contract — API docs (OpenAPI) are a separate, often-stale document |
+
+Resource modeling, HTTP methods and status codes, idempotency, and
+versioning are covered in full in the [REST Deep Dive](rest-deep-dive.md).
 
 ## 2. SOAP
 

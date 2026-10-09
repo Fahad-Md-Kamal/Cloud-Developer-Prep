@@ -220,7 +220,7 @@ subscription {
   is marked `@deprecated(reason: "...")` and kept functional until
   clients have migrated off it, rather than being removed behind a new
   version number. This mirrors
-  [API Design Fundamentals §3](api-design-fundamentals.md#3-versioning)'s
+  [REST Deep Dive §3](rest-deep-dive.md#3-versioning)'s
   "prefer additive changes" guidance, just as GraphQL's default
   convention rather than one option among several.
 - **Federation** (Apollo Federation, GraphQL Mesh) lets multiple

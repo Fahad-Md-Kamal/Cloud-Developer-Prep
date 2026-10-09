@@ -172,11 +172,11 @@ sits underneath.
     - [Clean Code Practices](architecture/clean-code-practices.md)
     - [Refactoring Legacy Systems](architecture/refactoring-legacy-systems.md)
 - **APIs**
-    - [API Design Fundamentals](architecture/api-design-fundamentals.md)
-    - [API Production Readiness](architecture/api-production-readiness.md)
     - [API Paradigms & Patterns](architecture/api-paradigms-and-patterns.md)
+    - [REST Deep Dive](architecture/rest-deep-dive.md)
     - [GraphQL Deep Dive](architecture/graphql-deep-dive.md)
     - [gRPC Deep Dive](architecture/grpc-deep-dive.md)
+    - [API Production Readiness](architecture/api-production-readiness.md)
 - [Authentication, Authorization, and Security](architecture/chapter-4.md)
 - [Performance Profiling, Optimization, and Caching](architecture/chapter-5.md)
 - [Version Control & Git Workflows](architecture/version-control-and-git-workflows.md)

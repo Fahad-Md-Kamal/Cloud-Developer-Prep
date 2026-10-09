@@ -5,9 +5,9 @@ title: API Production Readiness
 # API Production Readiness
 
 Caching, rate limiting, and observability — what turns a working API
-into one that survives real production traffic. For resource modeling
-and versioning, see
-[API Design Fundamentals](api-design-fundamentals.md).
+into one that survives real production traffic, regardless of which
+paradigm it's built with. For REST-specific resource modeling and
+versioning, see the [REST Deep Dive](rest-deep-dive.md).
 
 ## 1. Caching
 

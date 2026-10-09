@@ -1,15 +1,16 @@
 ---
-title: API Design Fundamentals
+title: REST Deep Dive
 ---
 
-# API Design Fundamentals
+# REST Deep Dive
 
-How to actually design a REST API — resource modeling, HTTP methods
-and status codes, and versioning — framework-agnostic, applies whether
-the implementation is Django, FastAPI, or anything else. For *why*
-REST is the default choice, see
-[API Paradigms & Patterns §1](api-paradigms-and-patterns.md#1-rest);
-for framework-specific depth, see
+REST is the paradigm this site's [API Paradigms & Patterns §1](api-paradigms-and-patterns.md#1-rest)
+only summarizes — resource modeling, HTTP methods and status codes,
+and versioning, the same depth treatment as the
+[GraphQL Deep Dive](graphql-deep-dive.md) and
+[gRPC Deep Dive](grpc-deep-dive.md) give their paradigms.
+Framework-agnostic, applies whether the implementation is Django,
+FastAPI, or anything else — for framework-specific depth, see
 [Frameworks → Django & DRF](../backend/python/django-orm.md) or
 [Frameworks → FastAPI](../backend/python/fastapi-dependency-injection.md).
 
@@ -81,10 +82,10 @@ gets caught in CI, not by a client in production.
 
 ## Where to Go Next
 
-- **Why REST, and how it compares to SOAP/GraphQL/gRPC/WebSocket/SSE**
-  — [API Paradigms & Patterns](api-paradigms-and-patterns.md).
+- **How REST compares to SOAP/GraphQL/gRPC/WebSocket/SSE** —
+  [API Paradigms & Patterns](api-paradigms-and-patterns.md).
 - **Caching, rate limiting, and observability** for an API already
   built this way — [API Production Readiness](api-production-readiness.md).
-- **Depth on a specific paradigm** — the
+- **Depth on a different paradigm** — the
   [GraphQL Deep Dive](graphql-deep-dive.md) and
   [gRPC Deep Dive](grpc-deep-dive.md).
