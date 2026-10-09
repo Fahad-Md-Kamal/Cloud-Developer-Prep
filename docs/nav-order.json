@@ -56,6 +56,10 @@
     "url": "programming-languages/python/typing-and-generics/"
   },
   {
+    "title": "Bit Manipulation Basics",
+    "url": "programming-languages/python/bit-manipulation-basics/"
+  },
+  {
     "title": "Concurrency & AsyncIO",
     "url": "programming-languages/python/concurrency-and-asyncio/"
   },

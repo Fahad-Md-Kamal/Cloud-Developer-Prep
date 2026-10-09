@@ -35,6 +35,7 @@ nav = [
           { "Python & Frameworks" = [
               { "Modern Python Mastery" = [
                   { "Typing & Generics" = "programming-languages/python/typing-and-generics.md" },
+                  { "Bit Manipulation Basics" = "programming-languages/python/bit-manipulation-basics.md" },
                   { "Concurrency & AsyncIO" = "programming-languages/python/concurrency-and-asyncio.md" },
                   { "Concurrency & Worker Pools: Hands-On Practice" = [
                       { "Threading in Practice" = "programming-languages/python/threading-in-practice.md" },
