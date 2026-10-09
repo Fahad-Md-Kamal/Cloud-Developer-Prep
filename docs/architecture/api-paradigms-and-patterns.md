@@ -19,17 +19,27 @@ POST /api/v1/orders
 **What it is:** Resources (nouns) manipulated via standard HTTP verbs
 (`GET`/`POST`/`PUT`/`PATCH`/`DELETE`), JSON payloads, stateless
 requests. The default choice for most public and internal HTTP APIs
-today.
+today. For the practical side of actually building one — resource
+modeling, status codes, versioning — see
+[API Design Fundamentals](api-design-fundamentals.md).
 
 **Benefits:** Supported by every language and HTTP client already in
 use; cacheable by default via standard HTTP features (`ETag`,
 `Cache-Control`); human-readable and easy to debug with just `curl`;
-stateless, so any server can handle any request — easy to scale
-horizontally.
+stateless — no server-side session needed to understand a request — so
+any server instance can handle any request, and load balancing never
+needs sticky sessions the way a session-cookie-based design would.
 
 **Best for:** Public APIs, CRUD-heavy applications, anything that
 benefits from HTTP caching, and any team that wants the widest possible
 client compatibility with the least specialized tooling.
+
+**Worth knowing:** **HATEOAS** (responses linking to related actions,
+so a client discovers what it can do next from the response itself) is
+the most commonly-skipped part of REST's original definition — most
+real-world "REST" APIs don't implement it. Worth naming as "I know it
+exists, most real APIs skip it," not claiming you've built it unless
+you actually have.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -70,7 +80,7 @@ predates REST's dominance and replacing it isn't worth the risk.
 | Pros | Cons / Trade-offs |
 |---|---|
 | Rigid, machine-verifiable contract (WSDL) — hard to integrate incorrectly | Verbose XML payloads — much larger than equivalent JSON |
-| Mature standards for security/transactions/reliable delivery | Steep learning curve, heavier tooling, slower to iterate on |
+| Mature standards for security/transactions/reliable delivery | Takes longer to learn, heavier tooling, slower to iterate on |
 | Transport-agnostic (HTTP, SMTP, message queues) | Rarely the right choice for a *new* API today — mentioned mainly for legacy-system interviews |
 
 ## 3. GraphQL
@@ -206,7 +216,7 @@ one-directional, server-to-client.
 Webhooks push events to the consumer instead of the consumer repeatedly
 asking "anything new?" — right for real-time notifications and
 async-workflow integrations, wrong for consumers behind a firewall that
-can't receive inbound requests, or for ultra-high-volume low-value
+can't receive inbound requests, or for very high-volume, low-value
 events where the overhead of a webhook per event isn't worth it.
 Basics: a subscription URL to register, retries with backoff on
 delivery failure, signature verification so the consumer can trust the
@@ -217,7 +227,7 @@ for anything large rather than pushing the full object every time.
 |---|---|
 | No polling waste — the consumer only does work when something happened | Consumer must expose a reachable public endpoint |
 | Near-real-time delivery | Delivery isn't guaranteed by default — needs retries, and the consumer must handle duplicates |
-| Decouples producer from needing to know when a consumer wants updates | Debugging is harder — failures happen async, out of band from any request the consumer made |
+| Decouples producer from needing to know when a consumer wants updates | Debugging is harder — failures happen later, separately from any request the consumer made |
 
 ---
 

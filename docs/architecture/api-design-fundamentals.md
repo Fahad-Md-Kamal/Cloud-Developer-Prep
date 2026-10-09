@@ -4,9 +4,12 @@ title: API Design Fundamentals
 
 # API Design Fundamentals
 
-Resource modeling, HTTP semantics, and versioning — framework-agnostic,
-applies whether the implementation is Django, FastAPI, or anything
-else. For framework-specific depth, see
+How to actually design a REST API — resource modeling, HTTP methods
+and status codes, and versioning — framework-agnostic, applies whether
+the implementation is Django, FastAPI, or anything else. For *why*
+REST is the default choice, see
+[API Paradigms & Patterns §1](api-paradigms-and-patterns.md#1-rest);
+for framework-specific depth, see
 [Frameworks → Django & DRF](../backend/python/django-orm.md) or
 [Frameworks → FastAPI](../backend/python/fastapi-dependency-injection.md).
 
@@ -51,7 +54,7 @@ changed the resource first, instead of silently overwriting their
 change.
 
 **`PATCH` vs `PUT`:** `PUT` replaces the whole resource; `PATCH` updates
-specific fields. Document `PATCH`'s merge semantics explicitly — a
+specific fields. Document exactly how `PATCH` merges fields — a
 client sending `{"status": "shipped"}` should update only `status`, not
 silently null out every other field.
 
@@ -74,32 +77,14 @@ Communicate deprecation via `Deprecation`/`Sunset` headers with a real
 timeline, and run contract tests between versions so a breaking change
 gets caught in CI, not by a client in production.
 
-## 4. "What's the actual purpose of using REST?"
+---
 
-**Answer:**
+## Where to Go Next
 
-- A uniform, resource-oriented interface — resources (nouns), a small
-  standard set of HTTP verbs/status codes, and representations (JSON)
-  — lets client and server evolve independently without a bespoke
-  contract per endpoint.
-- Statelessness — no server-side session required to interpret a
-  request — is the real enabler of horizontal scaling: any server
-  instance can handle any request, so load balancing never needs
-  sticky sessions, unlike a session-cookie-based design where a
-  balancer must route a client back to the same instance.
-- The RPC-style alternative (§1's "Bad" example) works too, but
-  couples client and server to a growing list of bespoke method names
-  instead of a small, predictable set of verbs — the thing that makes
-  a well-designed REST API's next endpoint guessable without reading
-  its docs.
-- **HATEOAS** (responses linking to related actions, so a client
-  discovers what it can do next from the response itself) is the most
-  commonly-omitted part of REST's original definition — worth naming
-  as "I know it exists, most real APIs skip it," not claiming you've
-  built it unless you actually have.
-
-For the full REST vs. SOAP vs. GraphQL vs. gRPC vs. WebSocket vs. SSE
-comparison, see [API Paradigms & Patterns](api-paradigms-and-patterns.md);
-for depth beyond the comparison, see the
-[GraphQL Deep Dive](graphql-deep-dive.md) and
-[gRPC Deep Dive](grpc-deep-dive.md).
+- **Why REST, and how it compares to SOAP/GraphQL/gRPC/WebSocket/SSE**
+  — [API Paradigms & Patterns](api-paradigms-and-patterns.md).
+- **Caching, rate limiting, and observability** for an API already
+  built this way — [API Production Readiness](api-production-readiness.md).
+- **Depth on a specific paradigm** — the
+  [GraphQL Deep Dive](graphql-deep-dive.md) and
+  [gRPC Deep Dive](grpc-deep-dive.md).

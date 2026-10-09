@@ -20,7 +20,7 @@ a `304 Not Modified` instead of the full payload again.
 **The hard part is always invalidation, not caching.** Key cache entries
 by everything they depend on (tenant + resource + version), and
 invalidate explicitly on the write path rather than relying on a short
-TTL to paper over staleness for data that needs to be fresh immediately
+TTL to hide staleness for data that needs to be fresh immediately
 after a write.
 
 ## 2. Rate Limiting & Security
