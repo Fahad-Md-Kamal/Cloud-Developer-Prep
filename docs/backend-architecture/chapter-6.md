@@ -138,6 +138,54 @@ the same dual-write discipline as a
 [database migration](../core-engineering-foundations/refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
 applied to a message format instead of a table.
 
+### 5. AWS SNS vs. SQS, and the Fan-Out Pattern
+
+**"Describe the difference between SNS and SQS in terms of architecture."**
+
+```
+# SQS alone: one queue, work consumed once -- a point-to-point queue
+Producer -> [SQS Queue] -> Consumer
+
+# SNS + SQS fan-out: one event, multiple independent consumers
+                 +-> [SQS Queue A] -> Service A (e.g. billing)
+Producer -> [SNS Topic] -+-> [SQS Queue B] -> Service B (e.g. analytics)
+                 +-> [SQS Queue C] -> Service C (e.g. notifications)
+```
+
+**Answer:**
+
+- **SQS** is a queue — a point-to-point hand-off. A message put on a
+  queue is delivered to (and removed by) exactly one consumer. This is
+  the AWS-native equivalent of the Redis task-queue role from
+  [§3 above](#3-choosing-between-kafka-and-redis): one producer, work
+  consumed once.
+- **SNS** is a pub/sub topic — a publisher sends one message to a
+  topic, and the topic pushes a copy to *every* subscriber, with no
+  single subscriber "consuming" it away from the others. On its own,
+  SNS has no durable storage or retry queue — if a subscriber is down
+  when the message is published, that subscriber simply misses it.
+- **The fan-out pattern** combines both: publish once to an SNS topic,
+  and subscribe multiple SQS queues to that topic — each queue gets
+  its own durable copy of every message. This is the AWS-native way to
+  get Kafka's "same event reaches multiple independent consumers"
+  property ([§3](#3-choosing-between-kafka-and-redis)) without running
+  Kafka: SNS does the broadcasting, SQS gives each consumer its own
+  durable, retriable, independently-scaled queue to work through at
+  its own pace.
+- **Why not subscribe services directly to SNS without SQS in
+  between?** Durability and backpressure — a direct SNS subscription
+  (HTTP endpoint, Lambda) has to process a message essentially
+  immediately or risk it being retried and eventually dropped per
+  SNS's own retry policy. Putting an SQS queue between the topic and
+  the consumer means a slow or temporarily-down consumer doesn't lose
+  messages — they sit durably in its queue until it catches up.
+
+| | SQS alone | SNS + SQS fan-out |
+|---|---|---|
+| Delivery | One message to one consumer | One message to every subscribed queue |
+| Use when | A single, well-defined worker does the work | Multiple independent services each need to react to the same event |
+| Failure isolation | N/A — one consumer | A slow/down consumer's queue backs up without affecting the others |
+
 ---
 
 ## Part 3: Inter-Service Communication

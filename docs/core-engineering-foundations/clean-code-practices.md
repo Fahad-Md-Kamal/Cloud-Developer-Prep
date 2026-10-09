@@ -82,6 +82,30 @@ unit tests, fewer integration, fewest end-to-end — chasing 100% coverage
 on everything is lower value than deep coverage on auth, billing, and
 anything touching PII.
 
+**"What's the actual difference between integration testing and
+end-to-end testing?"**
+
+- **Integration testing** verifies that two or more real components
+  work correctly *together* — a service layer against a real
+  (test) database, or a real call to an internal dependency — but
+  still within one process/service boundary, with external
+  third-party systems typically still faked.
+- **End-to-end (E2E) testing** exercises the *entire* deployed system
+  the way a real user or client would — hitting a real running API
+  over HTTP, through real infrastructure (load balancer, auth,
+  database), sometimes across multiple real services, with little or
+  nothing mocked.
+- The practical difference is scope and cost: an integration test
+  proves "my service talks to its database correctly"; an E2E test
+  proves "a user can actually sign up, place an order, and receive a
+  confirmation, start to finish, against something that looks like
+  production." E2E tests catch what integration tests structurally
+  can't — misconfigured infrastructure, a missing environment
+  variable, two correctly-tested services that don't actually agree on
+  a contract — at the cost of being the slowest, flakiest, and most
+  expensive tests to write and maintain, which is exactly why the test
+  pyramid puts fewest tests at that level.
+
 | Pros | Cons / Trade-offs |
 |---|---|
 | Fast feedback loop — unit tests run in seconds | Over-mocking can mean tests pass while real integration is broken |

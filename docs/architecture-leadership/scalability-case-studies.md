@@ -65,6 +65,34 @@ together end to end.
   read-heavy, non-financial data — accept a bounded staleness window
   in exchange for availability and lower latency.
 
+**Follow-up — "what does PACELC add on top of CAP?"**
+
+- CAP only describes behavior **during a network partition** (`P`):
+  choose availability (`A`) or consistency (`C`). PACELC's actual
+  contribution is pointing out that the interesting trade-off doesn't
+  disappear once the partition heals — **"Else"** (`E`), under normal
+  operation with no partition at all, a system still has to choose
+  between **latency** (`L`) and **consistency** (`C`).
+- Concretely: a single-leader database that synchronously replicates
+  every write to a replica before acknowledging it is choosing
+  consistency over latency *every single write*, partition or not — the
+  write has to wait for that round trip. An async-replication setup
+  acknowledges immediately (low latency) but a read against the
+  replica right after can see stale data — consistency over latency,
+  chosen on the "Else" side of the formula, not the partition side.
+- This is why PACELC is the more complete framework for a real system
+  design conversation: CAP alone only equips you to answer "what
+  happens during a partition" (a rare event); PACELC also makes you
+  name the latency/consistency trade-off a system is making on every
+  single normal-operation write, which is the trade-off actually being
+  paid most of the time.
+- Classifying real systems: Dynamo-style stores (Cassandra, DynamoDB
+  default settings) are **PA/EL** — available under partition, low
+  latency normally, consistency sacrificed in both cases. A
+  traditional single-leader relational DB configured for synchronous
+  replication is **PC/EC** — consistent in both cases, at the cost of
+  latency and availability.
+
 ## 4. "Microservices vs. monolith — how do you actually decide, instead of defaulting to microservices because it sounds more senior?"
 
 **Answer:**

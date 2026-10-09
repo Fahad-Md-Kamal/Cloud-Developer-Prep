@@ -14,6 +14,25 @@ concurrency without threads at all.
 
 ## Choosing Between Threading, AsyncIO, and Multiprocessing
 
+**Terminology first — "what's the difference between AsyncIO and concurrency?"**
+
+- **Concurrency** is the general concept: multiple tasks make progress
+  over overlapping time periods, without necessarily running at the
+  exact same instant. Threading, AsyncIO, *and* multiprocessing are
+  all mechanisms for achieving concurrency — AsyncIO isn't a competing
+  concept to concurrency, it's one specific way to get it.
+- **Parallelism** is the stricter case: tasks genuinely executing at
+  the same instant, which requires multiple CPU cores actually running
+  Python bytecode simultaneously. In CPython, only multiprocessing
+  achieves real parallelism — threading and AsyncIO both give
+  concurrency *without* parallelism, since the GIL (for threads) and
+  the single event-loop thread (for AsyncIO) each still run exactly
+  one line of Python at a time.
+- So "AsyncIO vs. concurrency" is really "one specific concurrency
+  mechanism vs. the general category it belongs to" — the more useful
+  question is the one the rest of this page answers: *which*
+  concurrency mechanism fits a given workload.
+
 **The one-liner to lead with:** "threads for I/O-bound, processes for
 CPU-bound, AsyncIO for *massively* concurrent I/O on one thread" —
 then be ready to explain *why*, not just recite it. The sections below
@@ -197,6 +216,49 @@ async def main():
   multiprocessing instead of AsyncIO here, see
   [Choosing Between Threading, AsyncIO, and Multiprocessing](#choosing-between-threading-asyncio-and-multiprocessing)
   above.
+
+## 4. "How does the OS actually handle input and output, and how does that relate to AsyncIO?"
+
+**Answer:**
+
+- At the OS level, I/O (reading a socket, a file, waiting on a
+  network response) works through system calls — a process asks the
+  kernel to perform the operation, and the kernel manages the actual
+  hardware (network card, disk controller) and interrupts the process
+  when data is ready. The two classic models:
+    - **Blocking I/O** — the calling thread is suspended by the OS
+      scheduler until the operation completes. This is what a plain
+      `socket.recv()` does by default: the thread does nothing else
+      until data arrives.
+    - **Non-blocking I/O with readiness notification** — the process
+      asks the kernel "tell me which of these N file descriptors are
+      ready to read/write right now" via a system call
+      (`select`/`poll` historically, `epoll` on Linux, `kqueue` on
+      BSD/macOS), then only acts on the ones that are actually ready —
+      no thread sits blocked waiting on any single one.
+- **This second model is exactly what AsyncIO's event loop is built
+  on.** `asyncio`'s default event loop uses `epoll` (Linux) under the
+  hood: it registers every open socket a coroutine is waiting on, asks
+  the kernel which ones are ready, and resumes only those coroutines —
+  the same mechanism as
+  [§3's `gather()` explanation](#3-asyncio-runs-on-a-single-thread-how-does-it-get-concurrency-out-of-that-and-what-does-using-it-actually-look-like),
+  just one level deeper: the event loop's own "which task is ready to
+  run" decision is itself answered by a single OS readiness-notification
+  call covering every waiting task at once, not N separate blocking
+  calls.
+- **Why this explains thousands of concurrent connections on one
+  thread:** a thread-per-connection blocking model needs one OS thread
+  per in-flight connection — real memory and scheduling overhead past
+  a few thousand. `epoll` lets one thread ask about thousands of file
+  descriptors in a single call, so AsyncIO's concurrency ceiling is
+  governed by memory-per-coroutine (cheap) rather than
+  memory-per-OS-thread (comparatively expensive).
+- **Interview point:** "AsyncIO achieves concurrency through
+  cooperative multitasking" is the *application-level* answer (§3);
+  "AsyncIO's event loop is a thin wrapper around epoll/kqueue readiness
+  notification" is the *systems-level* answer underneath it — being
+  able to go one layer deeper than "it uses `await`" is what
+  distinguishes a surface answer from a strong one here.
 
 ---
 
