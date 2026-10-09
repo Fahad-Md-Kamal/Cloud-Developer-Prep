@@ -79,6 +79,7 @@ nav = [
           { "API Design Fundamentals" = "architecture/api-design-fundamentals.md" },
           { "API Production Readiness" = "architecture/api-production-readiness.md" },
           { "API Paradigms & Patterns" = "architecture/api-paradigms-and-patterns.md" },
+          { "gRPC Deep Dive" = "architecture/grpc-deep-dive.md" },
       ] },
       { "AuthN/AuthZ & Security" = "architecture/chapter-4.md" },
       { "Performance Profiling & Caching" = "architecture/chapter-5.md" },

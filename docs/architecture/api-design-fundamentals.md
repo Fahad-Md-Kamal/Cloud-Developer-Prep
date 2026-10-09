@@ -144,6 +144,8 @@ Cookie: session_id=abc123               # server looks up session state to know 
   "the server process handling this specific request doesn't need to
   remember the previous one to process it correctly."
 
-**"How does gRPC compare to REST?"** — covered in depth, with a full
-comparison table against GraphQL/SOAP/WebSocket/SSE too, in
-[API Paradigms & Patterns §4](api-paradigms-and-patterns.md#4-grpc).
+**"How does gRPC compare to REST?"** — the comparison basics are in
+[API Paradigms & Patterns §4](api-paradigms-and-patterns.md#4-grpc),
+with a full comparison table against GraphQL/SOAP/WebSocket/SSE; for
+Protobuf internals, the four RPC types, and the gRPC-specific
+load-balancing gotcha, see the [gRPC Deep Dive](grpc-deep-dive.md).

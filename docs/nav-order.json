@@ -176,6 +176,10 @@
     "url": "architecture/api-paradigms-and-patterns/"
   },
   {
+    "title": "gRPC Deep Dive",
+    "url": "architecture/grpc-deep-dive/"
+  },
+  {
     "title": "AuthN/AuthZ & Security",
     "url": "architecture/chapter-4/"
   },
