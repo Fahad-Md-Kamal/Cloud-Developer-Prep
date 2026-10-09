@@ -228,8 +228,20 @@
     "url": "architecture/api-production-readiness/"
   },
   {
-    "title": "AuthN/AuthZ & Security",
-    "url": "architecture/chapter-4/"
+    "title": "Authentication Patterns",
+    "url": "architecture/authentication-patterns/"
+  },
+  {
+    "title": "Authorization Patterns",
+    "url": "architecture/authorization-patterns/"
+  },
+  {
+    "title": "Security Hardening",
+    "url": "architecture/security-hardening/"
+  },
+  {
+    "title": "Threat Detection & Monitoring",
+    "url": "architecture/threat-detection-and-monitoring/"
   },
   {
     "title": "Performance Profiling & Caching",

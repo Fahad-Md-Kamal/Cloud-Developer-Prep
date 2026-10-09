@@ -192,7 +192,11 @@ sits underneath.
     - [GraphQL Deep Dive](architecture/graphql-deep-dive.md)
     - [gRPC Deep Dive](architecture/grpc-deep-dive.md)
     - [API Production Readiness](architecture/api-production-readiness.md)
-- [Authentication, Authorization, and Security](architecture/chapter-4.md)
+- **Authentication, Authorization, and Security**
+    - [Authentication Patterns](architecture/authentication-patterns.md)
+    - [Authorization Patterns](architecture/authorization-patterns.md)
+    - [Security Hardening](architecture/security-hardening.md)
+    - [Threat Detection & Monitoring](architecture/threat-detection-and-monitoring.md)
 - [Performance Profiling, Optimization, and Caching](architecture/chapter-5.md)
 - [Version Control & Git Workflows](architecture/version-control-and-git-workflows.md)
 - **System Design Interviews**
