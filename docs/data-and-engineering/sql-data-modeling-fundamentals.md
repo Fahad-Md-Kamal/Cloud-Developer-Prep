@@ -276,6 +276,37 @@ ALTER TABLE orders
 | `UNIQUE` closes race conditions that an application-level "check then insert" can't | Migrations that add a constraint can fail against existing data that already violates it |
 | `ON DELETE` behavior makes cascade/restrict/null-out an explicit, reviewable schema decision | Overly strict constraints can make legitimate edge-case data operations harder than they should be |
 
+## 6. "How would you handle MySQL slow-query optimization, sharding, and partitioning?"
+
+**Answer:**
+
+- These are the same three tools covered in depth elsewhere on this
+  site for Postgres and MongoDB — MySQL's answers are the same concepts
+  under different names, not a different problem:
+    - **Slow-query diagnosis** — `EXPLAIN` on the query, check whether
+      it's actually using an index or falling back to a table scan,
+      same workflow as
+      [PostgreSQL for Scale's query-diagnosis section](postgresql-for-scale.md#2-how-do-you-find-out-why-a-query-is-slow-instead-of-guessing).
+    - **Partitioning** — splitting one table into smaller physical
+      pieces by a key (commonly date range) so queries that filter on
+      that key only scan the relevant partition — the same trade-off
+      (query speed on the partition key vs. complexity for queries that
+      don't filter on it) as
+      [PostgreSQL for Scale §3](postgresql-for-scale.md#3-when-would-you-reach-for-table-partitioning-and-what-does-it-cost-you).
+    - **Sharding** — splitting data *horizontally across separate
+      database instances* (not just separate tables on one instance)
+      by a shard key, trading single-instance capacity limits for the
+      operational complexity of cross-shard queries — the same
+      shard-key-selection problem as
+      [MongoDB for Scale §3](mongodb-for-scale.md#3-how-does-mongodb-scale-writes-and-reads-and-how-do-you-pick-a-shard-key).
+- **The one real MySQL-specific wrinkle**: MySQL's query planner
+  (especially on older versions, and depending on storage engine —
+  InnoDB vs. the legacy MyISAM) has historically been less sophisticated
+  than Postgres's at choosing a good plan for complex joins — in
+  practice this means `EXPLAIN` output needs more hands-on scrutiny on
+  MySQL, and a query that performs fine on Postgres isn't guaranteed to
+  perform the same way on MySQL without re-verifying its actual plan.
+
 ---
 
 ## Code Samples

@@ -138,7 +138,80 @@ the same dual-write discipline as a
 [database migration](../core-engineering-foundations/refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
 applied to a message format instead of a table.
 
-### 5. AWS SNS vs. SQS, and the Fan-Out Pattern
+### 5. AWS SQS vs. Kafka, and How to Actually Handle Duplicate Events
+
+**"Where have you used AWS SQS, and how does it differ from Kafka?"**
+
+**Answer:**
+
+- This is the AWS-managed version of
+  [§3's Kafka-vs-Redis decision](#3-choosing-between-kafka-and-redis),
+  with SQS playing Redis's role — a simple, durable, point-to-point
+  queue with no partitioning or consumer-group concepts to manage.
+- **SQS**: fully managed, scales transparently, messages are deleted
+  once consumed (or after a visibility timeout expires and they're
+  redelivered) — no replay, no multiple independent consumer groups
+  reading the same stream at different offsets.
+- **Kafka**: a durable, replayable log — multiple independent consumer
+  groups can read the same topic at their own pace, and a consumer can
+  rewind and reprocess history. This is the capability SQS fundamentally
+  doesn't have, and it's the real reason to reach for Kafka (or
+  Kinesis, its AWS-managed equivalent) over SQS: needing replay, or
+  needing the *same* event stream read by several independent systems
+  without an [SNS fan-out](#6-aws-sns-vs-sqs-and-the-fan-out-pattern)
+  in front of it.
+- **Operational trade-off**: SQS requires essentially no operational
+  decisions — create a queue, send, receive. Kafka (or Kinesis)
+  requires partition-count and retention decisions up front, the same
+  "don't reach for the heavier tool before you need its specific
+  capability" judgment as §3.
+
+**"How does event-driven architecture actually work, and how do you handle duplicate events?"**
+
+```python
+# The naive version -- processes every message exactly as delivered.
+# At-least-once delivery (SQS, Kafka, SNS) means a message CAN be
+# delivered more than once -- a consumer crash after processing but
+# before acknowledging is enough to trigger redelivery.
+def handle_order_placed(event):
+    charge_customer(event["order_id"], event["amount"])  # runs twice -> double charge
+
+# The idempotent version -- the operation is made safe to run more than once.
+def handle_order_placed(event):
+    if ProcessedEvent.objects.filter(event_id=event["event_id"]).exists():
+        return  # already handled -- this is a redelivery, not a new event
+    with transaction.atomic():
+        charge_customer(event["order_id"], event["amount"])
+        ProcessedEvent.objects.create(event_id=event["event_id"])
+```
+
+**Answer:**
+
+- Event-driven architecture means a service publishes a fact ("order
+  placed") without knowing or caring who reacts to it — each consumer
+  independently decides what to do when that fact occurs, the same
+  decoupling [Observer](../core-engineering-foundations/design-patterns.md#observer)
+  provides inside a single process, at the scale of whole services.
+- **The duplicate-event problem is not an edge case — it's the default
+  guarantee.** Virtually every real message system (SQS, Kafka, SNS)
+  offers **at-least-once** delivery, not exactly-once: a consumer that
+  crashes after processing a message but before acknowledging it will
+  see that message redelivered. Design for this up front, don't treat
+  it as a rare failure to patch later.
+- **The actual fix is idempotency, not "try to prevent duplicates"** —
+  trying to guarantee exactly-once delivery at the messaging layer is
+  the wrong layer to solve it at. Instead, make *handling* a duplicate
+  safe: record the event's unique ID as having been processed (in the
+  same transaction as the side effect itself, as in the example above)
+  and check that record before acting, so redelivery becomes a cheap
+  no-op instead of a double-charge.
+- This is the same pattern named in passing elsewhere in this
+  chapter's Pros/Cons table (["compensating actions must be
+  idempotent"](#8-the-saga-pattern-for-distributed-transactions))
+  — here's the concrete mechanism behind that requirement, not just
+  the name of it.
+
+### 6. AWS SNS vs. SQS, and the Fan-Out Pattern
 
 **"Describe the difference between SNS and SQS in terms of architecture."**
 
@@ -190,7 +263,7 @@ Producer -> [SNS Topic] -+-> [SQS Queue B] -> Service B (e.g. analytics)
 
 ## Part 3: Inter-Service Communication
 
-### 5. Synchronous vs. Asynchronous, and the Hybrid Middle Ground
+### 7. Synchronous vs. Asynchronous, and the Hybrid Middle Ground
 
 **"When would you use a REST call between two services instead of an
 event, and vice versa?"**
@@ -206,7 +279,7 @@ the user is waiting on an answer for right now (place an order), and
 events for everything that can happen a moment later (send the
 confirmation email, update analytics, warm a cache).
 
-### 6. The Saga Pattern for Distributed Transactions
+### 8. The Saga Pattern for Distributed Transactions
 
 **"An order touches inventory, payment, and shipping services — none
 share a database. How do you keep that consistent, and what happens
@@ -242,7 +315,7 @@ high availability) for every saga it runs.
 | Orchestration: one place to see and debug the whole transaction's state | Orchestration: the coordinator is now a critical dependency for every saga |
 | Both: failures are recoverable instead of leaving half-applied state | Both: compensating actions must be idempotent — a saga step can be retried or replayed |
 
-### 7. Service Discovery and Inter-Service Load Balancing
+### 9. Service Discovery and Inter-Service Load Balancing
 
 **"Service A needs to call Service B, which has five replicas that
 scale up and down. How does A find a healthy instance?"**

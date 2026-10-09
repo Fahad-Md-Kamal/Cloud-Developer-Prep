@@ -177,6 +177,89 @@ case <-time.After(1 * time.Second):
   communicate by sharing memory, share memory by communicating" is
   Go's own framing of this.
 
+**A real interview progression — word count, built up in three steps**
+(a live-coding exercise actually asked this way: solve it, then make
+it concurrent, then make it thread-safe):
+
+```go
+// Step 1: sequential -- the correctness baseline
+func wordCount(docs []string) map[string]int {
+    counts := make(map[string]int)
+    for _, doc := range docs {
+        for _, word := range strings.Fields(doc) {
+            counts[word]++
+        }
+    }
+    return counts
+}
+
+// Step 2: "make it concurrent" -- the naive, BROKEN version most
+// candidates write first: a plain map has no synchronization, so
+// concurrent writes from multiple goroutines race exactly like
+// Python's counter += 1 (see Concurrency & AsyncIO's race condition
+// demo) -- this version will panic ("concurrent map writes") or
+// silently lose updates under -race.
+func wordCountConcurrentBroken(docs []string) map[string]int {
+    counts := make(map[string]int)
+    var wg sync.WaitGroup
+    for _, doc := range docs {
+        wg.Add(1)
+        go func(d string) {
+            defer wg.Done()
+            for _, word := range strings.Fields(d) {
+                counts[word]++ // DATA RACE: unsynchronized map write
+            }
+        }(doc)
+    }
+    wg.Wait()
+    return counts
+}
+
+// Step 3: "make it thread-safe" -- a mutex around the shared map
+func wordCountSafe(docs []string) map[string]int {
+    counts := make(map[string]int)
+    var mu sync.Mutex
+    var wg sync.WaitGroup
+    for _, doc := range docs {
+        wg.Add(1)
+        go func(d string) {
+            defer wg.Done()
+            local := make(map[string]int)
+            for _, word := range strings.Fields(d) {
+                local[word]++ // accumulate locally first -- no lock needed yet
+            }
+            mu.Lock()
+            for word, n := range local {
+                counts[word] += n // merge into shared state under the lock
+            }
+            mu.Unlock()
+        }(doc)
+    }
+    wg.Wait()
+    return counts
+}
+```
+
+- **The interview-level insight**: a plain Go `map` is exactly as
+  unsynchronized as a Python `dict` or `int` — "goroutines are
+  lightweight" says nothing about whether shared state they touch is
+  safe, the same lesson as
+  [Concurrency & AsyncIO's threading pitfalls](../python/concurrency-and-asyncio.md#2-what-kinds-of-problems-do-threaded-programs-face-and-how-do-you-overcome-them)
+  applied to a different language.
+- `sync.Mutex` is Go's direct equivalent of Python's `threading.Lock`
+  — `mu.Lock()`/`mu.Unlock()` (usually paired with `defer mu.Unlock()`
+  in real code) bracket the critical section exactly like Python's
+  `with lock:`.
+- Accumulating into a **local** map per goroutine and only locking to
+  merge it into the shared map at the end (Step 3) minimizes time
+  spent holding the lock — the same contention-reduction instinct as
+  batching writes, rather than taking the lock on every single
+  increment.
+- `go vet` and running tests with `go test -race` catch exactly this
+  class of bug — the Go toolchain's race detector would flag Step 2's
+  `counts[word]++` immediately, the equivalent rigor to actually
+  running Python's `threading` race demo enough times to see it fail.
+
 ## Error Handling — No Exceptions
 
 ```python

@@ -184,6 +184,51 @@ being deployed.
 
     The split model (the diagram above) is the one to reach for once one of the failure modes above actually happens, not preemptively — the same "don't split until it hurts" judgment as any other premature abstraction. A small project or a single-team setup is usually better off with one pipeline and the `changeset` guard than with two pipelines and the coordination overhead of keeping them in sync.
 
+## "Every Pipeline Stage Is Green, But the Change Still Failed in Production"
+
+A real interview question, and the question a green pipeline can't
+answer on its own.
+
+**Answer:**
+
+- A green pipeline proves the things it actually checked — the build
+  compiled, the tests it ran passed, the deploy step completed without
+  erroring. It says nothing about the things it *didn't* check, which
+  is where this failure mode lives.
+- **The systematic way to find it, not guess at it:**
+    - **Compare environments first** — a passing CI run and a failing
+      production usually differ in exactly one dimension: environment
+      variables/config, a feature flag state, real traffic/data shape
+      the test fixtures didn't represent, or a dependency version that
+      drifted between the CI image and production (the whole reason
+      [Tagging by Commit](docker-production-images.md#tagging-by-commit)
+      matters — "it worked in staging" is only meaningful if staging
+      and production are provably running the same artifact).
+    - **Check what the test suite didn't cover** — the pipeline being
+      green only proves the *existing* tests pass; a gap in test
+      coverage for the exact code path that broke is the single most
+      common real answer here, not some exotic infrastructure issue.
+    - **Look for a race or a load-dependent issue** — tests typically
+      run with one request at a time, low concurrency, small data
+      volumes; a bug that only appears under real concurrent load or
+      data volume (a race condition, an N+1 query that's fine at 10
+      rows and catastrophic at 10,000) is invisible to a green CI run
+      by construction.
+    - **Check the deploy mechanism itself** — a successful `terraform
+      apply`/`kubectl apply` exit code doesn't guarantee the new
+      version is actually serving traffic correctly; this is exactly
+      what a [health endpoint](docker-production-images.md#health-endpoints)
+      and post-deploy smoke tests close the gap on, and why
+      [progressive delivery](#progressive-delivery-runbook-readiness-review)
+      below — canary/blue-green with real monitoring — catches this
+      class of failure before it reaches 100% of traffic.
+- **The honest answer, stated directly:** "green pipeline" means
+  "everything I decided to test automatically passed" — the real skill
+  being tested by this question is knowing that's a narrower guarantee
+  than "the change is correct," and having a systematic way to close
+  that gap (environment diffing, coverage gaps, load-dependent bugs,
+  deploy verification) rather than randomly guessing at root causes.
+
 ## Progressive Delivery, Runbook, Readiness Review
 
 - Blue/green and canary driven from the pipeline
