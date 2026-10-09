@@ -67,7 +67,7 @@ find the step that produced the bad output" instead of guessing.
 **Where this actually shows up:** the JD-level requirement "monitor
 backend performance, debug production issues, improve observability"
 applied specifically to LLM/agent systems — traditional APM tools
-(Prometheus/Grafana, see [Chapter 10](../backend/chapter-10.md)) show you latency
+(Prometheus/Grafana, see [Metrics & Prometheus](../backend/metrics-and-prometheus.md)) show you latency
 and error rates, but not *why* an agent produced a specific wrong
 answer. LangSmith fills that gap specifically for LLM call chains.
 

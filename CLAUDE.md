@@ -86,6 +86,21 @@ Notes:
   don't need retroactive rewriting unless asked — this governs new
   content and answers going forward.
 
+### Say less, not more
+
+The more a reader has to read to find the key point, the more likely
+they lose it. Favor the shortest sentence that still carries the real
+information over a longer, more complete-sounding one — this applies
+to bullet *content*, not just bullet *formatting*.
+
+- Don't restate the question inside the answer, don't add a throat-clearing
+  lead-in sentence before the actual point, and don't give three examples
+  where one makes the point.
+- A good test before finalizing a section: could the same key
+  information survive losing a third of the words? If yes, cut them.
+- This doesn't mean dropping real trade-offs or nuance that changes the
+  answer — it means not padding the sentences that carry them.
+
 ### Plain vocabulary, not fancy synonyms
 
 Prefer the common, everyday word over an obscure or high-register

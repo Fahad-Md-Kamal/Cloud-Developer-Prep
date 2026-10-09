@@ -60,11 +60,30 @@ nav = [
           { "Kotlin for JVM Backend Interviews" = "backend/kotlin/kotlin-for-jvm-interviews.md" },
       ] },
       { "Microservices & Distributed Systems" = [
-          { "Microservices & Message Queues" = "backend/chapter-6.md" },
-          { "Distributed System Design" = "backend/chapter-7.md" },
-          { "API Gateway & Rate Limiting" = "backend/chapter-9.md" },
-          { "Kong API Gateway" = "backend/kong-api-gateway.md" },
-          { "Observability" = "backend/chapter-10.md" },
+          { "Microservices & Messaging" = [
+              { "Service Boundaries & Architecture" = "backend/service-boundaries-and-architecture.md" },
+              { "Messaging: Kafka, Redis & AWS" = "backend/messaging-kafka-redis-and-aws.md" },
+              { "Inter-Service Communication" = "backend/inter-service-communication.md" },
+          ] },
+          { "Distributed System Design" = [
+              { "Fault Tolerance Patterns" = "backend/fault-tolerance-patterns.md" },
+              { "Load Balancing & Auto-Scaling" = "backend/load-balancing-and-autoscaling.md" },
+              { "Consistency & Consensus" = "backend/consistency-and-consensus.md" },
+              { "Data & Capacity Scaling" = "backend/data-and-capacity-scaling.md" },
+          ] },
+          { "API Gateway & Resilience" = [
+              { "API Gateway Architecture" = "backend/api-gateway-architecture.md" },
+              { "Rate Limiting Strategies" = "backend/rate-limiting-strategies.md" },
+              { "Circuit Breakers, Retries & Bulkheads" = "backend/circuit-breakers-retries-and-bulkheads.md" },
+              { "API Management & Versioning" = "backend/api-management-and-versioning.md" },
+              { "Kong API Gateway" = "backend/kong-api-gateway.md" },
+          ] },
+          { "Observability" = [
+              { "Structured Logging" = "backend/structured-logging.md" },
+              { "Metrics & Prometheus" = "backend/metrics-and-prometheus.md" },
+              { "Distributed Tracing" = "backend/distributed-tracing.md" },
+              { "Dashboards & Alerting" = "backend/dashboards-and-alerting.md" },
+          ] },
       ] },
   ] },
   { "Architecture" = [

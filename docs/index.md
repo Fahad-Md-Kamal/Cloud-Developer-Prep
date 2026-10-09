@@ -152,12 +152,27 @@ Django/FastAPI.
 
 **Microservices & Distributed Systems**
 
-- [Microservices Design with FastAPI & Message Queues](backend/chapter-6.md) —
-  includes AWS SNS/SQS, the fan-out pattern, and idempotent event handling
-- [Distributed System Design](backend/chapter-7.md)
-- [API Gateway, Rate Limiting, and Circuit Breaking](backend/chapter-9.md)
-- [Kong API Gateway](backend/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
-- [Observability with Prometheus & Grafana](backend/chapter-10.md)
+- **Microservices & Messaging**
+    - [Service Boundaries & Architecture](backend/service-boundaries-and-architecture.md)
+    - [Messaging: Kafka, Redis & AWS](backend/messaging-kafka-redis-and-aws.md) —
+      includes SNS/SQS, the fan-out pattern, and idempotent event handling
+    - [Inter-Service Communication](backend/inter-service-communication.md)
+- **Distributed System Design**
+    - [Fault Tolerance Patterns](backend/fault-tolerance-patterns.md)
+    - [Load Balancing & Auto-Scaling](backend/load-balancing-and-autoscaling.md)
+    - [Consistency & Consensus](backend/consistency-and-consensus.md)
+    - [Data & Capacity Scaling](backend/data-and-capacity-scaling.md)
+- **API Gateway & Resilience**
+    - [API Gateway Architecture](backend/api-gateway-architecture.md)
+    - [Rate Limiting Strategies](backend/rate-limiting-strategies.md)
+    - [Circuit Breakers, Retries & Bulkheads](backend/circuit-breakers-retries-and-bulkheads.md)
+    - [API Management & Versioning](backend/api-management-and-versioning.md)
+    - [Kong API Gateway](backend/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
+- **Observability**
+    - [Structured Logging](backend/structured-logging.md)
+    - [Metrics & Prometheus](backend/metrics-and-prometheus.md)
+    - [Distributed Tracing](backend/distributed-tracing.md)
+    - [Dashboards & Alerting](backend/dashboards-and-alerting.md)
 
 ### Architecture
 

@@ -124,24 +124,68 @@
     "url": "backend/kotlin/kotlin-for-jvm-interviews/"
   },
   {
-    "title": "Microservices & Message Queues",
-    "url": "backend/chapter-6/"
+    "title": "Service Boundaries & Architecture",
+    "url": "backend/service-boundaries-and-architecture/"
   },
   {
-    "title": "Distributed System Design",
-    "url": "backend/chapter-7/"
+    "title": "Messaging: Kafka, Redis & AWS",
+    "url": "backend/messaging-kafka-redis-and-aws/"
   },
   {
-    "title": "API Gateway & Rate Limiting",
-    "url": "backend/chapter-9/"
+    "title": "Inter-Service Communication",
+    "url": "backend/inter-service-communication/"
+  },
+  {
+    "title": "Fault Tolerance Patterns",
+    "url": "backend/fault-tolerance-patterns/"
+  },
+  {
+    "title": "Load Balancing & Auto-Scaling",
+    "url": "backend/load-balancing-and-autoscaling/"
+  },
+  {
+    "title": "Consistency & Consensus",
+    "url": "backend/consistency-and-consensus/"
+  },
+  {
+    "title": "Data & Capacity Scaling",
+    "url": "backend/data-and-capacity-scaling/"
+  },
+  {
+    "title": "API Gateway Architecture",
+    "url": "backend/api-gateway-architecture/"
+  },
+  {
+    "title": "Rate Limiting Strategies",
+    "url": "backend/rate-limiting-strategies/"
+  },
+  {
+    "title": "Circuit Breakers, Retries & Bulkheads",
+    "url": "backend/circuit-breakers-retries-and-bulkheads/"
+  },
+  {
+    "title": "API Management & Versioning",
+    "url": "backend/api-management-and-versioning/"
   },
   {
     "title": "Kong API Gateway",
     "url": "backend/kong-api-gateway/"
   },
   {
-    "title": "Observability",
-    "url": "backend/chapter-10/"
+    "title": "Structured Logging",
+    "url": "backend/structured-logging/"
+  },
+  {
+    "title": "Metrics & Prometheus",
+    "url": "backend/metrics-and-prometheus/"
+  },
+  {
+    "title": "Distributed Tracing",
+    "url": "backend/distributed-tracing/"
+  },
+  {
+    "title": "Dashboards & Alerting",
+    "url": "backend/dashboards-and-alerting/"
   },
   {
     "title": "SOLID Principles",

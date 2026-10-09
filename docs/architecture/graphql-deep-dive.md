@@ -159,7 +159,7 @@ mutation {
   REST — GraphQL's spec says nothing about retry-safety; a mutation
   that isn't naturally idempotent needs the same idempotency-key
   pattern as
-  [an at-least-once message handler](../backend/chapter-6.md#5-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events)
+  [an at-least-once message handler](../backend/messaging-kafka-redis-and-aws.md#3-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events)
   if it needs to tolerate retries safely.
 
 ## 4. Why GraphQL Is Hard to Cache at the HTTP Layer

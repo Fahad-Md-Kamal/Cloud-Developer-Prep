@@ -75,9 +75,10 @@ page is the interview-framing layer, not a re-derivation.
 - The interview-level judgment call is usually "synchronous call vs.
   queue," not picking a specific broker — be ready to justify why a
   given interaction needs to be async at all.
-- For the concrete choice between message brokers and the patterns
-  built on top of them (sagas, schema evolution), see
-  [Chapter 6: Microservices & Message Queues](../backend/chapter-6.md)
+- For the concrete choice between message brokers, see
+  [Messaging: Kafka, Redis & AWS](../backend/messaging-kafka-redis-and-aws.md);
+  for the patterns built on top of them (sagas), see
+  [Inter-Service Communication](../backend/inter-service-communication.md)
   and [Chapter 27: Event-Driven Architectures](chapter-27.md).
 
 ## 5. "When does a CDN or edge computing actually matter for a design?"

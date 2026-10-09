@@ -65,7 +65,7 @@ message OrderResponse {
       name); changing a field's *number* or its *wire type* is a
       breaking change.
 - This is the same additive-first discipline as
-  [Schema Evolution for Long-Lived Event Streams](../backend/chapter-6.md#4-schema-evolution-for-long-lived-event-streams),
+  [Schema Evolution for Long-Lived Event Streams](../backend/messaging-kafka-redis-and-aws.md#2-schema-evolution-for-long-lived-event-streams),
   applied to RPC contracts instead of Kafka events — the same lesson
   shows up at every layer that needs forward/backward compatibility.
 

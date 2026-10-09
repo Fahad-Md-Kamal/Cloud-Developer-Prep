@@ -8,7 +8,9 @@ The specific gateway product interviewers mean when a JD says "API
 Gateway (Kong)" — what it adds over a plain reverse proxy, and the
 plugins that cover auth/rate limiting/multi-tenancy. For the general
 API gateway concepts (not tied to one product), see
-[Chapter 9: API Gateway, Rate Limiting, and Circuit Breaking Patterns](chapter-9.md).
+[API Gateway Architecture](api-gateway-architecture.md),
+[Rate Limiting Strategies](rate-limiting-strategies.md), and
+[Circuit Breakers, Retries & Bulkheads](circuit-breakers-retries-and-bulkheads.md).
 
 ## 1. "What does Kong actually add on top of a plain reverse proxy like nginx?"
 

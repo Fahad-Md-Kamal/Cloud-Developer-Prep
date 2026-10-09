@@ -63,8 +63,10 @@ see [Django & DRF](django-orm.md) and
 - Yes, commonly: Django for the primary web app and admin/back-office,
   FastAPI for a specific high-throughput or async-heavy service (an
   AI/LLM gateway, a webhook processor) — not mutually exclusive at the
-  org level. Matches how [Chapter 6](../chapter-6.md) treats FastAPI as
-  one service type among several in a microservices architecture.
+  org level. Matches how
+  [Service Boundaries & Architecture](../service-boundaries-and-architecture.md)
+  treats FastAPI as one service type among several in a microservices
+  architecture.
 
 | Pros: Django | Cons: Django |
 |---|---|
