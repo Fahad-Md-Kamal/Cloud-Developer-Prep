@@ -104,6 +104,11 @@ same backend.
 | Strongly-typed schema is a real, enforced contract | A naive resolver can hide an N+1 query problem behind one deceptively simple query |
 | Great for aggregating multiple backend resources for a UI | More backend complexity — resolvers, schema stitching, query cost/depth limiting |
 
+Resolvers, the N+1 problem and DataLoader, why GraphQL is hard to
+cache at the HTTP layer, subscriptions, federation, and query-depth
+security concerns are covered in full in the
+[GraphQL Deep Dive](graphql-deep-dive.md).
+
 ## 4. gRPC
 
 ```protobuf
@@ -221,5 +226,5 @@ for anything large rather than pushing the full object every time.
 |---|---|---|---|---|---|---|
 | Payload | JSON | XML | JSON | Protobuf | Any | Text (`data:` events) |
 | Direction | Request/response | Request/response | Request/response | Request/response + streaming | Bidirectional | Server → client only |
-| Best fit | Public APIs, CRUD | Legacy enterprise integration | Multi-shape client needs | [Internal service-to-service](grpc-deep-dive.md) | Real-time bidirectional | Server-push updates |
+| Best fit | Public APIs, CRUD | Legacy enterprise integration | [Multi-shape client needs](graphql-deep-dive.md) | [Internal service-to-service](grpc-deep-dive.md) | Real-time bidirectional | Server-push updates |
 | Human-debuggable | Yes (`curl`) | Somewhat (verbose XML) | Yes (GraphiQL/Playground) | No (needs `grpcurl`) | Needs a client tool | Yes (`curl`/`EventSource`) |

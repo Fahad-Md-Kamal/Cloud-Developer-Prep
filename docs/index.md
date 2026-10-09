@@ -171,10 +171,11 @@ sits underneath.
     - [Design Patterns](architecture/design-patterns.md)
     - [Clean Code Practices](architecture/clean-code-practices.md)
     - [Refactoring Legacy Systems](architecture/refactoring-legacy-systems.md)
-- **REST API Design**
+- **APIs**
     - [API Design Fundamentals](architecture/api-design-fundamentals.md)
     - [API Production Readiness](architecture/api-production-readiness.md)
     - [API Paradigms & Patterns](architecture/api-paradigms-and-patterns.md)
+    - [GraphQL Deep Dive](architecture/graphql-deep-dive.md)
     - [gRPC Deep Dive](architecture/grpc-deep-dive.md)
 - [Authentication, Authorization, and Security](architecture/chapter-4.md)
 - [Performance Profiling, Optimization, and Caching](architecture/chapter-5.md)
