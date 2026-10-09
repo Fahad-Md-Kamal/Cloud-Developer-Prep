@@ -6,13 +6,16 @@ here for anyone (or any agent) editing content.
 
 ## `docs/` is organized into subdirectories matching the nav
 
-As of 2026-09-24, `docs/*.md` is no longer flat — every file lives
-under a subdirectory matching its top-level nav group (e.g.
-`docs/data-and-engineering/postgresql-for-scale.md`,
-`docs/programming-languages/python/django-orm.md`). Only `index.md`
+As of 2026-10-09, `docs/*.md` is no longer flat — every file lives
+under a subdirectory matching its top-level nav domain (e.g.
+`docs/database/postgresql-for-scale.md`,
+`docs/backend/python/django-orm.md`,
+`docs/frontend/js-ts/react-and-react-native.md`). Only `index.md`
 and `session-log.md` stay at `docs/` root, as the site's entry points.
 Put a new file in the subdirectory matching where it belongs in the
-nav — don't drop it back at the flat root.
+nav — don't drop it back at the flat root. The ten top-level domains
+are: Frontend, Backend, Architecture, Database, Cloud & DevOps,
+AI & LLM, Algorithms, and Interview Prep (plus Home and Session Log).
 
 Internal links between pages are normal relative Markdown paths from
 the linking file's own location — `../other-group/page.md` to link
@@ -79,7 +82,7 @@ This repo holds real client/employer-confidential content directly in
 That's only safe as long as the repo's GitHub visibility stays private —
 if you're ever asked to make it public again, that requires a full pass
 over `docs/**/*.md` to genericize real names first, starting with
-`docs/reference-case-studies/project-stories.md`.
-`docs/reference-case-studies/meeting-intelligence-case-study.md` is
+`docs/interview-prep/project-stories.md`.
+`docs/interview-prep/meeting-intelligence-case-study.md` is
 already anonymized (no real project name or client-identifying detail)
 and doesn't need that pass.

@@ -4,7 +4,7 @@ title: "Django ORM Query Cheat Sheet for Senior Engineers"
 
 # Django ORM Query Cheat Sheet for Senior Engineers
 
-This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops. For the PostgreSQL-side concepts behind these patterns — index selection, reading `EXPLAIN`, partitioning — see [PostgreSQL for Scale](../../data-and-engineering/postgresql-for-scale.md).
+This appendix is a practical Django ORM reference focused on interview-grade and production-grade query patterns. The goal is not to memorize every API surface, but to recognize when a query should be pushed into the database instead of being handled inefficiently in Python loops. For the PostgreSQL-side concepts behind these patterns — index selection, reading `EXPLAIN`, partitioning — see [PostgreSQL for Scale](../../database/postgresql-for-scale.md).
 
 ## 1. Query Loading Patterns
 
@@ -443,7 +443,7 @@ free win.
   or a missing filter before it ever hits the DB.
 - `queryset.explain(analyze=True)` — Django's wrapper around the
   database's `EXPLAIN` (see
-  [PostgreSQL for Scale](../../data-and-engineering/postgresql-for-scale.md)
+  [PostgreSQL for Scale](../../database/postgresql-for-scale.md)
   for reading the plan itself).
 - `django-debug-toolbar` in local dev — surfaces query count and
   duplicate queries per request visually; the fastest way to catch an
@@ -497,7 +497,7 @@ they're actually probing.
   queryset gets cached in memory; `.iterator()` (or chunked
   `.values_list()` pagination) streams instead — see
   [§10](#10-query-shaping-and-memory-control) and
-  [Large-Scale Report Generation](../../data-and-engineering/large-scale-report-generation.md).
+  [Large-Scale Report Generation](../../database/large-scale-report-generation.md).
 - "When would `bulk_create` be the wrong choice even though it's
   faster?" — expects: when per-row side effects in `save()`/signals
   are actually required ([§14](#14-bulk-operations)) — speed isn't

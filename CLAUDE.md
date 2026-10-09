@@ -5,10 +5,17 @@
 This site is built with [Zensical](https://zensical.org/) (a Markdown-based
 static site generator). Content lives in `docs/**/*.md`, organized into
 subdirectories mirroring `zensical.toml`'s nav (e.g.
-`docs/data-and-engineering/postgresql-for-scale.md`) — only `index.md`
-and `session-log.md` sit at `docs/` root. Config in `zensical.toml`, and
-`.github/workflows/docs.yml` builds and deploys it to GitHub Pages
-automatically on every push to `main`.
+`docs/database/postgresql-for-scale.md`,
+`docs/backend/python/django-orm.md`) — only `index.md`
+and `session-log.md` sit at `docs/` root. As of 2026-10-09 the
+top-level domains are Frontend, Backend, Architecture, Database,
+Cloud & DevOps, AI & LLM, Algorithms, and Interview Prep — a flat,
+domain-based structure (no "Study Materials" wrapper, no
+"Programming Languages" grouping — Python/Go/Kotlin live under
+Backend, JS/TS/React under Frontend) replacing the earlier
+chapter-numbered and then topic-grouped layouts. Config in
+`zensical.toml`, and `.github/workflows/docs.yml` builds and deploys
+it to GitHub Pages automatically on every push to `main`.
 
 - **To add or edit a page**: see `docs/README.md`.
 - **Local build/preview**: `pip install -r requirements.txt`, then
@@ -92,11 +99,11 @@ group in `zensical.toml`, wrapping several standalone files under the
 same subdirectory, one per sub-topic:
 
 ```toml
-{ "1. Modern Python Mastery" = [
-    { "Typing & Generics" = "programming-languages/python/typing-and-generics.md" },
-    { "Concurrency & AsyncIO" = "programming-languages/python/concurrency-and-asyncio.md" },
-    { "Memory & Caching" = "programming-languages/python/memory-and-caching.md" },
-    { "Practical Patterns" = "programming-languages/python/practical-patterns.md" },
+{ "Python" = [
+    { "Typing & Generics" = "backend/python/typing-and-generics.md" },
+    { "Concurrency & AsyncIO" = "backend/python/concurrency-and-asyncio.md" },
+    { "Memory & Caching" = "backend/python/memory-and-caching.md" },
+    { "Practical Patterns" = "backend/python/practical-patterns.md" },
 ] },
 ```
 
@@ -122,7 +129,7 @@ hiring era, not just AI/LLM as a technical topic — interviewers now
 routinely ask how a candidate actually uses AI tools day to day, live
 coding happens with an AI assistant present, some panels are run by an
 adaptive AI interviewer, and resumes pass through AI-driven ATS screening.
-[Interviewing in the AI Era](interview-portfolio/interviewing-in-the-ai-era.md)
+[Interviewing in the AI Era](interview-prep/interviewing-in-the-ai-era.md)
 is the dedicated page for that; it does not need to be re-derived from
 scratch each time this topic comes up.
 
@@ -142,7 +149,7 @@ forced add-on everywhere:**
   tools in your daily work," "what's your approach to coding with AI")
   is exactly the kind of signal that should trigger adding it to whatever
   chapter the surrounding questions landed in — see how
-  `backend-architecture/chapter-6.md` and the Kotlin/React tracks handle
+  `backend/chapter-6.md` and the Kotlin/React tracks handle
   it as a precedent.
 
 ## This repo must stay PRIVATE — do not suggest making it public again
@@ -154,7 +161,7 @@ vs. a private layer; the subdirectory split is purely topical, not a
 privacy boundary. Real company/target names (Lawstronaut, Optimizely,
 Cefalo) are mixed directly into the chapters. **Not genericized.**
 
-`docs/reference-case-studies/meeting-intelligence-case-study.md`
+`docs/interview-prep/meeting-intelligence-case-study.md`
 (formerly `meetingflow-case-study.md`) is the one exception — as of 2026-09-23 it
 was rewritten to remove the real project name, the specific business
 domain/language framing, literal source-language prompts, and real file

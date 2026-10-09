@@ -42,7 +42,7 @@ page is the interview-framing layer, not a re-derivation.
 - Invalidation strategy matters as much as the caching pattern itself
   — TTL-based (simple, bounded staleness) vs. event-based (precise,
   more moving parts). See
-  [Memory & Caching](../programming-languages/python/memory-and-caching.md)
+  [Memory & Caching](../backend/python/memory-and-caching.md)
   for the mechanics at the single-process level, and
   [LLM Response Caching](../ai-llm/llm-response-caching.md) for a
   worked TTL-strategy example that generalizes beyond LLM responses.
@@ -58,10 +58,10 @@ page is the interview-framing layer, not a re-derivation.
 - The shard key choice is the actual design decision worth spending
   interview time on — a poorly chosen key creates a hot shard that
   defeats the point. See
-  [MongoDB for Scale §3](../data-and-engineering/mongodb-for-scale.md#3-how-does-mongodb-scale-writes-and-reads-and-how-do-you-pick-a-shard-key)
+  [MongoDB for Scale §3](../database/mongodb-for-scale.md#3-how-does-mongodb-scale-writes-and-reads-and-how-do-you-pick-a-shard-key)
   for the concrete mechanics.
 - For a relational store specifically, see
-  [PostgreSQL for Scale](../data-and-engineering/postgresql-for-scale.md)
+  [PostgreSQL for Scale](../database/postgresql-for-scale.md)
   for replication's synchronous/asynchronous trade-off and
   partitioning.
 
@@ -77,7 +77,7 @@ page is the interview-framing layer, not a re-derivation.
   given interaction needs to be async at all.
 - For the concrete choice between message brokers and the patterns
   built on top of them (sagas, schema evolution), see
-  [Chapter 6: Microservices & Message Queues](../backend-architecture/chapter-6.md)
+  [Chapter 6: Microservices & Message Queues](../backend/chapter-6.md)
   and [Chapter 27: Event-Driven Architectures](chapter-27.md).
 
 ## 5. "When does a CDN or edge computing actually matter for a design?"

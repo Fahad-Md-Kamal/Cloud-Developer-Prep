@@ -112,7 +112,7 @@ and has to reason about consistency across them. Builds on
 - Migrate via a backfill/ETL step that reads the raw store and writes
   normalized rows into the new schema — the same
   dual-write-then-backfill-then-cutover discipline as
-  [Django & DRF's zero-downtime migration pattern](../programming-languages/python/django-drf.md#7-migrations),
+  [Django & DRF's zero-downtime migration pattern](../backend/python/django-drf.md#7-migrations),
   just moving data across stores instead of across one schema change.
 - Keep the raw store as the source of truth until the relational side
   is verified correct against it — don't delete the only unstructured

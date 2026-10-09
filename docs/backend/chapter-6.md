@@ -7,11 +7,11 @@ title: "Chapter 6: Microservices Design with FastAPI & Message Queues (Kafka/Red
 Service boundaries, inter-service communication, and the messaging
 patterns (Kafka, Redis) that hold a microservices system together — as
 questions you should be able to answer cold. FastAPI's own mechanics live in
-[Dependency Injection & Background Tasks](../programming-languages/python/fastapi-dependency-injection.md)
-and [Performance & Production Patterns](../programming-languages/python/fastapi-performance-patterns.md)
+[Dependency Injection & Background Tasks](python/fastapi-dependency-injection.md)
+and [Performance & Production Patterns](python/fastapi-performance-patterns.md)
 and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
-[API Design Fundamentals](../core-engineering-foundations/api-design-fundamentals.md). This chapter is about the architecture
+[API Design Fundamentals](../architecture/api-design-fundamentals.md). This chapter is about the architecture
 *around* the services, not the framework inside any one of them.
 
 ---
@@ -111,7 +111,7 @@ Operational weight. Kafka needs partitioning, consumer-group, and
 offset-management decisions Redis doesn't — reaching for it to send one
 background job (send this email) is solving a problem you don't have
 yet. For a single-process, no-fan-out background job, plain Celery
-([Practical Patterns §3](../programming-languages/python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+([Practical Patterns §3](python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
 is often enough on its own.
 
 ### 4. Schema Evolution for Long-Lived Event Streams
@@ -135,7 +135,7 @@ removing a field is a breaking change; it needs a new event type or
 version field, with both old and new shapes coexisting until every
 consumer has migrated, then a deprecation timeline for the old shape —
 the same dual-write discipline as a
-[database migration](../core-engineering-foundations/refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
+[database migration](../architecture/refactoring-legacy-systems.md#database-migration-dual-read-dual-write),
 applied to a message format instead of a table.
 
 ### 5. AWS SQS vs. Kafka, and How to Actually Handle Duplicate Events
@@ -190,7 +190,7 @@ def handle_order_placed(event):
 - Event-driven architecture means a service publishes a fact ("order
   placed") without knowing or caring who reacts to it — each consumer
   independently decides what to do when that fact occurs, the same
-  decoupling [Observer](../core-engineering-foundations/design-patterns.md#observer)
+  decoupling [Observer](../architecture/design-patterns.md#observer)
   provides inside a single process, at the scale of whole services.
 - **The duplicate-event problem is not an edge case — it's the default
   guarantee.** Virtually every real message system (SQS, Kafka, SNS)

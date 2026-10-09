@@ -10,7 +10,7 @@ optimization and ORM patterns (`select_related`, `F()`, `Subquery`,
 window functions), see the
 [Django ORM Query Cheat Sheet](django-orm.md). For general REST API
 design principles and versioning, see
-[API Design Fundamentals](../../core-engineering-foundations/api-design-fundamentals.md); for the FastAPI
+[API Design Fundamentals](../../architecture/api-design-fundamentals.md); for the FastAPI
 comparison, see [FastAPI](fastapi-dependency-injection.md).
 
 ---
@@ -320,7 +320,7 @@ needs.
 does a `JOIN` + `LIKE` — fine occasionally, but a frequently-searched
 field benefits from a real database index (or a dedicated search
 engine — see
-[Elasticsearch Architecture](../../data-and-engineering/elasticsearch-architecture.md))
+[Elasticsearch Architecture](../../database/elasticsearch-architecture.md))
 rather than a `LIKE '%term%'` scan on every request.
 
 ## 12. Throttling
