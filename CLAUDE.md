@@ -114,6 +114,37 @@ same subdirectory, one per sub-topic:
   sub-topic they want from the sidebar), not about shortening content —
   don't cut material to avoid splitting; split it instead.
 
+## Weaving in the AI-driven hiring era
+
+As of 2026-10-09 this site is explicitly positioned (see `docs/index.md`'s
+intro and `zensical.toml`'s `site_description`) as prep for an AI-driven
+hiring era, not just AI/LLM as a technical topic — interviewers now
+routinely ask how a candidate actually uses AI tools day to day, live
+coding happens with an AI assistant present, some panels are run by an
+adaptive AI interviewer, and resumes pass through AI-driven ATS screening.
+[Interviewing in the AI Era](interview-portfolio/interviewing-in-the-ai-era.md)
+is the dedicated page for that; it does not need to be re-derived from
+scratch each time this topic comes up.
+
+**Going forward, weave this in where it's genuinely relevant, not as a
+forced add-on everywhere:**
+
+- When writing or updating a chapter where AI-assisted workflows
+  realistically changed the day-to-day practice (debugging, code review,
+  test generation, boilerplate, documentation), add a short, honest note
+  on how AI tools fit in — not a generic "AI can help with this" aside,
+  but the same level of concrete, interview-ready depth as the rest of
+  the chapter (e.g. what a strong answer to "what's your approach to
+  coding with AI" sounds like for that specific topic).
+- Don't bolt this onto chapters where it doesn't fit naturally (e.g. a
+  pure CS-theory topic like Big-O analysis) just to check a box.
+- A real interview question naming this directly ("how do you use AI
+  tools in your daily work," "what's your approach to coding with AI")
+  is exactly the kind of signal that should trigger adding it to whatever
+  chapter the surrounding questions landed in — see how
+  `backend-architecture/chapter-6.md` and the Kotlin/React tracks handle
+  it as a precedent.
+
 ## This repo must stay PRIVATE — do not suggest making it public again
 
 As of 2026-09-22 this repo holds real client/employer-confidential content,

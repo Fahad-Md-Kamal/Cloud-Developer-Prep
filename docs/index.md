@@ -16,6 +16,15 @@ Rust, or anything else. One unified tree — 38 chapters + appendices,
 plus a running practice log cross-linked into the specific chapter
 each round belongs to.
 
+Hiring itself has changed, too — interviewers now routinely ask how
+candidates actually use AI tools day to day, live coding happens with
+an AI assistant in the room (not against one), some first-round panels
+are run by an adaptive AI interviewer instead of a human, and resumes
+increasingly pass through an AI-driven ATS before a person ever reads
+them.
+[Interviewing in the AI Era](interview-portfolio/interviewing-in-the-ai-era.md)
+covers that layer directly.
+
 !!! warning "Private content — repo must stay private"
     Contains real company names (Lawstronaut, Optimizely, Cefalo). The
     [Meeting-Intelligence System Case Study](reference-case-studies/meeting-intelligence-case-study.md)
@@ -336,6 +345,7 @@ interview, after the technical material above and the project-story
 material it draws on for behavioral answers.
 
 - [Behavioral Interview Prep](interview-portfolio/chapter-31.md)
+- [Interviewing in the AI Era](interview-portfolio/interviewing-in-the-ai-era.md)
 - [Technical Interview Deep Dives](interview-portfolio/chapter-32.md)
 - [Mock Projects](interview-portfolio/chapter-33.md)
 - [Take-Home & Live-Coding Exercises](interview-portfolio/take-home-and-live-coding-exercises.md) —
