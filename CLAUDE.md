@@ -86,6 +86,24 @@ Notes:
   don't need retroactive rewriting unless asked — this governs new
   content and answers going forward.
 
+### Plain vocabulary, not fancy synonyms
+
+Prefer the common, everyday word over an obscure or high-register
+synonym when both say the same thing — much of this site's real
+audience (the user and colleagues) are non-native English speakers, and
+words like "ubiquitous," "trivially," or "semantics" (used loosely)
+add friction without adding precision.
+
+- Turn "Ubiquitous tooling" into "Works with every language and HTTP
+  client." Turn "trivially horizontally scalable" into "easy to scale
+  horizontally."
+- This is about everyday decorative vocabulary, not technical
+  precision — real domain terms (idempotent, mutex, polymorphism,
+  eventual consistency) stay exactly as they are; those are the actual
+  thing being taught, not a fancy way of saying something simpler.
+- When in doubt, prefer the word a strong non-native English speaker
+  would already know over one they'd need to look up.
+
 ## Splitting large chapters into nested nav files
 
 When a chapter/page grows too large or covers several genuinely distinct

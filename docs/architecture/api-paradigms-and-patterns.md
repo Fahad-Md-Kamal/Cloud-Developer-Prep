@@ -21,10 +21,11 @@ POST /api/v1/orders
 requests. The default choice for most public and internal HTTP APIs
 today.
 
-**Benefits:** Ubiquitous tooling (every language, every HTTP client);
-cacheable by default via standard HTTP semantics (`ETag`, `Cache-Control`);
-human-readable and easy to debug with just `curl`; stateless, so any
-server can handle any request — trivially horizontally scalable.
+**Benefits:** Supported by every language and HTTP client already in
+use; cacheable by default via standard HTTP features (`ETag`,
+`Cache-Control`); human-readable and easy to debug with just `curl`;
+stateless, so any server can handle any request — easy to scale
+horizontally.
 
 **Best for:** Public APIs, CRUD-heavy applications, anything that
 benefits from HTTP caching, and any team that wants the widest possible
