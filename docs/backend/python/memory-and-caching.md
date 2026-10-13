@@ -107,6 +107,60 @@ get_user_data(123)  # cache hit, no DB call
 - `sys.getrefcount(obj)` shows an object's current reference count (it
   reports one more than you'd expect, since passing `obj` to
   `getrefcount` itself creates a temporary reference).
+- **Small objects don't even call `malloc()` per allocation.** CPython's
+  `pymalloc` pre-allocates large chunks ("arenas"), carves them into
+  fixed-size "pools," and reuses freed slots — objects under ~512 bytes
+  (most Python objects) come from this pool instead of a fresh OS
+  allocation each time. This is the real reason object creation is fast
+  despite being garbage collected.
+
+### The cyclic GC in depth: generations, thresholds, and how it actually finds a cycle
+
+**Answer:**
+
+- The core idea: the cyclic GC exists for exactly one job — catching
+  reference cycles reference counting can't free — and it's
+  **generational** because most objects die young, so scanning
+  brand-new objects often and ancient ones rarely is far cheaper than
+  scanning everything equally.
+- **Three generations** — gen 0 (newest), gen 1, gen 2 (oldest,
+  longest-lived). A new object starts in gen 0; surviving a gen-0
+  collection promotes it to gen 1, then eventually gen 2.
+- **Thresholds decide when each generation runs** —
+  `gc.get_threshold()` returns something like `(700, 10, 10)`: gen 0 is
+  scanned every 700 net allocations; gen 1 every 10 gen-0 collections;
+  gen 2 every 10 gen-1 collections. Older generations run far less
+  often, since surviving this long makes an object statistically
+  unlikely to be garbage.
+- **How it actually detects a cycle ("trial deletion"):** for a
+  candidate set of objects, it computes how many references *into*
+  that set come from *outside* it — by temporarily subtracting every
+  internal (within-the-set) reference from each object's refcount. If
+  the remaining external count is 0 for the whole group, the entire
+  group is unreachable garbage, even though each object's real refcount
+  is still non-zero. It's answering "is anything outside this group
+  keeping it alive," not inspecting any single object in isolation.
+
+```python
+import gc
+
+gc.get_threshold()   # e.g. (700, 10, 10) -- gen0, gen1, gen2 collection frequency
+gc.collect()         # force a full collection on demand
+gc.disable()         # turns off the CYCLIC collector only -- refcounting still runs
+gc.freeze()          # treat everything currently alive as permanent, stop re-scanning it
+```
+
+- `gc.disable()` is sometimes used for short-lived scripts/CLI tools —
+  if the process exits soon anyway, paying cycle-collection overhead
+  during its lifetime buys nothing.
+- `gc.freeze()` is for long-running services: call it once after
+  startup, once large static structures are loaded, so every future
+  collection has a smaller pool of objects to re-examine instead of
+  re-scanning data that was never going away.
+- **Interview trap to avoid:** the GIL and the GC are two unrelated
+  locks on two unrelated things — the GIL protects bytecode execution
+  ([Concurrency & AsyncIO](concurrency-and-asyncio.md)); the cyclic GC
+  is purely about memory, and runs independently of it.
 
 ### Weak references: holding a reference that doesn't count
 
@@ -206,3 +260,49 @@ class OrderResult:
   at the call site instead of a silent `KeyError` or `None`), and costs
   less memory per instance than a dict, especially at the scale of
   "one per row in a report with 10 million rows."
+
+## 5. "How is a dict (or a hash map in any language) actually structured?"
+
+**Answer:**
+
+- The core idea, true in any language: a hash map is an array, and
+  `hash(key) % array_size` picks which slot to check — everything else
+  is just "what happens when two keys land on the same slot."
+- **Two real collision-resolution strategies:**
+    - **Chaining** (Java's `HashMap`) — each slot holds a linked list
+      (or a small tree, in modern Java, once a bucket gets large) of
+      every key that hashed there.
+    - **Open addressing** (Python's `dict`) — no lists. On a collision,
+      probe a different slot using a fixed sequence until an empty one
+      is found — no per-entry pointer overhead for a list node.
+- **Python's actual structure is two arrays, not one** (since 3.6,
+  guaranteed by the language spec since 3.7) — this is the detail that
+  explains why `dict` preserves insertion order:
+    - A **sparse index table** mapping `hash → position`.
+    - A **dense array** of `(hash, key, value)` entries, in the exact
+      order they were inserted.
+    - A lookup hashes the key, finds its position via the sparse
+      table, then reads that slot from the dense array. Iteration just
+      walks the dense array in order — insertion order falls out for
+      free, and the sparse table only needs to store small integers,
+      not full entries, which is also why this redesign (the "compact
+      dict") cut `dict` memory use measurably.
+- **Resizing** — once the table is about 2/3 full (its load factor), a
+  larger array is allocated and every entry is rehashed into it. This
+  is *why* a hash map lookup is "usually O(1)" rather than a hard
+  guarantee on every single call — the occasional resize is itself
+  O(n), amortized across all the O(1) operations between resizes.
+
+```python
+# A hash collision doesn't change correctness, only speed -- both keys
+# still resolve to their own value via probing, just with extra steps.
+d = {}
+d["a"] = 1   # hash("a") -> slot N (say)
+d["b"] = 2   # hash("b") -> also slot N -- probe to the next open slot instead
+```
+
+**Interview point:** "is a dict lookup always O(1)?" is a trap —
+amortized average-case O(1), assuming a reasonable hash function
+spreads keys evenly. A pathological hash function (or a type with a
+broken `__hash__`) that sends every key to the same slot degrades
+every lookup to O(n), scanning the whole probe chain.
