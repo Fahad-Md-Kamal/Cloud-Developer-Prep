@@ -101,6 +101,18 @@ to bullet *content*, not just bullet *formatting*.
 - This doesn't mean dropping real trade-offs or nuance that changes the
   answer — it means not padding the sentences that carry them.
 
+**Lead with the one core idea, not a list of equal-weight facts.**
+Before writing bullets, find the single thing that matters most and
+say it first, in one sentence a reader could stop after and still have
+the point. Supporting bullets then back that one idea up, rather than
+reading as N parallel facts with no signal of which one is central.
+This is why the GIL kitchen analogy
+([Concurrency & AsyncIO](backend/python/concurrency-and-asyncio.md))
+landed better than the original bullet list covering the same facts —
+one through-line (one knife, one kitchen) that everything else hangs
+off, instead of several same-weight bullets the reader has to
+synthesize themselves.
+
 ### Plain vocabulary, not fancy synonyms
 
 Prefer the common, everyday word over an obscure or high-register
