@@ -33,6 +33,37 @@ concurrency without threads at all.
       multiple chefs actually chopping at the same literal instant —
       in Python, that only happens with separate kitchens (processes).
 
+The diagram below is that same story as a timeline — watch who's
+holding the knife (the GIL) at each moment:
+
+```mermaid
+%%{init: {'theme': 'default', 'themeVariables': {'fontSize': '20px'}, 'gantt': {'barHeight': 46, 'barGap': 12, 'fontSize': 20, 'sectionFontSize': 20, 'leftPadding': 140, 'topPadding': 60, 'gridLineStartPadding': 30}}}%%
+gantt
+    title One GIL, Two Threads: Who's Holding the Knife
+    dateFormat X
+    axisFormat %s
+    section Thread A
+    Chopping (has the GIL)     :a1, 0, 2
+    Boiling water (I/O wait)   :a2, 2, 3
+    Chopping (has the GIL)     :a3, 5, 2
+    section Thread B
+    Waiting for the knife      :b1, 0, 2
+    Chopping (has the GIL)     :b2, 2, 3
+    Boiling water (I/O wait)   :b3, 5, 2
+```
+
+- **0-2:** Thread A has the knife (GIL) and chops. Thread B just waits
+  — the knife is taken.
+- **2-5:** Thread A starts boiling water (I/O) and puts the knife down.
+  Thread B picks it up and chops *during that exact window* — this
+  overlap is the entire reason threading helps I/O-bound code.
+- **5-7:** Thread A's water is ready, it takes the knife back and
+  resumes chopping. Thread B now goes to boil its own water.
+- Notice there's never a moment where *both* bars show "chopping" at
+  once — only one thread ever holds the GIL. The speedup comes purely
+  from overlapping the *waiting*, not from two threads computing
+  simultaneously.
+
 ## Choosing Between Threading, AsyncIO, and Multiprocessing
 
 **Terminology first — "what's the difference between AsyncIO and concurrency?"**
