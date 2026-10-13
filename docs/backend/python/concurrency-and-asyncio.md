@@ -12,6 +12,27 @@ the GIL first (it explains *why* the other three exist), then
 threading's own pitfalls, then AsyncIO as a different way to get
 concurrency without threads at all.
 
+!!! example "Real-world analogy: one chef, one kitchen"
+    - One kitchen, one chef, one knife — only one task can be actively
+      "chopping" (executing Python) at any instant. That's the GIL.
+    - A pot of water boiling is I/O — the chef doesn't stand there
+      staring at it. They put the knife down (release the GIL) and
+      chop something else while it boils, then pick the knife back up.
+      This is why more threads help when there's a lot of waiting.
+    - Pure chopping with no waiting is CPU-bound work. Hiring more
+      chefs doesn't help here — there's still only one knife, so extra
+      chefs just wait their turn. This is why more threads *don't*
+      help CPU-bound work.
+    - To genuinely chop faster you need separate kitchens, each with
+      its own chef and own knife, working at the same instant — that's
+      multiprocessing. The cost: kitchens can't hand ingredients
+      directly anymore, they have to shout things between rooms
+      (serializing data between processes).
+    - **Concurrency** is one chef juggling multiple pots — switching
+      attention over time, no second chef required. **Parallelism** is
+      multiple chefs actually chopping at the same literal instant —
+      in Python, that only happens with separate kitchens (processes).
+
 ## Choosing Between Threading, AsyncIO, and Multiprocessing
 
 **Terminology first — "what's the difference between AsyncIO and concurrency?"**
