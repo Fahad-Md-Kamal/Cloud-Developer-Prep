@@ -123,6 +123,7 @@ Django/FastAPI.
 - [Building Worker Pools From Scratch](backend/python/building-worker-pools.md)
 - [Capstone: A Concurrent Data Pipeline](backend/python/concurrent-data-pipeline-capstone.md)
 - [Memory & Caching](backend/python/memory-and-caching.md)
+- [Data Structures & Their Memory Model](backend/python/data-structures-and-memory.md)
 - [Practical Patterns](backend/python/practical-patterns.md)
 - [Python Internals & Advanced OOP](backend/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
 - [Choosing a Python Web Framework](backend/python/choosing-a-python-web-framework.md) —

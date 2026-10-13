@@ -68,6 +68,10 @@
     "url": "backend/python/memory-and-caching/"
   },
   {
+    "title": "Data Structures & Their Memory Model",
+    "url": "backend/python/data-structures-and-memory/"
+  },
+  {
     "title": "Practical Patterns",
     "url": "backend/python/practical-patterns/"
   },
