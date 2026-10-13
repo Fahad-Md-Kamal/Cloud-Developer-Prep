@@ -12,6 +12,57 @@ API gateway concepts (not tied to one product), see
 [Rate Limiting Strategies](rate-limiting-strategies.md), and
 [Circuit Breakers, Retries & Bulkheads](circuit-breakers-retries-and-bulkheads.md).
 
+## Overview
+
+**What it is:**
+
+- An API gateway — a reverse proxy purpose-built for API traffic,
+  built on nginx/OpenResty — sitting in front of your backend services
+  as the single entry point for external requests.
+- Config is **declarative**: enable a capability (auth, rate limiting,
+  logging) per route/service via a plugin, not custom proxy code.
+
+**Why it's used:**
+
+- Centralizes cross-cutting concerns in one place instead of
+  duplicating auth/rate-limiting/logging logic in every service.
+- One policy change (new rate limit, revoke a key) takes effect
+  immediately, with no redeploy of any backend service.
+
+**Advantages vs. each service handling its own concerns ("regular APIs"):**
+
+- Consistent enforcement — no service can forget to check auth.
+- Plugin ecosystem covers most needs out of the box, instead of
+  hand-rolling auth/rate-limiting per service.
+- One place to monitor and debug all external traffic.
+
+**Disadvantages:**
+
+- New single point of failure — must itself be run highly available.
+- Adds one network hop of latency to every request.
+- Another piece of infrastructure to run, monitor, and upgrade.
+- Only sees "is this a valid key" — business-level authorization
+  ("can *this* user edit *this* order") still belongs in the service.
+- Can become a dumping ground for logic that doesn't belong there if
+  nobody owns what gets added to it.
+
+**Additional things worth knowing:**
+
+- **Editions**: Kong Gateway (open-source, self-hosted) vs. Kong
+  Enterprise (extra plugins, a dev portal, vendor support) vs. Kong
+  Konnect (Kong's own managed/hosted control plane) — a JD may
+  reference any of the three.
+- **Two ways to configure it**: declarative config (a `kong.yml` file
+  — the GitOps-friendly, version-controllable approach) vs. the Admin
+  API (imperative REST calls that configure Kong itself at runtime).
+- **DB-less mode**: Kong can run without its own Postgres/Cassandra
+  backing store, reading all config from a YAML file instead — simpler
+  operationally for smaller deployments.
+- **Where it sits among alternatives**: AWS API Gateway (managed,
+  AWS-native, less flexible), Apigee (enterprise-heavy, Google-owned),
+  Envoy/Traefik (general-purpose proxies that *can* do gateway-like
+  work but aren't API-gateway-first products the way Kong is).
+
 ## 1. "What does Kong actually add on top of a plain reverse proxy like nginx?"
 
 **Answer:** Nginx routes and proxies requests; Kong does that plus a
