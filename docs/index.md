@@ -272,6 +272,10 @@ mistakes and fixes kept in as teaching material.
     - [Jenkins: Production Deployment Pipelines](cloud-devops/jenkins-production-deployment-pipelines.md)
     - [Jenkins: Security, Hardening & Production Patterns](cloud-devops/jenkins-security-hardening-and-production-patterns.md)
     - [CI/CD & Progressive Delivery](cloud-devops/cicd-and-progressive-delivery.md) — includes diagnosing a green pipeline with a broken production deploy
+- **Ansible (Configuration Management)**
+    - [Ansible Fundamentals](cloud-devops/ansible-fundamentals.md)
+    - [Handlers, Templates, Roles & Vault](cloud-devops/ansible-handlers-templates-roles-vault.md)
+    - [Collections, Execution Environments & Automation Platform](cloud-devops/ansible-collections-and-automation-platform.md)
 - [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 

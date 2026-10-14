@@ -176,6 +176,11 @@ nav = [
           { "Jenkins: Security, Hardening & Production Patterns" = "cloud-devops/jenkins-security-hardening-and-production-patterns.md" },
           { "CI/CD & Progressive Delivery" = "cloud-devops/cicd-and-progressive-delivery.md" },
       ] },
+      { "Ansible (Configuration Management)" = [
+          { "Ansible Fundamentals" = "cloud-devops/ansible-fundamentals.md" },
+          { "Handlers, Templates, Roles & Vault" = "cloud-devops/ansible-handlers-templates-roles-vault.md" },
+          { "Collections, Execution Environments & Automation Platform" = "cloud-devops/ansible-collections-and-automation-platform.md" },
+      ] },
       { "AWS Services Quick Reference" = "cloud-devops/aws-services.md" },
   ] },
   { "AI & LLM" = [

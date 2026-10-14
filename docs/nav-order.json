@@ -432,6 +432,18 @@
     "url": "cloud-devops/cicd-and-progressive-delivery/"
   },
   {
+    "title": "Ansible Fundamentals",
+    "url": "cloud-devops/ansible-fundamentals/"
+  },
+  {
+    "title": "Handlers, Templates, Roles & Vault",
+    "url": "cloud-devops/ansible-handlers-templates-roles-vault/"
+  },
+  {
+    "title": "Collections, Execution Environments & Automation Platform",
+    "url": "cloud-devops/ansible-collections-and-automation-platform/"
+  },
+  {
     "title": "AWS Services Quick Reference",
     "url": "cloud-devops/aws-services/"
   },
