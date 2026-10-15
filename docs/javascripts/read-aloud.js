@@ -24,6 +24,8 @@
   var navigationTimer = null;
   var activeEl = null;
   var ACTIVE_CLASS = "read-aloud-active";
+  var lastHref = location.href;
+  var navigationObserverAttached = false;
 
   // Bumped on every stop/start/jump. Utterance callbacks capture the
   // token at creation time and ignore themselves if it's gone stale --
@@ -445,16 +447,45 @@
     }
   }
 
+  // Buttons live in the header instead of floating over the page, so
+  // they don't sit on top of the nav/ToC. Several scripts share one
+  // #header-custom-actions row -- whichever loads first creates it.
+  function getActionsContainer() {
+    var existing = document.getElementById("header-custom-actions");
+    if (existing) {
+      return existing;
+    }
+    var headerInner = document.querySelector(".md-header__inner");
+    if (!headerInner) {
+      return null;
+    }
+    var container = document.createElement("div");
+    container.id = "header-custom-actions";
+    var source = headerInner.querySelector(".md-header__source");
+    if (source) {
+      headerInner.insertBefore(container, source);
+    } else {
+      headerInner.appendChild(container);
+    }
+    return container;
+  }
+
   function injectToolbar() {
-    var toolbar = document.createElement("div");
-    toolbar.id = "read-aloud-toolbar";
+    if (document.getElementById("read-aloud-btn")) {
+      return;
+    }
+    var container = getActionsContainer();
+    if (!container) {
+      return;
+    }
 
     btn = document.createElement("button");
     btn.id = "read-aloud-btn";
     btn.type = "button";
+    btn.className = "md-header__button header-action-btn";
     updateButton();
     btn.addEventListener("click", handleClick);
-    toolbar.appendChild(btn);
+    container.appendChild(btn);
 
     speedWrap = document.createElement("div");
     speedWrap.id = "read-aloud-speed-wrap";
@@ -462,6 +493,7 @@
     speedBtn = document.createElement("button");
     speedBtn.id = "read-aloud-speed-btn";
     speedBtn.type = "button";
+    speedBtn.className = "md-header__button header-action-btn";
     speedBtn.title = "Reading speed -- hover to pick one";
     updateSpeedButton();
     // Hover reveals the menu via CSS (:hover / :focus-within below) --
@@ -490,52 +522,63 @@
     }
     updateSpeedMenu();
     speedWrap.appendChild(speedMenu);
-    toolbar.appendChild(speedWrap);
+    container.appendChild(speedWrap);
 
     autoBtn = document.createElement("button");
     autoBtn.id = "read-aloud-auto-btn";
     autoBtn.type = "button";
+    autoBtn.className = "md-header__button header-action-btn";
     autoBtn.title = "Keep reading automatically when you move to a new page";
     autoBtn.textContent = "↻ Auto";
     updateAutoButton();
     autoBtn.addEventListener("click", toggleAutoContinue);
-    toolbar.appendChild(autoBtn);
+    container.appendChild(autoBtn);
 
-    document.body.appendChild(toolbar);
     attachMarkers();
 
     // This site uses instant navigation (page content swaps via fetch,
-    // no full reload) -- and the swap replaces the whole
-    // .md-content__inner element rather than mutating it in place, so an
-    // observer bound to that one element goes dead and silently stops
-    // firing the moment the reader navigates once. document.body is
-    // never replaced, so watch that instead, and use the URL itself
-    // (not "did something change under body") to decide whether a real
-    // navigation happened -- that's what tells a page change apart from
-    // incidental DOM noise, including our own marker insertions below.
-    var lastHref = location.href;
-    if ("MutationObserver" in window) {
-      var observer = new MutationObserver(function () {
-        if (location.href === lastHref) {
-          return;
-        }
-        lastHref = location.href;
-        var wasReading = state !== STATE_IDLE;
-        if (wasReading) {
-          stopReading();
-        }
-        attachMarkers();
-        if (wasReading && autoContinue) {
-          if (navigationTimer) {
-            clearTimeout(navigationTimer);
-          }
-          navigationTimer = setTimeout(function () {
-            startReading();
-          }, 400);
-        }
-      });
-      observer.observe(document.body, { childList: true, subtree: true });
+    // no full reload) -- and the swap can replace the whole
+    // .md-content__inner element (and, potentially, the header) rather
+    // than mutating it in place, so an observer bound to one specific
+    // element can go dead and silently stop firing the moment the
+    // reader navigates once. document.body is never replaced, so watch
+    // that instead, and use the URL itself (not "did something change
+    // under body") to decide whether a real navigation happened --
+    // that's what tells a page change apart from incidental DOM noise,
+    // including our own marker insertions below.
+    //
+    // injectToolbar() can re-enter this function (see the no-op guard
+    // at its top) if the header buttons ever get wiped out by the same
+    // swap -- guard against attaching a second observer each time that
+    // happens.
+    if (navigationObserverAttached || !("MutationObserver" in window)) {
+      return;
     }
+    navigationObserverAttached = true;
+    var observer = new MutationObserver(function () {
+      // The header buttons may have been wiped out by the same swap --
+      // cheap to check every time, and injectToolbar() no-ops if
+      // they're still there.
+      injectToolbar();
+      if (location.href === lastHref) {
+        return;
+      }
+      lastHref = location.href;
+      var wasReading = state !== STATE_IDLE;
+      if (wasReading) {
+        stopReading();
+      }
+      attachMarkers();
+      if (wasReading && autoContinue) {
+        if (navigationTimer) {
+          clearTimeout(navigationTimer);
+        }
+        navigationTimer = setTimeout(function () {
+          startReading();
+        }, 400);
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   // Stop narrating if the tab is hidden/closed rather than leave speech

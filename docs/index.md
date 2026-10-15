@@ -248,18 +248,37 @@ mistakes and fixes kept in as teaching material.
 - [DevOps Principles & Delivery](cloud-devops/devops-principles-and-delivery.md) —
   The Three Ways, DORA metrics, SLOs/error budgets, deployment strategies
 - [AWS Accounts & IAM](cloud-devops/aws-accounts-and-iam.md)
+- **AWS Security & Governance**
+    - [Encryption, Secrets & Identity Federation](cloud-devops/kms-secrets-and-cognito.md)
+    - [AWS Organizations & Control Tower](cloud-devops/aws-organizations-and-control-tower.md)
+    - [Security & Compliance Services](cloud-devops/aws-security-and-compliance-services.md)
+    - [AWS Systems Manager](cloud-devops/aws-systems-manager.md)
 - **AWS Networking (VPC)**
     - [VPC & Subnet Design](cloud-devops/aws-networking-vpc.md)
     - [Security Groups, Gateways & Flow Logs](cloud-devops/vpc-security-groups-and-flow-logs.md)
+    - [VPC Connectivity & Hybrid Networking](cloud-devops/vpc-connectivity-and-hybrid-networking.md)
+    - [CloudFront: Content Delivery & Edge Caching](cloud-devops/cloudfront-cdn.md)
+- [Caching Layers & Global Accelerator](cloud-devops/caching-layers-and-global-accelerator.md)
 - **Compute & Scaling**
     - [EC2, AMIs & Launch Templates](cloud-devops/compute-and-scaling.md)
+    - [EC2 Instance Families, Purchasing Options & Placement Groups](cloud-devops/ec2-instance-types-and-purchasing-options.md)
     - [Auto Scaling Groups & Scaling Policies](cloud-devops/auto-scaling-groups.md)
-- [Load Balancing & DNS](cloud-devops/load-balancing-and-dns.md)
-- [Databases: RDS Operations](cloud-devops/databases-rds-operations.md)
-- [Storage & Observability](cloud-devops/storage-and-observability.md) — includes CloudWatch vs. Prometheus/Grafana/Nagios
+- [Load Balancing & DNS](cloud-devops/load-balancing-and-dns.md) — includes ALB, NLB & Gateway Load Balancer
+- **Databases**
+    - [RDS Operations](cloud-devops/databases-rds-operations.md)
+    - [Aurora & RDS Proxy](cloud-devops/aurora-and-rds-proxy.md)
+    - [DynamoDB & ElastiCache](cloud-devops/dynamodb-and-elasticache.md)
+- **Storage**
+    - [S3, Secrets & Observability](cloud-devops/storage-and-observability.md) — includes CloudWatch vs. Prometheus/Grafana/Nagios
+    - [EBS, EFS, FSx & Data Transfer](cloud-devops/storage-options-ebs-efs-fsx.md)
+- [Cost Management: Cost Explorer, CUR & Data Transfer](cloud-devops/cost-management-tools.md)
 - **Containers**
     - [Docker: Production Container Images](cloud-devops/docker-production-images.md)
     - [Container Orchestration: ECS & EKS](cloud-devops/container-orchestration-ecs-eks.md)
+- [Serverless & Managed Compute](cloud-devops/serverless-and-managed-compute.md) — Lambda limits, Elastic Beanstalk, AWS Batch, Step Functions
+- [Messaging & Event-Driven Services](cloud-devops/messaging-and-event-driven-services.md) — SQS, SNS, EventBridge, Kinesis, Amazon MQ
+- [Data Analytics: Glue, Lake Formation & EMR](cloud-devops/data-analytics-glue-lake-formation-emr.md)
+- [Disaster Recovery Strategies & AWS Backup](cloud-devops/disaster-recovery-strategies.md) — Backup & Restore, Pilot Light, Warm Standby, Multi-Site Active/Active
 - **Terraform (IaC)**
     - [Terraform Fundamentals](cloud-devops/terraform-fundamentals.md)
     - [Iteration, Modules & Advanced HCL](cloud-devops/terraform-modules-and-advanced-hcl.md)
@@ -276,6 +295,11 @@ mistakes and fixes kept in as teaching material.
     - [Ansible Fundamentals](cloud-devops/ansible-fundamentals.md)
     - [Handlers, Templates, Roles & Vault](cloud-devops/ansible-handlers-templates-roles-vault.md)
     - [Collections, Execution Environments & Automation Platform](cloud-devops/ansible-collections-and-automation-platform.md)
+- [SAA-C03 Exam Prep: Domain Review Index](cloud-devops/saa-c03-exam-prep-index.md) —
+  everything above, organized by the exam's 4 scored domains instead of
+  by study week
+- [SAA-C03 Practice Quiz](cloud-devops/saa-c03-practice-quiz.md) — 16
+  questions, 4 per domain, drawn from the comparisons above
 - [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 

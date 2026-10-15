@@ -749,6 +749,37 @@ aws ec2 release-address --allocation-id <EIP_ALLOC_B> --profile fahad
 
     An unattached Elastic IP is billed hourly. Release both EIPs right after deleting the NLB — it's easy to delete the load balancer and forget the IPs are still sitting there charging.
 
+## Gateway Load Balancer (GWLB)
+
+Solves a different problem than ALB or NLB entirely: instead of
+distributing *your application's* traffic, it distributes traffic
+through a fleet of **third-party virtual security appliances** —
+firewalls, intrusion detection/prevention systems — transparently
+inserted into the path.
+
+- Operates at **layer 3** (network layer), using the **GENEVE**
+  protocol to pass the original packet to an appliance and back.
+- Combines a load balancer and a **Gateway Load Balancer Endpoint**
+  (a VPC endpoint) — traffic is routed to the GWLB endpoint via a route
+  table entry, inspected by the appliance fleet behind the GWLB, then
+  forwarded on to its real destination.
+- Scales the appliance fleet itself with an Auto Scaling Group, the same
+  way an ALB scales target instances — so the security layer scales
+  with traffic instead of becoming the bottleneck.
+
+|  | ALB | NLB | GWLB |
+|---|---|---|---|
+| Layer | 7 (HTTP/HTTPS) | 4 (TCP/UDP) | 3 (IP packets) |
+| Routes based on | Path, host, headers | Port, protocol | Nothing — transparently passes traffic through |
+| Typical use | Web applications | Extreme throughput, static IP, non-HTTP TCP/UDP | Inserting a fleet of firewalls/IDS/IPS appliances into the traffic path |
+
+!!! success "The exam signal"
+
+    "Insert a third-party firewall/intrusion-detection appliance
+    transparently in front of a VPC's traffic, and scale that appliance
+    fleet" → GWLB. Anything about routing HTTP paths → ALB. Anything
+    about raw TCP/UDP throughput or a static IP → NLB.
+
 ## Route 53 — DNS Records & Routing
 
 #### Record types

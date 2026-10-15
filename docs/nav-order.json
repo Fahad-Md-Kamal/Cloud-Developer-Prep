@@ -356,6 +356,22 @@
     "url": "cloud-devops/aws-accounts-and-iam/"
   },
   {
+    "title": "Encryption, Secrets & Identity Federation",
+    "url": "cloud-devops/kms-secrets-and-cognito/"
+  },
+  {
+    "title": "AWS Organizations & Control Tower",
+    "url": "cloud-devops/aws-organizations-and-control-tower/"
+  },
+  {
+    "title": "Security & Compliance Services",
+    "url": "cloud-devops/aws-security-and-compliance-services/"
+  },
+  {
+    "title": "AWS Systems Manager",
+    "url": "cloud-devops/aws-systems-manager/"
+  },
+  {
     "title": "VPC & Subnet Design",
     "url": "cloud-devops/aws-networking-vpc/"
   },
@@ -364,8 +380,24 @@
     "url": "cloud-devops/vpc-security-groups-and-flow-logs/"
   },
   {
+    "title": "VPC Connectivity & Hybrid Networking",
+    "url": "cloud-devops/vpc-connectivity-and-hybrid-networking/"
+  },
+  {
+    "title": "CloudFront: Content Delivery & Edge Caching",
+    "url": "cloud-devops/cloudfront-cdn/"
+  },
+  {
+    "title": "Caching Layers & Global Accelerator",
+    "url": "cloud-devops/caching-layers-and-global-accelerator/"
+  },
+  {
     "title": "EC2, AMIs & Launch Templates",
     "url": "cloud-devops/compute-and-scaling/"
+  },
+  {
+    "title": "EC2 Instance Families, Purchasing Options & Placement Groups",
+    "url": "cloud-devops/ec2-instance-types-and-purchasing-options/"
   },
   {
     "title": "Auto Scaling Groups & Scaling Policies",
@@ -376,12 +408,28 @@
     "url": "cloud-devops/load-balancing-and-dns/"
   },
   {
-    "title": "Databases: RDS Operations",
+    "title": "RDS Operations",
     "url": "cloud-devops/databases-rds-operations/"
   },
   {
-    "title": "Storage & Observability",
+    "title": "Aurora & RDS Proxy",
+    "url": "cloud-devops/aurora-and-rds-proxy/"
+  },
+  {
+    "title": "DynamoDB & ElastiCache",
+    "url": "cloud-devops/dynamodb-and-elasticache/"
+  },
+  {
+    "title": "S3, Secrets & Observability",
     "url": "cloud-devops/storage-and-observability/"
+  },
+  {
+    "title": "EBS, EFS, FSx & Data Transfer",
+    "url": "cloud-devops/storage-options-ebs-efs-fsx/"
+  },
+  {
+    "title": "Cost Management: Cost Explorer, CUR & Data Transfer",
+    "url": "cloud-devops/cost-management-tools/"
   },
   {
     "title": "Docker: Production Container Images",
@@ -390,6 +438,22 @@
   {
     "title": "Container Orchestration: ECS & EKS",
     "url": "cloud-devops/container-orchestration-ecs-eks/"
+  },
+  {
+    "title": "Serverless & Managed Compute",
+    "url": "cloud-devops/serverless-and-managed-compute/"
+  },
+  {
+    "title": "Messaging & Event-Driven Services",
+    "url": "cloud-devops/messaging-and-event-driven-services/"
+  },
+  {
+    "title": "Data Analytics: Glue, Lake Formation & EMR",
+    "url": "cloud-devops/data-analytics-glue-lake-formation-emr/"
+  },
+  {
+    "title": "Disaster Recovery Strategies & AWS Backup",
+    "url": "cloud-devops/disaster-recovery-strategies/"
   },
   {
     "title": "Terraform Fundamentals",
@@ -442,6 +506,14 @@
   {
     "title": "Collections, Execution Environments & Automation Platform",
     "url": "cloud-devops/ansible-collections-and-automation-platform/"
+  },
+  {
+    "title": "SAA-C03 Exam Prep: Domain Review Index",
+    "url": "cloud-devops/saa-c03-exam-prep-index/"
+  },
+  {
+    "title": "SAA-C03 Practice Quiz",
+    "url": "cloud-devops/saa-c03-practice-quiz/"
   },
   {
     "title": "AWS Services Quick Reference",

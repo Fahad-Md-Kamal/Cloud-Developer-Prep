@@ -1,22 +1,24 @@
-/* "Download PDF" button, floating over normal page content */
-#download-pdf-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 1000;
-  padding: 0.6em 1.2em;
-  background: var(--md-primary-fg-color, #009485);
-  color: var(--md-primary-bg-color, #fff);
+/* Buttons this site injects into the header (Download PDF, Read Aloud)
+   share this container and base reset -- living in the header instead
+   of floating over the page keeps them out of the way of the nav/ToC.
+   .md-header__button (Zensical's own class) supplies the theme-correct
+   color/hover/padding across the classic/modern and light/dark
+   variants; this just undoes the browser's default <button> chrome so
+   that shows through cleanly. */
+#header-custom-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-action-btn {
+  background: none;
   border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-family: inherit;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font: inherit;
+  white-space: nowrap;
 }
 
 #download-pdf-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: wait;
 }
 
@@ -58,7 +60,7 @@
     break-inside: avoid;
   }
 
-  #download-pdf-btn {
+  #header-custom-actions {
     display: none !important;
   }
 

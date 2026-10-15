@@ -13,6 +13,26 @@ command below was run against a real account, not copied from docs.
 
 ## S3 Deep Dive
 
+### Storage Classes
+
+| Class | Availability | Min. storage duration | Retrieval | Use for |
+|---|---|---|---|---|
+| Standard | 99.99% | None | Milliseconds | Frequently accessed, hot data |
+| Intelligent-Tiering | 99.9% | None | Milliseconds | Access pattern unknown or changing — AWS moves objects between tiers automatically based on actual access, no lifecycle rule to write |
+| Standard-IA | 99.9% | 30 days | Milliseconds | Infrequent access, but needs millisecond retrieval when it is accessed |
+| One Zone-IA | 99.5% (single AZ) | 30 days | Milliseconds | Same as Standard-IA, but the data is reproducible / non-critical enough to risk a single AZ for a lower price |
+| Glacier Instant Retrieval | 99.9% | 90 days | Milliseconds | Archive data that's rarely accessed but still needs instant reads (e.g. medical images, news archives) |
+| Glacier Flexible Retrieval | 99.99% | 90 days | Minutes to hours | Archive, retrieval isn't urgent |
+| Glacier Deep Archive | 99.99% | 180 days | Hours (up to 12) | Long-term compliance retention, cheapest option, retrieval is rare |
+
+!!! success "The exam signal"
+
+    "Access pattern is unpredictable or changing" → Intelligent-Tiering,
+    not a hand-written lifecycle rule. "Cheapest possible, retrieval
+    within 12 hours is fine, compliance retention" → Glacier Deep
+    Archive. "Non-critical, reproducible data, lower cost than
+    Standard-IA" → One Zone-IA.
+
 ### Lifecycle policies
 
 Lifecycle policies automatically transition objects between storage
@@ -50,6 +70,60 @@ Day 365: Delete                        ← remove old data
   specific regions).
 - Combined with lifecycle policies, the replicated bucket can use
   cheaper storage classes than the source.
+
+### Object Lock
+
+Write-Once-Read-Many (WORM) storage — once locked, an object genuinely
+cannot be deleted or overwritten by anyone, including the account root
+user, until the lock expires.
+
+- **Governance mode** — users with a special IAM permission can still
+  override or delete the lock. Protects against accidental deletion.
+- **Compliance mode** — nobody can override it, not even the root
+  account, until the retention period ends. The actual regulatory
+  requirement (SEC 17a-4, financial/healthcare retention rules) exam
+  questions point at.
+- Requires versioning to be enabled on the bucket — same prerequisite as
+  cross-region replication above.
+
+!!! success "The exam signal"
+
+    "Data must be provably unchangeable/undeletable for a regulatory
+    retention period, not even an administrator can remove it early" →
+    Object Lock in Compliance mode.
+
+### Presigned URLs
+
+A time-limited URL that grants temporary access to a specific private
+object, generated using the credentials of whoever creates it — without
+making the object or the bucket public.
+
+```
+aws s3 presign s3://my-bucket/report.pdf --expires-in 3600
+```
+
+- Lets an application hand out a direct download/upload link (e.g. "let
+  this user upload a profile photo straight to S3") without routing the
+  actual file bytes through the application server, and without the
+  bucket ever being publicly readable.
+- The URL embeds a signature and an expiry — it stops working the moment
+  that expiry passes, no extra cleanup needed.
+
+### Encryption Options
+
+| Option | Who manages the key | Use when |
+|---|---|---|
+| SSE-S3 | AWS, fully managed | Default, simplest, no key management needed |
+| SSE-KMS | You, via [a KMS key](kms-secrets-and-cognito.md#kms-keys-not-the-secrets-themselves) | Need an audit trail of key usage (CloudTrail), or control over who can decrypt |
+| SSE-C | You, provided with every request | You manage keys entirely outside AWS, but still want S3 to do the encryption work |
+| Client-side | You, entirely | Data must be encrypted before it ever reaches AWS, keys never touch AWS at all |
+
+!!! success "The exam signal"
+
+    "Needs an audit trail of exactly who used the encryption key, and
+    when" → SSE-KMS — this is the only option where key usage shows up
+    in CloudTrail. "Simplest possible, no key management overhead
+    needed" → SSE-S3.
 
 ### CLI: S3 bucket operations
 

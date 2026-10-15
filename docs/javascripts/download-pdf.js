@@ -7,13 +7,60 @@
   var scriptUrl = document.currentScript.src;
   var siteRoot = scriptUrl.replace(/javascripts\/download-pdf\.js.*$/, "");
 
+  // Buttons live in the header instead of floating over the page, so
+  // they don't sit on top of the nav/ToC. Several scripts share one
+  // #header-custom-actions row -- whichever loads first creates it.
+  function getActionsContainer() {
+    var existing = document.getElementById("header-custom-actions");
+    if (existing) {
+      return existing;
+    }
+    var headerInner = document.querySelector(".md-header__inner");
+    if (!headerInner) {
+      return null;
+    }
+    var container = document.createElement("div");
+    container.id = "header-custom-actions";
+    var source = headerInner.querySelector(".md-header__source");
+    if (source) {
+      headerInner.insertBefore(container, source);
+    } else {
+      headerInner.appendChild(container);
+    }
+    return container;
+  }
+
   function injectButton() {
+    if (document.getElementById("download-pdf-btn")) {
+      return;
+    }
+    var container = getActionsContainer();
+    if (!container) {
+      return;
+    }
     var btn = document.createElement("button");
     btn.id = "download-pdf-btn";
     btn.type = "button";
-    btn.textContent = "Download PDF";
+    btn.className = "md-header__button header-action-btn";
+    btn.title = "Download the whole site as a PDF";
+    btn.textContent = "PDF";
     btn.addEventListener("click", downloadPdf);
-    document.body.appendChild(btn);
+    container.appendChild(btn);
+  }
+
+  // This site uses instant navigation (page content swaps via fetch, no
+  // full reload) -- if that swap ever replaces the header itself, this
+  // button would silently vanish. Re-check on every navigation and
+  // re-inject if needed.
+  var lastHref = location.href;
+  if ("MutationObserver" in window) {
+    new MutationObserver(function () {
+      if (location.href === lastHref) {
+        return;
+      }
+      lastHref = location.href;
+      injectButton();
+    }).observe(document.body, { childList: true, subtree: true });
   }
 
   function extractContent(htmlText) {
