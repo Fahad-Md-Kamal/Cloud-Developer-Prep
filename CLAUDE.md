@@ -166,6 +166,54 @@ same subdirectory, one per sub-topic:
   sub-topic they want from the sidebar), not about shortening content —
   don't cut material to avoid splitting; split it instead.
 
+## Depth over tools: lead with fundamentals, not command lists
+
+As of 2026-10-16, chapters centered on a tool or managed service should
+teach the underlying system that tool is built on *before* the
+practical "how to actually use it" material — not instead of it. Knowing
+`docker run`'s flags isn't the same as understanding what a container
+actually is, and a reader who only learned the commands has nothing left
+to reason with the moment something breaks in a way the command-line
+flags never covered.
+
+**Precedent:**
+[Docker: Production Container Images](cloud-devops/docker-production-images.md)
+was rewritten as the model for this — it now opens with "What a
+Container Actually Is" (Linux namespaces, cgroups, the union filesystem
+and copy-on-write) before the production checklist, replacing what used
+to be a brief "vs VMs" comparison bolted on at the end.
+
+**How to apply, so any agent working on this repo does it the same way:**
+
+- When writing a new chapter, or substantially revisiting an existing
+  one, that's centered on a tool/service: ask "what's the actual
+  mechanism this tool is built on," and teach that mechanism first, with
+  the tool's commands/usage presented afterward as an application of it
+  — not the other way around.
+- A concrete signal something is missing: if a bullet asserts a behavior
+  ("a build only re-runs from the first changed layer," "an SCP can
+  only restrict, never grant") without explaining *why* that's true at
+  the system level, that's the gap to fill in.
+- Use an animated inline SVG diagram — native SVG `<animate>` /
+  `<animateTransform>` elements, no CSS and no JS — specifically when a
+  concept is a **process unfolding over time** (copy-on-write, a request
+  moving through a pipeline, a scheduler handing off a CPU). A static
+  diagram is still the right call for structure or a side-by-side
+  comparison; animation is for sequences, not everything.
+- The same raw-HTML-in-Markdown constraints apply as everywhere else on
+  this site (see "Known Zensical/Markdown gotchas" below): no `<style>`
+  tag, no blank lines inside the block, no comments — inline `style="…"`
+  per element, and SMIL `<animate>` elements for motion/color/opacity
+  instead of CSS keyframes.
+- This is a site-wide direction, not scoped to Cloud & DevOps — apply
+  the same lens anywhere a chapter is shaped like a tool's command
+  reference rather than an explanation of the system underneath it.
+- Don't retrofit this into every existing chapter on a whim — reserve
+  the effort for chapters that are genuinely tool-usage-shaped today and
+  would gain real understanding from the underlying mechanism, the same
+  "do it properly when it's warranted, don't force it everywhere" spirit
+  as the splitting convention above.
+
 ## Weaving in the AI-driven hiring era
 
 As of 2026-10-09 this site is explicitly positioned (see `docs/index.md`'s
