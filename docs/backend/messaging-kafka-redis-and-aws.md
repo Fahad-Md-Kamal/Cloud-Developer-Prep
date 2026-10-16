@@ -140,6 +140,19 @@ def handle_order_placed(event):
 
 ## 4. AWS SNS vs. SQS, and the Fan-Out Pattern
 
+**Fan-out**, as a general term before the AWS specifics below: one
+event happens once, and a **broadcast step** hands an independent copy
+to every interested downstream consumer, so they all process it in
+parallel instead of one service handling it and then calling the next
+one itself. This is the same umbrella concept behind two very different
+looking things on this site — the SNS+SQS broadcast below, *and* the
+[fan-out-on-write vs. fan-out-on-read decision for a social feed](../architecture/scalability-case-studies.md#5-worked-example-designing-a-social-feed-style-system-end-to-end),
+which is the same "broadcast once, let consumers work independently"
+idea applied to *precomputing a feed per follower* instead of
+*broadcasting an event to services*. If a question just says "fan-out"
+with no further context, it's worth asking which of the two is meant —
+they share a name and a motivation, not an implementation.
+
 **"Describe the difference between SNS and SQS in terms of architecture."**
 
 ```
@@ -185,6 +198,31 @@ Producer -> [SNS Topic] -+-> [SQS Queue B] -> Service B (e.g. analytics)
 | Delivery | One message to one consumer | One message to every subscribed queue |
 | Use when | A single, well-defined worker does the work | Multiple independent services each need to react to the same event |
 | Failure isolation | N/A — one consumer | A slow/down consumer's queue backs up without affecting the others |
+
+**"Is fan-out always asynchronous?"**
+
+**Answer:**
+
+- No — the SNS+SQS version above is **asynchronous fan-out**: the
+  publisher drops the message and moves on immediately, and every
+  consumer works through it independently, at its own pace, with no one
+  waiting on anyone else.
+- **Synchronous fan-out** is the same "broadcast to several things at
+  once" idea, but the caller blocks until *every* downstream call
+  finishes before it can respond — e.g. an API handler that calls three
+  other services directly (not through a queue) and waits for all three
+  responses before returning. It's simpler to reason about (no
+  eventual-consistency gap, no separate broker to run), but it directly
+  couples the caller's latency and availability to the *slowest* and
+  *least reliable* downstream call — one hung service makes the whole
+  request hang, which a queue-based async fan-out never lets happen
+  (each consumer's queue just backs up on its own).
+- The AWS-native default answer to "design a fan-out" is almost always
+  the asynchronous SNS+SQS version above, specifically because it
+  doesn't have that single-slow-dependency failure mode — reach for
+  synchronous fan-out only when the caller genuinely cannot respond
+  until every result is in hand (e.g. aggregating several prices before
+  quoting a total).
 
 ---
 

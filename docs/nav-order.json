@@ -36,6 +36,10 @@
     "url": "frontend/js-ts/typescript-and-angular-for-backend-leads/"
   },
   {
+    "title": "Python's Execution Model",
+    "url": "backend/python/pythons-execution-model/"
+  },
+  {
     "title": "Typing & Generics",
     "url": "backend/python/typing-and-generics/"
   },
@@ -210,6 +214,10 @@
   {
     "title": "Refactoring Legacy Systems",
     "url": "architecture/refactoring-legacy-systems/"
+  },
+  {
+    "title": "How the Internet Moves Files",
+    "url": "architecture/how-the-internet-moves-files/"
   },
   {
     "title": "API Paradigms & Patterns",

@@ -115,6 +115,7 @@ earlier-stage tracks for engineers coming from those languages.
 framework added here later (web, desktop, or otherwise), not just
 Django/FastAPI.
 
+- [Python's Execution Model](backend/python/pythons-execution-model.md)
 - [Typing & Generics](backend/python/typing-and-generics.md)
 - [Bit Manipulation Basics](backend/python/bit-manipulation-basics.md)
 - [Concurrency & AsyncIO](backend/python/concurrency-and-asyncio.md)
@@ -188,6 +189,8 @@ sits underneath.
     - [Clean Code Practices](architecture/clean-code-practices.md)
     - [Refactoring Legacy Systems](architecture/refactoring-legacy-systems.md)
 - **APIs**
+    - [How the Internet Moves Files](architecture/how-the-internet-moves-files.md) —
+      TCP segmentation, multipart uploads, chunked transfer, Range requests
     - [API Paradigms & Patterns](architecture/api-paradigms-and-patterns.md)
     - [REST Deep Dive](architecture/rest-deep-dive.md)
     - [GraphQL Deep Dive](architecture/graphql-deep-dive.md)

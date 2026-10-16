@@ -137,7 +137,14 @@ people they follow."
   reads more expensive. Most real systems use a hybrid — fan-out on
   write for typical users, fan-out on read (or a capped/sampled
   fan-out) for very-high-follower accounts, to avoid one huge post
-  triggering millions of synchronous writes.
+  triggering millions of synchronous writes. This is the same
+  "broadcast once, let consumers work independently" idea as
+  [SNS+SQS fan-out](../backend/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern),
+  just applied to precomputing per-follower feed entries instead of
+  broadcasting an event to services — the "very-high-follower accounts"
+  problem here is the same hotspot concern as a single consumer getting
+  overwhelmed there, solved the same general way: don't force the
+  expensive path onto the case that can't afford it.
 - **Caching**: the recent-posts-per-user data and the assembled feed
   itself are both natural caching targets — see
   [Common System Design Patterns §2](system-design-patterns.md#2-how-do-you-decide-on-a-caching-strategy-for-a-system-design-answer)
