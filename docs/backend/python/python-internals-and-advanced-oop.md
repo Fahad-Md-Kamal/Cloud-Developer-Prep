@@ -8,7 +8,79 @@ Descriptors, metaclasses, MRO, and magic-method correctness — the
 "expert Python" layer beyond day-to-day code, and where it actually
 shows up in frameworks you already use (Django's ORM, DRF's
 serializers). Flagged from the BJIT Senior Python Developer JD's
-"Expert knowledge in Python + Django" requirement.
+"Expert knowledge in Python + Django" requirement. Everything below
+builds on two mechanics most OOP tutorials wave past as "just how
+classes work" — object creation, and what `self` actually is.
+
+## How an Object Actually Gets Created
+
+`MyClass(args)` doesn't call `__init__` directly — it calls
+`type.__call__(MyClass, args)`, which does exactly two things, in order:
+
+1. Calls `MyClass.__new__(MyClass, args)` to actually **allocate** and
+   return a new, empty instance.
+2. Calls `instance.__init__(args)` on that instance to **populate** it.
+
+This split is why `__new__` returns the object and `__init__` always
+returns `None` (implicitly) — by the time `__init__` runs, the object
+already exists; it only ever mutates it, never creates it.
+
+!!! success "Why `__new__` exists at all, separate from `__init__`"
+
+    `__new__` is the one to override when something needs to happen
+    *before* there's an instance to mutate — returning an already-existing
+    instance instead of a new one (the singleton pattern), returning an
+    instance of a different subclass entirely, or subclassing an
+    immutable built-in (`int`, `str`, `tuple`): their value has to be
+    fixed at creation time, since nothing can mutate them afterward in
+    `__init__`.
+
+## What `self` Actually Is
+
+`instance.attr` doesn't just check `instance.__dict__` — it checks, in
+order: a **data descriptor** (has both `__get__` and `__set__` — e.g.
+`property`) anywhere in the type's MRO wins outright, even over the
+instance's own `__dict__`; otherwise the instance's own `__dict__` wins;
+otherwise a plain class attribute or **non-data descriptor** (`__get__`
+only) from the type's MRO is used.
+
+A plain function defined inside a class is itself a non-data
+descriptor — every function object has a `__get__`. Accessing
+`instance.method` doesn't hand back the raw function; it calls the
+function's `__get__(instance, owner)`, which returns a **bound
+method** — a small wrapper remembering *both* the function and the
+instance, so calling it automatically passes `instance` as the first
+argument. `self` isn't the language secretly injecting a hidden
+argument — it's the exact same
+[descriptor protocol covered next](#1-whats-a-descriptor-and-where-have-you-actually-used-one-without-realizing-it),
+just applied to plain functions instead of a custom `__get__`/`__set__`
+pair.
+
+<svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of obj.method(x) resolving through the descriptor protocol into a bound method, then unpacking into method(obj, x)" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="10" y="150" width="165" height="110" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="92" y="190" font-size="14" font-weight="600" text-anchor="middle" fill="#2b313b">obj.method</text>
+<text x="92" y="210" font-size="12" text-anchor="middle" fill="#5b6472">attribute access</text>
+<rect x="195" y="150" width="165" height="110" rx="8" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="277" y="182" font-size="13" font-weight="600" text-anchor="middle" fill="#1d4a78">function.__get__</text>
+<text x="277" y="202" font-size="13" font-weight="600" text-anchor="middle" fill="#1d4a78">(obj, type(obj))</text>
+<text x="277" y="222" font-size="11" text-anchor="middle" fill="#3d699a">descriptor fires</text>
+<rect x="380" y="150" width="165" height="110" rx="8" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
+<text x="462" y="182" font-size="13" font-weight="600" text-anchor="middle" fill="#7a5c14">bound method</text>
+<text x="462" y="202" font-size="12" text-anchor="middle" fill="#9a7420">remembers:</text>
+<text x="462" y="220" font-size="12" text-anchor="middle" fill="#9a7420">function + obj</text>
+<rect x="565" y="150" width="165" height="110" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="647" y="190" font-size="13" font-weight="600" text-anchor="middle" fill="#2b313b">bound_method(x)</text>
+<text x="647" y="210" font-size="12" text-anchor="middle" fill="#5b6472">called normally</text>
+<rect x="750" y="150" width="140" height="110" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"></rect>
+<text x="820" y="182" font-size="13" font-weight="600" text-anchor="middle" fill="#0f6b45">method(obj, x)</text>
+<text x="820" y="202" font-size="12" text-anchor="middle" fill="#3d9a73">self = obj,</text>
+<text x="820" y="220" font-size="12" text-anchor="middle" fill="#3d9a73">no magic</text>
+<circle r="9" fill="#d9822b" cy="205"><animate attributeName="cx" values="92;277;462;647;820;820" keyTimes="0;0.22;0.44;0.66;0.85;1" dur="12s" repeatCount="indefinite"></animate></circle>
+<text x="450" y="340" font-size="18" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.2;0.24;1" dur="12s" repeatCount="indefinite"></animate>obj.method is attribute access — Python finds a function on the class.</text>
+<text x="450" y="340" font-size="18" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.22;0.26;0.42;0.46;1" dur="12s" repeatCount="indefinite"></animate>The function is a descriptor — its __get__ runs automatically.</text>
+<text x="450" y="340" font-size="18" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.44;0.48;0.64;0.68;1" dur="12s" repeatCount="indefinite"></animate>__get__ returns a bound method — a package of (function, obj).</text>
+<text x="450" y="340" font-size="18" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.68;0.72;1" dur="12s" repeatCount="indefinite"></animate>Calling it runs method(obj, x) — self was always just obj, passed normally.</text>
+</svg>
 
 ## 1. "What's a descriptor, and where have you actually used one without realizing it?"
 
