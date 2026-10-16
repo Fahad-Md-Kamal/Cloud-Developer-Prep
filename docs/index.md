@@ -338,6 +338,8 @@ mistakes and fixes kept in as teaching material.
 A parallel-track universal skill, not backend-architecture-specific —
 usually practiced alongside everything else, not saved for last.
 
+- [Big-O & the Hardware Underneath It](dsa/big-o-and-memory-hardware.md) —
+  cache lines, memory locality, virtual memory
 - [Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
 - [Visualizing Algorithms with AI](dsa/ai-assisted-algorithm-visualization.md) —
   a reusable prompt for generating a NeetCode-style step-through visualizer for your own solution

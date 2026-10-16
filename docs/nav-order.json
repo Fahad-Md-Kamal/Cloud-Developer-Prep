@@ -576,6 +576,10 @@
     "url": "ai-llm/langchain-ecosystem/"
   },
   {
+    "title": "Big-O & the Hardware Underneath It",
+    "url": "dsa/big-o-and-memory-hardware/"
+  },
+  {
     "title": "Blind 75 / Grind 75 / NeetCode 150",
     "url": "dsa/chapter-36/"
   },
