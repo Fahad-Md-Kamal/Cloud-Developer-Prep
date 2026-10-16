@@ -35,7 +35,7 @@ the full step-by-step build of this VPC.
 <text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" text-anchor="middle" x="240" y="103">Internet Gateway</text>
 <line marker-end="url(#vi-arrow)" stroke="#5c5468" stroke-width="1.5" x1="200" x2="135" y1="114" y2="150"></line>
 <rect fill="none" height="128" rx="8" stroke="#e0d9d0" stroke-width="1.5" width="440" x="20" y="126"></rect>
-<text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" x="34" y="142">VPC 10.0.0.0/16 — fahad-devops-vpc</text>
+<text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" x="34" y="142">VPC 10.0.0.0/16 — demo-devops-vpc</text>
 <rect fill="#dc4c2f" height="90" opacity=".12" rx="6" stroke="#dc4c2f" stroke-width="1.2" width="190" x="40" y="150"></rect>
 <text style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;fill:#5c5468" x="50" y="164">Public — 10.0.1.0/24</text>
 <rect fill="#dc4c2f" height="28" opacity=".85" rx="4" width="170" x="50" y="175"></rect>
@@ -806,6 +806,6 @@ Destination        Target
 
 See [VPC Security, Gateways & the Hands-On Build](vpc-security-groups-and-flow-logs.md)
 for the Internet Gateway, NAT Gateway, security groups, flow logs, and the
-full step-by-step build of this VPC (`fahad-devops-vpc`), including how EC2
+full step-by-step build of this VPC (`demo-devops-vpc`), including how EC2
 instances in these subnets are launched through an
 [Auto Scaling Group](auto-scaling-groups.md) across both AZs.

@@ -5,7 +5,7 @@ icon: lucide/house
 
 # Engineering for Scale: Backend, AI, and System Design Mastery
 
-**A Comprehensive Interview Preparation Guide** — by Fahad Md Kamal
+**A Comprehensive Interview Preparation Guide**
 
 A living backend/cloud interview-prep guide, built from real practice
 sessions rather than a static checklist. Most of it is
@@ -24,12 +24,6 @@ increasingly pass through an AI-driven ATS before a person ever reads
 them.
 [Interviewing in the AI Era](interview-prep/interviewing-in-the-ai-era.md)
 covers that layer directly.
-
-!!! warning "Private content — repo must stay private"
-    Contains real company names (Lawstronaut, Optimizely, Cefalo). The
-    [Meeting-Intelligence System Case Study](interview-prep/meeting-intelligence-case-study.md)
-    has been anonymized (no client/project name, no domain-identifying
-    details) but the repo should still stay private.
 
 ## About this book
 

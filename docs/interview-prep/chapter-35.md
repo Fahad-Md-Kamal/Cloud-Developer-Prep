@@ -31,7 +31,7 @@ Create a comprehensive 30-day preparation plan that brings together all previous
 - Mock technical interviews and feedback
 
 ### 3. Week 3: Specialization Focus (Days 15-21)
-- Role-specific skill development (Lawstronaut vs Optimizely)
+- Role-specific skill development (legal-tech vs. AI-platform)
 - Web crawling or AI platform deep dives
 - Performance optimization and monitoring
 - Security and best practices review

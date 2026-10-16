@@ -324,7 +324,7 @@ updating tags, say — applies normally:
         id   = "i-0aaa1111aaaa11111"
       ~ tags = {
             "Name"  = "critical-app"
-          + "Owner" = "fahad"
+          + "Owner" = "demo"
         }
     }
 
@@ -373,15 +373,15 @@ longer. `TF_LOG_PATH` redirects it to a file instead:
 
 ``` bash
 export TF_LOG=DEBUG
-export TF_LOG_PATH="/home/fahad/logs/debug.log"
+export TF_LOG_PATH="/home/demo/logs/debug.log"
 terraform apply
 ```
 
 !!! danger "The directory has to already exist"
 
     Terraform does not create missing directories in `TF_LOG_PATH` —
-    pointing it at `/home/fahad/logs/debug.log` when
-    `/home/fahad/logs/` doesn't exist yet fails to write the log at all
+    pointing it at `/home/demo/logs/debug.log` when
+    `/home/demo/logs/` doesn't exist yet fails to write the log at all
     (checked directly: a fresh `logs/` directory genuinely doesn't
     exist until something creates it). `mkdir -p` the directory first,
     the same requirement as any other tool writing to a path you

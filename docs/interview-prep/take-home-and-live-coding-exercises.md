@@ -158,7 +158,8 @@ if __name__ == "__main__":
 
 ## Exercise 2: Movie Database API — Debug & Extend (Django REST Framework)
 
-**Source:** a real SELISE Python Developer take-home assessment. Full
+**Source:** a real Python Developer take-home assessment from a past
+interview process. Full
 solution: [movie-database-assessment](https://github.com/Fahad-Md-Kamal/movie-database-assessment)
 (private-repo submission, now public).
 

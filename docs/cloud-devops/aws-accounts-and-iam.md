@@ -87,7 +87,7 @@ Set a convention on day one:
 ``` tags
 Environment  = dev | staging | prod
 Project      = ecommerce-platform
-Owner        = fahad
+Owner        = demo
 CostCenter   = ramp-plan-2026
 ManagedBy    = terraform | manual
 ```

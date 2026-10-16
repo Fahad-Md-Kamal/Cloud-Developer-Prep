@@ -78,7 +78,7 @@ applies from racing against it at the same time.
 # backend.tf
 terraform {
   backend "s3" {
-    bucket         = "fahad-terraform-state"
+    bucket         = "demo-terraform-state"
     key            = "dev/network/terraform.tfstate"
     region         = "ap-south-1"
     dynamodb_table = "terraform-locks"   # locking, pre-2023 syntax
@@ -92,13 +92,13 @@ terraform {
     A real `terraform init -migrate-state` failed with `403 Forbidden`
     on the S3 bucket, even though the exact same bucket worked fine for
     every other command. Cause: the `backend "s3" { }` block above has
-    no `profile` argument, so it never inherits `profile = "fahad"`
+    no `profile` argument, so it never inherits `profile = "demo"`
     from the `provider "aws" { }` block below it — backend
     initialization happens before providers are even loaded, so nothing
     carries over automatically. With no explicit profile, it silently
     fell back to this machine's *default* AWS credential chain, which
     resolved to a completely different AWS account that had no access
-    to the bucket at all. The fix is adding `profile = "fahad"` directly
+    to the bucket at all. The fix is adding `profile = "demo"` directly
     inside the `backend` block — it needs its own credentials, stated
     explicitly, every time.
 
@@ -163,7 +163,7 @@ backend "s3" {
   key          = "tf-state/locking/terraform.tfstate"
   region       = "ap-south-1"
   use_lockfile = true          # was: dynamodb_table = "dynamodb-state-locking"
-  profile      = "fahad"
+  profile      = "demo"
 }
 ```
 
@@ -338,7 +338,7 @@ read-only.
 data "terraform_remote_state" "network" {
   backend = "s3"
   config = {
-    bucket = "fahad-terraform-state"
+    bucket = "demo-terraform-state"
     key    = "dev/network/terraform.tfstate"
     region = "ap-south-1"
   }

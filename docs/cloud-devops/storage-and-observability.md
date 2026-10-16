@@ -129,28 +129,28 @@ aws s3 presign s3://my-bucket/report.pdf --expires-in 3600
 
 ``` bash
 # Create a bucket (name must be globally unique)
-aws s3 mb s3://fahad-ecommerce-assets-dev
+aws s3 mb s3://demo-ecommerce-assets-dev
 
 # Enable versioning
 aws s3api put-bucket-versioning \
-  --bucket fahad-ecommerce-assets-dev \
+  --bucket demo-ecommerce-assets-dev \
   --versioning-configuration Status=Enabled
 
 # Upload a file
-aws s3 cp ./logo.png s3://fahad-ecommerce-assets-dev/images/logo.png
+aws s3 cp ./logo.png s3://demo-ecommerce-assets-dev/images/logo.png
 
 # Upload an entire folder
-aws s3 sync ./static/ s3://fahad-ecommerce-assets-dev/static/
+aws s3 sync ./static/ s3://demo-ecommerce-assets-dev/static/
 
 # List objects
-aws s3 ls s3://fahad-ecommerce-assets-dev/ --recursive
+aws s3 ls s3://demo-ecommerce-assets-dev/ --recursive
 
 # Download a file
-aws s3 cp s3://fahad-ecommerce-assets-dev/images/logo.png ./downloaded-logo.png
+aws s3 cp s3://demo-ecommerce-assets-dev/images/logo.png ./downloaded-logo.png
 
 # Set lifecycle policy (Standard → IA after 30 days → Glacier after 90)
 aws s3api put-bucket-lifecycle-configuration \
-  --bucket fahad-ecommerce-assets-dev \
+  --bucket demo-ecommerce-assets-dev \
   --lifecycle-configuration '{
     "Rules": [{
       "ID": "archive-old-objects",
@@ -165,17 +165,17 @@ aws s3api put-bucket-lifecycle-configuration \
   }'
 
 # Check bucket size and object count
-aws s3 ls s3://fahad-ecommerce-assets-dev/ --recursive --summarize \
+aws s3 ls s3://demo-ecommerce-assets-dev/ --recursive --summarize \
   | tail -2
 
 # Block all public access (security best practice)
 aws s3api put-public-access-block \
-  --bucket fahad-ecommerce-assets-dev \
+  --bucket demo-ecommerce-assets-dev \
   --public-access-block-configuration \
     BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
 
 # Delete all objects and the bucket
-aws s3 rb s3://fahad-ecommerce-assets-dev --force
+aws s3 rb s3://demo-ecommerce-assets-dev --force
 ```
 
 ## Secrets Manager & Parameter Store
@@ -295,19 +295,19 @@ An alarm can trigger any of:
 
 ``` bash
 # Create an SNS topic for alerts (you need this for alarm actions)
-aws sns create-topic --name fahad-alerts \
+aws sns create-topic --name demo-alerts \
   --query "TopicArn" --output text
 
 # Subscribe your email to the topic
 aws sns subscribe \
-  --topic-arn arn:aws:sns:ap-south-1:111122223333:fahad-alerts \
+  --topic-arn arn:aws:sns:ap-south-1:111122223333:demo-alerts \
   --protocol email \
-  --notification-endpoint fahadmdkamal@gmail.com
+  --notification-endpoint alerts@example.com
 # Check your email and click "Confirm subscription"
 
 # Create alarm: high CPU on an instance
 aws cloudwatch put-metric-alarm \
-  --alarm-name fahad-high-cpu-web \
+  --alarm-name demo-high-cpu-web \
   --metric-name CPUUtilization \
   --namespace AWS/EC2 \
   --statistic Average \
@@ -315,12 +315,12 @@ aws cloudwatch put-metric-alarm \
   --threshold 80 \
   --comparison-operator GreaterThanThreshold \
   --evaluation-periods 2 \
-  --alarm-actions arn:aws:sns:ap-south-1:111122223333:fahad-alerts \
+  --alarm-actions arn:aws:sns:ap-south-1:111122223333:demo-alerts \
   --dimensions Name=InstanceId,Value=i-xxxxx
 
 # Create alarm: high 5xx errors on ALB
 aws cloudwatch put-metric-alarm \
-  --alarm-name fahad-alb-5xx-errors \
+  --alarm-name demo-alb-5xx-errors \
   --metric-name HTTPCode_Target_5XX_Count \
   --namespace AWS/ApplicationELB \
   --statistic Sum \
@@ -328,7 +328,7 @@ aws cloudwatch put-metric-alarm \
   --threshold 10 \
   --comparison-operator GreaterThanThreshold \
   --evaluation-periods 2 \
-  --alarm-actions arn:aws:sns:ap-south-1:111122223333:fahad-alerts
+  --alarm-actions arn:aws:sns:ap-south-1:111122223333:demo-alerts
 
 # List all alarms
 aws cloudwatch describe-alarms \
@@ -367,7 +367,7 @@ Log events:  individual log lines      ← timestamped, searchable
 ``` bash
 # Create a log group
 aws logs create-log-group \
-  --log-group-name /ec2/fahad-web-dev
+  --log-group-name /ec2/demo-web-dev
 
 # List log groups
 aws logs describe-log-groups \
@@ -375,11 +375,11 @@ aws logs describe-log-groups \
   --output table
 
 # Tail logs in real-time (requires aws-cli v2)
-aws logs tail /ec2/fahad-web-dev --follow
+aws logs tail /ec2/demo-web-dev --follow
 
 # Search logs for errors (last 1 hour)
 aws logs filter-log-events \
-  --log-group-name /ec2/fahad-web-dev \
+  --log-group-name /ec2/demo-web-dev \
   --filter-pattern "ERROR" \
   --start-time $(date -u -d '1 hour ago' +%s)000 \
   --query "events[].{Time:timestamp,Message:message}" \
@@ -387,7 +387,7 @@ aws logs filter-log-events \
 
 # Delete a log group (cleanup)
 aws logs delete-log-group \
-  --log-group-name /ec2/fahad-web-dev
+  --log-group-name /ec2/demo-web-dev
 ```
 
 **Log Insights** queries across all log streams with SQL-like syntax (in
@@ -463,7 +463,7 @@ Trace: GET /api/orders
 aws budgets create-budget \
   --account-id 111122223333 \
   --budget '{
-    "BudgetName": "ramp-plan-fahad",
+    "BudgetName": "ramp-plan-demo",
     "BudgetLimit": {"Amount": "80", "Unit": "USD"},
     "TimeUnit": "QUARTERLY",
     "BudgetType": "COST",
@@ -482,7 +482,7 @@ aws budgets create-budget \
       },
       "Subscribers": [{
         "SubscriptionType": "EMAIL",
-        "Address": "fahadmdkamal@gmail.com"
+        "Address": "alerts@example.com"
       }]
     },
     {
@@ -494,11 +494,11 @@ aws budgets create-budget \
       },
       "Subscribers": [{
         "SubscriptionType": "EMAIL",
-        "Address": "fahadmdkamal@gmail.com"
+        "Address": "alerts@example.com"
       }]
     }
   ]' \
-  --profile fahad
+  --profile demo
 ```
 
 ### Method 2: File-based (separate JSON files — cleaner for version control)
@@ -509,7 +509,7 @@ Create two files, then reference them:
 
 ``` json
 {
-  "BudgetName": "ramp-plan-fahad",
+  "BudgetName": "ramp-plan-demo",
   "BudgetLimit": {
     "Amount": "80",
     "Unit": "USD"
@@ -555,7 +555,7 @@ Create two files, then reference them:
     },
     "Subscribers": [{
       "SubscriptionType": "EMAIL",
-      "Address": "fahadmdkamal@gmail.com"
+      "Address": "alerts@example.com"
     }]
   },
   {
@@ -567,7 +567,7 @@ Create two files, then reference them:
     },
     "Subscribers": [{
       "SubscriptionType": "EMAIL",
-      "Address": "fahadmdkamal@gmail.com"
+      "Address": "alerts@example.com"
     }]
   }
 ]
@@ -590,7 +590,7 @@ aws budgets create-budget \
   --account-id 111122223333 \
   --budget file://budget.json \
   --notifications-with-subscribers file://notifications.json \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "file:// paths"
@@ -702,13 +702,13 @@ aws budgets describe-budgets \
   --account-id 111122223333 \
   --query "Budgets[].{Name:BudgetName,Limit:BudgetLimit.Amount,Spent:CalculatedSpend.ActualSpend.Amount,Type:BudgetType,TimeUnit:TimeUnit}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Update a budget (change the limit to $100)
 aws budgets update-budget \
   --account-id 111122223333 \
   --new-budget '{
-    "BudgetName": "ramp-plan-fahad",
+    "BudgetName": "ramp-plan-demo",
     "BudgetLimit": {"Amount": "100", "Unit": "USD"},
     "TimeUnit": "QUARTERLY",
     "BudgetType": "COST",
@@ -717,20 +717,20 @@ aws budgets update-budget \
       "End": "2026-12-31T23:59:59Z"
     }
   }' \
-  --profile fahad
+  --profile demo
 
 # Delete a budget
 aws budgets delete-budget \
   --account-id 111122223333 \
-  --budget-name "ramp-plan-fahad" \
-  --profile fahad
+  --budget-name "ramp-plan-demo" \
+  --profile demo
 
 # Check current spend vs budget
 aws ce get-cost-and-usage \
   --time-period Start=2026-09-01,End=2026-09-30 \
   --granularity DAILY \
   --metrics "UnblendedCost" \
-  --profile fahad
+  --profile demo
 
 # Spend breakdown by service (find what's costing the most)
 aws ce get-cost-and-usage \
@@ -738,7 +738,7 @@ aws ce get-cost-and-usage \
   --granularity MONTHLY \
   --metrics "UnblendedCost" \
   --group-by Type=DIMENSION,Key=SERVICE \
-  --profile fahad
+  --profile demo
 ```
 
 ### Common budget patterns

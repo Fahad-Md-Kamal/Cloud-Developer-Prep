@@ -4,7 +4,7 @@ title: "Chapter 36: Mastering Data Structures & Algorithms with Blind 75, Grind 
 
 # Chapter 36: Mastering Data Structures & Algorithms with Blind 75, Grind 75 & NeetCode 150
 
-Acing the coding interview is a non-negotiable step for landing roles at top-tier companies like Lawstronaut and Optimizely. This chapter provides a focused, pattern-driven approach to mastering three curated problem lists—"Blind 75," "Grind 75," and the expanded "NeetCode 150"—that contain essential LeetCode problems frequently appearing in technical interviews. Instead of memorizing solutions, you will learn to recognize underlying patterns, enabling you to solve not just these problems, but hundreds of similar ones.
+Acing the coding interview is a non-negotiable step for landing roles at top-tier tech companies. This chapter provides a focused, pattern-driven approach to mastering three curated problem lists—"Blind 75," "Grind 75," and the expanded "NeetCode 150"—that contain essential LeetCode problems frequently appearing in technical interviews. Instead of memorizing solutions, you will learn to recognize underlying patterns, enabling you to solve not just these problems, but hundreds of similar ones.
 
 **What's Covered:**
 - **Blind 75:** The original foundational 75 problems that every candidate should know

@@ -55,7 +55,7 @@ aws ec2 describe-launch-templates \
   --launch-template-names ecommerce-web \
   --query "LaunchTemplates[0].{ID:LaunchTemplateId,Name:LaunchTemplateName,Version:LatestVersionNumber}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Our template: lt-0aaa77778888bbbb (ecommerce-web, references Golden AMI v1.1)
 ```
@@ -65,21 +65,21 @@ aws ec2 describe-launch-templates \
 ``` bash
 # Create with desired=1 to stay within free tier
 aws autoscaling create-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --launch-template LaunchTemplateName=ecommerce-web,Version='$Latest' \
   --min-size 1 \
   --max-size 3 \
   --desired-capacity 1 \
   --vpc-zone-identifier "subnet-0ccc3333cccc33333,subnet-0ddd4444dddd44444" \
-  --tags Key=Name,Value=fahad-web-asg,PropagateAtLaunch=true \
+  --tags Key=Name,Value=demo-web-asg,PropagateAtLaunch=true \
          Key=Environment,Value=dev,PropagateAtLaunch=true \
-         Key=Owner,Value=fahad,PropagateAtLaunch=true \
-  --profile fahad
+         Key=Owner,Value=demo,PropagateAtLaunch=true \
+  --profile demo
 ```
 
 !!! note "vpc-zone-identifier"
 
-    This specifies which subnets the ASG launches instances into. Using both private app subnets (`fahad-private-app-a` + `fahad-private-app-b`) across two AZs gives automatic fault tolerance — see [AWS Networking & VPC](aws-networking-vpc.md) for how these subnets were built.
+    This specifies which subnets the ASG launches instances into. Using both private app subnets (`demo-private-app-a` + `demo-private-app-b`) across two AZs gives automatic fault tolerance — see [AWS Networking & VPC](aws-networking-vpc.md) for how these subnets were built.
 
 !!! danger "Free tier warning"
 
@@ -90,10 +90,10 @@ aws autoscaling create-auto-scaling-group \
 ``` bash
 # Check ASG status (wait ~30 seconds after creation)
 aws autoscaling describe-auto-scaling-groups \
-  --auto-scaling-group-names fahad-web-asg \
+  --auto-scaling-group-names demo-web-asg \
   --query "AutoScalingGroups[0].{Min:MinSize,Max:MaxSize,Desired:DesiredCapacity,Instances:Instances[].{ID:InstanceId,AZ:AvailabilityZone,Health:HealthStatus,State:LifecycleState}}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 ### Troubleshooting: instances array is empty
@@ -103,16 +103,16 @@ If the ASG shows `"Instances": []`, either it's still launching (wait 30 seconds
 ``` bash
 # Shows WHY a launch failed (wrong subnet, SG not in VPC, quota hit, etc.)
 aws autoscaling describe-scaling-activities \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --query "Activities[0].{Status:StatusCode,Desc:Description,Cause:Cause}" \
-  --profile fahad
+  --profile demo
 
 # If this returns null, the ASG hasn't even attempted yet — just wait longer
 
 # Full ASG dump (use when --query hides the problem)
 aws autoscaling describe-auto-scaling-groups \
-  --auto-scaling-group-names fahad-web-asg \
-  --profile fahad
+  --auto-scaling-group-names demo-web-asg \
+  --profile demo
 ```
 
 ### Lab: testing scale-out and scale-in
@@ -122,16 +122,16 @@ This is the powerful part — manually scaling to see the ASG distribute instanc
 ``` bash
 # Scale up to 2 instances
 aws autoscaling set-desired-capacity \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --desired-capacity 2 \
-  --profile fahad
+  --profile demo
 
 # Wait 30 seconds, then check — should see 2 instances in different AZs
 aws autoscaling describe-auto-scaling-groups \
-  --auto-scaling-group-names fahad-web-asg \
+  --auto-scaling-group-names demo-web-asg \
   --query "AutoScalingGroups[0].Instances[].{ID:InstanceId,AZ:AvailabilityZone,Health:HealthStatus}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 **What we observed:**
@@ -158,8 +158,8 @@ It comes down to this one line from the `create-auto-scaling-group` command:
 That gave the ASG two subnets in two different AZs:
 
 ```
-subnet-0ccc3333cccc33333 = fahad-private-app-a → ap-south-1a
-subnet-0ddd4444dddd44444 = fahad-private-app-b → ap-south-1b
+subnet-0ccc3333cccc33333 = demo-private-app-a → ap-south-1a
+subnet-0ddd4444dddd44444 = demo-private-app-b → ap-south-1b
 ```
 
 The ASG automatically distributes instances across whichever subnets it's given, balancing AZs as it goes:
@@ -182,16 +182,16 @@ desired=4, 2 subnets → 2 in ap-south-1a, 2 in ap-south-1b
 ``` bash
 # Scale back down to 1 (save money!)
 aws autoscaling set-desired-capacity \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --desired-capacity 1 \
-  --profile fahad
+  --profile demo
 
 # Wait 30 seconds, check which one was terminated
 aws autoscaling describe-auto-scaling-groups \
-  --auto-scaling-group-names fahad-web-asg \
+  --auto-scaling-group-names demo-web-asg \
   --query "AutoScalingGroups[0].Instances[].{ID:InstanceId,AZ:AvailabilityZone}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 **What we observed:**
@@ -223,33 +223,33 @@ When the ASG needs to remove an instance during scale-in, it follows a policy:
 ``` bash
 # Check all ASG details
 aws autoscaling describe-auto-scaling-groups \
-  --auto-scaling-group-names fahad-web-asg \
+  --auto-scaling-group-names demo-web-asg \
   --query "AutoScalingGroups[0].{Name:AutoScalingGroupName,Min:MinSize,Max:MaxSize,Desired:DesiredCapacity,HealthCheck:HealthCheckType,Instances:Instances[].{ID:InstanceId,AZ:AvailabilityZone,Health:HealthStatus}}" \
-  --profile fahad
+  --profile demo
 
 # Update settings (e.g. change max from 3 to 6)
 aws autoscaling update-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --max-size 6 \
-  --profile fahad
+  --profile demo
 
 # Force replace all instances with new launch template version (rolling update)
 aws autoscaling start-instance-refresh \
-  --auto-scaling-group-name fahad-web-asg \
-  --profile fahad
+  --auto-scaling-group-name demo-web-asg \
+  --profile demo
 
 # Protect a specific instance from scale-in (e.g. running a long job)
 aws autoscaling set-instance-protection \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --instance-ids i-xxxxx \
   --protected-from-scale-in \
-  --profile fahad
+  --profile demo
 
 # Delete ASG entirely (terminates all its instances)
 aws autoscaling delete-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --force-delete \
-  --profile fahad
+  --profile demo
 ```
 
 ### End-of-session cleanup
@@ -263,16 +263,16 @@ aws autoscaling delete-auto-scaling-group \
 ``` bash
 # Delete ASG (terminates its instances automatically)
 aws autoscaling delete-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --force-delete \
-  --profile fahad
+  --profile demo
 
 # Verify no extra instances left running
 aws ec2 describe-instances \
   --filters "Name=instance-state-name,Values=running" \
   --query "Reservations[].Instances[].{ID:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Type:InstanceType}" \
   --output table \
-  --profile fahad
+  --profile demo
 # Should show only nsl-ledgerly
 ```
 
@@ -281,15 +281,15 @@ aws ec2 describe-instances \
 ``` bash
 # One command to bring the ASG back (template + AMI already exist)
 aws autoscaling create-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --launch-template LaunchTemplateName=ecommerce-web,Version='$Latest' \
   --min-size 1 \
   --max-size 3 \
   --desired-capacity 1 \
   --vpc-zone-identifier "subnet-0ccc3333cccc33333,subnet-0ddd4444dddd44444" \
-  --tags Key=Name,Value=fahad-web-asg,PropagateAtLaunch=true \
-         Key=Owner,Value=fahad,PropagateAtLaunch=true \
-  --profile fahad
+  --tags Key=Name,Value=demo-web-asg,PropagateAtLaunch=true \
+         Key=Owner,Value=demo,PropagateAtLaunch=true \
+  --profile demo
 ```
 
 ## Scaling Policies
@@ -301,7 +301,7 @@ Set a target metric, ASG adjusts automatically. You don't define thresholds or s
 ``` bash
 # Keep average CPU at 60%
 aws autoscaling put-scaling-policy \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --policy-name cpu-target-60 \
   --policy-type TargetTrackingScaling \
   --target-tracking-configuration '{
@@ -310,7 +310,7 @@ aws autoscaling put-scaling-policy \
     },
     "TargetValue": 60.0
   }' \
-  --profile fahad
+  --profile demo
 ```
 
 ### What AWS auto-creates for you
@@ -319,8 +319,8 @@ When you set a target tracking policy, AWS automatically creates **two CloudWatc
 
 | Alarm | What it does | Auto-created name |
 |---|---|---|
-| **AlarmHigh** | CPU > 60% → scale OUT (add instances) | `TargetTracking-fahad-web-asg-AlarmHigh-xxxxx` |
-| **AlarmLow** | CPU drops well below 60% → scale IN (remove instances) | `TargetTracking-fahad-web-asg-AlarmLow-xxxxx` |
+| **AlarmHigh** | CPU > 60% → scale OUT (add instances) | `TargetTracking-demo-web-asg-AlarmHigh-xxxxx` |
+| **AlarmLow** | CPU drops well below 60% → scale IN (remove instances) | `TargetTracking-demo-web-asg-AlarmLow-xxxxx` |
 
 You set one target (60% CPU) and AWS created the entire feedback loop —
 monitoring, decision logic, and actions — automatically. This is why
@@ -331,10 +331,10 @@ CloudWatch alarms and metrics generally.
 ``` bash
 # See the auto-created alarms
 aws cloudwatch describe-alarms \
-  --alarm-name-prefix "TargetTracking-fahad-web-asg" \
+  --alarm-name-prefix "TargetTracking-demo-web-asg" \
   --query "MetricAlarms[].{Name:AlarmName,State:StateValue,Threshold:Threshold}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 ### Lab output — what we got
@@ -344,8 +344,8 @@ Policy created:
   PolicyARN: arn:aws:autoscaling:ap-south-1:111122223333:scalingPolicy:...
 
 Auto-created alarms:
-  AlarmHigh: TargetTracking-fahad-web-asg-AlarmHigh-7cd8afbb-...
-  AlarmLow:  TargetTracking-fahad-web-asg-AlarmLow-173efae5-...
+  AlarmHigh: TargetTracking-demo-web-asg-AlarmHigh-7cd8afbb-...
+  AlarmLow:  TargetTracking-demo-web-asg-AlarmLow-173efae5-...
 
 → One put-scaling-policy command = policy + 2 CloudWatch alarms + auto-scaling logic
 → No manual alarm configuration needed
@@ -363,17 +363,17 @@ Auto-created alarms:
 ``` bash
 # Example: scale based on requests per target (needs ALB target group ARN)
 aws autoscaling put-scaling-policy \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --policy-name requests-per-target-1000 \
   --policy-type TargetTrackingScaling \
   --target-tracking-configuration '{
     "PredefinedMetricSpecification": {
       "PredefinedMetricType": "ALBRequestCountPerTarget",
-      "ResourceLabel": "app/fahad-web-alb/xxxxx/targetgroup/fahad-web-tg/xxxxx"
+      "ResourceLabel": "app/demo-web-alb/xxxxx/targetgroup/demo-web-tg/xxxxx"
     },
     "TargetValue": 1000.0
   }' \
-  --profile fahad
+  --profile demo
 ```
 
 ### Step scaling (more granular control)
@@ -383,7 +383,7 @@ Define explicit thresholds and actions — you control exactly how many instance
 ``` bash
 # First create a CloudWatch alarm that triggers the policy
 aws cloudwatch put-metric-alarm \
-  --alarm-name fahad-cpu-high-70 \
+  --alarm-name demo-cpu-high-70 \
   --metric-name CPUUtilization \
   --namespace AWS/EC2 \
   --statistic Average \
@@ -391,12 +391,12 @@ aws cloudwatch put-metric-alarm \
   --threshold 70 \
   --comparison-operator GreaterThanThreshold \
   --evaluation-periods 2 \
-  --dimensions Name=AutoScalingGroupName,Value=fahad-web-asg \
-  --profile fahad
+  --dimensions Name=AutoScalingGroupName,Value=demo-web-asg \
+  --profile demo
 
 # Then create the step scaling policy
 aws autoscaling put-scaling-policy \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --policy-name cpu-step-scale-out \
   --policy-type StepScaling \
   --adjustment-type ChangeInCapacity \
@@ -404,7 +404,7 @@ aws autoscaling put-scaling-policy \
     {"MetricIntervalLowerBound": 0, "MetricIntervalUpperBound": 20, "ScalingAdjustment": 1},
     {"MetricIntervalLowerBound": 20, "ScalingAdjustment": 3}
   ]' \
-  --profile fahad
+  --profile demo
 ```
 
 - If CPU > 70% → add 1 instance.
@@ -424,32 +424,32 @@ Scale based on time, not metrics. Good for predictable traffic patterns:
 ``` bash
 # Scale up to 3 instances at 8am Dhaka time (2am UTC) on weekdays
 aws autoscaling put-scheduled-update-group-action \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --scheduled-action-name morning-scale-up \
   --recurrence "0 2 * * MON-FRI" \
   --desired-capacity 3 \
-  --profile fahad
+  --profile demo
 
 # Scale back to 1 instance at 10pm Dhaka time (4pm UTC) on weekdays
 aws autoscaling put-scheduled-update-group-action \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --scheduled-action-name evening-scale-down \
   --recurrence "0 16 * * MON-FRI" \
   --desired-capacity 1 \
-  --profile fahad
+  --profile demo
 
 # List scheduled actions
 aws autoscaling describe-scheduled-actions \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --query "ScheduledUpdateGroupActions[].{Name:ScheduledActionName,Recurrence:Recurrence,Desired:DesiredCapacity}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Delete a scheduled action
 aws autoscaling delete-scheduled-action \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --scheduled-action-name morning-scale-up \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "Cron format"
@@ -463,17 +463,17 @@ Prevents specific instances from being terminated during scale-in. Use for insta
 ``` bash
 # Protect a specific instance
 aws autoscaling set-instance-protection \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --instance-ids i-xxxxx \
   --protected-from-scale-in \
-  --profile fahad
+  --profile demo
 
 # Remove protection
 aws autoscaling set-instance-protection \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --instance-ids i-xxxxx \
   --no-protected-from-scale-in \
-  --profile fahad
+  --profile demo
 ```
 
 ### Which policy type to choose?
@@ -496,16 +496,16 @@ aws autoscaling set-instance-protection \
 ``` bash
 # List all policies on an ASG
 aws autoscaling describe-policies \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --query "ScalingPolicies[].{Name:PolicyName,Type:PolicyType,Target:TargetTrackingConfiguration.TargetValue}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Delete a scaling policy
 aws autoscaling delete-policy \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --policy-name cpu-target-60 \
-  --profile fahad
+  --profile demo
 
 # Note: deleting a target tracking policy also deletes its auto-created CloudWatch alarms
 ```

@@ -298,11 +298,11 @@ empty until a database moves in.
 ``` hcl
 provider "aws" {
   region  = "ap-south-1"
-  profile = "fahad"
+  profile = "demo"
 }
 ```
 
-- **What it did:** pointed Terraform at the `fahad` AWS CLI profile, in
+- **What it did:** pointed Terraform at the `demo` AWS CLI profile, in
   `ap-south-1`.
 - **Next:** before anything can be created, it needs somewhere to live
   — a VPC.

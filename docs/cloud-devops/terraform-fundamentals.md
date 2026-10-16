@@ -82,7 +82,7 @@ terraform {
 
 provider "aws" {
   region  = "ap-south-1"
-  profile = "fahad"
+  profile = "demo"
 }
 ```
 
@@ -156,14 +156,14 @@ terraform init -upgrade
 
     - A real `plan` once failed with `InvalidClientTokenId: The security
       token included in the request is invalid` — even though `aws sts
-      get-caller-identity --profile fahad` worked fine from a different
+      get-caller-identity --profile demo` worked fine from a different
       terminal, same machine, same credentials file.
     - Cause: an `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` left exported
       earlier in that specific shell session, from something typed by
       hand.
     - Both the AWS CLI and the Terraform AWS provider check environment
       variables *before* the profile in `~/.aws/credentials` — a stale
-      exported key silently overrides `profile = "fahad"` in every
+      exported key silently overrides `profile = "demo"` in every
       command run in that terminal, with no warning that it's happening.
     - `env | grep AWS` is the first thing to check when a credential
       error doesn't match what `~/.aws/credentials` actually contains.

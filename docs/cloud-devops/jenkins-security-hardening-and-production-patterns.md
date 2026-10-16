@@ -338,8 +338,8 @@ pipeline{
             steps{
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh "docker tag investor-pro:${env.BUILD_NUMBER} fahadmdkamal801/investor-pro:${env.BUILD_NUMBER}"
-                    sh "docker push fahadmdkamal801/investor-pro:${env.BUILD_NUMBER}"
+                    sh "docker tag investor-pro:${env.BUILD_NUMBER} exampleuser/investor-pro:${env.BUILD_NUMBER}"
+                    sh "docker push exampleuser/investor-pro:${env.BUILD_NUMBER}"
                 }
             }
         }
@@ -366,7 +366,7 @@ running.
 
 !!! note "The registry push doesn't (yet) change what Deploy actually runs"
 
-    Right now Build creates a local image, Push sends a copy to Docker Hub, and Deploy still rebuilds from source rather than pulling what was just pushed — so the pushed image isn't actually consumed by this pipeline yet. That's fine as a first step, but the real payoff of this approach — a separate host, or a separate pipeline, pulling the exact tested artifact instead of rebuilding it — only shows up once something downstream actually runs `docker pull fahadmdkamal801/investor-pro:<tag>` instead of building again.
+    Right now Build creates a local image, Push sends a copy to Docker Hub, and Deploy still rebuilds from source rather than pulling what was just pushed — so the pushed image isn't actually consumed by this pipeline yet. That's fine as a first step, but the real payoff of this approach — a separate host, or a separate pipeline, pulling the exact tested artifact instead of rebuilding it — only shows up once something downstream actually runs `docker pull exampleuser/investor-pro:<tag>` instead of building again.
 
 ### The pipeline, step by step
 
@@ -377,7 +377,7 @@ running.
 :   Gated by `when { anyOf { changeset ... } }` (see below) — only runs if the commits this build picked up actually touched `Dockerfile`, `src/**`, `pyproject.toml`, or `uv.lock`. When it does run: `docker build -t investor-pro:${env.BUILD_NUMBER} .` builds the image and tags it with just the Jenkins build number — no `:latest` this time (see the stage-differences table above for why).
 
 `stage("Push to Dockerhub")`
-:   Gated by the same `when` condition as Build, so the two stages always agree — Push never runs against an image Build didn't just create. `withCredentials([...])` binds the stored Docker Hub username and password to two masked environment variables, scoped to just this block. Three shell steps run in order inside it: log in (`docker login`, fed the password over stdin so it never shows up in `ps` output or shell history), re-tag the just-built image under the Docker Hub namespace (`fahadmdkamal801/investor-pro:...` — Docker Hub requires the image name prefixed with the account it's being pushed to), then push it.
+:   Gated by the same `when` condition as Build, so the two stages always agree — Push never runs against an image Build didn't just create. `withCredentials([...])` binds the stored Docker Hub username and password to two masked environment variables, scoped to just this block. Three shell steps run in order inside it: log in (`docker login`, fed the password over stdin so it never shows up in `ps` output or shell history), re-tag the just-built image under the Docker Hub namespace (`exampleuser/investor-pro:...` — Docker Hub requires the image name prefixed with the account it's being pushed to), then push it.
 
 `stage("Deploy")`
 :   `make start` → `docker compose up -d --build`, the same as before — rebuilds and (re)starts the app locally. Doesn't yet consume the image that was just pushed (see the note above).
@@ -568,10 +568,10 @@ pipeline {
         }
         stage('Build & Push') {
             steps {
-                sh "docker build -t fahadmdkamal801/investor-pro:${env.GIT_COMMIT.take(7)} ."
+                sh "docker build -t exampleuser/investor-pro:${env.GIT_COMMIT.take(7)} ."
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh "docker push fahadmdkamal801/investor-pro:${env.GIT_COMMIT.take(7)}"
+                    sh "docker push exampleuser/investor-pro:${env.GIT_COMMIT.take(7)}"
                 }
             }
         }
@@ -607,7 +607,7 @@ pipeline {
     }
     stages {
         stage('Pull image') {
-            steps { sh "docker pull fahadmdkamal801/investor-pro:${params.IMAGE_TAG}" }
+            steps { sh "docker pull exampleuser/investor-pro:${params.IMAGE_TAG}" }
         }
         stage('Blue/green') {
             when { expression { params.STRATEGY == 'blue-green' } }

@@ -19,27 +19,27 @@ Internet
    │
    │  HTTPS :443 — TLS terminates here (cert from ACM, see below)
    ▼
-Internet Gateway  (fahad-igw)
+Internet Gateway  (demo-igw)
    │
    ▼
 ┌─────────────────────────────────────────────────┐
 │  ALB — public subnets, both AZs                  │
-│  fahad-public-a (10.0.1.0/24)                    │
-│  fahad-public-b (10.0.2.0/24)                    │
+│  demo-public-a (10.0.1.0/24)                    │
+│  demo-public-b (10.0.2.0/24)                    │
 └─────────────────────┬─────────────────────────────┘
                        │  HTTP :80 — plain, never leaves the VPC
                        ▼
 ┌─────────────────────────────────────────────────┐
 │  Target group → EC2 (Auto Scaling Group)         │
-│  fahad-private-app-a (10.0.10.0/24)              │
-│  fahad-private-app-b (10.0.11.0/24)              │
+│  demo-private-app-a (10.0.10.0/24)              │
+│  demo-private-app-b (10.0.11.0/24)              │
 └─────────────────────┬─────────────────────────────┘
                        │  :5432
                        ▼
 ┌─────────────────────────────────────────────────┐
 │  RDS — private DB subnets                        │
-│  fahad-private-db-a (10.0.20.0/24)               │
-│  fahad-private-db-b (10.0.21.0/24)               │
+│  demo-private-db-a (10.0.20.0/24)               │
+│  demo-private-db-b (10.0.21.0/24)               │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -117,14 +117,14 @@ ALB :443
 
 ``` bash
 aws elbv2 create-load-balancer \
-  --name fahad-web-alb \
+  --name demo-web-alb \
   --subnets subnet-0aaa1111aaaa11111 subnet-0bbb2222bbbb22222 \
   --security-groups sg-0aaa1111aaaa11111 \
   --scheme internet-facing \
   --type application \
   --query "LoadBalancers[0].{ARN:LoadBalancerArn,DNS:DNSName,State:State.Code}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 Save the **ALB ARN** and **DNS name** from the output. The DNS name is what users hit in their browser.
@@ -133,7 +133,7 @@ Save the **ALB ARN** and **DNS name** from the output. The DNS name is what user
 
 ``` bash
 aws elbv2 create-target-group \
-  --name fahad-web-tg \
+  --name demo-web-tg \
   --protocol HTTP \
   --port 80 \
   --vpc-id vpc-0123456789abcdef0 \
@@ -145,7 +145,7 @@ aws elbv2 create-target-group \
   --unhealthy-threshold-count 3 \
   --query "TargetGroups[0].TargetGroupArn" \
   --output text \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Port must match"
@@ -160,7 +160,7 @@ aws elbv2 create-listener \
   --protocol HTTP \
   --port 80 \
   --default-actions Type=forward,TargetGroupArn=<TARGET_GROUP_ARN> \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Gotcha: swapped ARNs"
@@ -171,9 +171,9 @@ aws elbv2 create-listener \
 
 ``` bash
 aws autoscaling attach-load-balancer-target-groups \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --target-group-arns <TARGET_GROUP_ARN> \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Existing instances don't auto-register"
@@ -185,12 +185,12 @@ aws autoscaling attach-load-balancer-target-groups \
 aws elbv2 register-targets \
   --target-group-arn <TARGET_GROUP_ARN> \
   --targets Id=i-0aaa1111aaaa11111 \
-  --profile fahad
+  --profile demo
 
 # Or force the ASG to replace all instances (rolling update)
 aws autoscaling start-instance-refresh \
-  --auto-scaling-group-name fahad-web-asg \
-  --profile fahad
+  --auto-scaling-group-name demo-web-asg \
+  --profile demo
 ```
 
 **Step 5: Verify target health**
@@ -200,7 +200,7 @@ aws elbv2 describe-target-health \
   --target-group-arn <TARGET_GROUP_ARN> \
   --query "TargetHealthDescriptions[].{ID:Target.Id,Health:TargetHealth.State,Reason:TargetHealth.Reason}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 | State | What it means | Action |
@@ -213,7 +213,7 @@ aws elbv2 describe-target-health \
 **Step 6: Test in browser**
 
 ```
-http://fahad-web-alb-XXXXXXXXXX.ap-south-1.elb.amazonaws.com
+http://demo-web-alb-XXXXXXXXXX.ap-south-1.elb.amazonaws.com
 
 Expected results:
   ✓ Nginx welcome page  → full path working (internet → ALB → EC2 → Nginx)
@@ -237,7 +237,7 @@ aws elbv2 modify-rule \
       ]
     }
   }]' \
-  --profile fahad
+  --profile demo
 ```
 
 90% of traffic to v1, 10% to v2. Change weights to shift traffic during canary deploys — no server restart needed.
@@ -249,20 +249,20 @@ aws elbv2 modify-rule \
 aws elbv2 describe-load-balancers \
   --query "LoadBalancers[].{Name:LoadBalancerName,DNS:DNSName,State:State.Code}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # List all target groups
 aws elbv2 describe-target-groups \
   --query "TargetGroups[].{Name:TargetGroupName,Port:Port,HealthPort:HealthCheckPort,HealthPath:HealthCheckPath}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # List listeners on an ALB
 aws elbv2 describe-listeners \
   --load-balancer-arn <ALB_ARN> \
   --query "Listeners[].{Port:Port,Protocol:Protocol}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 #### End-of-session cleanup
@@ -275,18 +275,18 @@ aws elbv2 describe-listeners \
 # Delete ALB (stops the charge)
 aws elbv2 delete-load-balancer \
   --load-balancer-arn <ALB_ARN> \
-  --profile fahad
+  --profile demo
 
 # Delete target groups (free, but cleanup)
 aws elbv2 delete-target-group \
   --target-group-arn <TG_ARN> \
-  --profile fahad
+  --profile demo
 
 # Delete ASG (stops extra EC2 charge)
 aws autoscaling delete-auto-scaling-group \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --force-delete \
-  --profile fahad
+  --profile demo
 ```
 
 ## Health Checks — Debugging Guide
@@ -313,7 +313,7 @@ aws elbv2 modify-target-group \
   --health-check-interval-seconds 30 \
   --healthy-threshold-count 2 \
   --unhealthy-threshold-count 3 \
-  --profile fahad
+  --profile demo
 ```
 
 #### Troubleshooting by error reason
@@ -331,7 +331,7 @@ The ALB reached the instance but got an unexpected HTTP response (not 200).
 aws elbv2 modify-target-group \
   --target-group-arn <TARGET_GROUP_ARN> \
   --health-check-path / \
-  --profile fahad
+  --profile demo
 ```
 
 **Reason: `Target.Timeout`**
@@ -358,14 +358,14 @@ aws ec2 describe-security-groups \
   --group-ids <APP_SG_ID> \
   --query "SecurityGroups[0].IpPermissions[].{Port:FromPort,Source:UserIdGroupPairs[0].GroupId}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # If the health check port isn't listed, add it
 aws ec2 authorize-security-group-ingress \
   --group-id <APP_SG_ID> \
   --protocol tcp --port 80 \
   --source-group <ALB_SG_ID> \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "Rule"
@@ -399,7 +399,7 @@ What we experienced:
 ``` bash
 # Create new target group on the correct port
 aws elbv2 create-target-group \
-  --name fahad-web-tg-80 \
+  --name demo-web-tg-80 \
   --protocol HTTP \
   --port 80 \
   --vpc-id vpc-0123456789abcdef0 \
@@ -408,35 +408,35 @@ aws elbv2 create-target-group \
   --health-check-port 80 \
   --query "TargetGroups[0].TargetGroupArn" \
   --output text \
-  --profile fahad
+  --profile demo
 
 # Update the listener to use the new target group
 aws elbv2 modify-listener \
   --listener-arn <LISTENER_ARN> \
   --default-actions Type=forward,TargetGroupArn=<NEW_TG_ARN> \
-  --profile fahad
+  --profile demo
 
 # Swap ASG attachment
 aws autoscaling detach-load-balancer-target-groups \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --target-group-arns <OLD_TG_ARN> \
-  --profile fahad
+  --profile demo
 
 aws autoscaling attach-load-balancer-target-groups \
-  --auto-scaling-group-name fahad-web-asg \
+  --auto-scaling-group-name demo-web-asg \
   --target-group-arns <NEW_TG_ARN> \
-  --profile fahad
+  --profile demo
 
 # Register existing instances (attach only affects future launches)
 aws elbv2 register-targets \
   --target-group-arn <NEW_TG_ARN> \
   --targets Id=i-0aaa1111aaaa11111 \
-  --profile fahad
+  --profile demo
 
 # Clean up old target group
 aws elbv2 delete-target-group \
   --target-group-arn <OLD_TG_ARN> \
-  --profile fahad
+  --profile demo
 ```
 
 #### Troubleshooting: 503 Service Unavailable
@@ -447,7 +447,7 @@ The ALB has no healthy targets at all.
 # Check if any targets are registered
 aws elbv2 describe-target-health \
   --target-group-arn <TARGET_GROUP_ARN> \
-  --profile fahad
+  --profile demo
 
 # Empty = no targets registered → attach ASG + register instances (see the ALB lab above)
 # All unhealthy = follow the debugging steps above
@@ -521,10 +521,10 @@ SSL security policy
 aws acm request-certificate \
   --domain-name app.example.com \
   --validation-method DNS \
-  --tags Key=Name,Value=fahad-app-cert Key=Owner,Value=fahad \
+  --tags Key=Name,Value=demo-app-cert Key=Owner,Value=demo \
   --query "CertificateArn" \
   --output text \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Wrong region = invisible certificate"
@@ -538,7 +538,7 @@ aws acm describe-certificate \
   --certificate-arn <CERT_ARN> \
   --query "Certificate.DomainValidationOptions[0].ResourceRecord" \
   --output table \
-  --profile fahad
+  --profile demo
 # Returns a Name (CNAME record name), Type (CNAME), and Value (the target)
 ```
 
@@ -558,7 +558,7 @@ aws route53 change-resource-record-sets \
       }
     }]
   }' \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "Don't delete this record later"
@@ -568,13 +568,13 @@ aws route53 change-resource-record-sets \
 **Step 4: Wait for validation, then confirm ISSUED**
 
 ``` bash
-aws acm wait certificate-validated --certificate-arn <CERT_ARN> --profile fahad
+aws acm wait certificate-validated --certificate-arn <CERT_ARN> --profile demo
 
 aws acm describe-certificate \
   --certificate-arn <CERT_ARN> \
   --query "Certificate.Status" \
   --output text \
-  --profile fahad
+  --profile demo
 # PENDING_VALIDATION → ISSUED, usually within a few minutes once DNS propagates
 ```
 
@@ -588,7 +588,7 @@ aws elbv2 create-listener \
   --certificates CertificateArn=<CERT_ARN> \
   --ssl-policy ELBSecurityPolicy-TLS13-1-2-2021-06 \
   --default-actions Type=forward,TargetGroupArn=<TARGET_GROUP_ARN> \
-  --profile fahad
+  --profile demo
 ```
 
 **Step 6: Redirect the existing HTTP listener to HTTPS**
@@ -605,7 +605,7 @@ aws elbv2 modify-listener \
       "StatusCode": "HTTP_301"
     }
   }]' \
-  --profile fahad
+  --profile demo
 ```
 
 !!! success "Best practice"
@@ -632,7 +632,7 @@ aws route53 change-resource-record-sets \
       }
     }]
   }' \
-  --profile fahad
+  --profile demo
 
 # Inspect the handshake and certificate chain directly
 curl -vI https://app.example.com 2>&1 | grep -A5 "Server certificate"
@@ -652,14 +652,14 @@ curl -vI https://app.example.com 2>&1 | grep -A5 "Server certificate"
 aws acm list-certificates \
   --query "CertificateSummaryList[].{Domain:DomainName,ARN:CertificateArn,Status:Status}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Full detail on one certificate (validation status, expiry, in-use resources)
 aws acm describe-certificate \
   --certificate-arn <CERT_ARN> \
   --query "Certificate.{Domain:DomainName,Status:Status,NotAfter:NotAfter,InUseBy:InUseBy}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 !!! success "Cleanup note"
@@ -695,22 +695,22 @@ Cross-zone load balancing is off by default
 
 ``` bash
 # 1. Allocate a static Elastic IP per AZ (this is what gives the NLB a fixed IP)
-aws ec2 allocate-address --domain vpc --profile fahad
+aws ec2 allocate-address --domain vpc --profile demo
 
 # 2. Create the NLB, one EIP per public subnet
 aws elbv2 create-load-balancer \
-  --name fahad-tcp-nlb \
+  --name demo-tcp-nlb \
   --type network \
   --scheme internet-facing \
   --subnet-mappings SubnetId=subnet-0aaa1111aaaa11111,AllocationId=<EIP_ALLOC_A> \
                      SubnetId=subnet-0bbb2222bbbb22222,AllocationId=<EIP_ALLOC_B> \
   --query "LoadBalancers[0].{ARN:LoadBalancerArn,DNS:DNSName}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # 3. Target group — note the protocol is TCP, not HTTP
 aws elbv2 create-target-group \
-  --name fahad-tcp-tg \
+  --name demo-tcp-tg \
   --protocol TCP \
   --port 5432 \
   --vpc-id vpc-0123456789abcdef0 \
@@ -718,7 +718,7 @@ aws elbv2 create-target-group \
   --health-check-protocol TCP \
   --query "TargetGroups[0].TargetGroupArn" \
   --output text \
-  --profile fahad
+  --profile demo
 
 # 4. Listener — forwards raw TCP, no path/header awareness at all
 aws elbv2 create-listener \
@@ -726,7 +726,7 @@ aws elbv2 create-listener \
   --protocol TCP \
   --port 5432 \
   --default-actions Type=forward,TargetGroupArn=<TARGET_GROUP_ARN> \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "TCP health checks are shallower"
@@ -737,12 +737,12 @@ aws elbv2 create-listener \
 
 ``` bash
 # List NLBs
-aws elbv2 describe-load-balancers --query "LoadBalancers[?Type=='network']" --profile fahad
+aws elbv2 describe-load-balancers --query "LoadBalancers[?Type=='network']" --profile demo
 
 # Delete — same commands as ALB cleanup
-aws elbv2 delete-load-balancer --load-balancer-arn <NLB_ARN> --profile fahad
-aws ec2 release-address --allocation-id <EIP_ALLOC_A> --profile fahad
-aws ec2 release-address --allocation-id <EIP_ALLOC_B> --profile fahad
+aws elbv2 delete-load-balancer --load-balancer-arn <NLB_ARN> --profile demo
+aws ec2 release-address --allocation-id <EIP_ALLOC_A> --profile demo
+aws ec2 release-address --allocation-id <EIP_ALLOC_B> --profile demo
 ```
 
 !!! danger "Elastic IPs cost money when idle"
@@ -894,17 +894,17 @@ Private hosted zone
 # 1. Create the public hosted zone
 aws route53 create-hosted-zone \
   --name example.com \
-  --caller-reference "fahad-$(date +%s)" \
+  --caller-reference "demo-$(date +%s)" \
   --query "HostedZone.Id" \
   --output text \
-  --profile fahad
+  --profile demo
 
 # 2. Get the 4 name servers Route 53 assigned — these go at your domain registrar
 aws route53 get-hosted-zone \
   --id <HOSTED_ZONE_ID> \
   --query "DelegationSet.NameServers" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # 3. Alias record pointing the apex domain straight at the ALB (no CNAME needed)
 aws route53 change-resource-record-sets \
@@ -923,7 +923,7 @@ aws route53 change-resource-record-sets \
       }
     }]
   }' \
-  --profile fahad
+  --profile demo
 
 # 4. Verify resolution
 dig example.com +short
@@ -946,13 +946,13 @@ nslookup example.com
 
 ``` bash
 # List all hosted zones
-aws route53 list-hosted-zones --query "HostedZones[].{Name:Name,Id:Id}" --output table --profile fahad
+aws route53 list-hosted-zones --query "HostedZones[].{Name:Name,Id:Id}" --output table --profile demo
 
 # List records in a zone
-aws route53 list-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --output table --profile fahad
+aws route53 list-resource-record-sets --hosted-zone-id <HOSTED_ZONE_ID> --output table --profile demo
 
 # Delete the hosted zone (all records must be removed first, except the default NS/SOA)
-aws route53 delete-hosted-zone --id <HOSTED_ZONE_ID> --profile fahad
+aws route53 delete-hosted-zone --id <HOSTED_ZONE_ID> --profile demo
 ```
 
 !!! success "Cost"

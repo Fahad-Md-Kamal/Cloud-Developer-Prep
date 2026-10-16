@@ -4,7 +4,7 @@ title: "Chapter 33: Mock Projects \u2014 Distributed Legal Data Crawler & Conver
 
 # Chapter 33: Mock Projects — Distributed Legal Data Crawler & Conversational AI Platform
 
-Build two comprehensive projects that demonstrate the skills needed for Lawstronaut and Optimizely roles. Create portfolio pieces that showcase distributed systems and AI integration expertise.
+Build two comprehensive projects that demonstrate the skills needed for legal-tech and AI-platform roles. Create portfolio pieces that showcase distributed systems and AI integration expertise.
 
 ## Learning Objectives
 
@@ -16,14 +16,14 @@ Build two comprehensive projects that demonstrate the skills needed for Lawstron
 
 ## Key Topics
 
-### 1. Project 1: Distributed Legal Data Crawler (Lawstronaut Focus)
+### 1. Project 1: Distributed Legal Data Crawler (Legal-Tech Role Focus)
 - Multi-source legal document crawling system
 - Distributed architecture with Scrapy, Celery, and Kafka
 - MongoDB cluster for document storage and indexing
 - Data cleaning, normalization, and deduplication pipeline
 - Real-time monitoring and alerting system
 
-### 2. Project 2: Conversational AI Platform (Optimizely Focus)
+### 2. Project 2: Conversational AI Platform (AI Platform Role Focus)
 - Multi-agent conversational AI system
 - FastAPI backend with LangChain integration
 - RAG implementation with vector database

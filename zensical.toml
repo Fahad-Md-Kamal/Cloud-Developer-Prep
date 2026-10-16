@@ -1,8 +1,7 @@
 [project]
 site_url = "https://fahad-md-kamal.github.io/Cloud-Developer-Prep/"
 site_name = "Cloud Developer Prep"
-site_description = "A living backend engineering interview-prep guide for the AI-driven hiring era — system design, data structures & algorithms, architecture, cloud, databases, and behavioral prep that apply regardless of primary language, plus a deep Python/Django track, guidance on AI-driven interviews and tooling, and a running log of practice sessions."
-site_author = "Fahad Md Kamal"
+site_description = "A living backend engineering interview-prep guide for the AI-driven hiring era — system design, data structures & algorithms, architecture, cloud, databases, and behavioral prep that apply regardless of primary language, plus a deep Python/Django track and guidance on AI-driven interviews and tooling."
 
 repo_url = "https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep"
 repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"

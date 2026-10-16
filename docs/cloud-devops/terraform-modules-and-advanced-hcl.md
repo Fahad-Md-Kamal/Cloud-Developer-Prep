@@ -80,7 +80,7 @@ variable "project_environment" {
   type = map(string)
   default = {
     Name  = "app"
-    Owner = "fahad"
+    Owner = "demo"
     Event = "learning-devops-tf"
   }
 }
@@ -93,8 +93,8 @@ resource "aws_instance" "app" {
     { Name = "${var.project_environment["Name"]}-${count.index + 1}" }
   )
 }
-# result per instance: { Name = "app-1", Owner = "fahad", Event = "learning-devops-tf" }
-#                       { Name = "app-2", Owner = "fahad", Event = "learning-devops-tf" }  ...
+# result per instance: { Name = "app-1", Owner = "demo", Event = "learning-devops-tf" }
+#                       { Name = "app-2", Owner = "demo", Event = "learning-devops-tf" }  ...
 ```
 
 !!! danger "Without merge(), the rest of the map silently disappears"

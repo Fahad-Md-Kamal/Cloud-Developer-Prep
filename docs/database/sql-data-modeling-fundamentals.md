@@ -8,7 +8,7 @@ Schema design fundamentals — normalization, keys, relationships, JOIN
 types, and constraints — as distinct from
 [PostgreSQL for Scale](postgresql-for-scale.md), which covers indexing,
 replication, and sharding for a schema that's already well-designed.
-Flagged from the BJIT Senior Python Developer JD's "Proficient in SQL
+Flagged from a Senior Python Developer JD's "Proficient in SQL
 (data modeling and structuring relational databases)" requirement.
 
 ## 1. "Given a flat, spreadsheet-style requirement, walk through normalizing it into proper tables."

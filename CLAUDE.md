@@ -245,34 +245,42 @@ forced add-on everywhere:**
   `backend/chapter-6.md` and the Kotlin/React tracks handle
   it as a precedent.
 
-## This repo must stay PRIVATE — do not suggest making it public again
+## This site is meant to go open-source — keep it name-agnostic
 
-As of 2026-09-22 this repo holds real client/employer-confidential content,
-now organized under `docs/**/*.md` in subdirectories mirroring the nav
-(see "Site architecture" above) — there is no separate public-safe layer
-vs. a private layer; the subdirectory split is purely topical, not a
-privacy boundary. Real company/target names (Lawstronaut, Optimizely,
-Cefalo) are mixed directly into the chapters. **Not genericized.**
+As of 2026-10-16 this repo has been through a genericization pass so it
+can eventually be made public and accept outside contributions, after
+previously (as of 2026-09-22) holding real client/employer-confidential
+content mixed directly into the chapters. That pass:
+
+- Removed the owner's personal byline/name/email from the site
+  (`zensical.toml`'s `site_author`, the homepage byline, hardcoded
+  notification-endpoint emails).
+- Replaced the `fahad`-prefixed AWS resource-naming convention used
+  throughout Cloud & DevOps CLI examples (`fahad-web-asg`,
+  `--profile fahad`, etc.) with a neutral `demo` prefix.
+- Genericized real target-company names (Lawstronaut, Optimizely),
+  real-employer JD references (BJIT), and a real take-home-assessment
+  source (SELISE) into role/domain descriptions instead of named
+  companies.
+
+**Going forward, don't reintroduce this kind of thing** — a new chapter
+or example should use a generic placeholder (`demo`, `example.com`,
+"a legal-tech startup," "a Senior Python Developer JD") rather than the
+owner's real name, a real employer/client name, or a real personal
+resource-naming convention, even though this is still, for now, the
+owner's own private working repo.
 
 `docs/interview-prep/meeting-intelligence-case-study.md`
-(formerly `meetingflow-case-study.md`) is the one exception — as of 2026-09-23 it
-was rewritten to remove the real project name, the specific business
-domain/language framing, literal source-language prompts, and real file
-paths, so it can't be traced back to the actual client/project even if
-this repo were ever exposed. Keep it that way: don't reintroduce the
-real project name or domain specifics into that file.
+(formerly `meetingflow-case-study.md`) was separately rewritten
+(2026-09-23) to remove the real project name, business domain/language
+framing, literal source-language prompts, and real file paths, so it
+can't be traced back to the actual client/project. Keep it that way.
 
-The public/private boundary is enforced entirely at the **repo
-visibility** level (must be private), not per-file or per-directory —
-the topical subdirectories under `docs/` are purely organizational, not
-a privacy split. If asked to make this repo public again, that requires
-a full pass over `docs/**/*.md` to genericize real names first.
-
-The user's own name, email, and real project details are fine here now —
-this is a private repo, not a public prep site anymore.
-
-If unsure whether something is safe to add given this repo's current
-privacy state, ask.
+Actually changing the GitHub repo's visibility (private → public) is
+the owner's own action to take outside this repo, not something to do
+from here — this section just keeps the content itself ready for
+whenever that happens. If unsure whether something being added is
+generic enough, ask.
 
 ## Known Zensical/Markdown gotchas
 

@@ -131,7 +131,7 @@ why it exists, and what fails if you remove it.
 <line marker-end="url(#vpc-arrow)" stroke="#5c5468" stroke-width="1.5" x1="310" x2="195" y1="114" y2="176"></line>
 <line marker-end="url(#vpc-arrow)" stroke="#5c5468" stroke-width="1.5" x1="410" x2="525" y1="114" y2="176"></line>
 <rect fill="none" height="280" rx="8" stroke="#e0d9d0" stroke-width="1.5" width="680" x="20" y="126"></rect>
-<text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" x="34" y="142">VPC 10.0.0.0/16 — fahad-devops-vpc</text>
+<text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" x="34" y="142">VPC 10.0.0.0/16 — demo-devops-vpc</text>
 <text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" text-anchor="middle" x="195" y="164">AZ-a — ap-south-1a</text>
 <text style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;font-weight:700;fill:#3730a3" text-anchor="middle" x="525" y="164">AZ-b — ap-south-1b</text>
 <rect fill="#dc4c2f" height="64" opacity=".12" rx="6" stroke="#dc4c2f" stroke-width="1.2" width="290" x="50" y="176"></rect>
@@ -174,7 +174,7 @@ why it exists, and what fails if you remove it.
 <text style="font-family:'IBM Plex Sans',sans-serif;font-size:11px;fill:#5c5468" text-anchor="middle" x="360" y="522">Production would place one NAT per AZ for redundancy.</text>
 </svg>
 
-### VPC (fahad-devops-vpc — 10.0.0.0/16)
+### VPC (demo-devops-vpc — 10.0.0.0/16)
 
 What it does
 :   Your private isolated network inside AWS. Nothing can enter or leave unless you explicitly allow it.
@@ -199,7 +199,7 @@ Without them
 Why two?
 :   One per AZ (ap-south-1a and ap-south-1b). If AZ-a goes down, the ALB in AZ-b keeps serving. This is high availability.
 
-### Application Load Balancer (fahad-alb)
+### Application Load Balancer (demo-alb)
 
 What it does
 :   Sits in both public subnets, terminates TLS, and distributes incoming requests across healthy targets in the app subnets.
@@ -260,7 +260,7 @@ Without it
 Why two DB subnets, one per AZ?
 :   So RDS Multi-AZ has somewhere to place a synchronous standby in AZ-b. If the primary in AZ-a fails, AWS promotes the standby automatically — an active-passive failover pattern, applied at the database layer.
 
-### Internet Gateway (fahad-igw)
+### Internet Gateway (demo-igw)
 
 What it does
 :   The door between your VPC and the public internet. Bidirectional — traffic flows both in and out.
@@ -274,7 +274,7 @@ Without it
 Key detail
 :   One IGW per VPC. Fully managed by AWS — horizontally scaled, redundant, never a bottleneck.
 
-### NAT Gateway (fahad-nat)
+### NAT Gateway (demo-nat)
 
 What it does
 :   Sits in a public subnet, relays outbound traffic for private subnets. One-way — the internet can't initiate connections through it.
@@ -292,7 +292,7 @@ Why in a public subnet?
 
     NAT Gateway is ~$32/month — the most expensive component in your VPC. Delete it when not studying. Also delete the Elastic IP after, or it charges too.
 
-### Route tables (fahad-public-rt, fahad-private-rt)
+### Route tables (demo-public-rt, demo-private-rt)
 
 What they do
 :   Rules that tell traffic where to go. Every subnet is associated with one route table: "if the destination matches this CIDR, send it there."
@@ -302,16 +302,16 @@ Why they exist
 
 | Route table | Rule | Meaning |
 |---|---|---|
-| **fahad-public-rt** | `10.0.0.0/16 → local` | Traffic within the VPC stays internal |
+| **demo-public-rt** | `10.0.0.0/16 → local` | Traffic within the VPC stays internal |
 | `0.0.0.0/0 → IGW` | Everything else goes to the internet |
-| **fahad-private-rt** | `10.0.0.0/16 → local` | Traffic within the VPC stays internal |
+| **demo-private-rt** | `10.0.0.0/16 → local` | Traffic within the VPC stays internal |
 | `0.0.0.0/0 → NAT` | Everything else goes outbound through NAT |
 
 !!! note "Without them"
 
     Every subnet would use the VPC's main route table (which has only the `local` route). No internet access for anything.
 
-### Security groups (fahad-alb-sg, fahad-app-sg, fahad-db-sg)
+### Security groups (demo-alb-sg, demo-app-sg, demo-db-sg)
 
 What they do
 :   Stateful firewalls attached to individual resources. They define *who* can talk to *whom* on *which port*.

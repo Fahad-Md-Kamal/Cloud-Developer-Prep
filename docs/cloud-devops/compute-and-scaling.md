@@ -90,21 +90,21 @@ aws ec2 describe-security-groups \
 ``` bash
 # ALB security group
 aws ec2 create-security-group \
-  --group-name fahad-alb-sg \
+  --group-name demo-alb-sg \
   --description "ALB - allows HTTPS/HTTP from internet" \
   --vpc-id vpc-0123456789abcdef0 \
   --query "GroupId" --output text
 
 # App security group
 aws ec2 create-security-group \
-  --group-name fahad-app-sg \
+  --group-name demo-app-sg \
   --description "App servers - allows traffic from ALB only" \
   --vpc-id vpc-0123456789abcdef0 \
   --query "GroupId" --output text
 
 # DB security group
 aws ec2 create-security-group \
-  --group-name fahad-db-sg \
+  --group-name demo-db-sg \
   --description "Database - allows traffic from App only" \
   --vpc-id vpc-0123456789abcdef0 \
   --query "GroupId" --output text
@@ -142,13 +142,13 @@ aws ec2 run-instances \
   --image-id <AMI_ID_FROM_STEP_1> \
   --instance-type t3.micro \
   --key-name devopsKeypair \
-  --subnet-id <fahad-private-app-a SUBNET_ID> \
-  --security-group-ids <fahad-app-sg ID> \
+  --subnet-id <demo-private-app-a SUBNET_ID> \
+  --security-group-ids <demo-app-sg ID> \
   --count 1 \
   --tag-specifications 'ResourceType=instance,Tags=[
-    {Key=Name,Value=fahad-web-dev},
+    {Key=Name,Value=demo-web-dev},
     {Key=Environment,Value=dev},
-    {Key=Owner,Value=fahad},
+    {Key=Owner,Value=demo},
     {Key=Project,Value=ecommerce-platform},
     {Key=ManagedBy,Value=manual}
   ]'
@@ -159,7 +159,7 @@ aws ec2 run-instances \
 ``` bash
 # Check — IP should be 10.0.10.x, NOT 172.31.x.x
 aws ec2 describe-instances \
-  --filters "Name=tag:Name,Values=fahad-web-dev" \
+  --filters "Name=tag:Name,Values=demo-web-dev" \
             "Name=instance-state-name,Values=running" \
   --query "Reservations[].Instances[].{ID:InstanceId,IP:PrivateIpAddress,Subnet:SubnetId,VPC:VpcId,State:State.Name}" \
   --output table
@@ -235,7 +235,7 @@ a **public subnet** with internet access and a security group that
 allows SSH.
 
 ``` bash
-# Launch in fahad-public-a with ALB security group
+# Launch in demo-public-a with ALB security group
 aws ec2 run-instances \
   --image-id ami-0aaaaaaaaaaaaaaaa \
   --instance-type t3.micro \
@@ -244,10 +244,10 @@ aws ec2 run-instances \
   --security-group-ids sg-0aaa00001111bbbb \
   --count 1 \
   --tag-specifications 'ResourceType=instance,Tags=[
-    {Key=Name,Value=fahad-golden-base},
-    {Key=Owner,Value=fahad}
+    {Key=Name,Value=demo-golden-base},
+    {Key=Owner,Value=demo}
   ]' \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Don't use an existing project instance"
@@ -262,7 +262,7 @@ aws ec2 describe-instances \
   --instance-ids <INSTANCE_ID> \
   --query "Reservations[0].Instances[0].{PublicIP:PublicIpAddress,State:State.Name}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "Why wait 30 seconds?"
@@ -281,13 +281,13 @@ aws ec2 describe-security-groups \
   --group-ids sg-0aaa00001111bbbb \
   --query "SecurityGroups[0].IpPermissions[].{Port:FromPort}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # If port 22 is NOT listed, add it temporarily
 aws ec2 authorize-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "Why port 22?"
@@ -304,7 +304,7 @@ If `ssh -v` shows `debug1: Connecting to x.x.x.x port 22.` and then hangs, check
 **Problem 1: Route table not associated with the public subnet**
 
 - This is the most common issue.
-- You created `fahad-public-rt` with the IGW route, but forgot to associate it with the public subnets.
+- You created `demo-public-rt` with the IGW route, but forgot to associate it with the public subnets.
 - Without association, the subnet uses the VPC's main route table (which has no internet route).
 
 ``` bash
@@ -313,19 +313,19 @@ aws ec2 describe-route-tables \
   --filters "Name=association.subnet-id,Values=subnet-0aaa1111aaaa11111" \
   --query "RouteTables[].{ID:RouteTableId,Routes:Routes[].{Dest:DestinationCidrBlock,Target:GatewayId}}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # If empty → no route table associated. Fix:
 aws ec2 associate-route-table \
   --route-table-id rtb-0aaa99998888bbbb \
   --subnet-id subnet-0aaa1111aaaa11111 \
-  --profile fahad
+  --profile demo
 
-# Do the same for fahad-public-b
+# Do the same for demo-public-b
 aws ec2 associate-route-table \
   --route-table-id rtb-0aaa99998888bbbb \
   --subnet-id subnet-0bbb2222bbbb22222 \
-  --profile fahad
+  --profile demo
 ```
 
 **Problem 2: Internet Gateway not attached to VPC**
@@ -336,13 +336,13 @@ aws ec2 describe-internet-gateways \
   --filters "Name=attachment.vpc-id,Values=vpc-0123456789abcdef0" \
   --query "InternetGateways[].{ID:InternetGatewayId,State:Attachments[0].State}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # If State is "detached" or empty:
 aws ec2 attach-internet-gateway \
   --internet-gateway-id igw-0aaa11112222bbbb \
   --vpc-id vpc-0123456789abcdef0 \
-  --profile fahad
+  --profile demo
 ```
 
 **Problem 3: SSH key file not found**
@@ -358,7 +358,7 @@ aws ec2 create-key-pair \
   --key-name devopsKeypair \
   --query "KeyMaterial" \
   --output text \
-  --profile fahad > ~/.ssh/devopsKeypair.pem
+  --profile demo > ~/.ssh/devopsKeypair.pem
 
 chmod 400 ~/.ssh/devopsKeypair.pem
 
@@ -419,18 +419,18 @@ aws ec2 create-image \
   --description "AL2023 + Python 3.12 + Nginx + Django 5.1 + CW agent" \
   --tag-specifications 'ResourceType=image,Tags=[
     {Key=Name,Value=golden-ecommerce-v1.0},
-    {Key=Owner,Value=fahad},
+    {Key=Owner,Value=demo},
     {Key=Project,Value=ecommerce-platform},
     {Key=BaseAMI,Value=ami-0aaaaaaaaaaaaaaaa}
   ]' \
-  --profile fahad
+  --profile demo
 
 # Check if it's ready (takes 3-5 minutes: pending → available)
 aws ec2 describe-images \
   --owners self \
   --query "Images[].{ID:ImageId,Name:Name,State:State}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 !!! note "BaseAMI tag"
@@ -443,13 +443,13 @@ aws ec2 describe-images \
 # Terminate the base instance (no longer needed)
 aws ec2 terminate-instances \
   --instance-ids <INSTANCE_ID> \
-  --profile fahad
+  --profile demo
 
 # Remove SSH access from ALB security group (security hygiene)
 aws ec2 revoke-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Don't forget"
@@ -470,7 +470,7 @@ aws ec2 run-instances \
   --key-name devopsKeypair \
   --subnet-id subnet-0ccc3333cccc33333 \
   --security-group-ids sg-0bbb00002222cccc \
-  --profile fahad
+  --profile demo
 
 # Boot time: ~30 seconds (vs ~4 minutes with user-data bootstrap)
 ```
@@ -483,12 +483,12 @@ aws ec2 describe-images \
   --owners self \
   --query "Images[].{ID:ImageId,Name:Name,State:State,Date:CreationDate}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Deregister an old AMI you no longer need
 aws ec2 deregister-image \
   --image-id ami-xxxxx \
-  --profile fahad
+  --profile demo
 ```
 
 ### When to re-bake
@@ -525,9 +525,9 @@ aws ec2 run-instances \
   --subnet-id subnet-0aaa1111aaaa11111 \
   --security-group-ids sg-0aaa00001111bbbb \
   --tag-specifications 'ResourceType=instance,Tags=[
-    {Key=Name,Value=fahad-golden-rebake}
+    {Key=Name,Value=demo-golden-rebake}
   ]' \
-  --profile fahad
+  --profile demo
 
 # 2. Re-open port 22 — Step 6 of the first bake revoked it, so it's
 #    almost certainly closed again. Skipping this = SSH hangs at
@@ -536,7 +536,7 @@ aws ec2 run-instances \
 aws ec2 authorize-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 
 # 3. SSH in — everything from v1.0 is already there
 ssh -i ~/.ssh/devopsKeypair.pem ec2-user@<PUBLIC_IP>
@@ -557,18 +557,18 @@ aws ec2 create-image \
   --description "v1.0 + Redis client" \
   --tag-specifications 'ResourceType=image,Tags=[
     {Key=Name,Value=golden-ecommerce-v1.1},
-    {Key=Owner,Value=fahad},
+    {Key=Owner,Value=demo},
     {Key=BaseAMI,Value=ami-0bbbbbbbbbbbbbbbb},
     {Key=ChangeLog,Value=added-redis-client}
   ]' \
-  --profile fahad
+  --profile demo
 
 # 7. Clean up — terminate the instance AND re-revoke port 22
-aws ec2 terminate-instances --instance-ids <INSTANCE_ID> --profile fahad
+aws ec2 terminate-instances --instance-ids <INSTANCE_ID> --profile demo
 aws ec2 revoke-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 ```
 
 ### Scenario 2 — security re-bake (new Amazon base AMI)
@@ -582,7 +582,7 @@ aws ec2 describe-images \
   --filters "Name=name,Values=al2023-ami-2023*-x86_64" \
             "Name=state,Values=available" \
   --query "Images | sort_by(@, &CreationDate) | [-1].{ID:ImageId,Name:Name}" \
-  --output table --profile fahad
+  --output table --profile demo
 
 # 2. Launch from the NEW base (not your old Golden AMI)
 aws ec2 run-instances \
@@ -592,16 +592,16 @@ aws ec2 run-instances \
   --subnet-id subnet-0aaa1111aaaa11111 \
   --security-group-ids sg-0aaa00001111bbbb \
   --tag-specifications 'ResourceType=instance,Tags=[
-    {Key=Name,Value=fahad-golden-rebake-v2}
+    {Key=Name,Value=demo-golden-rebake-v2}
   ]' \
-  --profile fahad
+  --profile demo
 
 # 3. Re-open port 22 — same reason as Scenario 1: Step 6 of the first
 #    bake revoked it, so it's almost certainly closed right now.
 aws ec2 authorize-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 
 # 4. SSH in and install EVERYTHING from scratch (same as first bake)
 ssh -i ~/.ssh/devopsKeypair.pem ec2-user@<PUBLIC_IP>
@@ -625,18 +625,18 @@ aws ec2 create-image \
   --description "NEW base AL2023 + Python 3.12 + Nginx + Django 5.1 + Redis + CW agent" \
   --tag-specifications 'ResourceType=image,Tags=[
     {Key=Name,Value=golden-ecommerce-v2.0},
-    {Key=Owner,Value=fahad},
+    {Key=Owner,Value=demo},
     {Key=BaseAMI,Value=<NEW_AMAZON_AMI>},
     {Key=ChangeLog,Value=security-rebake-new-base}
   ]' \
-  --profile fahad
+  --profile demo
 
 # 6. Clean up — terminate the instance AND re-revoke port 22
-aws ec2 terminate-instances --instance-ids <INSTANCE_ID> --profile fahad
+aws ec2 terminate-instances --instance-ids <INSTANCE_ID> --profile demo
 aws ec2 revoke-security-group-ingress \
   --group-id sg-0aaa00001111bbbb \
   --protocol tcp --port 22 --cidr 0.0.0.0/0 \
-  --profile fahad
+  --profile demo
 ```
 
 ### Which scenario, when?
@@ -663,19 +663,19 @@ aws ec2 create-launch-template-version \
   --version-description "v2.0 - security rebake" \
   --source-version 1 \
   --launch-template-data '{"ImageId": "ami-NEW_GOLDEN_AMI"}' \
-  --profile fahad
+  --profile demo
 
 # Set it as default
 aws ec2 modify-launch-template \
   --launch-template-name ecommerce-web \
   --default-version 2 \
-  --profile fahad
+  --profile demo
 
 # ASG picks up the new version on next scale-out
 # To force all instances to update NOW:
 aws autoscaling start-instance-refresh \
-  --auto-scaling-group-name fahad-web-asg \
-  --profile fahad
+  --auto-scaling-group-name demo-web-asg \
+  --profile demo
 ```
 
 The `instance-refresh` command does a rolling replacement — terminates
@@ -690,7 +690,7 @@ aws ec2 describe-images \
   --owners self \
   --query "Images | sort_by(@, &CreationDate) | [].{ID:ImageId,Name:Name,Date:CreationDate,Base:Tags[?Key=='BaseAMI']|[0].Value}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 - Gives you a timeline of every Golden AMI you've built, when, and which base it came from.
@@ -756,11 +756,11 @@ aws ec2 create-image \
   --description "v1.0 + Redis client + Docker + Docker Compose" \
   --tag-specifications 'ResourceType=image,Tags=[
     {Key=Name,Value=golden-ecommerce-v1.1},
-    {Key=Owner,Value=fahad},
+    {Key=Owner,Value=demo},
     {Key=BaseAMI,Value=ami-0bbbbbbbbbbbbbbbb},
     {Key=ChangeLog,Value=added-redis-docker-compose}
   ]' \
-  --profile fahad
+  --profile demo
 ```
 
 **Current AMI inventory:**
@@ -789,7 +789,7 @@ aws ec2 describe-images \
   --image-ids ami-0bbbbbbbbbbbbbbbb ami-0ccccccccccccccc \
   --query "Images[].{AMI:ImageId,Name:Name,Snapshots:BlockDeviceMappings[].Ebs.SnapshotId}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 | What | Where | Can you see it? | Cost |
@@ -809,7 +809,7 @@ aws ec2 copy-image \
   --source-region ap-south-1 \
   --region eu-west-1 \
   --name "golden-ecommerce-v1.1-copy" \
-  --profile fahad
+  --profile demo
 ```
 
 - The AMI registration itself is free — it's just a pointer.
@@ -827,7 +827,7 @@ aws ec2 describe-instances \
   --filters "Name=instance-state-name,Values=running" \
   --query "Reservations[].Instances[].{ID:InstanceId,Name:Tags[?Key=='Name']|[0].Value,IP:PrivateIpAddress,VPC:VpcId}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # If you know the IP from your SSH prompt (e.g. ec2-user@ip-10-0-1-164):
 # Look for IP 10.0.1.164 in the table — that row has your instance ID
@@ -835,7 +835,7 @@ aws ec2 describe-instances \
 
 !!! note "Tip"
 
-    - If you filtered by `tag:Owner,Values=fahad` and got nothing, the instance might not have an Owner tag — drop the tag filter and search all running instances.
+    - If you filtered by `tag:Owner,Values=demo` and got nothing, the instance might not have an Owner tag — drop the tag filter and search all running instances.
     - The SSH prompt always shows the private IP — match it to the table.
 
 ### When and how to delete old Golden AMIs
@@ -857,17 +857,17 @@ aws ec2 describe-images \
   --image-ids ami-0bbbbbbbbbbbbbbbb \
   --query "Images[0].BlockDeviceMappings[].Ebs.SnapshotId" \
   --output text \
-  --profile fahad
+  --profile demo
 
 # Step 2: Deregister the AMI (removes it from your AMI list)
 aws ec2 deregister-image \
   --image-id ami-0bbbbbbbbbbbbbbbb \
-  --profile fahad
+  --profile demo
 
 # Step 3: Delete the orphan snapshot (stops the storage charge)
 aws ec2 delete-snapshot \
   --snapshot-id <SNAPSHOT_ID_FROM_STEP_1> \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Don't skip step 3"
@@ -880,7 +880,7 @@ aws ec2 describe-snapshots \
   --owner-ids self \
   --query "Snapshots[].{ID:SnapshotId,Size:VolumeSize,Date:StartTime,Desc:Description}" \
   --output table \
-  --profile fahad
+  --profile demo
 ```
 
 !!! success "Immutable infra"
@@ -908,15 +908,15 @@ aws ec2 create-launch-template \
     "TagSpecifications": [{
       "ResourceType": "instance",
       "Tags": [
-        {"Key": "Name", "Value": "fahad-web"},
+        {"Key": "Name", "Value": "demo-web"},
         {"Key": "Environment", "Value": "dev"},
-        {"Key": "Owner", "Value": "fahad"},
+        {"Key": "Owner", "Value": "demo"},
         {"Key": "Project", "Value": "ecommerce-platform"},
         {"Key": "ManagedBy", "Value": "manual"}
       ]
     }]
   }' \
-  --profile fahad
+  --profile demo
 ```
 
 Templates are versioned. When you update (new Golden AMI, different
@@ -932,20 +932,20 @@ aws ec2 create-launch-template-version \
   --launch-template-data '{
     "ImageId": "ami-NEW_GOLDEN_AMI_ID"
   }' \
-  --profile fahad
+  --profile demo
 
 # List versions
 aws ec2 describe-launch-template-versions \
   --launch-template-name ecommerce-web \
   --query "LaunchTemplateVersions[].{Version:VersionNumber,Desc:VersionDescription,AMI:LaunchTemplateData.ImageId}" \
   --output table \
-  --profile fahad
+  --profile demo
 
 # Set default version
 aws ec2 modify-launch-template \
   --launch-template-name ecommerce-web \
   --default-version 2 \
-  --profile fahad
+  --profile demo
 ```
 
 Auto Scaling Groups reference a template version — `$Latest` (always

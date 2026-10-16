@@ -28,53 +28,53 @@ Two different features that solve different problems:
 ``` bash
 # 1. Create a DB subnet group (tells RDS which subnets to use)
 aws rds create-db-subnet-group \
-  --db-subnet-group-name fahad-db-subnets \
+  --db-subnet-group-name demo-db-subnets \
   --db-subnet-group-description "Private DB subnets for ecommerce" \
   --subnet-ids subnet-0eee5555eeee55555 subnet-0fff6666ffff66666
 
 # 2. Create the RDS instance (single-AZ for learning, saves cost)
 aws rds create-db-instance \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --db-instance-class db.t3.micro \
   --engine postgres \
   --engine-version 16 \
   --master-username ecomadmin \
   --master-user-password '<USE_A_STRONG_PASSWORD>' \
   --allocated-storage 20 \
-  --db-subnet-group-name fahad-db-subnets \
+  --db-subnet-group-name demo-db-subnets \
   --vpc-security-group-ids <DB_SG_ID> \
   --backup-retention-period 7 \
   --no-publicly-accessible \
   --storage-encrypted \
-  --tags Key=Name,Value=fahad-ecommerce-db \
+  --tags Key=Name,Value=demo-ecommerce-db \
          Key=Environment,Value=dev \
-         Key=Owner,Value=fahad
+         Key=Owner,Value=demo
 
 # 3. Check status (takes 5-10 minutes to become "available")
 aws rds describe-db-instances \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --query "DBInstances[0].{Status:DBInstanceStatus,Endpoint:Endpoint.Address,Port:Endpoint.Port}" \
   --output table
 
 # 4. Get the connection endpoint (once available)
 aws rds describe-db-instances \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --query "DBInstances[0].Endpoint.Address" \
   --output text
 
 # 5. Create a read replica (for read scaling later)
 aws rds create-db-instance-read-replica \
-  --db-instance-identifier fahad-ecommerce-db-read \
-  --source-db-instance-identifier fahad-ecommerce-db
+  --db-instance-identifier demo-ecommerce-db-read \
+  --source-db-instance-identifier demo-ecommerce-db
 
 # 6. Force a Multi-AZ failover (for testing DR)
 aws rds reboot-db-instance \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --force-failover
 
 # Delete RDS (skip final snapshot for dev)
 aws rds delete-db-instance \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --skip-final-snapshot
 ```
 
@@ -91,11 +91,11 @@ A read replica does nothing by itself — your app has to be told to send read q
 DATABASES = {
     'default': {  # primary — all writes
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'fahad-ecommerce-db.xxxxx.ap-south-1.rds.amazonaws.com',
+        'HOST': 'demo-ecommerce-db.xxxxx.ap-south-1.rds.amazonaws.com',
     },
     'replica': {  # read replica — reads only
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': 'fahad-ecommerce-db-read.xxxxx.ap-south-1.rds.amazonaws.com',
+        'HOST': 'demo-ecommerce-db-read.xxxxx.ap-south-1.rds.amazonaws.com',
     },
 }
 
@@ -120,9 +120,9 @@ DATABASE_ROUTERS = ['myapp.routers.ReplicaRouter']
 
 ``` bash
 aws rds promote-read-replica \
-  --db-instance-identifier fahad-ecommerce-db-read \
+  --db-instance-identifier demo-ecommerce-db-read \
   --backup-retention-period 7 \
-  --profile fahad
+  --profile demo
 ```
 
 #### Watching replica lag
@@ -131,12 +131,12 @@ aws rds promote-read-replica \
 aws cloudwatch get-metric-statistics \
   --namespace AWS/RDS \
   --metric-name ReplicaLag \
-  --dimensions Name=DBInstanceIdentifier,Value=fahad-ecommerce-db-read \
+  --dimensions Name=DBInstanceIdentifier,Value=demo-ecommerce-db-read \
   --start-time $(date -u -d '1 hour ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
   --period 300 \
   --statistics Average Maximum \
-  --profile fahad
+  --profile demo
 ```
 
 - Measured in seconds.
@@ -174,31 +174,31 @@ Manual snapshots
 ``` bash
 # Set the automated backup window and retention
 aws rds modify-db-instance \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --backup-retention-period 7 \
   --preferred-backup-window "17:00-17:30" \
   --apply-immediately \
-  --profile fahad
+  --profile demo
 
 # Take a manual snapshot before a risky change
 aws rds create-db-snapshot \
-  --db-instance-identifier fahad-ecommerce-db \
-  --db-snapshot-identifier fahad-ecommerce-db-pre-migration-$(date +%Y%m%d) \
-  --profile fahad
+  --db-instance-identifier demo-ecommerce-db \
+  --db-snapshot-identifier demo-ecommerce-db-pre-migration-$(date +%Y%m%d) \
+  --profile demo
 
 # Copy a snapshot to another region (DR)
 aws rds copy-db-snapshot \
-  --source-db-snapshot-identifier arn:aws:rds:ap-south-1:111122223333:snapshot:fahad-ecommerce-db-pre-migration-20260903 \
-  --target-db-snapshot-identifier fahad-ecommerce-db-pre-migration-20260903-eu \
+  --source-db-snapshot-identifier arn:aws:rds:ap-south-1:111122223333:snapshot:demo-ecommerce-db-pre-migration-20260903 \
+  --target-db-snapshot-identifier demo-ecommerce-db-pre-migration-20260903-eu \
   --source-region ap-south-1 \
   --region eu-west-1 \
-  --profile fahad
+  --profile demo
 
 # Restore an instance FROM a snapshot (different from point-in-time restore)
 aws rds restore-db-instance-from-db-snapshot \
-  --db-instance-identifier fahad-ecommerce-db-restored \
-  --db-snapshot-identifier fahad-ecommerce-db-pre-migration-20260903 \
-  --profile fahad
+  --db-instance-identifier demo-ecommerce-db-restored \
+  --db-snapshot-identifier demo-ecommerce-db-pre-migration-20260903 \
+  --profile demo
 ```
 
 !!! note "Backup window vs maintenance window"
@@ -228,29 +228,29 @@ aws rds create-db-parameter-group \
 ``` bash
 # Attach the custom parameter group to the instance
 aws rds modify-db-instance \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --db-parameter-group-name ecommerce-pg16 \
   --apply-immediately \
-  --profile fahad
+  --profile demo
 
 # Change a dynamic parameter — takes effect without a reboot
 aws rds modify-db-parameter-group \
   --db-parameter-group-name ecommerce-pg16 \
   --parameters "ParameterName=work_mem,ParameterValue=16384,ApplyMethod=immediate" \
-  --profile fahad
+  --profile demo
 
 # Change a static parameter — queued until the next reboot
 aws rds modify-db-parameter-group \
   --db-parameter-group-name ecommerce-pg16 \
   --parameters "ParameterName=shared_buffers,ParameterValue={DBInstanceClassMemory/32768},ApplyMethod=pending-reboot" \
-  --profile fahad
+  --profile demo
 
 # Check what's pending vs applied
 aws rds describe-db-instances \
-  --db-instance-identifier fahad-ecommerce-db \
+  --db-instance-identifier demo-ecommerce-db \
   --query "DBInstances[0].DBParameterGroups[0].ParameterApplyStatus" \
   --output text \
-  --profile fahad
+  --profile demo
 ```
 
 !!! danger "Parameter groups aren't per-instance"
@@ -303,8 +303,8 @@ migrations/
 aws ssm start-session \
   --target <INSTANCE_ID_IN_VPC> \
   --document-name AWS-StartPortForwardingSessionToRemoteHost \
-  --parameters '{"host":["fahad-ecommerce-db.xxxxx.ap-south-1.rds.amazonaws.com"],"portNumber":["5432"],"localPortNumber":["5433"]}' \
-  --profile fahad
+  --parameters '{"host":["demo-ecommerce-db.xxxxx.ap-south-1.rds.amazonaws.com"],"portNumber":["5432"],"localPortNumber":["5433"]}' \
+  --profile demo
 
 # In another terminal, connect through the tunnel
 psql -h localhost -p 5433 -U ecomadmin -d postgres

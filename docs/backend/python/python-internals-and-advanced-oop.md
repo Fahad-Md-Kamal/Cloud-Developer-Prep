@@ -7,7 +7,7 @@ title: "Python Internals & Advanced OOP"
 Descriptors, metaclasses, MRO, and magic-method correctness — the
 "expert Python" layer beyond day-to-day code, and where it actually
 shows up in frameworks you already use (Django's ORM, DRF's
-serializers). Flagged from the BJIT Senior Python Developer JD's
+serializers). Flagged from a Senior Python Developer JD's
 "Expert knowledge in Python + Django" requirement. Everything below
 builds on two mechanics most OOP tutorials wave past as "just how
 classes work" — object creation, and what `self` actually is.
