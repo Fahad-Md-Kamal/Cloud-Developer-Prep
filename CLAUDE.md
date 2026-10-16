@@ -7,7 +7,7 @@ static site generator). Content lives in `docs/**/*.md`, organized into
 subdirectories mirroring `zensical.toml`'s nav (e.g.
 `docs/database/postgresql-for-scale.md`,
 `docs/backend/python/django-orm.md`) — only `index.md`
-and `session-log.md` sit at `docs/` root. As of 2026-10-09 the
+sits at `docs/` root. As of 2026-10-09 the
 top-level domains are Frontend, Backend, Architecture, Database,
 Cloud & DevOps, AI & LLM, Algorithms, and Interview Prep — a flat,
 domain-based structure (no "Study Materials" wrapper, no

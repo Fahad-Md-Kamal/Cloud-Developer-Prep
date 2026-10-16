@@ -11,11 +11,11 @@ under a subdirectory matching its top-level nav domain (e.g.
 `docs/database/postgresql-for-scale.md`,
 `docs/backend/python/django-orm.md`,
 `docs/frontend/js-ts/react-and-react-native.md`). Only `index.md`
-and `session-log.md` stay at `docs/` root, as the site's entry points.
+stays at `docs/` root, as the site's entry point.
 Put a new file in the subdirectory matching where it belongs in the
-nav — don't drop it back at the flat root. The ten top-level domains
+nav — don't drop it back at the flat root. The top-level domains
 are: Frontend, Backend, Architecture, Database, Cloud & DevOps,
-AI & LLM, Algorithms, and Interview Prep (plus Home and Session Log).
+AI & LLM, Algorithms, and Interview Prep (plus Home).
 
 Internal links between pages are normal relative Markdown paths from
 the linking file's own location — `../other-group/page.md` to link

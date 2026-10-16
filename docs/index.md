@@ -86,11 +86,8 @@ inside the relevant chapter, not on separate pages:
 
 ## Contents
 
-Organized by domain instead of by when each topic was added — ten
-top-level areas, each one click deep from here.
-
-- **[Session Log](session-log.md)** — running, dated record of live
-  practice Q&A, cross-linked into the chapters below.
+Organized by domain instead of by when each topic was added — each
+top-level area one click deep from here.
 
 ### Frontend
 

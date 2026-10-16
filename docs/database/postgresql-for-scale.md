@@ -229,9 +229,3 @@ inside the `OVER (...)` clause then ranks rows within each partition.
 | `ROW_NUMBER()` | always unique (1,2,3,4...) | n/a |
 | `RANK()` | same rank | **skips** (1,1,3,4) |
 | `DENSE_RANK()` | same rank | **doesn't skip** (1,1,2,3) |
-
-!!! note "Session note"
-    Covered in the [session log](../session-log.md#2026-09-22) — first
-    attempt used `GROUP BY` (wrong tool: collapses rows instead of
-    ranking within them) with no join and no window function. Flagged
-    for another rep before the real interview.

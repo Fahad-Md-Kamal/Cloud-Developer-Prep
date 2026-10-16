@@ -593,8 +593,3 @@ is bad" from "actually understands the ORM."
 without ever going "backwards" through a `ForeignKey`/`M2M`, use
 `select_related`. If at any point you're fetching a *collection* (reverse
 FK, M2M), use `prefetch_related`.
-
-!!! note "Session note"
-    Covered in the [session log](../../session-log.md#2026-09-22) — N+1
-    correctly diagnosed; initial fix used `prefetch_related`, corrected to
-    `select_related` after discussion of the to-one/to-many distinction.

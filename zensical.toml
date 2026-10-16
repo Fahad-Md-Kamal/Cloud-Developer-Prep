@@ -12,7 +12,6 @@ extra_css = ["stylesheets/print.css", "stylesheets/read-aloud.css"]
 
 nav = [
   { "Home" = "index.md" },
-  { "Session Log" = "session-log.md" },
   { "Frontend" = [
       { "Frontend Fundamentals" = "frontend/frontend-fundamentals.md" },
       { "CSS & Styling Frameworks" = "frontend/css-styling-frameworks.md" },
