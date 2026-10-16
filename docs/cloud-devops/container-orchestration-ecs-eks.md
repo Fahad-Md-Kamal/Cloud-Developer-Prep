@@ -506,16 +506,99 @@ repeated here.
 
 The Kubernetes side of the ECS-vs-EKS decision below — the core
 control-plane concepts and object model actually practiced here, not a
-full Kubernetes deep-dive:
+full Kubernetes deep-dive. Knowing that `kubectl apply` is "the command
+that deploys things" is the tool-usage version of this; the two
+mechanisms below are what's actually happening underneath it, and
+they're what let you reason about a cluster when `kubectl` itself isn't
+telling you enough.
 
-- Control plane vs data plane
-- Managed node groups vs Fargate profiles
-- `kubectl` and contexts
-- Pods, deployments, services, ingress
-- ConfigMaps and secrets
-- Requests and limits
-- IRSA for pod-level IAM
-- The horizontal pod autoscaler and the AWS Load Balancer Controller
+### What `kubectl apply` Actually Does
+
+Nothing in Kubernetes runs commands *at* the cluster the way `aws ec2
+run-instances` does. The entire model is **declarative** and built on
+one continuous loop, repeated by every controller, forever:
+
+1. **Observe** the actual state of the cluster right now.
+2. **Compare** it to the desired state sitting in **etcd** (the
+   cluster's single source of truth).
+3. **Act** to close whatever gap exists.
+4. Go back to step 1, immediately.
+
+`kubectl apply` doesn't deploy anything itself — it just writes *desired
+state* into etcd via the API server (the only thing anything in the
+cluster is allowed to talk to directly). A **controller** — a
+small program running this exact loop for one specific resource type —
+notices the new desired state shortly after and does the actual work.
+
+!!! success "This is why a killed Pod comes back on its own"
+
+    There's no special "restart crashed pods" feature. A Deployment's
+    controller is running the loop above, continuously: desired replica
+    count is 3, it observes 2 actual Pods, so it creates a third. That's
+    the entire mechanism — the same generic loop handles a crashed Pod,
+    a manually deleted Pod, and a node disappearing out from under one,
+    because to the controller they're all just "actual state no longer
+    matches desired state."
+
+### How a Service Actually Reaches a Pod
+
+A Kubernetes **Service** is not a running process and not a load
+balancer sitting somewhere in the cluster — it's a stable virtual IP
+(the **ClusterIP**) that exists only as **rules programmed into every
+node's kernel**, via `iptables` (or IPVS) by a component called
+**kube-proxy**.
+
+- **kube-proxy** watches the API server for Service/Endpoint changes and
+  continuously rewrites each node's NAT rules: "traffic sent to
+  `ClusterIP:port` → rewrite the destination to one of these actual Pod
+  IPs." This rewrite — **DNAT**, destination network address
+  translation — happens in the kernel, before the packet ever reaches
+  an application.
+- [CoreDNS](load-balancing-and-dns.md#how-dns-resolution-actually-works)
+  resolves a Service's name (`my-service.default.svc.cluster.local`) to
+  its ClusterIP — the exact same recursive-lookup idea already covered
+  for the public internet, just serving cluster-internal names instead
+  of public ones.
+- Reaching a Pod through a Service is therefore **two separate
+  rewrites**: a DNS name becomes a ClusterIP (CoreDNS), then the
+  ClusterIP becomes a real Pod IP (kube-proxy's DNAT rule) — and nothing
+  above either of those two layers ever needs to know a Pod's actual IP
+  at all.
+
+<svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a Service's stable ClusterIP being DNAT-rewritten to a Pod IP, then silently repointed to a replacement Pod" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<defs><marker id="k8s-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aa5b3"></path></marker></defs>
+<rect x="16" y="170" width="150" height="90" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="91" y="210" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Client Pod</text>
+<text x="91" y="230" font-size="12" text-anchor="middle" fill="#5b6472">sends to ClusterIP</text>
+<rect x="226" y="170" width="190" height="90" rx="8" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="321" y="200" font-size="14" font-weight="600" text-anchor="middle" fill="#1d4a78">Service ClusterIP</text>
+<text x="321" y="220" font-size="13" text-anchor="middle" fill="#3d699a">10.96.0.42</text>
+<text x="321" y="238" font-size="11" text-anchor="middle" fill="#5b82ab">(never changes)</text>
+<rect x="476" y="170" width="190" height="90" rx="8" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
+<text x="571" y="198" font-size="13" font-weight="600" text-anchor="middle" fill="#7a5c14">kube-proxy</text>
+<text x="571" y="215" font-size="12" font-weight="600" text-anchor="middle" fill="#7a5c14">iptables DNAT rule</text>
+<text x="571" y="233" font-size="12" text-anchor="middle" fill="#9a7420"><animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.47;0.5;0.53;0.56;1" dur="12s" repeatCount="indefinite"></animate>→ Pod A (10.244.1.5)</text>
+<text x="571" y="233" font-size="12" text-anchor="middle" fill="#9a7420"><animate attributeName="opacity" values="0;0;0;1;1;0" keyTimes="0;0.5;0.53;0.56;0.95;1" dur="12s" repeatCount="indefinite"></animate>→ Pod D (10.244.1.9)</text>
+<rect x="716" y="110" width="160" height="80" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.46;0.5;1" dur="12s" repeatCount="indefinite"></animate></rect>
+<text x="796" y="145" font-size="14" font-weight="600" text-anchor="middle" fill="#0f6b45"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.46;0.5;1" dur="12s" repeatCount="indefinite"></animate>Pod A</text>
+<text x="796" y="164" font-size="12" text-anchor="middle" fill="#3d9a73"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.46;0.5;1" dur="12s" repeatCount="indefinite"></animate>10.244.1.5</text>
+<text x="796" y="178" font-size="18" text-anchor="middle" fill="#c0392b"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.43;0.46;0.5;0.52;1" dur="12s" repeatCount="indefinite"></animate>killed ✕</text>
+<rect x="716" y="250" width="160" height="80" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.56;1" dur="12s" repeatCount="indefinite"></animate></rect>
+<text x="796" y="285" font-size="14" font-weight="600" text-anchor="middle" fill="#0f6b45"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.56;1" dur="12s" repeatCount="indefinite"></animate>Pod D (new)</text>
+<text x="796" y="304" font-size="12" text-anchor="middle" fill="#3d9a73"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.56;1" dur="12s" repeatCount="indefinite"></animate>10.244.1.9</text>
+<circle r="9" fill="#d9822b" cy="215"><animate attributeName="cx" values="91;321;571;796;796;571;321;91;91;321;571;796;796" keyTimes="0;0.06;0.12;0.18;0.40;0.46;0.5;0.56;0.60;0.66;0.72;0.78;1" dur="12s" repeatCount="indefinite"></animate><animate attributeName="cy" values="215;215;215;150;150;215;215;215;215;215;215;290;290" keyTimes="0;0.06;0.12;0.18;0.40;0.46;0.5;0.56;0.60;0.66;0.72;0.78;1" dur="12s" repeatCount="indefinite"></animate></circle>
+<text x="450" y="400" font-size="19" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.44;0.48;1" dur="12s" repeatCount="indefinite"></animate>The client only ever talks to the ClusterIP. kube-proxy's rule DNATs it to Pod A.</text>
+<text x="450" y="400" font-size="19" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.54;0.9;0.95;1" dur="12s" repeatCount="indefinite"></animate>Pod A is killed and replaced by Pod D. The ClusterIP never moves — kube-proxy just repoints the rule.</text>
+</svg>
+
+!!! danger "A Service's IP being stable doesn't mean a connection is"
+
+    Every new connection can land on a *different* backing Pod — DNAT
+    picks a target per connection, not once per client. An application
+    that assumes "I'm still talking to the same Pod as my last request"
+    without anything actually guaranteeing that (no session affinity
+    configured) will see requests land on different Pods, with
+    independent memory/state, from one request to the next.
 
 ## ECS vs. EKS: The Decision
 

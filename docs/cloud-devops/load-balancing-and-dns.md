@@ -780,6 +780,78 @@ inserted into the path.
     fleet" → GWLB. Anything about routing HTTP paths → ALB. Anything
     about raw TCP/UDP throughput or a static IP → NLB.
 
+## How DNS Resolution Actually Works
+
+Route 53 is one specific link in a chain — knowing the chain is what
+lets you reason about "why did my DNS change not show up yet" or
+"why is `nslookup` giving my coworker a different answer than me,"
+neither of which a list of Route 53 record types explains on its own.
+
+`Stub resolver`
+:   The tiny resolver built into your OS. It doesn't know how to find
+    anything itself — it just forwards the question to a recursive
+    resolver and waits.
+
+`Recursive resolver`
+:   Your ISP's resolver, a public one like `8.8.8.8`, or Route 53
+    Resolver — this is the one that actually does the work, walking the
+    chain below on the stub resolver's behalf, and **caching the answer**
+    for as long as the record's TTL says to.
+
+`Root servers`
+:   Know nothing about `example.com` directly — they only know which
+    servers are authoritative for `.com`, `.org`, and every other
+    top-level domain, and point the recursive resolver there.
+
+`TLD servers`
+:   Know which servers are authoritative for a specific domain within
+    their TLD (who's authoritative for `example.com` within `.com`) —
+    and point the recursive resolver there next.
+
+`Authoritative nameserver`
+:   The server that actually holds the real answer. **This is the role
+    Route 53 plays** — it has no idea what a recursive resolver is or
+    where the query originally came from; it just answers "here's the
+    record for this name" when asked.
+
+<svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a DNS query walking the resolution chain on a cache miss, then taking a cached shortcut on a repeat lookup" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<defs><marker id="dns-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aa5b3"></path></marker></defs>
+<line x1="94" y1="110" x2="806" y2="110" stroke="#c7cedb" stroke-width="3"></line>
+<rect x="16" y="60" width="155" height="100" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="94" y="100" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Your Computer</text>
+<text x="94" y="122" font-size="13" text-anchor="middle" fill="#5b6472">(stub resolver)</text>
+<rect x="194" y="60" width="155" height="100" rx="8" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="272" y="94" font-size="14" font-weight="600" text-anchor="middle" fill="#1d4a78">Recursive</text>
+<text x="272" y="112" font-size="14" font-weight="600" text-anchor="middle" fill="#1d4a78">Resolver</text>
+<text x="272" y="134" font-size="12" text-anchor="middle" fill="#3d699a">(ISP / 8.8.8.8)</text>
+<rect x="372" y="60" width="155" height="100" rx="8" fill="#eef1f5" stroke="#8a98ab" stroke-width="2"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate></rect>
+<text x="450" y="104" font-size="15" font-weight="600" text-anchor="middle" fill="#434d5c"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>Root Server</text>
+<text x="450" y="126" font-size="13" text-anchor="middle" fill="#5b6472"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>( . )</text>
+<rect x="550" y="60" width="155" height="100" rx="8" fill="#eef1f5" stroke="#8a98ab" stroke-width="2"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate></rect>
+<text x="628" y="104" font-size="15" font-weight="600" text-anchor="middle" fill="#434d5c"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>TLD Server</text>
+<text x="628" y="126" font-size="13" text-anchor="middle" fill="#5b6472"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>(.com)</text>
+<rect x="728" y="60" width="155" height="100" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate></rect>
+<text x="806" y="94" font-size="14" font-weight="600" text-anchor="middle" fill="#0f6b45"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>Authoritative NS</text>
+<text x="806" y="112" font-size="14" font-weight="600" text-anchor="middle" fill="#0f6b45"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>(Route 53)</text>
+<text x="806" y="134" font-size="12" text-anchor="middle" fill="#3d9a73"><animate attributeName="opacity" values="1;1;0.3;0.3;1;1" keyTimes="0;0.53;0.55;0.78;0.80;1" dur="13s" repeatCount="indefinite"></animate>knows example.com</text>
+<circle r="10" fill="#d9822b" cy="110"><animate attributeName="cx" values="94;272;450;628;806;272;94;94;272;272;94;94" keyTimes="0;0.08;0.16;0.24;0.32;0.42;0.50;0.55;0.63;0.70;0.78;1.00" dur="13s" repeatCount="indefinite"></animate></circle>
+<text x="450" y="200" font-size="20" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.48;0.50;1" dur="13s" repeatCount="indefinite"></animate>First lookup: nobody has it cached yet — walks the full chain, computer → resolver → root → .com → Route 53.</text>
+<text x="450" y="200" font-size="20" text-anchor="middle" fill="#1f2a3a"><animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.52;0.55;1" dur="13s" repeatCount="indefinite"></animate>Second lookup, within the TTL: the resolver already cached the answer — root, .com, and Route 53 are never contacted.</text>
+</svg>
+
+!!! danger "This is why a DNS change isn't instant, and why two people can see different answers"
+
+    A **recursive resolver** you don't control — your ISP's, a public
+    one, a coworker's laptop's — decides how long it keeps serving its
+    *own* cached answer, based on the TTL the record had the moment it
+    cached it. Lowering the TTL in Route 53 only changes what a resolver
+    caches on its *next* fresh lookup — it does nothing for a resolver
+    that already has the old answer cached with the old, longer TTL
+    still ticking down. This is exactly why dropping the TTL **before** a
+    planned cutover (below) has to happen well in advance, not minutes
+    before — every resolver needs a chance to do one more fresh lookup
+    and pick up the shorter TTL first.
+
 ## Route 53 — DNS Records & Routing
 
 #### Record types
@@ -864,7 +936,8 @@ nslookup example.com
 
 #### TTL — the trade-off you're actually making
 
-- Time-to-live controls how long resolvers cache a record before re-checking.
+- Time-to-live controls how long [recursive resolvers](#how-dns-resolution-actually-works)
+  cache a record before re-checking.
 - Low TTL (60s) means changes propagate fast but you pay more DNS query volume and clients feel any Route 53 blip.
 - High TTL (3600s+) is cheaper and steadier but a bad record takes longer to fix everywhere.
 - **Drop the TTL to 60 seconds before a planned cutover** (like switching to a new ALB), then raise it back afterward.
