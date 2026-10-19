@@ -115,13 +115,89 @@ either of these), see
       rolling deployment — a cluster with no service running in it does
       nothing at all, it's just an empty namespace waiting for one.
 
-- Clusters, task definitions and revisions, services
-- Task role vs execution role
-- CPU and memory sizing
-- `awsvpc` networking and ENI limits
-- ALB integration and service discovery
-- Service auto scaling
-- Rolling deployments and the deployment circuit breaker
+- A **task definition revision**: every change to a task definition
+  creates a new numbered revision rather than overwriting the old one —
+  a running service points at a specific revision, and rolling back is
+  just pointing it at the previous one, with the old revision still
+  there to inspect.
+
+#### Task Role vs. Execution Role
+
+Two separate IAM roles, answering two separate questions, and mixing
+them up is the single most common ECS IAM mistake.
+
+- **Execution role** — what **ECS itself** needs to actually start the
+  container: pull the image from ECR, write logs to CloudWatch, and
+  fetch any secrets referenced in the task definition's own `secrets`
+  field before the container process even starts.
+- **Task role** — what the **application code running inside the
+  container** is allowed to do once it's up — call S3, read from
+  Secrets Manager at runtime, write to DynamoDB. See
+  [Role 1 — Application Role (ECS Tasks)](aws-accounts-and-iam.md#the-three-iam-roles-for-assignment-a1)
+  for a real example of exactly this role, scoped to only what one
+  specific service actually needs.
+- Granting the application everything the execution role has (or vice
+  versa) defeats the whole point of having two roles — a compromised
+  container should only be able to do what the *application* role
+  allows, not also re-pull images or write arbitrary log groups.
+
+#### CPU and Memory Sizing
+
+- Fargate tasks pick from a **fixed set of CPU/memory combinations**
+  (e.g. 0.25 vCPU pairs with 0.5–2 GB, 1 vCPU pairs with 2–8 GB) —
+  not an arbitrary number, unlike sizing an EC2 instance.
+- A container that exceeds its **memory** limit gets OOM-killed
+  immediately — no warning, no throttling, the container process is
+  just terminated and ECS restarts it.
+- Exceeding the **CPU** limit doesn't kill anything — the container is
+  simply throttled to its allotted share, which shows up as the
+  application getting slower under load rather than crashing.
+
+#### `awsvpc` Networking
+
+- Every task gets its **own elastic network interface (ENI)**, with
+  its own private IP — not a shared IP with port mapping the way
+  classic Docker bridge networking works. Each task looks, from the
+  network's perspective, like its own small EC2 instance.
+- **The practical limit this creates:** each EC2 instance type only
+  supports a fixed number of ENIs, which caps how many `awsvpc` tasks
+  can run per instance — a real capacity constraint on the EC2 launch
+  type that Fargate (no instances to manage) doesn't have to think
+  about at all.
+
+#### ALB Integration and Service Discovery
+
+- A service registers its running tasks' IPs with an ALB **target
+  group** automatically as tasks start and stop — the same target
+  group mechanism covered in
+  [Application Load Balancer Deep Dive](load-balancing-and-dns.md#application-load-balancer-alb-deep-dive),
+  just kept in sync by ECS instead of maintained by hand.
+- **Service discovery** (via AWS Cloud Map) is the service-to-service
+  equivalent — a DNS name that always resolves to currently-healthy
+  task IPs, for traffic between internal services that doesn't go
+  through a load balancer at all.
+
+#### Service Auto Scaling
+
+- The same **target tracking** idea already covered for
+  [Auto Scaling Groups](auto-scaling-groups.md#target-tracking-simplest-most-common),
+  applied to a service's **desired task count** instead of an ASG's
+  instance count — pick a metric (CPU, memory, request count per
+  target) and a target value, and ECS adjusts task count to hold it.
+
+#### Rolling Deployments and the Deployment Circuit Breaker
+
+- A rolling deployment replaces old tasks with new ones gradually,
+  governed by **minimum/maximum healthy percent** — e.g. never drop
+  below 100% of desired capacity while never exceeding 200%, so
+  there's always full capacity available during the rollout.
+- The **deployment circuit breaker** watches the new tasks' health
+  during a rollout, and automatically rolls back to the previous
+  task definition revision if too many new tasks fail to start
+  healthy — the same "stop digging once it's clearly not working"
+  idea as the
+  [circuit breaker pattern](../backend/fault-tolerance-patterns.md#1-circuit-breakers)
+  covered elsewhere, applied to deployments instead of API calls.
 
 ### Hands-On: A First ECS Service, from the Console
 
@@ -599,6 +675,97 @@ node's kernel**, via `iptables` (or IPVS) by a component called
     without anything actually guaranteeing that (no session affinity
     configured) will see requests land on different Pods, with
     independent memory/state, from one request to the next.
+
+### Practical EKS Concepts
+
+The mechanisms above explain *how* Kubernetes works; these are the
+concrete decisions actually made running a real EKS cluster.
+
+#### Managed Node Groups vs. Fargate Profiles
+
+- **Managed node groups** — real EC2 instances, still yours to size and
+  patch, but EKS automates their lifecycle (rolling updates, draining
+  before termination). You're choosing instance types and capacity,
+  same judgment as
+  [EC2 Instance Families](ec2-instance-types-and-purchasing-options.md).
+- **Fargate profiles** — no nodes at all; each Pod matching the
+  profile's selector runs on its own serverless compute, the same
+  no-instances-to-manage trade-off
+  [ECS Fargate](#ecs-fargate) already makes, just for Kubernetes Pods
+  instead of ECS tasks.
+- Mixing both in one cluster is common: steady, predictable workloads
+  on managed node groups (cheaper at sustained load), bursty or
+  infrequent workloads on Fargate profiles (no idle capacity to pay
+  for).
+
+#### ConfigMaps & Secrets
+
+- A **ConfigMap** holds non-sensitive configuration (a URL, a feature
+  flag) that a Pod reads as environment variables or a mounted file —
+  the Kubernetes-native way to avoid baking config into the container
+  image.
+- A **Secret** looks identical in use, but holds sensitive data
+  instead.
+
+!!! danger "A Kubernetes Secret is base64, not encrypted"
+
+    Base64 is an *encoding*, not encryption — anyone with read access
+    to the Secret object (or etcd itself, if it isn't encrypted at
+    rest) can trivially decode it back to plaintext. Enabling
+    **encryption at rest for Secrets** (via a KMS key, the same
+    [envelope encryption](kms-secrets-and-cognito.md#envelope-encryption-why-kms-doesnt-encrypt-your-data-directly)
+    already covered for S3) is what actually protects a Secret sitting
+    in etcd — the base64 encoding by itself protects against nothing.
+
+#### Requests & Limits
+
+- A **request** is what a Pod is guaranteed, and what the scheduler
+  uses to decide which node has room for it — a Pod requesting 500m
+  CPU only gets scheduled onto a node with at least that much
+  available.
+- A **limit** is the hard ceiling — exceeding the memory limit gets the
+  Pod OOM-killed, exactly the same consequence already covered for
+  [ECS's memory sizing](#cpu-and-memory-sizing) above, just enforced by
+  the kubelet instead of the ECS agent. Exceeding the CPU limit throttles
+  instead of killing, same as ECS too — this is the same underlying
+  cgroups mechanism covered in
+  [What a Container Actually Is](docker-production-images.md#cgroups-how-much-the-process-is-allowed-to-use),
+  Kubernetes is just the layer setting those cgroup values on your behalf.
+
+#### IRSA: IAM Roles for Service Accounts
+
+- Without IRSA, every Pod on a node shares that **node's own** IAM
+  role — far too broad, since every workload on the node can do
+  whatever the node's role allows, whether or not that specific Pod
+  needs it.
+- IRSA gives a **Pod its own, narrowly-scoped IAM role** instead —
+  mechanically, the same federated-identity pattern already covered
+  for
+  [Cognito Identity Pools](kms-secrets-and-cognito.md#cognito-identity-for-your-applications-own-users):
+  a trusted token (here, a Kubernetes service account token, verified
+  via the cluster's OIDC provider) gets exchanged for temporary AWS
+  credentials through STS, scoped to exactly the role that service
+  account is allowed to assume.
+
+#### Horizontal Pod Autoscaler (HPA)
+
+- The same target-tracking idea as
+  [ECS's service auto scaling](#service-auto-scaling) and
+  [ASG target tracking](auto-scaling-groups.md#target-tracking-simplest-most-common)
+  — pick a metric (CPU, memory, or a custom metric) and a target value,
+  and the HPA adjusts **replica count** to hold it, at the Pod level
+  instead of the instance or task level.
+
+#### AWS Load Balancer Controller
+
+- A Kubernetes `Service` of type `LoadBalancer`, or an `Ingress`
+  object, doesn't provision any AWS infrastructure by itself — the AWS
+  Load Balancer Controller is what watches for those objects and
+  actually creates the real ALB or NLB behind them, keeping its target
+  group in sync with Pod IPs as they come and go, the Kubernetes-native
+  equivalent of
+  [ECS's own target group integration](#alb-integration-and-service-discovery)
+  above.
 
 ## ECS vs. EKS: The Decision
 
