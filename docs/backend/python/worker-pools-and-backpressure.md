@@ -1,19 +1,75 @@
 ---
-title: "Building Worker Pools From Scratch"
+title: "Worker Pools & Backpressure"
 ---
 
-# Building Worker Pools From Scratch
+# Worker Pools & Backpressure
 
-Implementing a worker pool yourself — before you reach for
-`ThreadPoolExecutor` or Celery — so the abstraction stops being a
-black box. Builds directly on the producer/consumer pattern in
-[Threading in Practice's Task 3](threading-in-practice.md#task-3-a-producerconsumer-pipeline-with-queuequeue).
+Hands-on tasks building up from a raw `queue.Queue` to a reusable worker
+pool class, then comparing that against the two tools you'd actually
+reach for in practice: `ThreadPoolExecutor` and Celery. Builds on
+[Threading & the GIL](threading-and-the-gil.md) — do each task yourself
+before reading the explanation.
 
-## Task 1: A minimal worker pool class
+## Task: A Producer/Consumer Pipeline with `queue.Queue`
 
-**The task:** wrap the queue-plus-workers shape from Threading in
-Practice into a reusable class with `submit()` and `shutdown()`
-methods — the shape `ThreadPoolExecutor` hides behind a nicer API.
+**The task:** one producer thread generates work items; three
+consumer threads process them; shut down cleanly when production is
+done — no consumer left hanging forever waiting for work that will
+never come.
+
+```python
+import queue
+import threading
+
+SENTINEL = object()  # a unique "no more work" marker
+
+def producer(q: queue.Queue, n_items: int):
+    for i in range(n_items):
+        q.put(f"item-{i}")
+    for _ in range(3):  # one sentinel per consumer
+        q.put(SENTINEL)
+
+def consumer(q: queue.Queue, worker_id: int):
+    while True:
+        item = q.get()
+        if item is SENTINEL:
+            break
+        print(f"worker {worker_id} processing {item}")
+        q.task_done()
+
+q = queue.Queue(maxsize=10)  # bounded — see below
+threads = [threading.Thread(target=consumer, args=(q, i)) for i in range(3)]
+for t in threads:
+    t.start()
+
+producer(q, 25)
+
+for t in threads:
+    t.join()
+```
+
+- `queue.Queue` is already thread-safe internally — no manual lock
+  needed around `put`/`get`, unlike the plain-counter scenario in
+  [Threading & the GIL's race condition task](threading-and-the-gil.md#task-reproduce-a-race-condition-then-fix-it).
+- The **sentinel pattern** (a unique marker meaning "stop") is the
+  standard way to shut down a fixed pool of consumers cleanly — each
+  consumer exits when it personally receives a sentinel, so you need
+  exactly one sentinel per consumer, not one total.
+- `maxsize=10` gives the queue **backpressure** — if consumers fall
+  behind, `q.put()` blocks the producer instead of letting the queue
+  grow unboundedly in memory. Try `maxsize=0` (unbounded, the default)
+  vs a small bound with a slow consumer and watch the difference in
+  memory behavior on a real workload.
+- This exact shape — a queue, a fixed pool of workers pulling from it,
+  a shutdown signal — is what the next task generalizes into a
+  reusable class, and what Celery does at a distributed, multi-machine
+  scale.
+
+## Task: A Minimal Worker Pool Class
+
+**The task:** wrap the queue-plus-workers shape above into a reusable
+class with `submit()` and `shutdown()` methods — the shape
+`ThreadPoolExecutor` hides behind a nicer API.
 
 ```python
 import queue
@@ -87,7 +143,7 @@ pool.shutdown()
   the exception on the `Future` instead — a real difference between
   building it yourself and using the standard tool.
 
-## Task 2: Add backpressure with a bounded queue
+## Task: Add Backpressure with a Bounded Queue
 
 **The task:** modify the pool above so a slow set of workers can't let
 memory grow without bound if `submit()` is called faster than tasks
@@ -109,7 +165,61 @@ _queue: queue.Queue = field(default_factory=lambda: queue.Queue(maxsize=50))
   a bounded connection pool in a database client — a recurring pattern
   anywhere producers and consumers can run at different speeds.
 
-## Task 3: From your own worker pool to Celery — what's actually different
+## Task: A Bounded Worker Pool Using `ThreadPoolExecutor`
+
+**The task:** fetch 20 URLs concurrently, but never more than 5 at
+once, and collect results as they finish (not necessarily in the
+order you submitted them) — this time using the standard library tool
+instead of the hand-rolled class above.
+
+```python
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+def fetch(url: str) -> str:
+    # stand-in for a real request — replace with requests.get(url).text
+    time.sleep(0.5)
+    return f"content of {url}"
+
+urls = [f"https://example.com/page/{i}" for i in range(20)]
+
+with ThreadPoolExecutor(max_workers=5) as pool:
+    futures = {pool.submit(fetch, url): url for url in urls}
+    for future in as_completed(futures):
+        url = futures[future]
+        try:
+            result = future.result()
+            print(f"done: {url} -> {len(result)} chars")
+        except Exception as exc:
+            print(f"failed: {url} -> {exc}")
+```
+
+- `ThreadPoolExecutor` is the standard tool for this — don't hand-roll
+  `Thread` objects and a semaphore unless you have a reason to, and
+  having just built the class above, you now know exactly what it's
+  doing underneath.
+- `max_workers=5` bounds concurrency deliberately. For I/O-bound work,
+  this number is usually much higher than your CPU core count, since
+  threads spend nearly all their time *waiting*, not computing — the
+  real ceiling is usually the target server's rate limit or your own
+  memory, not CPU.
+- `as_completed` yields futures as they finish, not in submission
+  order — the right choice when you want to process results as soon
+  as they're ready rather than waiting for a specific one.
+- Wrapping `future.result()` in `try/except` matters: an exception
+  raised inside the worker function is stored on the future and only
+  re-raised when you call `.result()` — a bare loop with no
+  `try/except` will crash on the first failed request rather than
+  reporting it and continuing.
+
+**Extend it yourself:** replace `fetch` with a real `requests.get`
+call, and change `max_workers` to 1, 5, and 50 — time each run. At
+some point past the target server's actual capacity, more workers
+stops helping and starts just producing more failed/rate-limited
+requests. Finding that point by measurement, not guessing, is the
+actual skill.
+
+## From Your Own Worker Pool to Celery
 
 **Answer, no new code — this is the conceptual bridge:**
 

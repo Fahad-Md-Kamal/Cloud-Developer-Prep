@@ -44,20 +44,24 @@
     "url": "backend/python/bit-manipulation-basics/"
   },
   {
-    "title": "Concurrency & AsyncIO",
-    "url": "backend/python/concurrency-and-asyncio/"
+    "title": "Choosing a Concurrency Model",
+    "url": "backend/python/choosing-a-concurrency-model/"
   },
   {
-    "title": "Threading in Practice",
-    "url": "backend/python/threading-in-practice/"
+    "title": "Threading & the GIL",
+    "url": "backend/python/threading-and-the-gil/"
+  },
+  {
+    "title": "AsyncIO Internals",
+    "url": "backend/python/asyncio-internals/"
+  },
+  {
+    "title": "Worker Pools & Backpressure",
+    "url": "backend/python/worker-pools-and-backpressure/"
   },
   {
     "title": "Multiprocessing in Practice",
     "url": "backend/python/multiprocessing-in-practice/"
-  },
-  {
-    "title": "Building Worker Pools From Scratch",
-    "url": "backend/python/building-worker-pools/"
   },
   {
     "title": "Capstone: A Concurrent Data Pipeline",

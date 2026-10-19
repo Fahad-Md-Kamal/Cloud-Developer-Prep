@@ -7,9 +7,9 @@ title: "Multiprocessing in Practice"
 Hands-on tasks for CPU-bound parallelism — where threading can't
 help, because the GIL means only one thread executes Python bytecode
 at a time regardless of thread count. Builds on
-[Threading in Practice](threading-in-practice.md); do these after that
-page, since several concepts (worker pools, queues) carry over with
-process-specific differences.
+[Worker Pools & Backpressure](worker-pools-and-backpressure.md); do
+these after that page, since several concepts (worker pools, queues)
+carry over with process-specific differences.
 
 ## Task 1: Parallelize a CPU-bound task with `multiprocessing.Pool`
 
@@ -141,7 +141,7 @@ with ProcessPoolExecutor(max_workers=4) as pool:
   to the parent, and re-raised when `.result()` is called on that
   specific future — the other 9 tasks are entirely unaffected.
 - This is the same `try/except`-around-`.result()` pattern as
-  [Threading in Practice's Task 2](threading-in-practice.md#task-2-build-a-bounded-worker-pool-for-io-bound-work)
+  [Worker Pools & Backpressure's ThreadPoolExecutor task](worker-pools-and-backpressure.md#task-a-bounded-worker-pool-using-threadpoolexecutor)
   — `ProcessPoolExecutor` and `ThreadPoolExecutor` share the same
   `concurrent.futures` interface deliberately, so code written against
   one mostly transfers to the other once the actual task is CPU-bound

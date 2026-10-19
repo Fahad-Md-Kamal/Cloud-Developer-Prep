@@ -171,7 +171,7 @@ case <-time.After(1 * time.Second):
 - Goroutines are lighter-weight than OS threads, and the runtime
   schedules them across available cores — real parallelism, not just
   concurrency on one thread the way Python's asyncio is (see
-  [Concurrency & AsyncIO](../python/concurrency-and-asyncio.md) for what the GIL
+  [Threading & the GIL](../python/threading-and-the-gil.md) for what the GIL
   specifically restricts in Python).
 - Channels are the idiomatic way goroutines communicate — "don't
   communicate by sharing memory, share memory by communicating" is
@@ -244,7 +244,7 @@ func wordCountSafe(docs []string) map[string]int {
   unsynchronized as a Python `dict` or `int` — "goroutines are
   lightweight" says nothing about whether shared state they touch is
   safe, the same lesson as
-  [Concurrency & AsyncIO's threading pitfalls](../python/concurrency-and-asyncio.md#2-what-kinds-of-problems-do-threaded-programs-face-and-how-do-you-overcome-them)
+  [Threading & the GIL's threading pitfalls](../python/threading-and-the-gil.md#threading-problems-and-how-to-fix-them)
   applied to a different language.
 - `sync.Mutex` is Go's direct equivalent of Python's `threading.Lock`
   — `mu.Lock()`/`mu.Unlock()` (usually paired with `defer mu.Unlock()`

@@ -5,9 +5,9 @@ title: "Capstone: A Concurrent Data Pipeline"
 # Capstone: A Concurrent Data Pipeline
 
 An advanced project tying together
-[Threading in Practice](threading-in-practice.md),
+[Threading & the GIL](threading-and-the-gil.md),
 [Multiprocessing in Practice](multiprocessing-in-practice.md), and
-[Building Worker Pools From Scratch](building-worker-pools.md) into
+[Worker Pools & Backpressure](worker-pools-and-backpressure.md) into
 one realistic system — the kind of architecture question a senior
 interview asks after confirming you know the individual primitives.
 
@@ -33,7 +33,7 @@ each stage, not one tool for everything.
 
 ## Why one tool doesn't fit all three stages
 
-- The fetch stage is I/O-bound — [Threading in Practice](threading-in-practice.md)
+- The fetch stage is I/O-bound — [Threading & the GIL](threading-and-the-gil.md)
   applies: a `ThreadPoolExecutor` handles many concurrent waits
   cheaply.
 - The transform stage is CPU-bound — threading buys nothing here
@@ -44,7 +44,7 @@ each stage, not one tool for everything.
   the same file/connection concurrently is a correctness bug, not a
   performance question. One dedicated writer, fed by a queue, is the
   standard fix — the same queue-plus-worker shape as
-  [Building Worker Pools From Scratch](building-worker-pools.md),
+  [Worker Pools & Backpressure](worker-pools-and-backpressure.md),
   just with exactly one worker by design.
 
 ## Suggested architecture
@@ -120,12 +120,12 @@ each stage, not one tool for everything.
   tests whether you understand backpressure: an unbounded
   `fetch_queue` would grow without limit; a bounded one makes the
   fetch stage block once it's full, the same concept as
-  [Building Worker Pools' Task 2](building-worker-pools.md#task-2-add-backpressure-with-a-bounded-queue).
+  [Worker Pools & Backpressure's backpressure task](worker-pools-and-backpressure.md#task-add-backpressure-with-a-bounded-queue).
 - "How would you scale the transform stage across multiple machines,
   not just multiple cores on one?" — tests whether you can name the
   actual next step: this is exactly the local-worker-pool-to-Celery
   jump covered in
-  [Building Worker Pools' Task 3](building-worker-pools.md#task-3-from-your-own-worker-pool-to-celery-whats-actually-different) —
+  [Worker Pools & Backpressure's Celery comparison](worker-pools-and-backpressure.md#from-your-own-worker-pool-to-celery) —
   a real broker instead of an in-process queue, workers on separate
   machines instead of local threads/processes.
 - "Your writer thread is now the bottleneck — what do you do?" — tests

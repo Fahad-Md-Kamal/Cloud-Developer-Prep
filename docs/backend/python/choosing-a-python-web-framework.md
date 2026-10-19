@@ -39,7 +39,7 @@ see [Django & DRF](django-orm.md) and
     I/O), rather than having async support bolted onto a framework
     originally designed as synchronous. FastAPI is async-first;
     Django's async support arrived later and is still partial in
-    places — see [Concurrency & AsyncIO](concurrency-and-asyncio.md)
+    places — see [AsyncIO Internals](asyncio-internals.md)
     for what async actually buys you and when it doesn't matter.
 
 !!! info "Micro-framework"

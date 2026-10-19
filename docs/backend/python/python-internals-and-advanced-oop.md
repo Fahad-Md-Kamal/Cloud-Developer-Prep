@@ -362,7 +362,7 @@ gc.freeze()          # treat everything currently alive as permanent, stop re-sc
   re-scanning data that was never going away.
 - **Interview trap to avoid:** the GIL and the GC are two unrelated
   locks on two unrelated things — the GIL protects bytecode execution
-  ([Concurrency & AsyncIO](concurrency-and-asyncio.md)); the cyclic GC
+  ([Threading & the GIL](threading-and-the-gil.md)); the cyclic GC
   is purely about memory, and runs independently of it.
 
 ### Weak references: holding a reference that doesn't count
