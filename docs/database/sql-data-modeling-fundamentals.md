@@ -11,6 +11,61 @@ replication, and sharding for a schema that's already well-designed.
 Flagged from a Senior Python Developer JD's "Proficient in SQL
 (data modeling and structuring relational databases)" requirement.
 
+## Choosing a Relational Database: PostgreSQL vs. MySQL vs. Oracle
+
+Everything below this section is relational-database theory that
+applies regardless of which engine runs it — but "which engine" is
+itself a real question, usually decided once per project rather than
+revisited, and worth being able to answer directly.
+
+`PostgreSQL`
+:   The richest feature set among open-source databases — real JSONB
+    (indexed JSON, not just a text blob), window functions, CTEs,
+    full-text search, and genuine extensibility (PostGIS for
+    geospatial data, `pgvector` for AI embeddings, custom types). The
+    [B-tree/MVCC/WAL fundamentals](postgresql-for-scale.md#how-postgres-actually-works)
+    and indexing/replication decisions covered in
+    [PostgreSQL for Scale](postgresql-for-scale.md) are Postgres's own.
+    Best fit when the queries themselves are genuinely complex, or the
+    schema needs to evolve in ways a rigid relational model resists.
+
+`MySQL`
+:   Simpler to set up and run for straightforward read/write
+    workloads, backed by a massive hosting and tooling ecosystem —
+    every cheap host, every tutorial, every legacy LAMP-stack app
+    assumes it. Historically faster for simple OLTP queries, though
+    that gap has narrowed significantly in recent versions. Best fit
+    when the workload is genuinely simple and the priority is "just
+    works, cheap to host, huge talent pool to hire from."
+
+`Oracle Database`
+:   Built for large enterprise workloads with real money behind
+    reliability requirements — Real Application Clusters (RAC) for
+    true multi-master high availability, Data Guard for disaster
+    recovery, and a query optimizer tuned over decades for huge,
+    complex workloads. Advanced security (fine-grained auditing,
+    row-level security, transparent encryption) is more battle-tested
+    than the open-source alternatives, which matters directly for
+    regulated industries (banking, telecom, healthcare) under
+    compliance pressure. The real trade-off: expensive licensing, and
+    genuine vendor lock-in once a system is built on Oracle-specific
+    features (PL/SQL packages, RAC-specific tuning).
+
+| | Best for | Real cost |
+|---|---|---|
+| PostgreSQL | Complex queries, evolving schemas, modern app stacks | Free, but you run and tune it yourself |
+| MySQL | Simple, high-volume reads/writes, fast time-to-first-deploy | Free, but fewer advanced features out of the box |
+| Oracle Database | Mission-critical enterprise systems, strict compliance | Licensing cost and vendor lock-in |
+
+!!! success "The exam/interview-style signal"
+
+    "Need geospatial queries, full-text search, or AI/vector search in
+    the same database as the rest of the schema" → PostgreSQL. "Cheap,
+    simple, high-traffic web app, team already knows it" → MySQL.
+    "Regulated industry, needs a vendor support contract and
+    enterprise-grade clustering" → Oracle — and expect licensing cost
+    to be part of the actual conversation, not an afterthought.
+
 ## 1. "Given a flat, spreadsheet-style requirement, walk through normalizing it into proper tables."
 
 ```sql

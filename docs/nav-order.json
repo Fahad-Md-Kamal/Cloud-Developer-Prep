@@ -360,6 +360,10 @@
     "url": "cloud-devops/devops-principles-and-delivery/"
   },
   {
+    "title": "Linux Fundamentals for DevOps",
+    "url": "cloud-devops/linux-fundamentals-for-devops/"
+  },
+  {
     "title": "AWS Accounts & IAM",
     "url": "cloud-devops/aws-accounts-and-iam/"
   },
@@ -448,6 +452,10 @@
     "url": "cloud-devops/container-orchestration-ecs-eks/"
   },
   {
+    "title": "Helm & GitOps",
+    "url": "cloud-devops/helm-and-gitops/"
+  },
+  {
     "title": "Serverless & Managed Compute",
     "url": "cloud-devops/serverless-and-managed-compute/"
   },
@@ -498,6 +506,10 @@
   {
     "title": "Jenkins: Security, Hardening & Production Patterns",
     "url": "cloud-devops/jenkins-security-hardening-and-production-patterns/"
+  },
+  {
+    "title": "GitLab CI/CD",
+    "url": "cloud-devops/gitlab-ci/"
   },
   {
     "title": "CI/CD & Progressive Delivery",

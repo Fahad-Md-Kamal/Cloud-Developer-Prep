@@ -243,6 +243,8 @@ mistakes and fixes kept in as teaching material.
 
 - [DevOps Principles & Delivery](cloud-devops/devops-principles-and-delivery.md) —
   The Three Ways, DORA metrics, SLOs/error budgets, deployment strategies
+- [Linux Fundamentals for DevOps](cloud-devops/linux-fundamentals-for-devops.md) —
+  processes/signals, systemd, disk/filesystem and networking troubleshooting
 - [AWS Accounts & IAM](cloud-devops/aws-accounts-and-iam.md)
 - **AWS Security & Governance**
     - [Encryption, Secrets & Identity Federation](cloud-devops/kms-secrets-and-cognito.md)
@@ -271,6 +273,7 @@ mistakes and fixes kept in as teaching material.
 - **Containers**
     - [Docker: Production Container Images](cloud-devops/docker-production-images.md)
     - [Container Orchestration: ECS & EKS](cloud-devops/container-orchestration-ecs-eks.md)
+    - [Helm & GitOps](cloud-devops/helm-and-gitops.md)
 - [Serverless & Managed Compute](cloud-devops/serverless-and-managed-compute.md) — Lambda limits, Elastic Beanstalk, AWS Batch, Step Functions
 - [Messaging & Event-Driven Services](cloud-devops/messaging-and-event-driven-services.md) — SQS, SNS, EventBridge, Kinesis, Amazon MQ
 - [Data Analytics: Glue, Lake Formation & EMR](cloud-devops/data-analytics-glue-lake-formation-emr.md)
@@ -286,6 +289,7 @@ mistakes and fixes kept in as teaching material.
     - [Jenkins: Setup & Pipeline Configuration](cloud-devops/jenkins-setup-and-pipeline-configuration.md)
     - [Jenkins: Production Deployment Pipelines](cloud-devops/jenkins-production-deployment-pipelines.md)
     - [Jenkins: Security, Hardening & Production Patterns](cloud-devops/jenkins-security-hardening-and-production-patterns.md)
+    - [GitLab CI/CD](cloud-devops/gitlab-ci.md)
     - [CI/CD & Progressive Delivery](cloud-devops/cicd-and-progressive-delivery.md) — includes diagnosing a green pipeline with a broken production deploy
 - **Ansible (Configuration Management)**
     - [Ansible Fundamentals](cloud-devops/ansible-fundamentals.md)
