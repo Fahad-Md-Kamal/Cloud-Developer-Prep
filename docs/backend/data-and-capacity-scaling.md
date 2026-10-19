@@ -23,30 +23,46 @@ ring = ConsistentHashRing(nodes)
 shard = ring.get_node(tenant_id)
 ```
 
-**Answer:** `hash(key) % N` remaps nearly *every* key the moment `N`
-changes — adding one node to a ten-node cluster to relieve load ends up
-moving roughly 90% of the data, the opposite of what you wanted.
-Consistent hashing places both nodes and keys on a ring, so adding or
-removing a node only reassigns the keys in its immediate neighborhood —
-a small, bounded fraction of the total. This is also what keeps a
-shard-per-tenant scheme operationally viable: a new tenant doesn't
-trigger a cluster-wide reshuffle.
+**Answer:** `hash(key) % N` breaks the moment `N` changes — adding one
+node to a ten-node cluster to relieve load ends up moving roughly 90%
+of the data, the opposite of what you wanted.
+
+- **Why it breaks:** the `% N` in the formula means the node count is
+  baked directly into every key's assignment — change `N` by even one,
+  and almost every key's result changes too.
+- **The fix — consistent hashing:** place both nodes and keys on a
+  single ring (a circular range of hash values). Adding or removing a
+  node only reassigns the keys sitting in that node's own small slice
+  of the ring, not the whole dataset.
+- **Why this matters for a shard-per-tenant setup specifically:** it's
+  what makes the scheme operationally viable at all — a new tenant
+  joining doesn't trigger a cluster-wide reshuffle of everyone else's
+  data.
 
 ## 2. Multi-Layer Caching
 
 **"You have an edge cache, a regional cache, and the origin database.
 Why different TTLs at each layer, not just one cache?"**
 
-**Answer:** Each layer trades staleness for load reduction at a
-different point in the request path. Edge caches (CDN-level) use the
-shortest TTLs for content that changes often but is cheap to refetch;
-regional caches sit closer to compute and can afford slightly longer
-TTLs; the origin database is the source of truth and should see the
-least traffic of all. Tiering means a cache miss at the edge doesn't
-necessarily hit the database — it hits the regional cache first.
-Getting this wrong in either direction shows up immediately: TTLs too
-short and the origin gets hammered; too long and users see stale data
-with no clear invalidation path.
+**Answer:** Each layer is trading staleness for load reduction at a
+different point along the request's path — a cache miss closer to the
+user shouldn't mean a trip all the way back to the database.
+
+- **Edge cache (CDN-level)** — shortest TTL. For content that changes
+  often but is cheap to refetch, sitting as close to the user as
+  possible.
+- **Regional cache** — sits closer to your own compute, and can afford
+  a somewhat longer TTL than the edge.
+- **Origin database** — the actual source of truth, and the layer that
+  should see the *least* traffic of all three, since the two caches
+  above exist specifically to shield it.
+- **The point of tiering:** a miss at the edge cache hits the regional
+  cache next, not the database directly — each layer is a buffer for
+  the one behind it, not a single flat cache in front of everything.
+- **Getting the TTLs wrong shows up immediately, in either direction:**
+  too short, and the origin gets hammered with traffic the cache was
+  supposed to absorb; too long, and users see stale data with no clear
+  way for it to ever get corrected.
 
 ## 3. Queue-Based Load Leveling
 
@@ -57,16 +73,25 @@ taking down the processing tier?"**
 await queue.enqueue("document-123")  # accepted immediately, processed at a steady rate
 ```
 
-**Answer:** The queue absorbs the burst by decoupling *acceptance* of
-work from *processing* of work — the producer-facing side accepts the
-spike instantly (a write to a queue is cheap), while a fixed pool of
-workers drains it at a steady, sustainable rate instead of the
-processing tier trying to instantaneously scale 10x. The failure mode
-to design for explicitly is the queue itself backing up: a max queue
-size plus a dead-letter queue for anything that can't be processed
-after N attempts, so a persistent backlog degrades visibly
-(rejected/delayed work, alertable) instead of growing unbounded until
-whatever's serving the queue runs out of memory.
+**Answer:** A queue absorbs a burst by splitting *accepting* work from
+*doing* work, so only the cheap half of that pair has to handle the
+spike directly.
+
+- **Accepting work is cheap** — a write to a queue — so the
+  producer-facing side can absorb the full 10x spike instantly, with
+  no slowdown.
+- **Doing the work stays at a steady pace** — a fixed pool of workers
+  drains the queue at a sustainable rate, instead of the processing
+  tier being forced to instantly scale up 10x to match the spike.
+- **The failure mode to design for on purpose: the queue itself backing
+  up.** Two concrete guards: a max queue size (so it can't grow forever
+  and exhaust memory), and a dead-letter queue for anything that still
+  fails after N attempts (so a stuck item doesn't block everything
+  behind it).
+- **The actual goal of both guards:** a persistent backlog should
+  degrade *visibly* — delayed or rejected work you can alert on — not
+  grow silently until whatever's serving the queue runs out of memory
+  and crashes outright.
 
 | Pros | Cons / Trade-offs |
 |---|---|

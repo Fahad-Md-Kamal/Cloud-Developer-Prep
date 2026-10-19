@@ -12,6 +12,18 @@ in [Circuit Breakers, Retries & Bulkheads](circuit-breakers-retries-and-bulkhead
 
 ## 1. Circuit Breakers
 
+!!! example "Real-world analogy: the breaker in your electrical panel"
+    - A real circuit breaker protects your house's wiring: if a circuit
+      draws too much current, the breaker trips and cuts power to that
+      circuit, rather than letting the wiring overheat.
+    - A software circuit breaker does the same job for a failing
+      dependency: once it's clearly unhealthy, stop sending it calls,
+      rather than letting every request pile up waiting on something
+      that's already broken.
+    - A real breaker doesn't stay off forever, either — eventually you
+      flip it back on to see if the problem's gone. That's the
+      "half-open" state below.
+
 **"Design a circuit breaker for a flaky downstream dependency. Walk
 through its states."**
 
@@ -41,27 +53,36 @@ class CircuitBreaker:
             return result
 ```
 
-**Answer:** Three states. **Closed** — calls go through normally,
-failures are counted. **Open** — once failures cross the threshold,
-calls fail fast without even attempting the downstream call, for
-`recovery_timeout` seconds; this is what protects the caller's own
-thread/connection pool from piling up waiting on a dependency that's
-already down. **Half-open** — after the timeout, exactly one probe call
-is let through; success resets to closed, failure reopens the breaker.
-The point isn't retrying smarter — it's refusing to call at all once a
-dependency has proven itself unhealthy, so one failing dependency can't
-exhaust the resources every *other* request also needs.
+**Answer:** Three states, and the point of all three together is:
+refuse to call a dependency at all once it's proven itself unhealthy,
+so one failing dependency can't exhaust the resources every *other*
+request also needs — this isn't about retrying smarter, it's about
+stopping.
 
-**Likely follow-up — "how is a bulkhead different from this?"** A
-circuit breaker decides *whether* to call a dependency at all; a
-bulkhead limits *how much concurrency* any one dependency can consume
-regardless of whether it's healthy — a fixed-size worker pool or
-semaphore per dependency, so a slow (but not yet failing) call to
-service A can't starve out the threads service B's calls need. They
-compose: the bulkhead limits blast radius while the breaker is still
-closed, the breaker stops the bleeding once it's clearly not helping.
-See [Circuit Breakers, Retries & Bulkheads §3](circuit-breakers-retries-and-bulkheads.md#3-what-is-the-bulkhead-pattern-and-why-do-you-need-it-alongside-a-circuit-breaker)
-for the full bulkhead treatment.
+- **Closed** — normal operation. Calls go through, and failures are
+  counted.
+- **Open** — once failures cross the threshold, calls fail
+  *immediately*, without even attempting the downstream call, for
+  `recovery_timeout` seconds. This is what actually protects the
+  caller: its own threads/connections never pile up waiting on a
+  dependency that's already down.
+- **Half-open** — once the timeout passes, exactly *one* probe call is
+  let through to test the water. Success resets the breaker to closed;
+  failure sends it straight back to open.
+
+**Likely follow-up — "how is a bulkhead different from this?"**
+
+- A circuit breaker decides **whether to call a dependency at all**.
+- A bulkhead limits **how much concurrency any one dependency can
+  consume**, whether or not it's currently healthy — a fixed-size
+  worker pool or semaphore per dependency, so a slow (but not yet
+  failing) call to service A can't starve out the threads service B's
+  calls need.
+- They work together: the bulkhead limits the blast radius while the
+  breaker is still closed; the breaker stops the bleeding entirely once
+  it's clear the dependency isn't helping anymore. See
+  [Circuit Breakers, Retries & Bulkheads §3](circuit-breakers-retries-and-bulkheads.md#3-what-is-the-bulkhead-pattern-and-why-do-you-need-it-alongside-a-circuit-breaker)
+  for the full bulkhead treatment.
 
 ## 2. Retries Without Making the Outage Worse
 
@@ -80,15 +101,22 @@ def retry_with_backoff(func, attempts=3, base_delay=0.1):
             time.sleep(delay)  # exponential backoff + jitter
 ```
 
-**Answer:** A fixed retry delay means every client that failed at the
-same moment retries at the same moment again — a thundering herd that
-can turn a brief blip into a sustained outage, since the retry wave
-itself becomes the load spiking the still-recovering service.
-Exponential backoff spreads retries out over time; adding jitter
-(randomizing the delay) spreads them across clients too, so they don't
-re-synchronize on every attempt. Retries should also be
-circuit-breaker-aware — retrying against a breaker that's already open
-just wastes the wait; fail fast instead.
+**Answer:** A fixed delay means every client that failed at the same
+moment also retries at the same moment — a **thundering herd**. That
+retry wave becomes a fresh spike of load hitting a service that's still
+trying to recover, and can turn a brief blip into a sustained outage.
+
+- **Exponential backoff** — each retry waits longer than the last
+  (`base_delay * 2^attempt`), spreading retries out over time instead
+  of firing them all at once.
+- **Jitter** — add a small random amount to each delay, so different
+  clients don't stay in lockstep with each other on every retry
+  (without jitter, "wait twice as long" still has every client waiting
+  the *same* "twice as long," and they all pile up together again).
+- **Circuit-breaker-aware retries** — don't retry against a breaker
+  that's already open. The breaker has already decided the dependency
+  is down; retrying anyway just wastes the wait instead of failing
+  fast.
 
 ## 3. Graceful Degradation
 
@@ -102,14 +130,18 @@ result = graceful_degradation(
 )
 ```
 
-**Answer:** Define the degraded experience explicitly as a tier, not as
-an afterthought — fresh data, then cached/last-known-good data, then a
-static default, each one a real, previously-decided fallback rather
-than an exception handler improvised at 2am. The point is that a
-dependency failing should shrink the *quality* of the response, not the
-*availability* of the whole page. Whichever tier serves the response,
-log that a degradation happened — customers not noticing is the goal,
-engineers not noticing is a problem.
+**Answer:** A dependency failing should shrink the *quality* of the
+response, not the *availability* of the whole page.
+
+- Define the degraded experience as explicit **tiers**, decided ahead
+  of time — fresh data, then cached/last-known-good data, then a
+  static default — not an exception handler improvised during an
+  incident at 2am.
+- Each tier is a real, previously-tested fallback, not a guess made
+  under pressure while something is already on fire.
+- Whichever tier actually served the response, **log that a
+  degradation happened**. The goal is customers not noticing; engineers
+  not noticing is the actual problem.
 
 | Pros | Cons / Trade-offs |
 |---|---|

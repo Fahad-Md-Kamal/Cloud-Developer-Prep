@@ -27,14 +27,21 @@ ROUTES = {
 }
 ```
 
-**Answer:** A load balancer operates at the connection/request level,
-distributing traffic across identical replicas of *one* service — it
-doesn't inspect what the request means. An API gateway is a single
-entry point that does L7-aware work: authenticate the caller, apply
-rate limits, route by path/version to the *right* service, translate
-protocols (REST in, gRPC to a backend), and sometimes aggregate several
-backend calls into one response. Every cross-cutting concern moves out
-of individual services and into one place.
+**Answer:** A load balancer only decides *which identical replica*
+handles a request — it never looks at what the request actually is. A
+gateway does, and acts on it.
+
+- **A load balancer** operates at the connection/request level,
+  spreading traffic across copies of *one* service, with no
+  understanding of what's inside the request.
+- **A gateway** is a single entry point that reads the request itself
+  and does real work with it: authenticate the caller, apply rate
+  limits, route by path or version to the *correct* service, translate
+  protocols (REST coming in, gRPC going to a backend), and sometimes
+  combine several backend calls into one response.
+- The underlying shift: cross-cutting concerns (auth, rate limiting,
+  logging) move out of every individual service and into one shared
+  place.
 
 | Pros | Cons / Trade-offs |
 |---|---|
@@ -58,20 +65,31 @@ async def gateway_auth_middleware(request, call_next):
     return await call_next(request)
 ```
 
-**Answer:** Validate the token once at the gateway, then pass a trusted
-identity (a header, or a re-signed internal token) downstream — services
-never see raw credentials and never re-implement JWT validation. The
-trade-off is that the gateway becomes the security boundary: if it's
-bypassed (a service reachable directly on the internal network) or
-compromised, every downstream service is exposed. Most real setups pair
-gateway-level auth with a lighter internal check (mTLS or a shared
-secret) so services don't blindly trust *any* traffic that reaches them.
+**Answer:** Validate the token once, at the gateway — not again in
+every service behind it.
 
-**Likely follow-up — "should the gateway own authorization too, not just authentication?"**
-Usually not entirely. Coarse authorization (is this token valid, is this
-scope present) fits at the gateway; fine-grained authorization ("can
-*this* user edit *this* specific order") needs domain data the gateway
-doesn't have, so it stays in the owning service.
+- The gateway checks the token, then passes a trusted identity
+  downstream (a header, or a re-signed internal token). Services never
+  see the raw credentials, and never have to implement JWT validation
+  themselves.
+- **The trade-off:** the gateway is now the security boundary. If it's
+  bypassed (a service that's also reachable directly, without going
+  through the gateway) or compromised, every service behind it is
+  exposed.
+- **The usual mitigation:** pair gateway-level auth with a lighter
+  internal check too (mTLS, or a shared secret) — so a service doesn't
+  blindly trust *any* traffic that happens to reach it, only traffic
+  that's actually come through the gateway.
+
+**Likely follow-up — "should the gateway own authorization too, not
+just authentication?"**
+
+- Usually not entirely.
+- **Coarse authorization** — "is this token valid, does it carry the
+  right scope" — fits fine at the gateway.
+- **Fine-grained authorization** — "can *this* user edit *this*
+  specific order" — needs domain data the gateway doesn't have, so it
+  has to stay in the service that owns that data.
 
 ## 3. "What's request aggregation, and when do you actually need it?"
 
@@ -85,14 +103,17 @@ async def get_order_summary(order_id: str):
     return {"order": order, "customer": customer, "in_stock": inventory.available}
 ```
 
-**Answer:** A mobile or web client that needs data from three services
-to render one screen shouldn't have to make three round trips (each
-with its own latency and failure mode) — a gateway or
-backend-for-frontend fans the calls out concurrently and merges the
-results into one response. The cost is that this composition logic is
-now business logic living in the gateway layer, which can turn a "dumb
-router" into something that needs its own testing, versioning, and
-on-call ownership.
+**Answer:** A client that needs data from three services to render one
+screen shouldn't have to make three separate round trips — each with
+its own latency and its own way to fail.
+
+- A gateway (or a dedicated backend-for-frontend) fans the three calls
+  out *concurrently* and merges the results into one response, so the
+  client makes one request instead of three.
+- **The cost:** this merging logic is now real business logic living
+  in the gateway layer — which can quietly turn a "dumb router" into
+  something that needs its own tests, its own versioning, and its own
+  on-call ownership.
 
 ---
 
