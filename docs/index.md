@@ -118,6 +118,8 @@ Django/FastAPI.
     - [Capstone: A Concurrent Data Pipeline](backend/python/concurrent-data-pipeline-capstone.md)
 - [Memory & Caching](backend/python/memory-and-caching.md)
 - [Data Structures & Their Memory Model](backend/python/data-structures-and-memory.md)
+- [Profiling & Optimization](backend/python/profiling-and-optimization.md) —
+  cProfile/py-spy, tracemalloc, algorithmic complexity, bounding async concurrency
 - [Practical Patterns](backend/python/practical-patterns.md)
 - [Python Internals & Advanced OOP](backend/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
 - [Choosing a Python Web Framework](backend/python/choosing-a-python-web-framework.md) —
@@ -194,17 +196,14 @@ sits underneath.
     - [Authorization Patterns](architecture/authorization-patterns.md)
     - [Security Hardening](architecture/security-hardening.md)
     - [Threat Detection & Monitoring](architecture/threat-detection-and-monitoring.md)
-- [Performance Profiling, Optimization, and Caching](architecture/chapter-5.md)
 - [Version Control & Git Workflows](architecture/version-control-and-git-workflows.md)
 - **System Design Interviews**
     - [System Design Methodology](architecture/system-design-methodology.md)
     - [Architecture Diagramming & Communication](architecture/architecture-diagramming-and-communication.md) — includes the C4 model
     - [Common System Design Patterns](architecture/system-design-patterns.md)
     - [Scalability Case Studies](architecture/scalability-case-studies.md) — includes CAP and PACELC
-- [Event-Driven Architectures and Async Workflows](architecture/chapter-27.md)
-- [Building for Resilience](architecture/chapter-28.md)
-- [Leadership for Engineers](architecture/chapter-29.md)
-- [Crafting the Staff Engineer Mindset](architecture/chapter-30.md)
+- [Event-Driven Architecture: CQRS & the Saga Pattern](architecture/event-driven-architecture.md) —
+  splitting reads from writes, and compensating transactions across services
 
 ### Database
 
@@ -404,6 +403,10 @@ dives, and a final countdown review. Comes last: it's what you do right
 before the interview, after the technical material above.
 
 - [Behavioral Interview Prep](interview-prep/chapter-31.md)
+- [Leadership for Engineers](interview-prep/leadership-mentoring-and-team-scaling.md) —
+  mentoring, reviews, team scaling (parked outline, not yet fleshed out)
+- [Staff Engineer Mindset](interview-prep/staff-engineer-mindset.md) —
+  strategy, influence without authority, vision (parked outline, not yet fleshed out)
 - [Interviewing in the AI Era](interview-prep/interviewing-in-the-ai-era.md)
 - [Technical Interview Deep Dives](interview-prep/chapter-32.md)
 - [Mock Projects](interview-prep/chapter-33.md)

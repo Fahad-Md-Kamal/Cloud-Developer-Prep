@@ -79,7 +79,7 @@ page is the interview-framing layer, not a re-derivation.
   [Messaging: Kafka, Redis & AWS](../backend/messaging-kafka-redis-and-aws.md);
   for the patterns built on top of them (sagas), see
   [Inter-Service Communication](../backend/inter-service-communication.md)
-  and [Chapter 27: Event-Driven Architectures](chapter-27.md).
+  and [Event-Driven Architecture: CQRS & the Saga Pattern](event-driven-architecture.md).
 
 ## 5. "When does a CDN or edge computing actually matter for a design?"
 

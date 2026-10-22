@@ -76,6 +76,10 @@
     "url": "backend/python/data-structures-and-memory/"
   },
   {
+    "title": "Profiling & Optimization",
+    "url": "backend/python/profiling-and-optimization/"
+  },
+  {
     "title": "Practical Patterns",
     "url": "backend/python/practical-patterns/"
   },
@@ -256,10 +260,6 @@
     "url": "architecture/threat-detection-and-monitoring/"
   },
   {
-    "title": "Performance Profiling & Caching",
-    "url": "architecture/chapter-5/"
-  },
-  {
     "title": "Version Control & Git Workflows",
     "url": "architecture/version-control-and-git-workflows/"
   },
@@ -280,20 +280,8 @@
     "url": "architecture/scalability-case-studies/"
   },
   {
-    "title": "Event-Driven Architectures",
-    "url": "architecture/chapter-27/"
-  },
-  {
-    "title": "Building for Resilience",
-    "url": "architecture/chapter-28/"
-  },
-  {
-    "title": "Leadership for Engineers",
-    "url": "architecture/chapter-29/"
-  },
-  {
-    "title": "Staff Engineer Mindset",
-    "url": "architecture/chapter-30/"
+    "title": "Event-Driven Architecture: CQRS & the Saga Pattern",
+    "url": "architecture/event-driven-architecture/"
   },
   {
     "title": "Database Types: The Decision Framework",
@@ -714,6 +702,14 @@
   {
     "title": "Behavioral Interview Prep",
     "url": "interview-prep/chapter-31/"
+  },
+  {
+    "title": "Leadership for Engineers",
+    "url": "interview-prep/leadership-mentoring-and-team-scaling/"
+  },
+  {
+    "title": "Staff Engineer Mindset",
+    "url": "interview-prep/staff-engineer-mindset/"
   },
   {
     "title": "Interviewing in the AI Era",

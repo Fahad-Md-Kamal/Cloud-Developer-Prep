@@ -1,8 +1,8 @@
 ---
-title: "Chapter 30: Crafting the Staff Engineer Mindset \u2014 Strategy, Ownership, Vision"
+title: "Staff Engineer Mindset: Strategy, Ownership & Vision"
 ---
 
-# Chapter 30: Crafting the Staff Engineer Mindset — Strategy, Ownership, Vision
+# Staff Engineer Mindset: Strategy, Ownership & Vision
 
 Develop the strategic thinking and leadership mindset required for staff-level engineering roles. Learn to influence without authority, drive technical strategy, and create lasting impact.
 

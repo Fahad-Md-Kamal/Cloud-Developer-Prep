@@ -1,8 +1,8 @@
 ---
-title: "Chapter 29: Leadership for Engineers \u2014 Mentoring, Reviews, and Team Scaling"
+title: "Leadership for Engineers: Mentoring, Reviews & Team Scaling"
 ---
 
-# Chapter 29: Leadership for Engineers — Mentoring, Reviews, and Team Scaling
+# Leadership for Engineers: Mentoring, Reviews & Team Scaling
 
 Develop technical leadership skills essential for senior and staff engineer roles. Learn to mentor team members, conduct effective reviews, and scale engineering teams successfully.
 
