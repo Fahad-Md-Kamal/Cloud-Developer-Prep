@@ -195,7 +195,11 @@ fails outright, not gracefully. `tiktoken` gives exact counts for
 OpenAI's tokenizer; other providers don't expose an equivalent public
 tokenizer, so token counts for Claude or Gemini are estimates (roughly
 4 characters per token as a rule of thumb) unless the provider exposes
-a counting endpoint. In practice: count before sending, truncate or
+a counting endpoint. A token is a subword unit, not a word — see
+[How LLMs Actually Work §2](how-llms-actually-work.md#2-what-is-a-token-really-and-why-doesnt-token-count-match-word-count)
+for why that 4-characters-per-token rule is only a rough average, and
+why the same sentence can cost noticeably more tokens in one language
+than another. In practice: count before sending, truncate or
 summarize the least-important context first when over budget (not a
 blind tail-truncation that might cut off the actual question), and
 budget tokens across system prompt + conversation history + user input

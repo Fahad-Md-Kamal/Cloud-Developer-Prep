@@ -35,6 +35,24 @@ before diving into coordination topologies in
 - A coding agent: read a file → decide what's wrong → run a build →
   observe the error → fix it → repeat until the build passes.
 
+**Likely follow-up — "is the model actually *deciding* to call a tool, or
+just predicting text?"**
+
+- Just predicting text — there's no separate decision-making step
+  bolted onto the model. Tool-calling uses the exact same
+  next-token-prediction mechanism as generating a sentence; the model
+  has simply been fine-tuned to recognize when a structured,
+  schema-matching output is the most probable thing to generate next,
+  given the current context and the tools it's been told are available.
+- That's worth knowing because it explains real failure modes: a vague
+  or overlapping tool description confuses the pattern match the same
+  way an ambiguous prompt confuses any other generation, and nothing
+  inside generation itself checks "does this tool actually exist"
+  before those tokens come out — that check happens in the calling
+  code, after the fact.
+- See [How LLMs Actually Work §6](how-llms-actually-work.md#6-when-an-agent-decides-to-call-a-tool-is-it-actually-reasoning-about-that-decision)
+  for the full mechanism.
+
 ## 2. "Why split into multiple agents instead of one?"
 
 **Answer — reasons to split:**

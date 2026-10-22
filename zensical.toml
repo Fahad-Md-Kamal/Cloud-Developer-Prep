@@ -215,6 +215,7 @@ nav = [
   ] },
   { "AI & LLM" = [
       { "AGI & ASI: The Intelligence Spectrum" = "ai-llm/agi-and-asi.md" },
+      { "How LLMs Actually Work: Tokens, Attention & Generation" = "ai-llm/how-llms-actually-work.md" },
       { "LLM APIs & Gateway" = [
           { "LLM APIs & Providers" = "ai-llm/llm-apis-and-providers.md" },
           { "LLM Gateway & Multi-Provider Integration" = "ai-llm/llm-gateway-multi-provider.md" },

@@ -218,6 +218,18 @@ themselves no longer fit affordably in memory. This mirrors an ordinary
 database indexing decision: a full scan is fine on a small table, and
 you reach for a more complex index only once scale demands it.
 
+**What HNSW is actually doing, mechanically:** it builds a multi-layer
+graph where each vector is a node connected to its approximate nearest
+neighbors — the top layer is sparse with long-range links (for quickly
+jumping to roughly the right neighborhood of the whole space), and each
+layer below is progressively denser with shorter-range links (for
+refining within that neighborhood). A search starts at the sparse top
+layer, greedily hops toward whichever neighbor is closest to the query,
+then drops down a layer and repeats with finer-grained links — similar
+in spirit to a skip list, trading a small, bounded chance of missing the
+true nearest neighbor (hence "approximate") for avoiding a full scan of
+every vector in the database.
+
 | Pros | Cons / Trade-offs |
 |---|---|
 | Managed services (Pinecone) remove index tuning and scaling ops entirely | Managed services cost more per vector at volume and add a hard external dependency |

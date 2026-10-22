@@ -308,6 +308,9 @@ mistakes and fixes kept in as teaching material.
 
 - [AGI & ASI: The Intelligence Spectrum](ai-llm/agi-and-asi.md) — narrow
   AI vs. AGI vs. ASI, how we'd measure AGI, and the alignment problem
+- [How LLMs Actually Work: Tokens, Attention & Generation](ai-llm/how-llms-actually-work.md) —
+  tokenization, self-attention, autoregressive sampling, why context
+  windows are a hard limit
 
 **LLM APIs & Gateway**
 

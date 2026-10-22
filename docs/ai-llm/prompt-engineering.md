@@ -54,7 +54,10 @@ Sentiment:"""
   tokens for a shrinking accuracy gain.
 - Order and balance matter more than raw count: models show a
   measurable recency/primacy bias (examples near the start and end of
-  the prompt influence output more than ones buried in the middle).
+  the prompt influence output more than ones buried in the middle) —
+  the same position-dependent attention behavior behind "lost in the
+  middle," explained at the mechanism level in
+  [How LLMs Actually Work §3](how-llms-actually-work.md#3-what-is-self-attention-and-why-is-it-the-mechanism-that-made-transformers-work).
 - An unbalanced example set (four positive examples, one negative)
   biases the model toward the majority class regardless of the actual
   input.

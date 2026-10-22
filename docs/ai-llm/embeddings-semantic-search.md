@@ -28,6 +28,29 @@ running" and "A canine is sprinting" produce embeddings close to each
 other despite sharing almost no words in common — the model captured
 meaning, not just surface text.
 
+**How that training actually happens:**
+
+- The model is built on the same transformer/self-attention machinery
+  covered in
+  [How LLMs Actually Work](how-llms-actually-work.md#3-what-is-self-attention-and-why-is-it-the-mechanism-that-made-transformers-work),
+  but trained with a different objective — it never learns to *generate*
+  text at all.
+- Training uses **contrastive learning**: the model is shown pairs of
+  text known to mean the same thing (two paraphrases, a question and its
+  correct answer) alongside pairs known to mean different things, and is
+  adjusted so matching pairs get pushed closer together in vector space
+  while mismatched pairs get pushed further apart.
+- "Hard negatives" — pairs that are *topically* similar but not actually
+  equivalent ("how do I reset my password" vs. "how do I delete my
+  account") — matter more for training quality than easy negatives,
+  since those are exactly the cases a weaker model would confuse.
+- This is also why an embedding model's output vector has no fixed
+  "meaning" per dimension the way a spreadsheet column would — the
+  vector only means something *relative to other vectors from the same
+  model*, which is the whole reason mixing vectors from two different
+  embedding models in one index silently breaks (see the migration
+  follow-up in §4 below).
+
 ## 2. "How do you measure similarity between two embeddings?"
 
 ```python

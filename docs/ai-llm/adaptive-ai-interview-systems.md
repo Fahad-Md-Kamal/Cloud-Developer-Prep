@@ -185,7 +185,11 @@ Score this answer."""
   on different runs if the rubric is vague or the scoring call's
   temperature isn't controlled. Use a low/zero temperature for
   scoring specifically (even if question generation uses more), and a
-  genuinely specific rubric.
+  genuinely specific rubric — see
+  [How LLMs Actually Work §4](how-llms-actually-work.md#4-why-does-an-llm-generate-one-token-at-a-time-and-what-does-temperature-actually-control)
+  for what temperature is actually doing to the token-probability
+  distribution, and why even temperature 0 isn't a hard determinism
+  guarantee on a hosted API.
 - **Gaming/prompt injection from the candidate** — a candidate's
   answer is untrusted input feeding back into the next
   question-generation prompt. The same
