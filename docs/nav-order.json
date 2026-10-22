@@ -328,6 +328,10 @@
     "url": "testing/integration-and-e2e-testing/"
   },
   {
+    "title": "Testing Tools & Frameworks by Type",
+    "url": "testing/testing-tools-and-frameworks/"
+  },
+  {
     "title": "Testing AI & LLM Applications",
     "url": "testing/testing-ai-and-llm-applications/"
   },

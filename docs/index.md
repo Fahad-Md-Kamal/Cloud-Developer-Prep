@@ -237,6 +237,9 @@ structurally can't.
 - [Integration & End-to-End Testing in Practice](testing/integration-and-e2e-testing.md) —
   test database isolation, parallel test data, and scoping E2E to
   critical journeys
+- [Testing Tools & Frameworks by Type](testing/testing-tools-and-frameworks.md) —
+  pytest/JUnit/Jest, Selenium/Playwright/Cypress, Cucumber/Behave,
+  REST Assured, Appium, visual regression, organized by test type
 - [Testing AI & LLM Applications](testing/testing-ai-and-llm-applications.md) —
   testing non-deterministic output, hallucination rate, prompt
   regression testing, adversarial/red-team testing, bias testing

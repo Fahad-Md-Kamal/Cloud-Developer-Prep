@@ -133,6 +133,7 @@ nav = [
       { "Mutation Testing" = "testing/mutation-testing.md" },
       { "Contract Testing" = "testing/contract-testing.md" },
       { "Integration & End-to-End Testing in Practice" = "testing/integration-and-e2e-testing.md" },
+      { "Testing Tools & Frameworks by Type" = "testing/testing-tools-and-frameworks.md" },
       { "Testing AI & LLM Applications" = "testing/testing-ai-and-llm-applications.md" },
   ] },
   { "Database" = [
