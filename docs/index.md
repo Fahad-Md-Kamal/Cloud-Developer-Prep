@@ -299,11 +299,15 @@ mistakes and fixes kept in as teaching material.
   everything above, organized by the exam's 4 scored domains instead of
   by study week
 - [SAA-C03 Practice Quiz](cloud-devops/saa-c03-practice-quiz.md) — 16
-  questions, 4 per domain, drawn from the comparisons above
+  self-made questions by domain, plus AWS's official 20-question
+  practice set
 - [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
   track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 
 ### AI & LLM
+
+- [AGI & ASI: The Intelligence Spectrum](ai-llm/agi-and-asi.md) — narrow
+  AI vs. AGI vs. ASI, how we'd measure AGI, and the alignment problem
 
 **LLM APIs & Gateway**
 

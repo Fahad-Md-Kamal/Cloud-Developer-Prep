@@ -540,6 +540,10 @@
     "url": "cloud-devops/aws-services/"
   },
   {
+    "title": "AGI & ASI: The Intelligence Spectrum",
+    "url": "ai-llm/agi-and-asi/"
+  },
+  {
     "title": "LLM APIs & Providers",
     "url": "ai-llm/llm-apis-and-providers/"
   },

@@ -214,6 +214,7 @@ nav = [
       { "AWS Services Quick Reference" = "cloud-devops/aws-services.md" },
   ] },
   { "AI & LLM" = [
+      { "AGI & ASI: The Intelligence Spectrum" = "ai-llm/agi-and-asi.md" },
       { "LLM APIs & Gateway" = [
           { "LLM APIs & Providers" = "ai-llm/llm-apis-and-providers.md" },
           { "LLM Gateway & Multi-Provider Integration" = "ai-llm/llm-gateway-multi-provider.md" },
