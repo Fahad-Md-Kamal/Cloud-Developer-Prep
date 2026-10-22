@@ -345,23 +345,19 @@
   },
   {
     "title": "Web Crawling at Scale",
-    "url": "database/chapter-11/"
+    "url": "database/web-crawling-at-scale/"
   },
   {
     "title": "HTML Parsing & Data Pipelines",
-    "url": "database/chapter-12/"
+    "url": "database/html-parsing-and-data-pipelines/"
   },
   {
     "title": "Distributed Crawling Architecture",
-    "url": "database/chapter-13/"
+    "url": "database/distributed-crawling-architecture/"
   },
   {
     "title": "Data Cleaning & Deduplication",
-    "url": "database/chapter-14/"
-  },
-  {
-    "title": "Large MongoDB Clusters",
-    "url": "database/chapter-15/"
+    "url": "database/data-cleaning-and-deduplication/"
   },
   {
     "title": "Apache Spark & PySpark",

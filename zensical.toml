@@ -140,11 +140,10 @@ nav = [
       { "Database Security & Breach Prevention" = "database/database-security-and-breach-prevention.md" },
       { "SQL & Relational Data Modeling" = "database/sql-data-modeling-fundamentals.md" },
       { "Web Crawling & Pipelines" = [
-          { "Web Crawling at Scale" = "database/chapter-11.md" },
-          { "HTML Parsing & Data Pipelines" = "database/chapter-12.md" },
-          { "Distributed Crawling Architecture" = "database/chapter-13.md" },
-          { "Data Cleaning & Deduplication" = "database/chapter-14.md" },
-          { "Large MongoDB Clusters" = "database/chapter-15.md" },
+          { "Web Crawling at Scale" = "database/web-crawling-at-scale.md" },
+          { "HTML Parsing & Data Pipelines" = "database/html-parsing-and-data-pipelines.md" },
+          { "Distributed Crawling Architecture" = "database/distributed-crawling-architecture.md" },
+          { "Data Cleaning & Deduplication" = "database/data-cleaning-and-deduplication.md" },
       ] },
       { "Big Data & Distributed Compute" = [
           { "Apache Spark & PySpark" = "database/spark-pyspark.md" },

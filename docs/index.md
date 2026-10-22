@@ -237,11 +237,15 @@ preprocessing.
 - [SQL & Relational Data Modeling](database/sql-data-modeling-fundamentals.md) —
   normalization, keys, JOINs, denormalization, DB-level constraints, MySQL-specific notes
 - **Web Crawling & Pipelines**
-    - [Web Crawling at Scale](database/chapter-11.md)
-    - [HTML Parsing and Data Pipelines](database/chapter-12.md)
-    - [Distributed Crawling Architecture](database/chapter-13.md)
-    - [Data Cleaning, Normalization, and Deduplication](database/chapter-14.md)
-    - [Building and Managing Large MongoDB Clusters](database/chapter-15.md)
+    - [Web Crawling at Scale](database/web-crawling-at-scale.md) —
+      why some pages need a real browser, Selenium vs. Playwright's
+      actual protocol difference, anti-bot fingerprinting
+    - [HTML Parsing & Data Pipelines](database/html-parsing-and-data-pipelines.md) —
+      the DOM tree, BeautifulSoup vs. lxml, CSS selectors vs. XPath
+    - [Distributed Crawling Architecture](database/distributed-crawling-architecture.md) —
+      Celery, Kafka, Ray, Bloom-filter frontiers, visibility timeouts
+    - [Data Cleaning, Normalization & Deduplication](database/data-cleaning-and-deduplication.md) —
+      MinHash and LSH for near-duplicate detection at scale
 - **Big Data & Distributed Compute**
     - [Apache Spark & PySpark](database/spark-pyspark.md)
     - [Databricks & Delta Lake](database/databricks-delta-lake.md)
