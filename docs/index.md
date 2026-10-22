@@ -343,6 +343,9 @@ mistakes and fixes kept in as teaching material.
 
 - [Embeddings & Semantic Search](ai-llm/embeddings-semantic-search.md)
 - [RAG & Vector Databases](ai-llm/rag-and-vector-databases.md)
+- [RAG Project Ideas: Beginner to Production](ai-llm/rag-project-ideas.md) —
+  a progression of build projects, from a single-PDF bot to a
+  production-grade multi-tenant assistant
 
 **LangChain**
 

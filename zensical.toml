@@ -239,6 +239,7 @@ nav = [
       { "RAG & Retrieval" = [
           { "Embeddings & Semantic Search" = "ai-llm/embeddings-semantic-search.md" },
           { "RAG & Vector Databases" = "ai-llm/rag-and-vector-databases.md" },
+          { "RAG Project Ideas: Beginner to Production" = "ai-llm/rag-project-ideas.md" },
       ] },
       { "LangChain" = [
           { "LangChain Agents" = "ai-llm/langchain-agents.md" },
