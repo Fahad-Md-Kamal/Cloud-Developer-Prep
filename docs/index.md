@@ -509,6 +509,20 @@ before the interview, after the technical material above.
     - [Healthcare Terminology](interview-prep/healthcare/healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm
     - [Patient Matching & MPI](interview-prep/healthcare/patient-matching-mpi.md)
     - [HIPAA & PHI-Safe Engineering](interview-prep/healthcare/hipaa-phi-safety.md)
+- **Fintech Interoperability** — the direct fintech parallel to
+  Healthcare Interoperability above, same shape: a modern API standard,
+  its auth/consent layer, legacy message rails, data taxonomy, entity
+  resolution, and compliance engineering
+    - [Open Banking & Financial Data APIs](interview-prep/fintech/open-banking-and-financial-apis.md) —
+      FDX/PSD2, and what it replaced (screen scraping)
+    - [FAPI & Consent Authorization Flows](interview-prep/fintech/fapi-and-consent-flows.md) —
+      the stricter OAuth2 profile, token binding via mutual TLS
+    - [Legacy Payment Rails: ISO 8583 & SWIFT MT/MX](interview-prep/fintech/iso8583-and-swift-mt-mx.md)
+    - [Financial Data Taxonomy](interview-prep/fintech/financial-data-taxonomy.md) — MCC, ISO 4217, ISO 20022 codes
+    - [Entity Resolution: KYC, AML & Beneficial Ownership](interview-prep/fintech/kyc-aml-entity-resolution.md) —
+      why this becomes a graph problem, and why the precision/recall tuning flips vs. healthcare
+    - [PCI-DSS & Financial Data Safety Engineering](interview-prep/fintech/pci-dss-and-financial-data-safety.md) —
+      tokenization vs. encryption, the never-store-SAD rule
 
 ## A note on names
 

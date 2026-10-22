@@ -316,6 +316,14 @@ nav = [
           { "Patient Matching & MPI" = "interview-prep/healthcare/patient-matching-mpi.md" },
           { "HIPAA & PHI-Safe Engineering" = "interview-prep/healthcare/hipaa-phi-safety.md" },
       ] },
+      { "Fintech Interoperability" = [
+          { "Open Banking & Financial Data APIs" = "interview-prep/fintech/open-banking-and-financial-apis.md" },
+          { "FAPI & Consent Authorization Flows" = "interview-prep/fintech/fapi-and-consent-flows.md" },
+          { "Legacy Payment Rails: ISO 8583 & SWIFT MT/MX" = "interview-prep/fintech/iso8583-and-swift-mt-mx.md" },
+          { "Financial Data Taxonomy" = "interview-prep/fintech/financial-data-taxonomy.md" },
+          { "Entity Resolution: KYC, AML & Beneficial Ownership" = "interview-prep/fintech/kyc-aml-entity-resolution.md" },
+          { "PCI-DSS & Financial Data Safety Engineering" = "interview-prep/fintech/pci-dss-and-financial-data-safety.md" },
+      ] },
   ] },
 ]
 

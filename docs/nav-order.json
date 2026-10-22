@@ -866,5 +866,29 @@
   {
     "title": "HIPAA & PHI-Safe Engineering",
     "url": "interview-prep/healthcare/hipaa-phi-safety/"
+  },
+  {
+    "title": "Open Banking & Financial Data APIs",
+    "url": "interview-prep/fintech/open-banking-and-financial-apis/"
+  },
+  {
+    "title": "FAPI & Consent Authorization Flows",
+    "url": "interview-prep/fintech/fapi-and-consent-flows/"
+  },
+  {
+    "title": "Legacy Payment Rails: ISO 8583 & SWIFT MT/MX",
+    "url": "interview-prep/fintech/iso8583-and-swift-mt-mx/"
+  },
+  {
+    "title": "Financial Data Taxonomy",
+    "url": "interview-prep/fintech/financial-data-taxonomy/"
+  },
+  {
+    "title": "Entity Resolution: KYC, AML & Beneficial Ownership",
+    "url": "interview-prep/fintech/kyc-aml-entity-resolution/"
+  },
+  {
+    "title": "PCI-DSS & Financial Data Safety Engineering",
+    "url": "interview-prep/fintech/pci-dss-and-financial-data-safety/"
   }
 ]
