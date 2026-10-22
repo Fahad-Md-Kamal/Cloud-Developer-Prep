@@ -146,6 +146,7 @@ nav = [
           { "Data Cleaning & Deduplication" = "database/data-cleaning-and-deduplication.md" },
       ] },
       { "Big Data & Distributed Compute" = [
+          { "ETL vs. ELT: Data Pipeline Architecture" = "database/etl-vs-elt.md" },
           { "Apache Spark & PySpark" = "database/spark-pyspark.md" },
           { "Databricks & Delta Lake" = "database/databricks-delta-lake.md" },
       ] },

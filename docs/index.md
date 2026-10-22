@@ -247,6 +247,8 @@ preprocessing.
     - [Data Cleaning, Normalization & Deduplication](database/data-cleaning-and-deduplication.md) —
       MinHash and LSH for near-duplicate detection at scale
 - **Big Data & Distributed Compute**
+    - [ETL vs. ELT: Data Pipeline Architecture](database/etl-vs-elt.md) —
+      the one real difference, why ELT became viable, and when ETL still wins
     - [Apache Spark & PySpark](database/spark-pyspark.md)
     - [Databricks & Delta Lake](database/databricks-delta-lake.md)
 - [Data Preprocessing: Pandas & NumPy](database/data-preprocessing-pandas-numpy.md)

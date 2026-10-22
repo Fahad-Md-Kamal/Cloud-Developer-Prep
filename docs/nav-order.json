@@ -360,6 +360,10 @@
     "url": "database/data-cleaning-and-deduplication/"
   },
   {
+    "title": "ETL vs. ELT: Data Pipeline Architecture",
+    "url": "database/etl-vs-elt/"
+  },
+  {
     "title": "Apache Spark & PySpark",
     "url": "database/spark-pyspark/"
   },
