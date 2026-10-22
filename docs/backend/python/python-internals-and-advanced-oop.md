@@ -405,6 +405,60 @@ print(child.parent_ref())  # call it to get the actual object (or None if freed)
   until explicitly evicted; a `WeakValueDictionary` never does that by
   itself.
 
+### Memory leaks: what they actually are, and how one happens even with a garbage collector
+
+**Answer:**
+
+- A memory leak is memory that's still **reachable** — so refcounting
+  and the cyclic GC both correctly leave it alone — but that the program
+  will genuinely never use again. The bug is in the program's own logic
+  still holding a reference it no longer needs, not a flaw in Python's
+  memory manager; a GC can only free what's actually unreachable.
+- In a manually-managed language (C/C++), a leak looks different
+  mechanically — a `malloc`/`new` with no matching `free`/`delete` — but
+  the end symptom is the same: memory that's allocated and never
+  reclaimed, growing for as long as the process runs.
+- **Concrete Python leak patterns, in order of how often they actually
+  show up:**
+    - An unbounded cache — a plain `dict` or an `lru_cache` with no
+      `maxsize` — every entry is a real, counted reference, so nothing
+      is ever freed until the process restarts. See
+      [Memory & Caching §2](memory-and-caching.md#2-implement-an-lru-cache-what-data-structures-does-it-need-and-why-both)
+      for the data structure; the leak is simply never evicting from it.
+    - A module-level list/dict used as an event log or registry that
+      only ever grows — nothing wrong with the data structure, the bug
+      is that nothing ever removes an entry once it's no longer needed.
+    - A listener or callback registered once and never unregistered —
+      the registry holding it alive counts as a real reference,
+      regardless of whether anything still cares about the callback
+      firing. `weakref.WeakValueDictionary` (above) is the direct fix
+      when the registry itself shouldn't be the reason something stays
+      alive.
+    - **A historical gotcha worth knowing:** before Python 3.4 (PEP
+      442), the cyclic GC genuinely **could not** collect a reference
+      cycle if any object in it defined `__del__` — it would place the
+      whole cycle in `gc.garbage` and leave it there forever, a real,
+      silent leak. Python 3.4+ fixed this; the cyclic GC now handles
+      `__del__` safely. Worth knowing as the reason older code or older
+      interview answers treat "an object in a cycle with `__del__`" as
+      a leak trap — it genuinely was one.
+- **Why it's specifically dangerous in a long-running process:** a
+  short CLI script that leaks and exits in two seconds never matters —
+  the OS reclaims everything on exit regardless. A web server or a
+  background worker process that's meant to run for days accumulates
+  the leak continuously, which is why this bug class shows up as
+  "memory climbs steadily, then the process gets OOM-killed after N
+  hours" rather than an immediate, obvious failure.
+- **Detecting one:** `tracemalloc` (built in, already named in
+  [Memory & Caching §1](memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory))
+  for general growth tracking; `gc.garbage` and the `objgraph` package
+  specifically for finding uncollectable reference cycles.
+- **On "benefits":** there genuinely aren't any — a memory leak is a
+  bug, not a trade-off. The only thing worth getting out of the
+  question is recognizing the pattern early (an unbounded cache, a
+  registry with no unregister path) in code review, before it becomes a
+  production incident instead of a one-line fix.
+
 ## 6. "How is a dict (or a hash map in any language) actually structured?"
 
 **Answer:**
