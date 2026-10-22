@@ -336,6 +336,50 @@
     "url": "testing/testing-ai-and-llm-applications/"
   },
   {
+    "title": "Cryptography Fundamentals",
+    "url": "security/cryptography-fundamentals/"
+  },
+  {
+    "title": "Network Security Fundamentals",
+    "url": "security/network-security-fundamentals/"
+  },
+  {
+    "title": "The OWASP Top 10, In Depth",
+    "url": "security/owasp-top-10-in-depth/"
+  },
+  {
+    "title": "Offensive Security & Penetration Testing Methodology",
+    "url": "security/offensive-security-and-pentesting/"
+  },
+  {
+    "title": "Security Operations: SIEM, Logging & Incident Response",
+    "url": "security/security-operations-and-incident-response/"
+  },
+  {
+    "title": "Identity Security: Zero Trust & Privileged Access",
+    "url": "security/identity-security-zero-trust-and-pam/"
+  },
+  {
+    "title": "Malware, Phishing & Social Engineering",
+    "url": "security/malware-phishing-and-social-engineering/"
+  },
+  {
+    "title": "Compliance & Security Frameworks",
+    "url": "security/compliance-and-security-frameworks/"
+  },
+  {
+    "title": "Cloud Security Fundamentals",
+    "url": "security/cloud-security-fundamentals/"
+  },
+  {
+    "title": "Security Certifications & Career Path",
+    "url": "security/security-certifications-and-career-path/"
+  },
+  {
+    "title": "AI & LLM Security",
+    "url": "security/ai-and-llm-security/"
+  },
+  {
     "title": "Database Types: The Decision Framework",
     "url": "database/database-types-overview/"
   },

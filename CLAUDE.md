@@ -9,8 +9,9 @@ subdirectories mirroring `zensical.toml`'s nav (e.g.
 `docs/backend/python/django-orm.md`) — only `index.md`
 sits at `docs/` root. As of 2026-10-22 the
 top-level domains are Frontend, Backend, Architecture, Software
-Testing, Database, Cloud & DevOps, AI & LLM, Algorithms, and
-Interview Prep — a flat, domain-based structure (no "Study Materials" wrapper, no
+Testing, Cyber Security, Database, Cloud & DevOps, AI & LLM,
+Algorithms, and Interview Prep — a flat, domain-based structure
+(no "Study Materials" wrapper, no
 "Programming Languages" grouping — Python/Go/Kotlin live under
 Backend, JS/TS/React under Frontend) replacing the earlier
 chapter-numbered and then topic-grouped layouts. Config in

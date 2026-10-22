@@ -244,6 +244,40 @@ structurally can't.
   testing non-deterministic output, hallucination rate, prompt
   regression testing, adversarial/red-team testing, bias testing
 
+### Cyber Security
+
+Existing security content elsewhere on this site (AuthN/AuthZ, database
+breach prevention, AWS-specific security services) is all application
+security — secure coding and prevention. This track is the broader
+field: cryptography and network security fundamentals, offensive
+security methodology, security operations, identity, compliance
+frameworks, cloud security posture, the certification/career path, and
+AI/LLM-specific security — cross-linking into the existing AppSec
+content rather than duplicating it.
+
+- [Cryptography Fundamentals](security/cryptography-fundamentals.md) —
+  symmetric vs. asymmetric, the TLS handshake, digital signatures, why bcrypt not SHA-256
+- [Network Security Fundamentals](security/network-security-fundamentals.md) —
+  stateful vs. stateless firewalls, zero trust, ARP/DNS spoofing, nmap & Wireshark
+- [The OWASP Top 10, In Depth](security/owasp-top-10-in-depth.md) —
+  the canonical map, with insecure design, vulnerable components, and SSRF covered in full
+- [Offensive Security & Penetration Testing Methodology](security/offensive-security-and-pentesting.md) —
+  recon through reporting, red/blue/purple team, bug bounty programs
+- [Security Operations: SIEM, Logging & Incident Response](security/security-operations-and-incident-response.md) —
+  log correlation, and the full incident response lifecycle
+- [Identity Security: Zero Trust & Privileged Access](security/identity-security-zero-trust-and-pam.md) —
+  continuous verification, MFA method strength, PAM and just-in-time access
+- [Malware, Phishing & Social Engineering](security/malware-phishing-and-social-engineering.md) —
+  virus/worm/trojan/ransomware mechanics, why phishing works
+- [Compliance & Security Frameworks](security/compliance-and-security-frameworks.md) —
+  SOC 2, ISO 27001, GDPR, PCI-DSS
+- [Cloud Security Fundamentals](security/cloud-security-fundamentals.md) —
+  shared responsibility, CSPM, why most cloud incidents are misconfiguration
+- [Security Certifications & Career Path](security/security-certifications-and-career-path.md) —
+  Security+, OSCP/CEH, GCIH/GCIA, CISSP, and which track each fits
+- [AI & LLM Security](security/ai-and-llm-security.md) —
+  the OWASP Top 10 for LLM Applications, excessive agency, RAG corpus poisoning, model theft
+
 ### Database
 
 Everything database- and data-engineering-related in one place —

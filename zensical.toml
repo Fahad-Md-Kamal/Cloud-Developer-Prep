@@ -136,6 +136,19 @@ nav = [
       { "Testing Tools & Frameworks by Type" = "testing/testing-tools-and-frameworks.md" },
       { "Testing AI & LLM Applications" = "testing/testing-ai-and-llm-applications.md" },
   ] },
+  { "Cyber Security" = [
+      { "Cryptography Fundamentals" = "security/cryptography-fundamentals.md" },
+      { "Network Security Fundamentals" = "security/network-security-fundamentals.md" },
+      { "The OWASP Top 10, In Depth" = "security/owasp-top-10-in-depth.md" },
+      { "Offensive Security & Penetration Testing Methodology" = "security/offensive-security-and-pentesting.md" },
+      { "Security Operations: SIEM, Logging & Incident Response" = "security/security-operations-and-incident-response.md" },
+      { "Identity Security: Zero Trust & Privileged Access" = "security/identity-security-zero-trust-and-pam.md" },
+      { "Malware, Phishing & Social Engineering" = "security/malware-phishing-and-social-engineering.md" },
+      { "Compliance & Security Frameworks" = "security/compliance-and-security-frameworks.md" },
+      { "Cloud Security Fundamentals" = "security/cloud-security-fundamentals.md" },
+      { "Security Certifications & Career Path" = "security/security-certifications-and-career-path.md" },
+      { "AI & LLM Security" = "security/ai-and-llm-security.md" },
+  ] },
   { "Database" = [
       { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
       { "Database Architecture for Scale" = [
