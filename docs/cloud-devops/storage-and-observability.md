@@ -252,10 +252,9 @@ aws ssm get-parameters-by-path \
     - Always read secrets from Secrets Manager or Parameter Store at
       runtime instead.
 
-Aurora RDS credentials (see [AWS Services Quick Reference](aws-services.md))
-are a natural fit for this — pairing a managed Postgres/MySQL instance
-with Secrets Manager for rotation is a common pattern worth knowing
-alongside Aurora itself.
+[Aurora RDS](aurora-and-rds-proxy.md) credentials are a natural fit for
+this — pairing a managed Postgres/MySQL instance with Secrets Manager
+for rotation is a common pattern worth knowing alongside Aurora itself.
 
 ## CloudWatch — Metrics, Alarms & Logs
 

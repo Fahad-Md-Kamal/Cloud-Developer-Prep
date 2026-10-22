@@ -74,7 +74,6 @@ inside the relevant chapter, not on separate pages:
 - Mutable default arguments → [Practical Patterns](backend/python/practical-patterns.md#practice-notes-from-live-session)
 - `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](backend/python/django-orm.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [PostgreSQL for Scale](database/postgresql-for-scale.md#practice-notes-from-live-session)
-- AWS gap services (ECS, Aurora RDS, DynamoDB) → [AWS Services Quick Reference](cloud-devops/aws-services.md)
 - Project stories for system-design questions → [Personal Project Stories](interview-prep/project-stories.md)
 - Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](backend/python/django-drf.md)
 
@@ -320,8 +319,6 @@ mistakes and fixes kept in as teaching material.
 - [SAA-C03 Practice Quiz](cloud-devops/saa-c03-practice-quiz.md) — 16
   self-made questions by domain, plus AWS's official 20-question
   practice set
-- [AWS Services Quick Reference](cloud-devops/aws-services.md) — current job-search
-  track's AWS gap review (ECS, Aurora RDS, DynamoDB)
 
 ### AI & LLM
 

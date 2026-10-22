@@ -214,7 +214,6 @@ nav = [
       ] },
       { "SAA-C03 Exam Prep: Domain Review Index" = "cloud-devops/saa-c03-exam-prep-index.md" },
       { "SAA-C03 Practice Quiz" = "cloud-devops/saa-c03-practice-quiz.md" },
-      { "AWS Services Quick Reference" = "cloud-devops/aws-services.md" },
   ] },
   { "AI & LLM" = [
       { "AGI & ASI: The Intelligence Spectrum" = "ai-llm/agi-and-asi.md" },

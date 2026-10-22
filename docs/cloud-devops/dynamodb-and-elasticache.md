@@ -4,11 +4,9 @@ title: "DynamoDB & ElastiCache"
 
 # DynamoDB & ElastiCache
 
-[AWS Services Quick Reference](aws-services.md#dynamodb) already covers
-DynamoDB at the level of "what to say if it comes up." This page goes
-deeper, for the exam's actual question style, and adds ElastiCache — the
-caching layer DynamoDB's own accelerator (DAX, below) is itself built on
-the same idea as.
+DynamoDB's key design, indexing, and capacity model, for the exam's
+actual question style, plus ElastiCache — the caching layer DynamoDB's
+own accelerator (DAX, below) is itself built on the same idea as.
 
 ## DynamoDB: Keys, Indexes & Capacity
 
