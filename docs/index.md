@@ -206,18 +206,28 @@ sits underneath.
 
 ### Software Testing
 
-The practice of testing itself, beyond the unit/integration/E2E basics
-in [Clean Code Practices](architecture/clean-code-practices.md#testing-strategy) —
-test doubles, TDD, flakiness, and the less commonly taught techniques
-(property-based, mutation, and contract testing) that catch what
-example-based tests and coverage percentages structurally can't.
+Covers the field broadly enough for someone starting a testing career,
+not just a developer's testing literacy — manual test design, the
+fuller testing-type vocabulary, non-functional testing, and QA tooling,
+alongside test doubles, TDD, flakiness, and the less commonly taught
+automation techniques (property-based, mutation, and contract testing)
+that catch what example-based tests and coverage percentages
+structurally can't.
 
+- [Manual Testing Fundamentals: Test Case Design & Bug Reports](testing/manual-testing-fundamentals.md) —
+  equivalence partitioning, boundary values, decision tables, writing a bug report
+- [Testing Types & Levels: Smoke, Sanity, Regression & UAT](testing/testing-types-and-levels.md) —
+  black-box/white-box/gray-box, and the type vocabulary beyond unit/integration/E2E
 - [Testing Strategy: The Pyramid, the Trophy & What Not to Test](testing/testing-strategy-pyramid-and-trophy.md) —
   pyramid vs. trophy, what coverage percentage actually misses
 - [Test Doubles & TDD](testing/test-doubles-and-tdd.md) — mock vs.
   stub vs. fake vs. spy, the red-green-refactor cycle
+- [Non-Functional Testing: Performance, Security & Accessibility](testing/non-functional-testing.md) —
+  load/stress/soak testing, OWASP-style security testing, WCAG accessibility
 - [Flaky Tests & CI Test Strategy](testing/flaky-tests-and-ci-strategy.md) —
   the four real causes of flakiness, and structuring CI's test stage
+- [QA Tools & the Path from Manual to Automation (SDET)](testing/qa-tools-and-the-sdet-path.md) —
+  TestRail/Jira, Postman/API testing, and the realistic manual-to-automation path
 - [Property-Based Testing](testing/property-based-testing.md) —
   Hypothesis, shrinking, and when a property actually exists to state
 - [Mutation Testing](testing/mutation-testing.md) — why mutation score
@@ -227,6 +237,9 @@ example-based tests and coverage percentages structurally can't.
 - [Integration & End-to-End Testing in Practice](testing/integration-and-e2e-testing.md) —
   test database isolation, parallel test data, and scoping E2E to
   critical journeys
+- [Testing AI & LLM Applications](testing/testing-ai-and-llm-applications.md) —
+  testing non-deterministic output, hallucination rate, prompt
+  regression testing, adversarial/red-team testing, bias testing
 
 ### Database
 

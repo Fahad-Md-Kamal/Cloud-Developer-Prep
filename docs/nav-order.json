@@ -284,6 +284,14 @@
     "url": "architecture/event-driven-architecture/"
   },
   {
+    "title": "Manual Testing Fundamentals: Test Case Design & Bug Reports",
+    "url": "testing/manual-testing-fundamentals/"
+  },
+  {
+    "title": "Testing Types & Levels: Smoke, Sanity, Regression & UAT",
+    "url": "testing/testing-types-and-levels/"
+  },
+  {
     "title": "Testing Strategy: The Pyramid, the Trophy & What Not to Test",
     "url": "testing/testing-strategy-pyramid-and-trophy/"
   },
@@ -292,8 +300,16 @@
     "url": "testing/test-doubles-and-tdd/"
   },
   {
+    "title": "Non-Functional Testing: Performance, Security & Accessibility",
+    "url": "testing/non-functional-testing/"
+  },
+  {
     "title": "Flaky Tests & CI Test Strategy",
     "url": "testing/flaky-tests-and-ci-strategy/"
+  },
+  {
+    "title": "QA Tools & the Path from Manual to Automation (SDET)",
+    "url": "testing/qa-tools-and-the-sdet-path/"
   },
   {
     "title": "Property-Based Testing",
@@ -310,6 +326,10 @@
   {
     "title": "Integration & End-to-End Testing in Practice",
     "url": "testing/integration-and-e2e-testing/"
+  },
+  {
+    "title": "Testing AI & LLM Applications",
+    "url": "testing/testing-ai-and-llm-applications/"
   },
   {
     "title": "Database Types: The Decision Framework",

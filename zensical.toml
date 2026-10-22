@@ -122,13 +122,18 @@ nav = [
       { "Event-Driven Architecture: CQRS & the Saga Pattern" = "architecture/event-driven-architecture.md" },
   ] },
   { "Software Testing" = [
+      { "Manual Testing Fundamentals: Test Case Design & Bug Reports" = "testing/manual-testing-fundamentals.md" },
+      { "Testing Types & Levels: Smoke, Sanity, Regression & UAT" = "testing/testing-types-and-levels.md" },
       { "Testing Strategy: The Pyramid, the Trophy & What Not to Test" = "testing/testing-strategy-pyramid-and-trophy.md" },
       { "Test Doubles & TDD" = "testing/test-doubles-and-tdd.md" },
+      { "Non-Functional Testing: Performance, Security & Accessibility" = "testing/non-functional-testing.md" },
       { "Flaky Tests & CI Test Strategy" = "testing/flaky-tests-and-ci-strategy.md" },
+      { "QA Tools & the Path from Manual to Automation (SDET)" = "testing/qa-tools-and-the-sdet-path.md" },
       { "Property-Based Testing" = "testing/property-based-testing.md" },
       { "Mutation Testing" = "testing/mutation-testing.md" },
       { "Contract Testing" = "testing/contract-testing.md" },
       { "Integration & End-to-End Testing in Practice" = "testing/integration-and-e2e-testing.md" },
+      { "Testing AI & LLM Applications" = "testing/testing-ai-and-llm-applications.md" },
   ] },
   { "Database" = [
       { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
