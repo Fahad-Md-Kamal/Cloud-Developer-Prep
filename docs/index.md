@@ -280,6 +280,9 @@ content rather than duplicating it.
   shared responsibility, CSPM, why most cloud incidents are misconfiguration
 - [Security Certifications & Career Path](security/security-certifications-and-career-path.md) —
   Security+, OSCP/CEH, GCIH/GCIA, CISSP, and which track each fits
+- [Real-World Breach Case Studies (2023–2025)](security/real-world-breach-case-studies.md) —
+  MOVEit, Change Healthcare, the Snowflake customer campaign, Microsoft
+  Storm-0558, and 23andMe, each mapped to the mechanism that caused it
 - [AI & LLM Security](security/ai-and-llm-security.md) —
   the OWASP Top 10 for LLM Applications, excessive agency, RAG corpus poisoning, model theft
 

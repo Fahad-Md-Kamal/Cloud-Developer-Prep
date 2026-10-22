@@ -149,6 +149,7 @@ nav = [
       { "Compliance & Security Frameworks" = "security/compliance-and-security-frameworks.md" },
       { "Cloud Security Fundamentals" = "security/cloud-security-fundamentals.md" },
       { "Security Certifications & Career Path" = "security/security-certifications-and-career-path.md" },
+      { "Real-World Breach Case Studies (2023–2025)" = "security/real-world-breach-case-studies.md" },
       { "AI & LLM Security" = "security/ai-and-llm-security.md" },
   ] },
   { "Database" = [
