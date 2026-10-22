@@ -805,7 +805,7 @@
   },
   {
     "title": "Behavioral Interview Prep",
-    "url": "interview-prep/chapter-31/"
+    "url": "interview-prep/behavioral-interview-prep/"
   },
   {
     "title": "Leadership for Engineers",
@@ -820,20 +820,12 @@
     "url": "interview-prep/interviewing-in-the-ai-era/"
   },
   {
-    "title": "Technical Interview Deep Dives",
-    "url": "interview-prep/chapter-32/"
-  },
-  {
-    "title": "Mock Projects",
-    "url": "interview-prep/chapter-33/"
-  },
-  {
     "title": "Take-Home & Live-Coding Exercises",
     "url": "interview-prep/take-home-and-live-coding-exercises/"
   },
   {
-    "title": "Resume & GitHub Optimization",
-    "url": "interview-prep/chapter-34/"
+    "title": "Resume, GitHub & Case Study Optimization",
+    "url": "interview-prep/resume-github-and-case-study-optimization/"
   },
   {
     "title": "Validating Your Skill Level",
@@ -841,7 +833,7 @@
   },
   {
     "title": "Final Review \u2014 30-Day Countdown",
-    "url": "interview-prep/chapter-35/"
+    "url": "interview-prep/final-review-30-day-countdown/"
   },
   {
     "title": "Personal Project Stories",

@@ -7,9 +7,10 @@ title: "Take-Home & Live-Coding Exercises"
 Real, scoped coding exercises recalled from actual interviews —
 attempt each one cold under a time box, then check your approach
 against the "what a strong solution demonstrates" list. Distinct from
-[Mock Projects](chapter-33.md): these are interview-scoped tasks
-(30 minutes to a few hours), not portfolio-scale builds. Not all of
-them are greenfield either — Exercise 2 is a debug-and-extend task,
+a portfolio-scale build (see
+[Personal Project Stories](project-stories.md)): these are
+interview-scoped tasks (30 minutes to a few hours). Not all of them
+are greenfield either — Exercise 2 is a debug-and-extend task,
 a genuinely different skill from building from scratch.
 
 ## Exercise 1: Weather CLI from a City Directory

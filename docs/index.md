@@ -481,20 +481,21 @@ stories for behavioral/system-design questions, domain-vertical deep
 dives, and a final countdown review. Comes last: it's what you do right
 before the interview, after the technical material above.
 
-- [Behavioral Interview Prep](interview-prep/chapter-31.md)
+- [Behavioral Interview Prep: STAR, Leadership & Conflict](interview-prep/behavioral-interview-prep.md) —
+  the STAR method precisely enough to use, plus disagreement/failure story framing
 - [Leadership for Engineers](interview-prep/leadership-mentoring-and-team-scaling.md) —
   mentoring, reviews, team scaling (parked outline, not yet fleshed out)
 - [Staff Engineer Mindset](interview-prep/staff-engineer-mindset.md) —
   strategy, influence without authority, vision (parked outline, not yet fleshed out)
 - [Interviewing in the AI Era](interview-prep/interviewing-in-the-ai-era.md)
-- [Technical Interview Deep Dives](interview-prep/chapter-32.md)
-- [Mock Projects](interview-prep/chapter-33.md)
 - [Take-Home & Live-Coding Exercises](interview-prep/take-home-and-live-coding-exercises.md) —
   real, scoped coding tasks recalled from interviews, e.g. a weather CLI
-- [Resume, GitHub, and Case Study Optimization](interview-prep/chapter-34.md)
+- [Resume, GitHub & Case Study Optimization](interview-prep/resume-github-and-case-study-optimization.md) —
+  impact bullets, a GitHub profile that signals skill, turning a project into a readable case study
 - [Validating Your Skill Level](interview-prep/validating-your-skill-level.md) —
   backing up a self-rated "expert" claim with something external
-- [Final Review — The 30-Day Countdown](interview-prep/chapter-35.md)
+- [Final Review — The 30-Day Countdown](interview-prep/final-review-30-day-countdown.md) —
+  a customizable week-by-week template across this site's actual current domains
 - [Personal Project Stories](interview-prep/project-stories.md) — real project STAR stories
   for system-design/behavioral questions
 - [Meeting-Intelligence System Case Study](interview-prep/meeting-intelligence-case-study.md)
