@@ -85,7 +85,7 @@ clinical or patient records.
    — this is a vendor/contract decision as much as an engineering one,
    worth naming as part of a complete answer.
 
-**This is the concrete version of the JD's "AI-native but PHI-safe"
+**This is the concrete answer to "AI-native but PHI-safe" as a design
 requirement** — the architecture pattern is de-identify-before-boundary,
 scope-to-minimum-necessary, re-attach-after, not "just don't use AI on
 healthcare data" (too restrictive to be useful) or "send everything,

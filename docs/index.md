@@ -499,9 +499,9 @@ before the interview, after the technical material above.
 - [Personal Project Stories](interview-prep/project-stories.md) — real project STAR stories
   for system-design/behavioral questions
 - [Meeting-Intelligence System Case Study](interview-prep/meeting-intelligence-case-study.md)
-- **Healthcare Interoperability** — the genuinely healthcare-specific
-  content from the Intellias JD, a real domain gap, not yet an active
-  application track
+- **Healthcare Interoperability** — genuinely healthcare-specific
+  content from a real healthcare-interoperability-focused JD, a real
+  domain gap, not yet an active application track
     - [FHIR R4](interview-prep/healthcare/fhir-r4.md)
     - [HL7 v2.x & C-CDA](interview-prep/healthcare/hl7-ccda.md)
     - [Healthcare Terminology](interview-prep/healthcare/healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm

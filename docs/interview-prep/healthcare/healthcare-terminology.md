@@ -80,7 +80,7 @@ thing.
    on the resulting resource, so a downstream consumer (or an auditor)
    can tell how much confidence to place in it.
 
-**This is exactly the kind of place a JD's "AI vs. deterministic
+**This is exactly the kind of place an "AI vs. deterministic
 processing" judgment call shows up concretely** — deterministic mapping
 tables for known, stable code inventories; AI-assisted suggestion (with
 mandatory review) for the long tail of free-text/unmapped codes; never
