@@ -848,6 +848,10 @@
     "url": "interview-prep/healthcare/fhir-r4/"
   },
   {
+    "title": "SMART on FHIR & Bulk Data Export",
+    "url": "interview-prep/healthcare/smart-on-fhir-and-bulk-data/"
+  },
+  {
     "title": "HL7 v2.x & C-CDA",
     "url": "interview-prep/healthcare/hl7-ccda/"
   },

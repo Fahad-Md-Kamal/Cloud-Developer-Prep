@@ -310,6 +310,7 @@ nav = [
       { "Meeting-Intelligence System Case Study" = "interview-prep/meeting-intelligence-case-study.md" },
       { "Healthcare Interoperability" = [
           { "FHIR R4" = "interview-prep/healthcare/fhir-r4.md" },
+          { "SMART on FHIR & Bulk Data Export" = "interview-prep/healthcare/smart-on-fhir-and-bulk-data.md" },
           { "HL7 v2.x & C-CDA" = "interview-prep/healthcare/hl7-ccda.md" },
           { "Healthcare Terminology" = "interview-prep/healthcare/healthcare-terminology.md" },
           { "Patient Matching & MPI" = "interview-prep/healthcare/patient-matching-mpi.md" },

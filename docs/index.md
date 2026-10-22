@@ -503,6 +503,8 @@ before the interview, after the technical material above.
   content from a real healthcare-interoperability-focused JD, a real
   domain gap, not yet an active application track
     - [FHIR R4](interview-prep/healthcare/fhir-r4.md)
+    - [SMART on FHIR & Bulk Data Export](interview-prep/healthcare/smart-on-fhir-and-bulk-data.md) —
+      the OAuth2 app-authorization layer and population-scale `$export`
     - [HL7 v2.x & C-CDA](interview-prep/healthcare/hl7-ccda.md)
     - [Healthcare Terminology](interview-prep/healthcare/healthcare-terminology.md) — SNOMED CT, LOINC, RxNorm
     - [Patient Matching & MPI](interview-prep/healthcare/patient-matching-mpi.md)
