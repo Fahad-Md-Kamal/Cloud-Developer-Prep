@@ -284,6 +284,34 @@
     "url": "architecture/event-driven-architecture/"
   },
   {
+    "title": "Testing Strategy: The Pyramid, the Trophy & What Not to Test",
+    "url": "testing/testing-strategy-pyramid-and-trophy/"
+  },
+  {
+    "title": "Test Doubles & TDD",
+    "url": "testing/test-doubles-and-tdd/"
+  },
+  {
+    "title": "Flaky Tests & CI Test Strategy",
+    "url": "testing/flaky-tests-and-ci-strategy/"
+  },
+  {
+    "title": "Property-Based Testing",
+    "url": "testing/property-based-testing/"
+  },
+  {
+    "title": "Mutation Testing",
+    "url": "testing/mutation-testing/"
+  },
+  {
+    "title": "Contract Testing",
+    "url": "testing/contract-testing/"
+  },
+  {
+    "title": "Integration & End-to-End Testing in Practice",
+    "url": "testing/integration-and-e2e-testing/"
+  },
+  {
     "title": "Database Types: The Decision Framework",
     "url": "database/database-types-overview/"
   },

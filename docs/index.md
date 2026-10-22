@@ -204,6 +204,30 @@ sits underneath.
 - [Event-Driven Architecture: CQRS & the Saga Pattern](architecture/event-driven-architecture.md) —
   splitting reads from writes, and compensating transactions across services
 
+### Software Testing
+
+The practice of testing itself, beyond the unit/integration/E2E basics
+in [Clean Code Practices](architecture/clean-code-practices.md#testing-strategy) —
+test doubles, TDD, flakiness, and the less commonly taught techniques
+(property-based, mutation, and contract testing) that catch what
+example-based tests and coverage percentages structurally can't.
+
+- [Testing Strategy: The Pyramid, the Trophy & What Not to Test](testing/testing-strategy-pyramid-and-trophy.md) —
+  pyramid vs. trophy, what coverage percentage actually misses
+- [Test Doubles & TDD](testing/test-doubles-and-tdd.md) — mock vs.
+  stub vs. fake vs. spy, the red-green-refactor cycle
+- [Flaky Tests & CI Test Strategy](testing/flaky-tests-and-ci-strategy.md) —
+  the four real causes of flakiness, and structuring CI's test stage
+- [Property-Based Testing](testing/property-based-testing.md) —
+  Hypothesis, shrinking, and when a property actually exists to state
+- [Mutation Testing](testing/mutation-testing.md) — why mutation score
+  is a stronger signal than line coverage
+- [Contract Testing](testing/contract-testing.md) — catching the gap
+  between two services that each pass their own tests
+- [Integration & End-to-End Testing in Practice](testing/integration-and-e2e-testing.md) —
+  test database isolation, parallel test data, and scoping E2E to
+  critical journeys
+
 ### Database
 
 Everything database- and data-engineering-related in one place —

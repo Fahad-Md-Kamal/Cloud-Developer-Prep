@@ -121,6 +121,15 @@ nav = [
       ] },
       { "Event-Driven Architecture: CQRS & the Saga Pattern" = "architecture/event-driven-architecture.md" },
   ] },
+  { "Software Testing" = [
+      { "Testing Strategy: The Pyramid, the Trophy & What Not to Test" = "testing/testing-strategy-pyramid-and-trophy.md" },
+      { "Test Doubles & TDD" = "testing/test-doubles-and-tdd.md" },
+      { "Flaky Tests & CI Test Strategy" = "testing/flaky-tests-and-ci-strategy.md" },
+      { "Property-Based Testing" = "testing/property-based-testing.md" },
+      { "Mutation Testing" = "testing/mutation-testing.md" },
+      { "Contract Testing" = "testing/contract-testing.md" },
+      { "Integration & End-to-End Testing in Practice" = "testing/integration-and-e2e-testing.md" },
+  ] },
   { "Database" = [
       { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
       { "Database Architecture for Scale" = [

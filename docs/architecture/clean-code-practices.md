@@ -58,6 +58,14 @@ actually act on it.
 
 ## Testing Strategy
 
+This section covers the core unit/integration/E2E distinction and the
+test pyramid's basic shape. For the deeper material — the pyramid vs.
+the testing trophy, what coverage percentage actually misses, test
+doubles and TDD, flaky tests, property-based and mutation testing, and
+contract testing between services — see the
+[Software Testing](../testing/testing-strategy-pyramid-and-trophy.md)
+section.
+
 **"How do you decide what to unit test vs. integration test vs. not test at all?"**
 
 ```python
