@@ -255,12 +255,17 @@ frameworks, cloud security posture, the certification/career path, and
 AI/LLM-specific security — cross-linking into the existing AppSec
 content rather than duplicating it.
 
-- [Cryptography Fundamentals](security/cryptography-fundamentals.md) —
-  symmetric vs. asymmetric, the TLS handshake, digital signatures, why bcrypt not SHA-256
+- [Cybersecurity for Beginners: The Learning Roadmap](security/cybersecurity-for-beginners-roadmap.md) —
+  the prerequisites (networking, Linux, scripting), the recommended
+  order through this track, and the single biggest beginner mistake
 - [Network Security Fundamentals](security/network-security-fundamentals.md) —
   stateful vs. stateless firewalls, zero trust, ARP/DNS spoofing, nmap & Wireshark
+- [Cryptography Fundamentals](security/cryptography-fundamentals.md) —
+  symmetric vs. asymmetric, the TLS handshake, digital signatures, why bcrypt not SHA-256
 - [The OWASP Top 10, In Depth](security/owasp-top-10-in-depth.md) —
   the canonical map, with insecure design, vulnerable components, and SSRF covered in full
+- [Cybersecurity Tools by Category](security/cybersecurity-tools-by-category.md) —
+  Nessus/OpenVAS, Burp Suite/ZAP, Metasploit, Hashcat, Splunk/ELK, Autopsy/Volatility
 - [Offensive Security & Penetration Testing Methodology](security/offensive-security-and-pentesting.md) —
   recon through reporting, red/blue/purple team, bug bounty programs
 - [Security Operations: SIEM, Logging & Incident Response](security/security-operations-and-incident-response.md) —

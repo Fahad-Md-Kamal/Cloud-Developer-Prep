@@ -137,9 +137,11 @@ nav = [
       { "Testing AI & LLM Applications" = "testing/testing-ai-and-llm-applications.md" },
   ] },
   { "Cyber Security" = [
-      { "Cryptography Fundamentals" = "security/cryptography-fundamentals.md" },
+      { "Cybersecurity for Beginners: The Learning Roadmap" = "security/cybersecurity-for-beginners-roadmap.md" },
       { "Network Security Fundamentals" = "security/network-security-fundamentals.md" },
+      { "Cryptography Fundamentals" = "security/cryptography-fundamentals.md" },
       { "The OWASP Top 10, In Depth" = "security/owasp-top-10-in-depth.md" },
+      { "Cybersecurity Tools by Category" = "security/cybersecurity-tools-by-category.md" },
       { "Offensive Security & Penetration Testing Methodology" = "security/offensive-security-and-pentesting.md" },
       { "Security Operations: SIEM, Logging & Incident Response" = "security/security-operations-and-incident-response.md" },
       { "Identity Security: Zero Trust & Privileged Access" = "security/identity-security-zero-trust-and-pam.md" },
