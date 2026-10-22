@@ -324,6 +324,22 @@ nav = [
           { "Entity Resolution: KYC, AML & Beneficial Ownership" = "interview-prep/fintech/kyc-aml-entity-resolution.md" },
           { "PCI-DSS & Financial Data Safety Engineering" = "interview-prep/fintech/pci-dss-and-financial-data-safety.md" },
       ] },
+      { "Telecom Interoperability" = [
+          { "TM Forum Open APIs" = "interview-prep/telecom/tm-forum-open-apis.md" },
+          { "Authorization for Telecom APIs: CIBA & Number Verification" = "interview-prep/telecom/telecom-api-authorization.md" },
+          { "Legacy Signaling: SS7 & Diameter" = "interview-prep/telecom/ss7-and-diameter.md" },
+          { "Telecom Data Taxonomy" = "interview-prep/telecom/telecom-data-taxonomy.md" },
+          { "Entity Resolution: Subscriber Identity, SIM Swap & Fraud Rings" = "interview-prep/telecom/subscriber-identity-and-fraud-resolution.md" },
+          { "Telecom Compliance: CALEA, Number Portability & Data Retention" = "interview-prep/telecom/telecom-compliance.md" },
+      ] },
+      { "Energy & Utilities Interoperability" = [
+          { "Green Button & Energy Data APIs" = "interview-prep/energy/green-button-and-energy-apis.md" },
+          { "Green Button Connect: Authorization & Consent" = "interview-prep/energy/green-button-connect-authorization.md" },
+          { "Legacy Industrial Protocols: Modbus, DNP3 & SCADA" = "interview-prep/energy/modbus-dnp3-and-scada.md" },
+          { "Energy Data Taxonomy" = "interview-prep/energy/energy-data-taxonomy.md" },
+          { "Entity Resolution: Grid Assets & Customer-Meter Matching" = "interview-prep/energy/grid-asset-entity-resolution.md" },
+          { "Energy & Utilities Compliance: NERC CIP" = "interview-prep/energy/energy-compliance.md" },
+      ] },
   ] },
 ]
 

@@ -523,6 +523,30 @@ before the interview, after the technical material above.
       why this becomes a graph problem, and why the precision/recall tuning flips vs. healthcare
     - [PCI-DSS & Financial Data Safety Engineering](interview-prep/fintech/pci-dss-and-financial-data-safety.md) —
       tokenization vs. encryption, the never-store-SAD rule
+- **Telecom Interoperability** — same shape again: TM Forum/CAMARA APIs,
+  SS7's actual role in SIM-swap/SMS-interception attacks, and fraud-ring
+  detection as a graph problem
+    - [TM Forum Open APIs](interview-prep/telecom/tm-forum-open-apis.md) —
+      the API catalog, plus CAMARA's network-capability APIs
+    - [Authorization for Telecom APIs: CIBA & Number Verification](interview-prep/telecom/telecom-api-authorization.md)
+    - [Legacy Signaling: SS7 & Diameter](interview-prep/telecom/ss7-and-diameter.md) —
+      how cross-carrier call routing actually works, and why SS7 has no built-in authentication
+    - [Telecom Data Taxonomy](interview-prep/telecom/telecom-data-taxonomy.md) —
+      CDRs, MCC/MNC (not fintech's MCC), E.164
+    - [Entity Resolution: Subscriber Identity, SIM Swap & Fraud Rings](interview-prep/telecom/subscriber-identity-and-fraud-resolution.md)
+    - [Telecom Compliance: CALEA, Number Portability & Data Retention](interview-prep/telecom/telecom-compliance.md)
+- **Energy & Utilities Interoperability** — same shape once more: Green
+  Button, why Modbus/DNP3 have zero built-in security by original
+  design, and NERC CIP's physical-consequence risk model
+    - [Green Button & Energy Data APIs](interview-prep/energy/green-button-and-energy-apis.md)
+    - [Green Button Connect: Authorization & Consent](interview-prep/energy/green-button-connect-authorization.md)
+    - [Legacy Industrial Protocols: Modbus, DNP3 & SCADA](interview-prep/energy/modbus-dnp3-and-scada.md) —
+      why these protocols have no authentication at all, not just old age
+    - [Energy Data Taxonomy](interview-prep/energy/energy-data-taxonomy.md) —
+      interval reads, rate schedules, billed vs. AMI data
+    - [Entity Resolution: Grid Assets & Customer-Meter Matching](interview-prep/energy/grid-asset-entity-resolution.md) —
+      grid topology as a graph problem, outage correlation as a validation loop
+    - [Energy & Utilities Compliance: NERC CIP](interview-prep/energy/energy-compliance.md)
 
 ## A note on names
 

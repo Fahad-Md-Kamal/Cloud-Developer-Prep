@@ -890,5 +890,53 @@
   {
     "title": "PCI-DSS & Financial Data Safety Engineering",
     "url": "interview-prep/fintech/pci-dss-and-financial-data-safety/"
+  },
+  {
+    "title": "TM Forum Open APIs",
+    "url": "interview-prep/telecom/tm-forum-open-apis/"
+  },
+  {
+    "title": "Authorization for Telecom APIs: CIBA & Number Verification",
+    "url": "interview-prep/telecom/telecom-api-authorization/"
+  },
+  {
+    "title": "Legacy Signaling: SS7 & Diameter",
+    "url": "interview-prep/telecom/ss7-and-diameter/"
+  },
+  {
+    "title": "Telecom Data Taxonomy",
+    "url": "interview-prep/telecom/telecom-data-taxonomy/"
+  },
+  {
+    "title": "Entity Resolution: Subscriber Identity, SIM Swap & Fraud Rings",
+    "url": "interview-prep/telecom/subscriber-identity-and-fraud-resolution/"
+  },
+  {
+    "title": "Telecom Compliance: CALEA, Number Portability & Data Retention",
+    "url": "interview-prep/telecom/telecom-compliance/"
+  },
+  {
+    "title": "Green Button & Energy Data APIs",
+    "url": "interview-prep/energy/green-button-and-energy-apis/"
+  },
+  {
+    "title": "Green Button Connect: Authorization & Consent",
+    "url": "interview-prep/energy/green-button-connect-authorization/"
+  },
+  {
+    "title": "Legacy Industrial Protocols: Modbus, DNP3 & SCADA",
+    "url": "interview-prep/energy/modbus-dnp3-and-scada/"
+  },
+  {
+    "title": "Energy Data Taxonomy",
+    "url": "interview-prep/energy/energy-data-taxonomy/"
+  },
+  {
+    "title": "Entity Resolution: Grid Assets & Customer-Meter Matching",
+    "url": "interview-prep/energy/grid-asset-entity-resolution/"
+  },
+  {
+    "title": "Energy & Utilities Compliance: NERC CIP",
+    "url": "interview-prep/energy/energy-compliance/"
   }
 ]
