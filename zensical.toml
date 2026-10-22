@@ -125,10 +125,16 @@ nav = [
       { "Staff Engineer Mindset" = "architecture/chapter-30.md" },
   ] },
   { "Database" = [
+      { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
       { "Database Architecture for Scale" = [
           { "PostgreSQL for Scale" = "database/postgresql-for-scale.md" },
           { "MongoDB for Scale" = "database/mongodb-for-scale.md" },
           { "Elasticsearch Architecture" = "database/elasticsearch-architecture.md" },
+          { "Redis as a Database" = "database/redis-as-a-database.md" },
+          { "Graph Databases (Neo4j)" = "database/graph-databases-neo4j.md" },
+          { "Time-Series Databases" = "database/time-series-databases.md" },
+          { "Wide-Column Stores (Cassandra)" = "database/wide-column-stores-cassandra.md" },
+          { "NewSQL: Distributed SQL" = "database/newsql-distributed-sql.md" },
           { "Cross-Store Architecture Patterns" = "database/cross-store-architecture-patterns.md" },
       ] },
       { "Database Security & Breach Prevention" = "database/database-security-and-breach-prevention.md" },

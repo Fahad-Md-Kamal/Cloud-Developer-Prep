@@ -213,10 +213,24 @@ database architecture, database security, SQL/relational modeling,
 web crawling/pipelines, distributed big-data compute, and
 preprocessing.
 
+- [Database Types: The Decision Framework](database/database-types-overview.md) —
+  relational, document, key-value, wide-column, graph, vector,
+  time-series, search-engine, and NewSQL, each explained by the
+  mechanism that fits its use case
 - **Database Architecture for Scale**
     - [PostgreSQL for Scale](database/postgresql-for-scale.md)
     - [MongoDB for Scale](database/mongodb-for-scale.md)
     - [Elasticsearch Architecture](database/elasticsearch-architecture.md)
+    - [Redis as a Database](database/redis-as-a-database.md) — beyond
+      caching: persistence, data structures, when it's the primary store
+    - [Graph Databases (Neo4j)](database/graph-databases-neo4j.md) —
+      index-free adjacency and when relationship traversal earns its cost
+    - [Time-Series Databases](database/time-series-databases.md) —
+      InfluxDB, TimescaleDB, Prometheus, and why Postgres alone struggles here
+    - [Wide-Column Stores (Cassandra)](database/wide-column-stores-cassandra.md) —
+      the LSM-tree write path, partition keys, tunable consistency
+    - [NewSQL: Distributed SQL](database/newsql-distributed-sql.md) —
+      Raft consensus, and how it gets ACID plus horizontal scale
     - [Cross-Store Architecture Patterns](database/cross-store-architecture-patterns.md)
 - [Database Security & Breach Prevention](database/database-security-and-breach-prevention.md) —
   network isolation, PII encryption, secure backup handling

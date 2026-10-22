@@ -296,6 +296,10 @@
     "url": "architecture/chapter-30/"
   },
   {
+    "title": "Database Types: The Decision Framework",
+    "url": "database/database-types-overview/"
+  },
+  {
     "title": "PostgreSQL for Scale",
     "url": "database/postgresql-for-scale/"
   },
@@ -306,6 +310,26 @@
   {
     "title": "Elasticsearch Architecture",
     "url": "database/elasticsearch-architecture/"
+  },
+  {
+    "title": "Redis as a Database",
+    "url": "database/redis-as-a-database/"
+  },
+  {
+    "title": "Graph Databases (Neo4j)",
+    "url": "database/graph-databases-neo4j/"
+  },
+  {
+    "title": "Time-Series Databases",
+    "url": "database/time-series-databases/"
+  },
+  {
+    "title": "Wide-Column Stores (Cassandra)",
+    "url": "database/wide-column-stores-cassandra/"
+  },
+  {
+    "title": "NewSQL: Distributed SQL",
+    "url": "database/newsql-distributed-sql/"
   },
   {
     "title": "Cross-Store Architecture Patterns",
