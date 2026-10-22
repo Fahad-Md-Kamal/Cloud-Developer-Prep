@@ -105,6 +105,9 @@ debug a multi-agent loop that won't converge, see
     - Runs scripted, deterministic multi-agent pipelines.
     - Needs zero extra setup if the goal is "get agentic workflows
       running," not "build a custom product."
+    - Its own tool/resource access to external systems runs on
+      [Model Context Protocol](model-context-protocol.md) — worth
+      knowing as the concrete, real-world example of that standard.
 - **Claude Agent SDK** (Python/TypeScript)
     - A library, not a framework — gives you the agent loop (tool use,
       context management) as building blocks.

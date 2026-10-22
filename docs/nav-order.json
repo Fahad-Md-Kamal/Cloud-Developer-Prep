@@ -548,6 +548,22 @@
     "url": "ai-llm/how-llms-actually-work/"
   },
   {
+    "title": "Fine-Tuning & the Model Training Lifecycle",
+    "url": "ai-llm/fine-tuning-and-training-lifecycle/"
+  },
+  {
+    "title": "Why LLMs Hallucinate",
+    "url": "ai-llm/why-llms-hallucinate/"
+  },
+  {
+    "title": "Multimodal Models",
+    "url": "ai-llm/multimodal-models/"
+  },
+  {
+    "title": "Quantization & Running Models Locally",
+    "url": "ai-llm/quantization-and-local-models/"
+  },
+  {
     "title": "LLM APIs & Providers",
     "url": "ai-llm/llm-apis-and-providers/"
   },
@@ -568,8 +584,16 @@
     "url": "ai-llm/agentic-ai-fundamentals/"
   },
   {
+    "title": "Model Context Protocol (MCP)",
+    "url": "ai-llm/model-context-protocol/"
+  },
+  {
     "title": "Designing Adaptive AI Interview Systems",
     "url": "ai-llm/adaptive-ai-interview-systems/"
+  },
+  {
+    "title": "Evaluating LLM Output at Scale",
+    "url": "ai-llm/evaluating-llm-output/"
   },
   {
     "title": "Coordination Patterns & Debugging",

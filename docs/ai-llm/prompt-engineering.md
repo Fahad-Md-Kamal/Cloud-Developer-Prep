@@ -107,7 +107,9 @@ Think through this step by step before giving the final answer."""
   fluent-looking reasoning trace is not proof the logic is sound.
 - Models can produce a confident, well-structured chain of reasoning
   that reaches the wrong conclusion, or even reverse-engineer the
-  reasoning to justify an answer it already committed to.
+  reasoning to justify an answer it already committed to — the same
+  plausible-not-necessarily-true dynamic covered in
+  [Why LLMs Hallucinate](why-llms-hallucinate.md#3-is-there-a-difference-between-a-hallucinated-fact-and-a-confidently-wrong-chain-of-reasoning).
 - For anything with real stakes, treat the reasoning trace as a
   debugging aid for a human reviewer (or a downstream check), not as
   a guarantee.

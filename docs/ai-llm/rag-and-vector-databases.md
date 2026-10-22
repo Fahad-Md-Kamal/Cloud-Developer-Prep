@@ -62,7 +62,7 @@ handful of chunks that actually make it into the prompt.
 
 | Pros | Cons / Trade-offs |
 |---|---|
-| Grounds generation in retrieved facts, cutting hallucination vs. relying on parametric knowledge alone | Answer quality is bounded by retrieval quality — a perfect generator can't fix a bad retrieval set |
+| Grounds generation in retrieved facts, cutting [hallucination](why-llms-hallucinate.md) vs. relying on parametric knowledge alone | Answer quality is bounded by retrieval quality — a perfect generator can't fix a bad retrieval set |
 | Retrieve-then-rerank separates a cheap recall step from an expensive precision step | Extra re-ranking hop adds latency the naive "just embed and search" pipeline doesn't have |
 | Each stage (embed, retrieve, rerank, assemble, generate) is independently testable | More moving parts than a single LLM call — more places for something to silently degrade |
 

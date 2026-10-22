@@ -311,6 +311,14 @@ mistakes and fixes kept in as teaching material.
 - [How LLMs Actually Work: Tokens, Attention & Generation](ai-llm/how-llms-actually-work.md) —
   tokenization, self-attention, autoregressive sampling, why context
   windows are a hard limit
+- [Fine-Tuning & the Model Training Lifecycle](ai-llm/fine-tuning-and-training-lifecycle.md) —
+  pretraining, SFT, RLHF/DPO, LoRA, and when to actually fine-tune
+- [Why LLMs Hallucinate](ai-llm/why-llms-hallucinate.md) — the mechanism,
+  and how to actually reduce it in production
+- [Multimodal Models](ai-llm/multimodal-models.md) — how image/audio
+  input fits into the same transformer mechanism as text
+- [Quantization & Running Models Locally](ai-llm/quantization-and-local-models.md) —
+  GGUF, llama.cpp, Ollama, and self-hosting trade-offs
 
 **LLM APIs & Gateway**
 
@@ -322,8 +330,12 @@ mistakes and fixes kept in as teaching material.
 
 - [Prompt Engineering & Context Management](ai-llm/prompt-engineering.md)
 - [Agentic AI Fundamentals](ai-llm/agentic-ai-fundamentals.md) — the agent loop, and how to actually build agents with API access
+- [Model Context Protocol (MCP)](ai-llm/model-context-protocol.md) —
+  the standard behind Claude Code's own tool/resource access
 - [Designing Adaptive AI Interview Systems](ai-llm/adaptive-ai-interview-systems.md) —
   LLM-driven question generation, answer scoring, and Computerized Adaptive Testing
+- [Evaluating LLM Output at Scale](ai-llm/evaluating-llm-output.md) —
+  benchmarks, golden sets, and LLM-as-judge pitfalls
 - [Multi-Agent Systems](ai-llm/multi-agent-systems.md) — coordination topologies, debugging
 - [Autogen: Multi-Agent Orchestration](ai-llm/autogen-orchestration.md)
 
