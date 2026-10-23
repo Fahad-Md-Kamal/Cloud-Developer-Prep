@@ -461,6 +461,10 @@ usually practiced alongside everything else, not saved for last.
   cache lines, memory locality, virtual memory
 - [How Interpreters & Compilers Actually Work](dsa/how-interpreters-and-compilers-work.md) —
   lexing/parsing/AST, bytecode, JIT compilation (animated), the CPU's fetch-decode-execute cycle
+- [Computer Architecture & How a CPU Actually Processes Instructions](dsa/computer-and-cpu-architecture.md) —
+  registers/ALU/control unit, pipelining (animated), branch prediction
+  and Spectre/Meltdown, CISC vs. RISC, why multi-core is real hardware
+  parallelism
 - [Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
 - [Visualizing Algorithms with AI](dsa/ai-assisted-algorithm-visualization.md) —
   a reusable prompt for generating a NeetCode-style step-through visualizer for your own solution

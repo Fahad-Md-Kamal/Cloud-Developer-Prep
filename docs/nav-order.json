@@ -752,6 +752,10 @@
     "url": "dsa/how-interpreters-and-compilers-work/"
   },
   {
+    "title": "Computer Architecture & How a CPU Actually Processes Instructions",
+    "url": "dsa/computer-and-cpu-architecture/"
+  },
+  {
     "title": "Blind 75 / Grind 75 / NeetCode 150",
     "url": "dsa/chapter-36/"
   },
