@@ -748,6 +748,10 @@
     "url": "dsa/big-o-and-memory-hardware/"
   },
   {
+    "title": "How Interpreters & Compilers Actually Work",
+    "url": "dsa/how-interpreters-and-compilers-work/"
+  },
+  {
     "title": "Blind 75 / Grind 75 / NeetCode 150",
     "url": "dsa/chapter-36/"
   },

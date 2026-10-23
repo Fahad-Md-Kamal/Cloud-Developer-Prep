@@ -282,6 +282,7 @@ nav = [
   ] },
   { "Algorithms" = [
       { "Big-O & the Hardware Underneath It" = "dsa/big-o-and-memory-hardware.md" },
+      { "How Interpreters & Compilers Actually Work" = "dsa/how-interpreters-and-compilers-work.md" },
       { "Blind 75 / Grind 75 / NeetCode 150" = "dsa/chapter-36.md" },
       { "Visualizing Algorithms with AI" = "dsa/ai-assisted-algorithm-visualization.md" },
       { "Arrays & Hashing" = "dsa/2-1-arrays-and-hashing.md" },
