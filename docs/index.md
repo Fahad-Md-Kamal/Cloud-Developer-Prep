@@ -106,6 +106,8 @@ framework added here later (web, desktop, or otherwise), not just
 Django/FastAPI.
 
 - [Python's Execution Model](backend/python/pythons-execution-model.md)
+- [Python Implementations: CPython, PyPy, GraalPy & Beyond](backend/python/python-implementations.md) —
+  what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
 - [Typing & Generics](backend/python/typing-and-generics.md)
 - [Bit Manipulation Basics](backend/python/bit-manipulation-basics.md)
 - **Concurrency & Parallelism**

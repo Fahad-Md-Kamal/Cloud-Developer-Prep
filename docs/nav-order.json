@@ -36,6 +36,10 @@
     "url": "backend/python/pythons-execution-model/"
   },
   {
+    "title": "Python Implementations: CPython, PyPy, GraalPy & Beyond",
+    "url": "backend/python/python-implementations/"
+  },
+  {
     "title": "Typing & Generics",
     "url": "backend/python/typing-and-generics/"
   },

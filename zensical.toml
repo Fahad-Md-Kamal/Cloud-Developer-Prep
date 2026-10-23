@@ -25,6 +25,7 @@ nav = [
   { "Backend" = [
       { "Python" = [
           { "Python's Execution Model" = "backend/python/pythons-execution-model.md" },
+          { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "backend/python/python-implementations.md" },
           { "Typing & Generics" = "backend/python/typing-and-generics.md" },
           { "Bit Manipulation Basics" = "backend/python/bit-manipulation-basics.md" },
           { "Concurrency & Parallelism" = [
