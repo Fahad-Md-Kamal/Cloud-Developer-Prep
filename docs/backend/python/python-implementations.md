@@ -121,6 +121,40 @@ actually run inside.
   support for Adafruit's own hardware, trading some of MicroPython's
   flexibility for a friendlier day-one experience.
 
+## 7. "Can you actually AOT-compile a Python project — which tool, and how do you pick fast?"
+
+**The one thing to know first:** AOT compilation is genuinely harder
+for Python than for C/Rust, because Python defers almost everything —
+types, even what a name refers to — to runtime. Every tool below works
+around that the same general way: either you add type hints, it falls
+back to the normal interpreter for anything too dynamic, or it only
+supports a narrower, less dynamic slice of the language.
+
+**Pick by what you actually want:**
+
+- Compile the whole project as-is, no rewrites → **Nuitka**
+- Speed up one hot module, willing to add type hints → **Cython** or
+  **mypyc**
+- Speed up numerical/array code specifically → **Numba**
+- Ship one file so users don't need Python installed → **PyInstaller**
+  / **cx_Freeze** — not a speedup, see below
+- Fine with a new, Python-*like* language for real native speed →
+  **Codon**
+
+| Tool | What it needs from you | What you actually get | Best for |
+|---|---|---|---|
+| **Nuitka** | Nothing — compiles existing `.py` files directly | A real compiled executable/extension; falls back to the normal interpreter for anything too dynamic to resolve | Speeding up or distributing an existing project with no rewrites |
+| **Cython** | Rewriting hot code in a Python superset (`.pyx`), with optional type declarations | Speed scales with how much typing you add — near-C speed when fully typed | Hand-optimizing one specific hot module or library |
+| **mypyc** | Type hints (the ones mypy already checks) | A compiled C extension built from already-typed `.py` code | A project that's already fully type-hinted |
+| **Numba** | A `@jit` decorator on a function (usually NumPy-based numeric code) | JIT by default; a real AOT mode (`numba.pycc`) exists for a standalone compiled version | Numerical/array-heavy functions specifically |
+| **Codon** | Accepting it isn't full Python — some dynamic features aren't supported | Full native compiled speed via LLVM | New, performance-critical code — not an existing dynamic codebase |
+| **PyInstaller / cx_Freeze** | Nothing | One distributable file — but the code still runs as interpreted bytecode, exactly as fast as before | Shipping to someone without Python installed — not a performance tool at all |
+
+**The one thing worth remembering if you only remember one thing:**
+"I made a `.exe`" and "I made my code faster" are two completely
+different problems. PyInstaller solves the first; everything else in
+this table solves the second.
+
 ## Summary: Implementation → Runtime → Why You'd Use It
 
 | Implementation | Runs on | Why you'd use it | Key trade-off |
