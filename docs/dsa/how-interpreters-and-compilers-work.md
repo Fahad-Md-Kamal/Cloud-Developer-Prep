@@ -139,6 +139,58 @@ spectrum is *when* you pay the translation cost (never, once upfront,
 once per run, or only for the parts that earn it back) — every other
 difference in this table falls out of that one choice.
 
+## The Same Comparison, Drawn Out
+
+<svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Static diagram comparing AOT compilation, pure AST interpretation, bytecode interpretation, and JIT compilation as horizontal timelines, showing when translation work happens relative to execution for each approach" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<text x="165" y="22" font-size="13" text-anchor="middle" fill="#5b6472">Earlier — a separate build step</text>
+<text x="560" y="22" font-size="13" text-anchor="middle" fill="#5b6472">Now — running `python file.py` / `./program`</text>
+<line x1="270" y1="36" x2="270" y2="452" stroke="#9aa5b3" stroke-width="2" stroke-dasharray="5,5"></line>
+<text x="40" y="58" font-size="14" font-weight="600" fill="#2b313b">AOT</text>
+<rect x="80" y="66" width="180" height="50" rx="6" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
+<text x="170" y="96" font-size="12" text-anchor="middle" fill="#7a5c14">Compile to machine code</text>
+<rect x="270" y="66" width="590" height="50" rx="6" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"></rect>
+<text x="565" y="96" font-size="12" text-anchor="middle" fill="#0f6b45">Run — native machine code, full speed from instruction one</text>
+<text x="40" y="148" font-size="14" font-weight="600" fill="#2b313b">Pure / AST</text>
+<rect x="270" y="156" width="59" height="50" fill="#eef1f5" stroke="#434d5c" stroke-width="1"></rect>
+<rect x="329" y="156" width="59" height="50" fill="#fdf3e3" stroke="#b5831f" stroke-width="1"></rect>
+<rect x="388" y="156" width="59" height="50" fill="#eef1f5" stroke="#434d5c" stroke-width="1"></rect>
+<rect x="447" y="156" width="59" height="50" fill="#fdf3e3" stroke="#b5831f" stroke-width="1"></rect>
+<rect x="506" y="156" width="59" height="50" fill="#eef1f5" stroke="#434d5c" stroke-width="1"></rect>
+<rect x="565" y="156" width="59" height="50" fill="#fdf3e3" stroke="#b5831f" stroke-width="1"></rect>
+<rect x="624" y="156" width="59" height="50" fill="#eef1f5" stroke="#434d5c" stroke-width="1"></rect>
+<rect x="683" y="156" width="59" height="50" fill="#fdf3e3" stroke="#b5831f" stroke-width="1"></rect>
+<rect x="742" y="156" width="59" height="50" fill="#eef1f5" stroke="#434d5c" stroke-width="1"></rect>
+<rect x="801" y="156" width="59" height="50" fill="#fdf3e3" stroke="#b5831f" stroke-width="1"></rect>
+<text x="565" y="224" font-size="11" text-anchor="middle" fill="#5b6472">translating and executing the same lines, over and over, every single run</text>
+<text x="40" y="248" font-size="14" font-weight="600" fill="#2b313b">Bytecode</text>
+<rect x="270" y="256" width="50" height="50" rx="6" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
+<rect x="320" y="256" width="540" height="50" rx="6" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="590" y="286" font-size="12" text-anchor="middle" fill="#1d4a78">Interpreting bytecode — one instruction at a time, for the whole run</text>
+<text x="40" y="348" font-size="14" font-weight="600" fill="#2b313b">JIT</text>
+<rect x="270" y="356" width="50" height="50" rx="6" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
+<rect x="320" y="356" width="180" height="50" rx="6" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<line x1="500" y1="350" x2="500" y2="412" stroke="#1f9d6b" stroke-width="2" stroke-dasharray="3,3"></line>
+<text x="500" y="340" font-size="11" text-anchor="middle" fill="#0f6b45">hot loop compiled here</text>
+<rect x="500" y="356" width="360" height="50" rx="6" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"></rect>
+<text x="680" y="386" font-size="12" text-anchor="middle" fill="#0f6b45">Running compiled native code for the hot path</text>
+<rect x="60" y="468" width="14" height="14" fill="#fdf3e3" stroke="#b5831f"></rect>
+<text x="80" y="479" font-size="11" fill="#2b313b">Translating / compiling</text>
+<rect x="280" y="468" width="14" height="14" fill="#eef1f5" stroke="#434d5c"></rect>
+<text x="300" y="479" font-size="11" fill="#2b313b">Interpreting raw source/AST (slowest)</text>
+<rect x="60" y="494" width="14" height="14" fill="#eaf2fb" stroke="#2f6fb3"></rect>
+<text x="80" y="505" font-size="11" fill="#2b313b">Interpreting bytecode</text>
+<rect x="280" y="494" width="14" height="14" fill="#e8f7f0" stroke="#1f9d6b"></rect>
+<text x="300" y="505" font-size="11" fill="#2b313b">Running native machine code (fastest)</text>
+</svg>
+
+The divider is the detail every explanation tends to skip: AOT's
+translation happens in a genuinely separate, earlier command (`gcc`,
+`cargo build`) — by the time you actually run the program, there's
+nothing left to translate at all. The other three all do their
+translation work **inside the same run** you're waiting on, which is
+exactly why Python startup time includes compiling to bytecode, not
+just executing it.
+
 ## 5. "Once you actually have real machine code, what does the CPU do to 'execute' it?"
 
 **Answer:**
