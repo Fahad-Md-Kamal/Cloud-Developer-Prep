@@ -1,7 +1,7 @@
 [project]
 site_url = "https://fahad-md-kamal.github.io/Cloud-Developer-Prep/"
 site_name = "Cloud Developer Prep"
-site_description = "A living backend engineering interview-prep guide for the AI-driven hiring era — system design, data structures & algorithms, architecture, cloud, databases, and behavioral prep that apply regardless of primary language, plus a deep Python/Django track and guidance on AI-driven interviews and tooling."
+site_description = "A living, multi-domain software engineering interview-prep guide for the AI-driven hiring era — frontend, backend, architecture, testing, cyber security, databases, cloud/DevOps, AI/LLM, and algorithms, from real fundamentals through staff-level depth, plus a deep Python/Django track and guidance on AI-driven interviews and tooling."
 
 repo_url = "https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep"
 repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
@@ -24,10 +24,19 @@ nav = [
   ] },
   { "Backend" = [
       { "Python" = [
-          { "Python's Execution Model" = "backend/python/pythons-execution-model.md" },
-          { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "backend/python/python-implementations.md" },
-          { "Typing & Generics" = "backend/python/typing-and-generics.md" },
-          { "Bit Manipulation Basics" = "backend/python/bit-manipulation-basics.md" },
+          { "Language Fundamentals" = [
+              { "Python's Execution Model" = "backend/python/pythons-execution-model.md" },
+              { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "backend/python/python-implementations.md" },
+              { "Typing & Generics" = "backend/python/typing-and-generics.md" },
+              { "Python Internals & Advanced OOP" = "backend/python/python-internals-and-advanced-oop.md" },
+              { "Practical Patterns" = "backend/python/practical-patterns.md" },
+          ] },
+          { "Performance & Memory" = [
+              { "Bit Manipulation Basics" = "backend/python/bit-manipulation-basics.md" },
+              { "Memory & Caching" = "backend/python/memory-and-caching.md" },
+              { "Data Structures & Their Memory Model" = "backend/python/data-structures-and-memory.md" },
+              { "Profiling & Optimization" = "backend/python/profiling-and-optimization.md" },
+          ] },
           { "Concurrency & Parallelism" = [
               { "Choosing a Concurrency Model" = "backend/python/choosing-a-concurrency-model.md" },
               { "Threading & the GIL" = "backend/python/threading-and-the-gil.md" },
@@ -36,19 +45,19 @@ nav = [
               { "Multiprocessing in Practice" = "backend/python/multiprocessing-in-practice.md" },
               { "Capstone: A Concurrent Data Pipeline" = "backend/python/concurrent-data-pipeline-capstone.md" },
           ] },
-          { "Memory & Caching" = "backend/python/memory-and-caching.md" },
-          { "Data Structures & Their Memory Model" = "backend/python/data-structures-and-memory.md" },
-          { "Profiling & Optimization" = "backend/python/profiling-and-optimization.md" },
-          { "Practical Patterns" = "backend/python/practical-patterns.md" },
-          { "Python Internals & Advanced OOP" = "backend/python/python-internals-and-advanced-oop.md" },
-          { "Choosing a Python Web Framework" = "backend/python/choosing-a-python-web-framework.md" },
-          { "Django & DRF" = [
-              { "ORM Query Cheat Sheet" = "backend/python/django-orm.md" },
-              { "Deep Dive: Serializers, Auth, Signals, Testing" = "backend/python/django-drf.md" },
-          ] },
-          { "FastAPI" = [
-              { "Dependency Injection & Background Tasks" = "backend/python/fastapi-dependency-injection.md" },
-              { "Performance & Production Patterns" = "backend/python/fastapi-performance-patterns.md" },
+          { "Web Frameworks" = [
+              { "Choosing a Python Web Framework" = "backend/python/choosing-a-python-web-framework.md" },
+              { "Django & DRF" = [
+                  { "ORM Query Cheat Sheet" = "backend/python/django-orm.md" },
+                  { "Deep Dive: Serializers, Auth, Signals, Testing" = "backend/python/django-drf.md" },
+              ] },
+              { "FastAPI" = [
+                  { "Routing & Pydantic Validation" = "backend/python/fastapi-routing-and-validation.md" },
+                  { "Dependency Injection & Background Tasks" = "backend/python/fastapi-dependency-injection.md" },
+                  { "Auth, Middleware & Lifecycle Events" = "backend/python/fastapi-auth-and-middleware.md" },
+                  { "Database Integration & Testing" = "backend/python/fastapi-database-and-testing.md" },
+                  { "Performance & Production Patterns" = "backend/python/fastapi-performance-patterns.md" },
+              ] },
           ] },
           { "Python Standard Library" = [
               { "Pathlib & File Operations" = "backend/python/pathlib-and-file-operations.md" },
@@ -154,8 +163,8 @@ nav = [
       { "AI & LLM Security" = "security/ai-and-llm-security.md" },
   ] },
   { "Database" = [
-      { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
       { "Database Architecture for Scale" = [
+          { "Database Types: The Decision Framework" = "database/database-types-overview.md" },
           { "PostgreSQL for Scale" = "database/postgresql-for-scale.md" },
           { "MongoDB for Scale" = "database/mongodb-for-scale.md" },
           { "Elasticsearch Architecture" = "database/elasticsearch-architecture.md" },
@@ -166,8 +175,10 @@ nav = [
           { "NewSQL: Distributed SQL" = "database/newsql-distributed-sql.md" },
           { "Cross-Store Architecture Patterns" = "database/cross-store-architecture-patterns.md" },
       ] },
-      { "Database Security & Breach Prevention" = "database/database-security-and-breach-prevention.md" },
-      { "SQL & Relational Data Modeling" = "database/sql-data-modeling-fundamentals.md" },
+      { "Fundamentals" = [
+          { "SQL & Relational Data Modeling" = "database/sql-data-modeling-fundamentals.md" },
+          { "Database Security & Breach Prevention" = "database/database-security-and-breach-prevention.md" },
+      ] },
       { "Web Crawling & Pipelines" = [
           { "Web Crawling at Scale" = "database/web-crawling-at-scale.md" },
           { "HTML Parsing & Data Pipelines" = "database/html-parsing-and-data-pipelines.md" },
@@ -178,9 +189,9 @@ nav = [
           { "ETL vs. ELT: Data Pipeline Architecture" = "database/etl-vs-elt.md" },
           { "Apache Spark & PySpark" = "database/spark-pyspark.md" },
           { "Databricks & Delta Lake" = "database/databricks-delta-lake.md" },
+          { "Data Preprocessing: Pandas & NumPy" = "database/data-preprocessing-pandas-numpy.md" },
+          { "Large-Scale Report Generation" = "database/large-scale-report-generation.md" },
       ] },
-      { "Data Preprocessing: Pandas & NumPy" = "database/data-preprocessing-pandas-numpy.md" },
-      { "Large-Scale Report Generation" = "database/large-scale-report-generation.md" },
   ] },
   { "Cloud & DevOps" = [
       { "DevOps Principles & Delivery" = "cloud-devops/devops-principles-and-delivery.md" },
@@ -248,12 +259,17 @@ nav = [
       { "SAA-C03 Practice Quiz" = "cloud-devops/saa-c03-practice-quiz.md" },
   ] },
   { "AI & LLM" = [
-      { "AGI & ASI: The Intelligence Spectrum" = "ai-llm/agi-and-asi.md" },
-      { "How LLMs Actually Work: Tokens, Attention & Generation" = "ai-llm/how-llms-actually-work.md" },
-      { "Fine-Tuning & the Model Training Lifecycle" = "ai-llm/fine-tuning-and-training-lifecycle.md" },
-      { "Why LLMs Hallucinate" = "ai-llm/why-llms-hallucinate.md" },
-      { "Multimodal Models" = "ai-llm/multimodal-models.md" },
-      { "Quantization & Running Models Locally" = "ai-llm/quantization-and-local-models.md" },
+      { "Fundamentals" = [
+          { "AGI & ASI: The Intelligence Spectrum" = "ai-llm/agi-and-asi.md" },
+          { "Types of AI Models & What They Actually Cost" = "ai-llm/types-of-ai-models-and-their-cost.md" },
+          { "How LLMs Actually Work: Tokens, Attention & Generation" = "ai-llm/how-llms-actually-work.md" },
+          { "Fine-Tuning & the Model Training Lifecycle" = "ai-llm/fine-tuning-and-training-lifecycle.md" },
+          { "Why LLMs Hallucinate" = "ai-llm/why-llms-hallucinate.md" },
+      ] },
+      { "Multimodal & Local Deployment" = [
+          { "Multimodal Models" = "ai-llm/multimodal-models.md" },
+          { "Quantization & Running Models Locally" = "ai-llm/quantization-and-local-models.md" },
+      ] },
       { "LLM APIs & Gateway" = [
           { "LLM APIs & Providers" = "ai-llm/llm-apis-and-providers.md" },
           { "LLM Gateway & Multi-Provider Integration" = "ai-llm/llm-gateway-multi-provider.md" },
@@ -284,7 +300,7 @@ nav = [
       { "Big-O & the Hardware Underneath It" = "dsa/big-o-and-memory-hardware.md" },
       { "How Interpreters & Compilers Actually Work" = "dsa/how-interpreters-and-compilers-work.md" },
       { "Computer Architecture & How a CPU Actually Processes Instructions" = "dsa/computer-and-cpu-architecture.md" },
-      { "Blind 75 / Grind 75 / NeetCode 150" = "dsa/chapter-36.md" },
+      { "Blind 75 / Grind 75 / NeetCode 150" = "dsa/blind-75-grind-75-neetcode-150.md" },
       { "Visualizing Algorithms with AI" = "dsa/ai-assisted-algorithm-visualization.md" },
       { "Arrays & Hashing" = "dsa/2-1-arrays-and-hashing.md" },
       { "Two Pointers" = "dsa/2-2-two-pointers.md" },

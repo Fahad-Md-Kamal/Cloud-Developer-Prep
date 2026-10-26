@@ -77,6 +77,7 @@ measurable trade-offs when it guesses wrong.
 ## How Pipelining Overlaps Multiple Instructions at Once
 
 <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of instruction pipelining: three instructions overlap across the fetch, decode, execute, and write-back stages simultaneously, so a new instruction completes every cycle once the pipeline is full, instead of waiting for each instruction to finish all four stages before the next one starts" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="380" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <text x="450" y="24" font-size="13" text-anchor="middle" fill="#5b6472">Four pipeline stages, running left to right over time</text>
 <text x="40" y="70" font-size="13" font-weight="600" fill="#2b313b">Fetch</text>
 <text x="40" y="140" font-size="13" font-weight="600" fill="#2b313b">Decode</text>

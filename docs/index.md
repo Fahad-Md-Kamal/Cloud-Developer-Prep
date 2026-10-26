@@ -3,18 +3,26 @@ title: Home
 icon: lucide/house
 ---
 
-# Engineering for Scale: Backend, AI, and System Design Mastery
+# Software Engineering Interview Prep, Start to Staff
 
-**A Comprehensive Interview Preparation Guide**
+**A Living, Multi-Domain Study & Interview Guide**
 
-A living backend/cloud interview-prep guide, built from real practice
-sessions rather than a static checklist. Most of it is
-**language-agnostic** — system design, data structures & algorithms,
-distributed architecture, cloud/DevOps, databases, security, and
-behavioral prep apply whether the primary stack is Python, Go, Ruby,
-Rust, or anything else. One unified tree — 38 chapters + appendices,
-plus a running practice log cross-linked into the specific chapter
-each round belongs to.
+A full map of software engineering — Frontend, Backend, Architecture,
+Software Testing, Cyber Security, Database, Cloud & DevOps, AI & LLM,
+Algorithms, and Interview Prep — ten domains, 230+ chapters and still
+growing, built from real practice sessions rather than a static
+checklist.
+
+- Each domain runs from real fundamentals up through senior/staff
+  depth — this isn't scoped to one experience level or to backend
+  alone.
+- Most of it is **language-agnostic** — system design, architecture,
+  testing, security, databases, cloud/DevOps, and behavioral prep
+  apply whether the primary stack is Python, Go, Ruby, Rust, or a
+  frontend framework.
+- Python and Django get the deepest, most detailed coverage inside
+  [Backend](#backend), since that's the author's own specialization
+  and current job search — everything else stands on its own.
 
 Hiring itself has changed, too — interviewers now routinely ask how
 candidates actually use AI tools day to day, live coding happens with
@@ -27,23 +35,32 @@ covers that layer directly.
 
 ## About this book
 
-A guide for senior backend engineers with 5+ years of experience
-targeting Staff/Senior roles, covering system design, distributed
-architecture, cloud, AI system integration, and technical leadership
-— usable regardless of primary language. Python and Django get the
-deepest, most detailed coverage since that's the author's own
-specialization and current job search, but that lives inside the
-Python subsection of [Backend](#backend) rather than being baked into
-the rest of the guide. A Go, Kotlin, Ruby, or Rust engineer gets full
-value from everything else and can treat Python as the one subsection
-to skim past, or use [Backend](#backend)'s earlier-stage Go/Kotlin
-material as the starting point to eventually fill in with their own
-language's full track.
+A living, multi-domain engineering study guide — not a single track
+scoped to one role or one experience level.
+
+- Covers the full breadth of a software engineering career: frontend,
+  backend, architecture, QA/testing, cyber security, databases, cloud
+  & DevOps, AI/LLM, algorithms, and interview prep.
+- Each domain starts from real fundamentals (e.g. Manual Testing
+  Fundamentals, Cybersecurity for Beginners, what an AI model even is)
+  and goes up through senior/staff-level depth (e.g. distributed
+  consensus, Terraform in production, the Staff Engineer mindset) — it
+  serves someone starting a track from zero just as well as someone
+  already deep into one.
+- Python and Django get the deepest, most detailed coverage since
+  that's the author's own specialization and current job search, but
+  that lives inside the Python subsection of [Backend](#backend)
+  rather than being baked into the rest of the guide. A Go, Kotlin,
+  Ruby, Rust, or frontend engineer gets full value from everything
+  else.
 
 ## Who should read this
 
-- Senior backend engineers preparing for interviews, in any primary
-  language
+- Anyone preparing for a software engineering interview, at any level
+  from "learning the fundamentals" to Staff Engineer
+- Engineers specializing in one domain — frontend, backend, QA,
+  security, data, or cloud/DevOps — who want that domain covered in
+  real depth, not a shallow survey
 - Engineers targeting roles in AI/ML, distributed systems, or
   fullstack platforms
 - Technical leads advancing toward Staff Engineer positions
@@ -52,19 +69,20 @@ language's full track.
 
 ## What this covers
 
-- System design, distributed architecture, and microservices at scale
-  — language-agnostic
-- Data structures & algorithms, databases, and cloud/DevOps —
-  language-agnostic
-- AI/LLM integration and conversational agent development
-- A deep Python/Django track, plus Go, Kotlin, and React/React
+- Frontend, backend, and architecture — language-agnostic system
+  design, distributed architecture, and microservices at scale, plus a
+  deep Python/Django track and Go/Kotlin/React/React
   Native/TypeScript/Angular material
-- Technical leadership and interview mastery
-
-## Study timeline
-
-Originally structured as a 6-month intensive preparation program, each part
-building on the previous one.
+- Software testing and QA, from manual test design through
+  property-based and mutation testing
+- Cyber security, from a beginner's roadmap through offensive
+  security, SecOps, compliance, and AI/LLM-specific security
+- Databases and data engineering, cloud/DevOps (a full AWS + Terraform
+  + CI/CD ramp plan, including SAA-C03 exam prep), and algorithms/DSA
+- AI/LLM integration and conversational agent development, starting
+  from "what is a model" for readers with zero prior AI knowledge
+- Technical leadership and interview mastery, including
+  industry-vertical case studies (healthcare, fintech, telecom, energy)
 
 ## Current job-search track: Senior Python/Django
 
@@ -105,11 +123,19 @@ earlier-stage tracks for engineers coming from those languages.
 framework added here later (web, desktop, or otherwise), not just
 Django/FastAPI.
 
-- [Python's Execution Model](backend/python/pythons-execution-model.md)
-- [Python Implementations: CPython, PyPy, GraalPy & Beyond](backend/python/python-implementations.md) —
-  what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
-- [Typing & Generics](backend/python/typing-and-generics.md)
-- [Bit Manipulation Basics](backend/python/bit-manipulation-basics.md)
+- **Language Fundamentals**
+    - [Python's Execution Model](backend/python/pythons-execution-model.md)
+    - [Python Implementations: CPython, PyPy, GraalPy & Beyond](backend/python/python-implementations.md) —
+      what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
+    - [Typing & Generics](backend/python/typing-and-generics.md)
+    - [Python Internals & Advanced OOP](backend/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
+    - [Practical Patterns](backend/python/practical-patterns.md)
+- **Performance & Memory**
+    - [Bit Manipulation Basics](backend/python/bit-manipulation-basics.md)
+    - [Memory & Caching](backend/python/memory-and-caching.md)
+    - [Data Structures & Their Memory Model](backend/python/data-structures-and-memory.md)
+    - [Profiling & Optimization](backend/python/profiling-and-optimization.md) —
+      cProfile/py-spy, tracemalloc, algorithmic complexity, bounding async concurrency
 - **Concurrency & Parallelism**
     - [Choosing a Concurrency Model](backend/python/choosing-a-concurrency-model.md)
     - [Threading & the GIL](backend/python/threading-and-the-gil.md)
@@ -117,21 +143,23 @@ Django/FastAPI.
     - [Worker Pools & Backpressure](backend/python/worker-pools-and-backpressure.md)
     - [Multiprocessing in Practice](backend/python/multiprocessing-in-practice.md)
     - [Capstone: A Concurrent Data Pipeline](backend/python/concurrent-data-pipeline-capstone.md)
-- [Memory & Caching](backend/python/memory-and-caching.md)
-- [Data Structures & Their Memory Model](backend/python/data-structures-and-memory.md)
-- [Profiling & Optimization](backend/python/profiling-and-optimization.md) —
-  cProfile/py-spy, tracemalloc, algorithmic complexity, bounding async concurrency
-- [Practical Patterns](backend/python/practical-patterns.md)
-- [Python Internals & Advanced OOP](backend/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
-- [Choosing a Python Web Framework](backend/python/choosing-a-python-web-framework.md) —
-  Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
-- **Django & DRF**
-    - [Django ORM Query Cheat Sheet](backend/python/django-orm.md)
-    - [Django & DRF Deep Dive](backend/python/django-drf.md) — serializers, permissions,
-      auth, signals, migrations, testing, caching
-- **FastAPI**
-    - [Dependency Injection & Background Tasks](backend/python/fastapi-dependency-injection.md)
-    - [Performance & Production Patterns](backend/python/fastapi-performance-patterns.md)
+- **Web Frameworks**
+    - [Choosing a Python Web Framework](backend/python/choosing-a-python-web-framework.md) —
+      Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
+    - **Django & DRF**
+        - [Django ORM Query Cheat Sheet](backend/python/django-orm.md)
+        - [Django & DRF Deep Dive](backend/python/django-drf.md) — serializers, permissions,
+          auth, signals, migrations, testing, caching
+    - **FastAPI**
+        - [Routing & Pydantic Validation](backend/python/fastapi-routing-and-validation.md) —
+          path/query/body parameters, validators, response models, auto `422`s
+        - [Dependency Injection & Background Tasks](backend/python/fastapi-dependency-injection.md)
+        - [Auth, Middleware & Lifecycle Events](backend/python/fastapi-auth-and-middleware.md) —
+          OAuth2/JWT, security scopes, Starlette middleware ordering, `lifespan` startup/shutdown
+        - [Database Integration & Testing](backend/python/fastapi-database-and-testing.md) —
+          SQLAlchemy 2.0 async + Alembic, `httpx.AsyncClient`, dependency overrides
+        - [Performance & Production Patterns](backend/python/fastapi-performance-patterns.md) —
+          connection pooling, WebSockets, ASGI vs. WSGI
 - **Python Standard Library**
     - [Pathlib & File Operations](backend/python/pathlib-and-file-operations.md)
     - [Collections & Itertools](backend/python/collections-and-itertools.md)
@@ -291,48 +319,55 @@ content rather than duplicating it.
 ### Database
 
 Everything database- and data-engineering-related in one place —
-database architecture, database security, SQL/relational modeling,
-web crawling/pipelines, distributed big-data compute, and
-preprocessing.
+database architecture, fundamentals & security, web crawling/pipelines,
+and distributed big-data compute.
+
+**Database Architecture for Scale**
 
 - [Database Types: The Decision Framework](database/database-types-overview.md) —
   relational, document, key-value, wide-column, graph, vector,
   time-series, search-engine, and NewSQL, each explained by the
   mechanism that fits its use case
-- **Database Architecture for Scale**
-    - [PostgreSQL for Scale](database/postgresql-for-scale.md)
-    - [MongoDB for Scale](database/mongodb-for-scale.md)
-    - [Elasticsearch Architecture](database/elasticsearch-architecture.md)
-    - [Redis as a Database](database/redis-as-a-database.md) — beyond
-      caching: persistence, data structures, when it's the primary store
-    - [Graph Databases (Neo4j)](database/graph-databases-neo4j.md) —
-      index-free adjacency and when relationship traversal earns its cost
-    - [Time-Series Databases](database/time-series-databases.md) —
-      InfluxDB, TimescaleDB, Prometheus, and why Postgres alone struggles here
-    - [Wide-Column Stores (Cassandra)](database/wide-column-stores-cassandra.md) —
-      the LSM-tree write path, partition keys, tunable consistency
-    - [NewSQL: Distributed SQL](database/newsql-distributed-sql.md) —
-      Raft consensus, and how it gets ACID plus horizontal scale
-    - [Cross-Store Architecture Patterns](database/cross-store-architecture-patterns.md)
-- [Database Security & Breach Prevention](database/database-security-and-breach-prevention.md) —
-  network isolation, PII encryption, secure backup handling
+- [PostgreSQL for Scale](database/postgresql-for-scale.md)
+- [MongoDB for Scale](database/mongodb-for-scale.md)
+- [Elasticsearch Architecture](database/elasticsearch-architecture.md)
+- [Redis as a Database](database/redis-as-a-database.md) — beyond
+  caching: persistence, data structures, when it's the primary store
+- [Graph Databases (Neo4j)](database/graph-databases-neo4j.md) —
+  index-free adjacency and when relationship traversal earns its cost
+- [Time-Series Databases](database/time-series-databases.md) —
+  InfluxDB, TimescaleDB, Prometheus, and why Postgres alone struggles here
+- [Wide-Column Stores (Cassandra)](database/wide-column-stores-cassandra.md) —
+  the LSM-tree write path, partition keys, tunable consistency
+- [NewSQL: Distributed SQL](database/newsql-distributed-sql.md) —
+  Raft consensus, and how it gets ACID plus horizontal scale
+- [Cross-Store Architecture Patterns](database/cross-store-architecture-patterns.md)
+
+**Fundamentals**
+
 - [SQL & Relational Data Modeling](database/sql-data-modeling-fundamentals.md) —
   normalization, keys, JOINs, denormalization, DB-level constraints, MySQL-specific notes
-- **Web Crawling & Pipelines**
-    - [Web Crawling at Scale](database/web-crawling-at-scale.md) —
-      why some pages need a real browser, Selenium vs. Playwright's
-      actual protocol difference, anti-bot fingerprinting
-    - [HTML Parsing & Data Pipelines](database/html-parsing-and-data-pipelines.md) —
-      the DOM tree, BeautifulSoup vs. lxml, CSS selectors vs. XPath
-    - [Distributed Crawling Architecture](database/distributed-crawling-architecture.md) —
-      Celery, Kafka, Ray, Bloom-filter frontiers, visibility timeouts
-    - [Data Cleaning, Normalization & Deduplication](database/data-cleaning-and-deduplication.md) —
-      MinHash and LSH for near-duplicate detection at scale
-- **Big Data & Distributed Compute**
-    - [ETL vs. ELT: Data Pipeline Architecture](database/etl-vs-elt.md) —
-      the one real difference, why ELT became viable, and when ETL still wins
-    - [Apache Spark & PySpark](database/spark-pyspark.md)
-    - [Databricks & Delta Lake](database/databricks-delta-lake.md)
+- [Database Security & Breach Prevention](database/database-security-and-breach-prevention.md) —
+  network isolation, PII encryption, secure backup handling
+
+**Web Crawling & Pipelines**
+
+- [Web Crawling at Scale](database/web-crawling-at-scale.md) —
+  why some pages need a real browser, Selenium vs. Playwright's
+  actual protocol difference, anti-bot fingerprinting
+- [HTML Parsing & Data Pipelines](database/html-parsing-and-data-pipelines.md) —
+  the DOM tree, BeautifulSoup vs. lxml, CSS selectors vs. XPath
+- [Distributed Crawling Architecture](database/distributed-crawling-architecture.md) —
+  Celery, Kafka, Ray, Bloom-filter frontiers, visibility timeouts
+- [Data Cleaning, Normalization & Deduplication](database/data-cleaning-and-deduplication.md) —
+  MinHash and LSH for near-duplicate detection at scale
+
+**Big Data & Distributed Compute**
+
+- [ETL vs. ELT: Data Pipeline Architecture](database/etl-vs-elt.md) —
+  the one real difference, why ELT became viable, and when ETL still wins
+- [Apache Spark & PySpark](database/spark-pyspark.md)
+- [Databricks & Delta Lake](database/databricks-delta-lake.md)
 - [Data Preprocessing: Pandas & NumPy](database/data-preprocessing-pandas-numpy.md)
 - [Large-Scale Report Generation](database/large-scale-report-generation.md) —
   memory-efficient PDF/XLSX export from 10+GB source data
@@ -406,8 +441,14 @@ mistakes and fixes kept in as teaching material.
 
 ### AI & LLM
 
+**Fundamentals**
+
 - [AGI & ASI: The Intelligence Spectrum](ai-llm/agi-and-asi.md) — narrow
   AI vs. AGI vs. ASI, how we'd measure AGI, and the alignment problem
+- [Types of AI Models & What They Actually Cost](ai-llm/types-of-ai-models-and-their-cost.md) —
+  genuinely starts from zero: what a model/training/a parameter even
+  is, then classification vs. generation vs. embeddings, and why cost
+  tracks output length, not task difficulty
 - [How LLMs Actually Work: Tokens, Attention & Generation](ai-llm/how-llms-actually-work.md) —
   tokenization, self-attention, autoregressive sampling, why context
   windows are a hard limit
@@ -415,6 +456,9 @@ mistakes and fixes kept in as teaching material.
   pretraining, SFT, RLHF/DPO, LoRA, and when to actually fine-tune
 - [Why LLMs Hallucinate](ai-llm/why-llms-hallucinate.md) — the mechanism,
   and how to actually reduce it in production
+
+**Multimodal & Local Deployment**
+
 - [Multimodal Models](ai-llm/multimodal-models.md) — how image/audio
   input fits into the same transformer mechanism as text
 - [Quantization & Running Models Locally](ai-llm/quantization-and-local-models.md) —
@@ -465,7 +509,7 @@ usually practiced alongside everything else, not saved for last.
   registers/ALU/control unit, pipelining (animated), branch prediction
   and Spectre/Meltdown, CISC vs. RISC, why multi-core is real hardware
   parallelism
-- [Blind 75, Grind 75 & NeetCode 150](dsa/chapter-36.md)
+- [Blind 75, Grind 75 & NeetCode 150](dsa/blind-75-grind-75-neetcode-150.md)
 - [Visualizing Algorithms with AI](dsa/ai-assisted-algorithm-visualization.md) —
   a reusable prompt for generating a NeetCode-style step-through visualizer for your own solution
 - [Arrays & Hashing](dsa/2-1-arrays-and-hashing.md)

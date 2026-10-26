@@ -14,10 +14,10 @@ service OrderService {
 }
 ```
 
-**What it is:** RPC framework using Protocol Buffers (a compact binary
-format) over HTTP/2, with native support for streaming (client, server,
-or bidirectional). Contracts are defined in `.proto` files, and client/
-server code is generated from them.
+**What it is:** an RPC (Remote Procedure Call) framework using Protocol
+Buffers (a compact binary format) over HTTP/2, with native support for
+streaming (client, server, or bidirectional). Contracts are defined in
+`.proto` files, and client/server code is generated from them.
 
 **Benefits:** Protobuf is far more compact and faster to
 serialize/deserialize than JSON. HTTP/2 gives multiplexing (many calls
@@ -29,6 +29,42 @@ microservices architecture, especially where latency and throughput
 matter and every service is under your own control (both ends need
 Protobuf/gRPC support, which makes it a poor fit for public APIs
 consumed by arbitrary third parties).
+
+## RPC vs. REST: Two Different Mental Models
+
+<svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Static diagram comparing RPC and REST: RPC calls a named procedure like GetOrder, with each operation as its own distinct function; REST sends a small fixed set of HTTP verbs to a URL representing a resource, with the same verbs reused across every resource" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="440" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
+<text x="225" y="26" font-size="18" font-weight="600" text-anchor="middle" fill="#2b313b">RPC</text>
+<text x="675" y="26" font-size="18" font-weight="600" text-anchor="middle" fill="#2b313b">REST</text>
+<line x1="450" y1="38" x2="450" y2="420" stroke="#9aa5b3" stroke-width="2" stroke-dasharray="5,5"></line>
+<rect x="145" y="50" width="160" height="50" rx="6" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="225" y="80" font-size="14" font-weight="600" text-anchor="middle" fill="#2b313b">Client</text>
+<line x1="225" y1="100" x2="225" y2="148" stroke="#9aa5b3" stroke-width="2"></line>
+<text x="225" y="130" font-size="12" text-anchor="middle" fill="#5b6472">GetOrder(orderId=123)</text>
+<rect x="145" y="150" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="225" y="172" font-size="13" font-weight="600" text-anchor="middle" fill="#1d4a78">Server</text>
+<text x="225" y="190" font-size="10" text-anchor="middle" fill="#1d4a78">runs the matching procedure</text>
+<text x="225" y="230" font-size="11" font-weight="600" text-anchor="middle" fill="#2b313b">Also exposed, as separate named calls:</text>
+<text x="225" y="250" font-size="11" text-anchor="middle" fill="#5b6472">CreateOrder(...)</text>
+<text x="225" y="268" font-size="11" text-anchor="middle" fill="#5b6472">CancelOrder(orderId)</text>
+<text x="225" y="286" font-size="11" text-anchor="middle" fill="#5b6472">ListOrders(customerId)</text>
+<text x="225" y="325" font-size="12" text-anchor="middle" fill="#1f2a3a">Each operation is its own named</text>
+<text x="225" y="343" font-size="12" text-anchor="middle" fill="#1f2a3a">procedure — the verb is the function name.</text>
+<rect x="595" y="50" width="160" height="50" rx="6" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
+<text x="675" y="80" font-size="14" font-weight="600" text-anchor="middle" fill="#2b313b">Client</text>
+<line x1="675" y1="100" x2="675" y2="148" stroke="#9aa5b3" stroke-width="2"></line>
+<text x="675" y="130" font-size="12" text-anchor="middle" fill="#5b6472">GET /orders/123</text>
+<rect x="595" y="150" width="160" height="50" rx="6" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
+<text x="675" y="172" font-size="13" font-weight="600" text-anchor="middle" fill="#1d4a78">Server</text>
+<text x="675" y="190" font-size="10" text-anchor="middle" fill="#1d4a78">interprets the verb on the resource</text>
+<text x="675" y="230" font-size="11" font-weight="600" text-anchor="middle" fill="#2b313b">Same fixed verbs, every resource:</text>
+<text x="675" y="250" font-size="11" text-anchor="middle" fill="#5b6472">POST /orders</text>
+<text x="675" y="268" font-size="11" text-anchor="middle" fill="#5b6472">PUT /orders/123</text>
+<text x="675" y="286" font-size="11" text-anchor="middle" fill="#5b6472">DELETE /orders/123</text>
+<text x="675" y="325" font-size="12" text-anchor="middle" fill="#1f2a3a">A small, fixed set of verbs, applied</text>
+<text x="675" y="343" font-size="12" text-anchor="middle" fill="#1f2a3a">uniformly to any resource URL.</text>
+<text x="450" y="400" font-size="13" text-anchor="middle" fill="#5b6472">RPC: many named operations, each its own call.  REST: few fixed verbs, reused across every resource.</text>
+</svg>
 
 ## 1. Protocol Buffers: The Wire Format Underneath Everything
 
@@ -177,7 +213,148 @@ service OrderService {
   the check in each handler — the RPC-layer equivalent of
   [DRF's permission classes](../backend/python/django-drf.md#4-authentication-permissions).
 
-## 7. When *Not* to Reach for gRPC
+## 7. Channels: The Connection Management Abstraction
+
+**Answer:**
+
+- A gRPC **channel** is the client-side abstraction representing a
+  connection to a server — not necessarily one single raw TCP/HTTP2
+  connection, one-to-one; the channel is what actually manages
+  connection setup, reconnection, and (depending on configuration)
+  which real backend address a given call goes out on.
+- This is the object §4's "client-side load balancing" was actually
+  referring to — a channel can be configured with a **resolver** (how
+  to discover candidate backend addresses — DNS, or a service-discovery
+  mechanism like xDS) and a **load-balancing policy** (round-robin,
+  pick-first) that decides which resolved address each new call
+  actually uses.
+- Channels are meant to be created once and reused for the life of an
+  application, not created fresh per call — creating one has real setup
+  cost (connection establishment, a TLS handshake if applicable), and
+  reusing a single channel across many calls is exactly what lets
+  HTTP/2 multiplexing (§3) do its job at all.
+
+## 8. Security: TLS and Authentication
+
+**Answer:**
+
+- gRPC distinguishes two separate kinds of credentials, worth naming
+  precisely: **channel credentials** secure the transport itself (TLS
+  — applied once, per channel), and **call credentials** authenticate
+  an individual *request* (a bearer token, an API key), attached as
+  metadata on each call, independent of whether the transport itself
+  is encrypted.
+- In production, gRPC channels run over TLS essentially by default —
+  an *insecure* channel is explicitly named "insecure" in most client
+  libraries specifically because it's the exception being opted into,
+  the opposite convention from plain HTTP, where unencrypted was
+  historically the unmarked default.
+- Call-level auth tokens travel as **gRPC metadata** — functionally
+  HTTP/2 headers, exposed through gRPC's own metadata API rather than
+  raw header manipulation — read and validated by a
+  [server interceptor](#6-interceptors-grpcs-middleware) uniformly
+  across every RPC, the same pattern already covered there.
+- **mTLS (mutual TLS)** — both client and server present certificates,
+  each verifying the other's identity — is common specifically for
+  internal service-to-service gRPC traffic inside a zero-trust mesh
+  (Istio/Envoy, already named in §4), where "which service is actually
+  calling me" needs to be cryptographically verified, not assumed from
+  network location alone.
+
+## 9. Server Reflection — Debugging Without a Local .proto File
+
+**Answer:**
+
+- [§13](#13-when-not-to-reach-for-grpc) names the real debuggability
+  trade-off: gRPC isn't `curl`-able the way REST is, because a client
+  normally needs the `.proto` contract in hand to know how to
+  construct a call at all.
+- **Server reflection** is gRPC's own answer to part of that gap: a
+  service can expose a reflection API
+  (`grpc.reflection.v1.ServerReflection`) letting a client discover its
+  available methods and message shapes **at runtime**, without the
+  `.proto` file being distributed to it in advance.
+- This is exactly what lets `grpcurl` and Postman's gRPC support call
+  an unfamiliar gRPC service interactively, the same way `curl` can hit
+  a REST endpoint without the caller holding OpenAPI docs first —
+  reflection doesn't make gRPC as universally debuggable as REST+JSON,
+  but it closes a real, practical chunk of that gap for ad hoc
+  debugging and exploration.
+
+## 10. Retries and the Service Config
+
+**Answer:**
+
+- gRPC supports **declarative, built-in retry policies**, configured
+  per method through a **service config** (JSON, supplied by the client
+  or resolved alongside the server address) — specifying which status
+  codes are retryable, how many attempts, and backoff parameters,
+  without the application hand-writing its own retry loop.
+- This matters specifically because of the same
+  [status-code specificity already covered in §5](#5-deadlines-cancellation-and-status-codes) —
+  only some codes (`UNAVAILABLE`, for instance) represent a genuinely
+  transient condition worth retrying; retrying `INVALID_ARGUMENT` or
+  `PERMISSION_DENIED` just repeats a failure that will never succeed —
+  the identical reasoning behind
+  [error-type-specific retry logic](../ai-llm/llm-apis-and-providers.md#7-walk-through-error-handling-and-retry-strategy-for-an-llm-api-call-whats-different-from-a-typical-rest-api-retry)
+  already established elsewhere on this site.
+- This is a narrower, protocol-level tool than a full
+  [circuit breaker](../backend/circuit-breakers-retries-and-bulkheads.md#2-how-does-a-circuit-breaker-interact-with-retries-and-timeouts-what-breaks-if-you-get-the-order-wrong) —
+  gRPC's retry policy decides "should this one call be retried," not
+  "should we stop sending calls to a service that's clearly down
+  entirely." A production system typically layers both: gRPC's retry
+  policy for the fast, local decision, a circuit breaker for the
+  broader one.
+
+## 11. Health Checking: The grpc.health.v1 Protocol
+
+**Answer:**
+
+- gRPC defines a standard **health-checking protocol**
+  (`grpc.health.v1.Health`) — a well-known RPC service any gRPC server
+  can implement, letting a load balancer or orchestrator query a
+  specific service's health by name over the same gRPC channel,
+  instead of needing a separate plain-HTTP health endpoint bolted on
+  alongside it.
+- This matters concretely in Kubernetes: a gRPC-aware readiness/
+  liveness probe calls this standard health service directly (using
+  `grpc_health_probe` as the actual probe binary, since kubelet's
+  native HTTP probes don't speak gRPC) instead of requiring every gRPC
+  service to additionally expose and maintain a separate HTTP endpoint
+  just to be probed.
+- This is the gRPC-specific version of the general
+  [health check](../cloud-devops/load-balancing-and-dns.md#health-checks-debugging-guide)
+  concept already covered elsewhere on this site — same purpose,
+  implemented as a real gRPC call instead of an HTTP one.
+
+## 12. Protobuf Beyond Basic Messages: oneof, Maps & Well-Known Types
+
+**Answer:**
+
+- **`oneof`** — declares a set of fields where **at most one** can
+  actually be set at a time, encoding a genuine "exactly one of these
+  alternatives" relationship directly in the schema, rather than
+  leaving it as an unenforced convention.
+- **`map<K, V>`** — a native map type, instead of hand-rolling a
+  repeated key-value message pair to represent the same thing.
+- **Well-known types** — standard, pre-defined messages shipped with
+  Protobuf itself for extremely common cases: `google.protobuf.Timestamp`
+  (instead of every team inventing its own timestamp representation),
+  `Duration`, `Empty` (a genuinely empty message, for an RPC that takes
+  or returns nothing meaningful), and `Any` (a field that can hold an
+  arbitrary, dynamically-typed message, resolved by a type URL carried
+  alongside the data — the explicit, opt-in escape hatch for the
+  dynamic flexibility Protobuf's static schema otherwise deliberately
+  doesn't allow).
+- **Tooling note**: modern teams increasingly manage `.proto` files
+  with **buf** rather than raw `protoc` directly — it adds linting and,
+  notably, **breaking-change detection** that mechanically enforces the
+  exact
+  [field-number/schema-evolution rules already covered in §1](#1-protocol-buffers-the-wire-format-underneath-everything) —
+  turning "never reuse a field number" from a rule a reviewer has to
+  remember into one a CI check actually catches.
+
+## 13. When *Not* to Reach for gRPC
 
 **Answer:**
 
@@ -198,6 +375,9 @@ service OrderService {
 | Generated client/server code from one `.proto` contract | Browser support is limited/awkward without a proxy (grpc-web) |
 | HTTP/2 multiplexing — many calls over one connection | Poor fit for public APIs — third parties would need gRPC tooling too |
 | First-class deadline propagation and call cancellation | Load balancing requires stream-aware tooling (Envoy) or client-side balancing — a plain L4 balancer pins traffic to one backend |
+| TLS essentially on by default, with mTLS a natural fit for service meshes | One more credential layer (channel vs. call credentials) to get right |
+| Built-in retry policies and standard health checking need no custom code | Both are still narrower tools than a full circuit breaker or app-level health logic |
+| Server reflection makes ad hoc debugging genuinely possible without a local `.proto` | Still not as universally accessible as a self-describing REST+OpenAPI endpoint |
 
 ## Interview Questions You're Likely to Get Asked
 
@@ -210,7 +390,17 @@ service OrderService {
   traffic?" — §4, the connection-level vs. stream-level distinction.
 - "How does gRPC handle a client that's no longer waiting for a
   response?" — §5's deadline propagation and cancellation.
-- "Where would gRPC be the wrong choice?" — §7; name the public-API and
+- "What's a gRPC channel, and how is it different from a single HTTP/2
+  connection?" — §7.
+- "How does gRPC actually handle authentication — walk through channel
+  vs. call credentials." — §8.
+- "How would you debug a gRPC service you don't have the `.proto` for?"
+  — §9's server reflection.
+- "Does gRPC have built-in retries, or do you have to write your own?"
+  — §10's service config, and how it relates to a circuit breaker.
+- "How does Kubernetes health-check a gRPC service, given its probes
+  speak HTTP?" — §11's `grpc.health.v1` protocol and `grpc_health_probe`.
+- "Where would gRPC be the wrong choice?" — §13; name the public-API and
   browser-client cases specifically, not just "when it doesn't fit."
 
 ---

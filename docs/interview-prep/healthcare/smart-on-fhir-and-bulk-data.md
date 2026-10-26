@@ -33,6 +33,7 @@ possible rather than just a data format.
 ## The SMART Launch Sequence
 
 <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a SMART on FHIR app launch: the app redirects to the EHR's authorization server, the clinician approves access, an authorization code is returned and exchanged for a scoped access token, which the app then uses to call the FHIR API" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="440" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="40" width="190" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="135" y="75" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">SMART App</text>
 <rect x="670" y="40" width="190" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>

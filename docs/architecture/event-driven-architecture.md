@@ -81,6 +81,7 @@ multiple services, where no single database transaction can cover it).
 ## A Saga in Motion: Success, Then a Failure Mid-Flight
 
 <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a saga for an order: payment and inventory steps succeeding, then shipping failing, triggering compensating actions that undo inventory and payment in reverse order" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="420" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="40" width="200" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="140" y="75" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Orchestrator</text>
 <rect x="340" y="40" width="200" height="60" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"><animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.4;0.44;0.78;1" dur="19s" repeatCount="indefinite"></animate></rect>

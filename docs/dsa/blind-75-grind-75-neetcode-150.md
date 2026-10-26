@@ -1,8 +1,8 @@
 ---
-title: "Chapter 36: Mastering Data Structures & Algorithms with Blind 75, Grind 75 & NeetCode 150"
+title: "Blind 75, Grind 75 & NeetCode 150"
 ---
 
-# Chapter 36: Mastering Data Structures & Algorithms with Blind 75, Grind 75 & NeetCode 150
+# Blind 75, Grind 75 & NeetCode 150
 
 Acing the coding interview is a non-negotiable step for landing roles at top-tier tech companies. This chapter provides a focused, pattern-driven approach to mastering three curated problem lists—"Blind 75," "Grind 75," and the expanded "NeetCode 150"—that contain essential LeetCode problems frequently appearing in technical interviews. Instead of memorizing solutions, you will learn to recognize underlying patterns, enabling you to solve not just these problems, but hundreds of similar ones.
 
@@ -76,7 +76,7 @@ The power of these lists isn't the specific problems themselves, but the pattern
 
 ### 2.1 Blind 75 Problems
 
-Here's the complete list of all 75 essential problems from the original Blind 75, organized by category with direct links to LeetCode:
+Here's the complete list of all 75 essential problems from the original Blind 75, organized by category with direct links to LeetCode — use this list as the full checklist to work through, grouped the way the original list groups them (by data structure/topic).
 
 ### Array
 - [Two Sum](https://leetcode.com/problems/two-sum/)
@@ -197,7 +197,7 @@ Grind 75 includes many problems from Blind 75 but with some substitutions and ad
 - Grind 75 includes more "warm-up" easy problems for beginners
 - Better week-by-week progression from easy to hard
 - Some premium problems from Blind 75 are replaced with free alternatives
-- More focus on practical problems commonly asked in 2024-2025
+- More focus on problems that come up frequently in recent interview reports, re-weighted periodically as the site tracks what's actually being asked
 
 **Accessing Grind 75:**
 Visit [grind75.com](https://grind75.com) to:
@@ -250,7 +250,14 @@ for spatial patterns like Two Pointers, Trees, and Graphs.
 
 ## 4. Topic Problems by Pattern
 
-Use the following quick-reference lists to drill additional problems immediately after you study each pattern and walk through its sample solution. They reinforce the same ideas while adding variations that frequently appear in Blind 75, NeetCode 150, and real interviews.
+Section 2 lists every problem the way the original lists group them —
+by data structure/topic (Array, Tree, Graph), useful as a complete
+checklist. This section regroups a subset of those same problems **by
+algorithmic pattern** instead — Two Pointers, Sliding Window, and so
+on — because a pattern often cuts across several of section 2's topic
+categories at once. Use this list right after studying a pattern in
+section 3, as a short, pattern-specific drill set rather than a
+duplicate of section 2's full checklist.
 
 ### Arrays & Hashing
 - [Two Sum](https://leetcode.com/problems/two-sum/)
@@ -307,4 +314,4 @@ Use the following quick-reference lists to drill additional problems immediately
 - [Coin Change](https://leetcode.com/problems/coin-change/)
 - [Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/)
 
-These lists mirror the chapter structure so you can bookmark them as “topic problems” for quick practice reps whenever you finish reviewing a solution walkthrough.
+These lists mirror the chapter structure so you can bookmark them as "topic problems" for quick practice reps whenever you finish reviewing a solution walkthrough.

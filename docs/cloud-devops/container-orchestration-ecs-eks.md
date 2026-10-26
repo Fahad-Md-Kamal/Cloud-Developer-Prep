@@ -642,6 +642,7 @@ node's kernel**, via `iptables` (or IPVS) by a component called
   at all.
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a Service's stable ClusterIP being DNAT-rewritten to a Pod IP, then silently repointed to a replacement Pod" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <defs><marker id="k8s-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aa5b3"></path></marker></defs>
 <rect x="16" y="170" width="150" height="90" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="91" y="210" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Client Pod</text>

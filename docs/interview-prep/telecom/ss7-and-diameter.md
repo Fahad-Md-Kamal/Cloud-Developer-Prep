@@ -30,6 +30,7 @@ exploited security weak point baked into global telecom infrastructure.
 ## How a Call Actually Gets Routed Across Carriers via SS7
 
 <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of SS7 call routing: the originating carrier queries the destination number's home network registry to locate the subscriber, then routes the call through the carrier currently serving that subscriber" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="400" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="40" width="180" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="130" y="75" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Caller's Carrier</text>
 <rect x="680" y="40" width="180" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>

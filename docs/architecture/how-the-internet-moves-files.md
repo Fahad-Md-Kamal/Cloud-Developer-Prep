@@ -29,6 +29,7 @@ way the library call itself never explains.
   connection before any of this data starts flowing at all.
 
 <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of file segments arriving out of order over IP, then TCP reassembling them into the correct order before handing bytes to the application" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="420" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="20" y="30" width="170" height="90" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="105" y="70" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Sender</text>
 <text x="105" y="92" font-size="12" text-anchor="middle" fill="#5b6472">sends 1, 2, 3, 4 in order</text>

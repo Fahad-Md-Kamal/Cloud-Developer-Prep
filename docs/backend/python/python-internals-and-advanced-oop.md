@@ -57,6 +57,7 @@ just applied to plain functions instead of a custom `__get__`/`__set__`
 pair.
 
 <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of obj.method(x) resolving through the descriptor protocol into a bound method, then unpacking into method(obj, x)" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="420" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="10" y="150" width="165" height="110" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="92" y="190" font-size="14" font-weight="600" text-anchor="middle" fill="#2b313b">obj.method</text>
 <text x="92" y="210" font-size="12" text-anchor="middle" fill="#5b6472">attribute access</text>

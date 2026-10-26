@@ -36,6 +36,7 @@ lookups and ranges, and exactly why every write has to pay for it.
   neighboring leaves — no repeated searching per row.
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a B-tree index lookup touching only three pages, then an insert into a full leaf page splitting it and adding a pointer to the parent" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <line x1="472" y1="95" x2="260" y2="150" stroke="#c7cedb" stroke-width="2"></line>
 <line x1="472" y1="95" x2="685" y2="150" stroke="#c7cedb" stroke-width="2"></line>
 <line x1="260" y1="205" x2="90" y2="270" stroke="#c7cedb" stroke-width="2"></line>

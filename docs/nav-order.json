@@ -44,8 +44,28 @@
     "url": "backend/python/typing-and-generics/"
   },
   {
+    "title": "Python Internals & Advanced OOP",
+    "url": "backend/python/python-internals-and-advanced-oop/"
+  },
+  {
+    "title": "Practical Patterns",
+    "url": "backend/python/practical-patterns/"
+  },
+  {
     "title": "Bit Manipulation Basics",
     "url": "backend/python/bit-manipulation-basics/"
+  },
+  {
+    "title": "Memory & Caching",
+    "url": "backend/python/memory-and-caching/"
+  },
+  {
+    "title": "Data Structures & Their Memory Model",
+    "url": "backend/python/data-structures-and-memory/"
+  },
+  {
+    "title": "Profiling & Optimization",
+    "url": "backend/python/profiling-and-optimization/"
   },
   {
     "title": "Choosing a Concurrency Model",
@@ -72,26 +92,6 @@
     "url": "backend/python/concurrent-data-pipeline-capstone/"
   },
   {
-    "title": "Memory & Caching",
-    "url": "backend/python/memory-and-caching/"
-  },
-  {
-    "title": "Data Structures & Their Memory Model",
-    "url": "backend/python/data-structures-and-memory/"
-  },
-  {
-    "title": "Profiling & Optimization",
-    "url": "backend/python/profiling-and-optimization/"
-  },
-  {
-    "title": "Practical Patterns",
-    "url": "backend/python/practical-patterns/"
-  },
-  {
-    "title": "Python Internals & Advanced OOP",
-    "url": "backend/python/python-internals-and-advanced-oop/"
-  },
-  {
     "title": "Choosing a Python Web Framework",
     "url": "backend/python/choosing-a-python-web-framework/"
   },
@@ -104,8 +104,20 @@
     "url": "backend/python/django-drf/"
   },
   {
+    "title": "Routing & Pydantic Validation",
+    "url": "backend/python/fastapi-routing-and-validation/"
+  },
+  {
     "title": "Dependency Injection & Background Tasks",
     "url": "backend/python/fastapi-dependency-injection/"
+  },
+  {
+    "title": "Auth, Middleware & Lifecycle Events",
+    "url": "backend/python/fastapi-auth-and-middleware/"
+  },
+  {
+    "title": "Database Integration & Testing",
+    "url": "backend/python/fastapi-database-and-testing/"
   },
   {
     "title": "Performance & Production Patterns",
@@ -436,12 +448,12 @@
     "url": "database/cross-store-architecture-patterns/"
   },
   {
-    "title": "Database Security & Breach Prevention",
-    "url": "database/database-security-and-breach-prevention/"
-  },
-  {
     "title": "SQL & Relational Data Modeling",
     "url": "database/sql-data-modeling-fundamentals/"
+  },
+  {
+    "title": "Database Security & Breach Prevention",
+    "url": "database/database-security-and-breach-prevention/"
   },
   {
     "title": "Web Crawling at Scale",
@@ -664,6 +676,10 @@
     "url": "ai-llm/agi-and-asi/"
   },
   {
+    "title": "Types of AI Models & What They Actually Cost",
+    "url": "ai-llm/types-of-ai-models-and-their-cost/"
+  },
+  {
     "title": "How LLMs Actually Work: Tokens, Attention & Generation",
     "url": "ai-llm/how-llms-actually-work/"
   },
@@ -757,7 +773,7 @@
   },
   {
     "title": "Blind 75 / Grind 75 / NeetCode 150",
-    "url": "dsa/chapter-36/"
+    "url": "dsa/blind-75-grind-75-neetcode-150/"
   },
   {
     "title": "Visualizing Algorithms with AI",

@@ -65,6 +65,7 @@ faster in practice.
   fresh cache miss, a fresh ~100 ns trip to RAM.
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram comparing an array scan, which serves most reads from one cached line, against a linked-list scan, which trips to RAM for nearly every node" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="20" y="40" width="160" height="90" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="100" y="80" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">CPU</text>
 <text x="100" y="100" font-size="12" text-anchor="middle" fill="#5b6472">reads one element</text>

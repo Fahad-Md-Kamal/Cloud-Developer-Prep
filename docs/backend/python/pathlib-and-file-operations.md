@@ -56,6 +56,7 @@ buffer, nothing more. There are three distinct places data passes
 through, each with a different durability guarantee:
 
 <svg viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of written data moving from Python's buffer to the OS page cache on flush, then to physical disk on fsync" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="380" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="20" y="60" width="260" height="110" rx="8" fill="#fdf3e3" stroke="#b5831f" stroke-width="2"></rect>
 <text x="150" y="100" font-size="16" font-weight="600" text-anchor="middle" fill="#7a5c14">Python's Buffer</text>
 <text x="150" y="122" font-size="13" text-anchor="middle" fill="#7a5c14">(user-space memory)</text>

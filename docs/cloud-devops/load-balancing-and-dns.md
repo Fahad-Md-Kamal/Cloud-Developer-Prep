@@ -815,6 +815,7 @@ neither of which a list of Route 53 record types explains on its own.
     record for this name" when asked.
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a DNS query walking the resolution chain on a cache miss, then taking a cached shortcut on a repeat lookup" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <defs><marker id="dns-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aa5b3"></path></marker></defs>
 <line x1="94" y1="110" x2="806" y2="110" stroke="#c7cedb" stroke-width="3"></line>
 <rect x="16" y="60" width="155" height="100" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>

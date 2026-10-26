@@ -101,6 +101,7 @@ either being passed in as an argument — each lookup just walks down the
 stack of frames already sitting there.
 
 <svg viewBox="0 0 820 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of the call stack building up as outer and inner are called, then variable lookups walking the stack via LEGB" style="width:100%;height:auto;max-width:820px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="820" height="520" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="380" width="740" height="100" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="64" y="412" font-size="15" font-weight="600" fill="#2b313b">Module / Global frame</text>
 <text x="64" y="434" font-size="14" fill="#434d5c">x = "global"</text>

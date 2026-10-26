@@ -89,6 +89,7 @@ write happens to that copy — the original, lower-layer version is never
 touched.
 
 <svg viewBox="0 0 760 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of copy-on-write across a container's union filesystem layers" style="width:100%;height:auto;max-width:760px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="760" height="500" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <defs><marker id="cow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6472"></path></marker></defs>
 <rect x="60" y="60" width="640" height="110" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="2"></rect>
 <text x="80" y="92" font-size="21" font-weight="600" fill="#0f6b45">Layer 3 — Container's Writable Layer</text>

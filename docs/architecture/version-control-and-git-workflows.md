@@ -47,6 +47,7 @@ project files — this is exactly why branches are so cheap in Git,
 unlike the centralized model covered in §1 below.
 
 <svg viewBox="0 0 900 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a commit graph, showing a merge commit joining two branch tips versus a rebase replaying commits onto a new parent with new hashes" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="480" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <line x1="130" y1="77" x2="190" y2="77" stroke="#c7cedb" stroke-width="2"></line>
 <line x1="280" y1="77" x2="340" y2="77" stroke="#c7cedb" stroke-width="2"></line>
 <line x1="235" y1="105" x2="300" y2="180" stroke="#c7cedb" stroke-width="2"></line>

@@ -33,6 +33,7 @@ process to do something — interrupt it, usually. Two matter most:
     specifically as the "nothing else worked" escape hatch.
 
 <svg viewBox="0 0 820 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of SIGTERM allowing a process to shut down cleanly, versus a stuck process being forcibly SIGKILLed once the grace period expires" style="width:100%;height:auto;max-width:820px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="820" height="400" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="140" width="220" height="90" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="150" y="180" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Orchestrator</text>
 <text x="150" y="200" font-size="12" text-anchor="middle" fill="#5b6472">(Kubernetes / systemd / Docker)</text>

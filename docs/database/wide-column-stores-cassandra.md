@@ -30,6 +30,7 @@ or deleted (Cassandra's deletes are actually a special marker called a
 **tombstone**, physically removed only once compaction processes it).
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of Cassandra's LSM-tree write path: a write going to the commit log and memtable at once, the memtable later flushing to a new SSTable, and compaction merging SSTables together" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="360" y="20" width="180" height="55" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="450" y="53" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">New Write</text>
 <line x1="420" y1="75" x2="250" y2="140" stroke="#9aa5b3" stroke-width="2"></line>

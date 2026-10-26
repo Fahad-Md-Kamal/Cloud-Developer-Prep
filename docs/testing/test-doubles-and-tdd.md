@@ -71,6 +71,7 @@ class FakeUserRepository:
 ## 2. "What's the actual TDD cycle, and what does each step buy you?"
 
 <svg viewBox="0 0 820 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of the TDD red-green-refactor cycle: write a failing test, write the minimum code to pass it, then refactor, repeating" style="width:100%;height:auto;max-width:820px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="820" height="420" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <circle cx="410" cy="210" r="150" fill="none" stroke="#c7cedb" stroke-width="2"></circle>
 <rect x="330" y="30" width="160" height="60" rx="8" fill="#fbe7e4" stroke="#c0392b" stroke-width="3"><animate attributeName="stroke" values="#c0392b;#c0392b;#9aa5b3;#9aa5b3" keyTimes="0;0.3;0.33;1" dur="16s" repeatCount="indefinite"></animate></rect>
 <text x="410" y="56" font-size="14" font-weight="600" text-anchor="middle" fill="#8e2d20">Red</text>

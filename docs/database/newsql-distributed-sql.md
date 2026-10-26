@@ -44,6 +44,7 @@ from the others, and — once it wins a majority — becomes the new leader,
 continuing from the last committed entry with nothing lost.
 
 <svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of Raft consensus: a leader replicating a write to followers and committing it once a majority acknowledge, then a leader failure triggering an election where a follower becomes the new leader" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="460" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="360" y="30" width="180" height="60" rx="8" fill="#e8f7f0" stroke="#1f9d6b" stroke-width="3"><animate attributeName="fill" values="#e8f7f0;#e8f7f0;#f0f1f3;#f0f1f3;#e8f7f0" keyTimes="0;0.46;0.5;0.86;1" dur="20s" repeatCount="indefinite"></animate><animate attributeName="stroke" values="#1f9d6b;#1f9d6b;#9aa5b3;#9aa5b3;#1f9d6b" keyTimes="0;0.46;0.5;0.86;1" dur="20s" repeatCount="indefinite"></animate></rect>
 <text x="450" y="65" font-size="15" font-weight="600" text-anchor="middle" fill="#0f6b45"><animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.46;0.5;0.86;1" dur="20s" repeatCount="indefinite"></animate>Leader</text>
 <text x="450" y="65" font-size="15" font-weight="600" text-anchor="middle" fill="#8e2d20"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.46;0.5;0.86;1" dur="20s" repeatCount="indefinite"></animate>Crashed</text>

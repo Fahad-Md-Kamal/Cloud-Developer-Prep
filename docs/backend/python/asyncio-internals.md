@@ -128,6 +128,7 @@ loop's main loop actually doing?"**
   precisely how exhausting an ordinary generator already works.
 
 <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of a coroutine suspending at await, the event loop registering interest with epoll, and resuming the coroutine via send() once epoll reports the socket ready" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="420" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="20" y="150" width="220" height="110" rx="8" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="2"></rect>
 <text x="130" y="190" font-size="15" font-weight="600" text-anchor="middle" fill="#1d4a78">Coroutine</text>
 <text x="130" y="210" font-size="12" text-anchor="middle" fill="#3d699a">await socket.recv()</text>

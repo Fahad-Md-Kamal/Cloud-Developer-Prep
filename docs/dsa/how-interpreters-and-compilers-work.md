@@ -80,6 +80,7 @@ at once.
 ## How a JIT Compiler Actually Changes Behavior Mid-Run
 
 <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of JIT compilation: a program starts out interpreting bytecode, the runtime detects a loop running repeatedly, compiles that loop to real machine code, and switches to running the compiled version for the rest of execution" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="400" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="350" y="30" width="200" height="55" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="450" y="63" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Program Starts</text>
 <rect x="350" y="150" width="200" height="60" rx="8" fill="#eaf2fb" stroke="#2f6fb3" stroke-width="3"><animate attributeName="stroke" values="#2f6fb3;#2f6fb3;#9aa5b3;#9aa5b3" keyTimes="0;0.4;0.44;1" dur="16s" repeatCount="indefinite"></animate></rect>
@@ -142,6 +143,7 @@ difference in this table falls out of that one choice.
 ## The Same Comparison, Drawn Out
 
 <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Static diagram comparing AOT compilation, pure AST interpretation, bytecode interpretation, and JIT compilation as horizontal timelines, showing when translation work happens relative to execution for each approach" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="520" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <text x="165" y="22" font-size="13" text-anchor="middle" fill="#5b6472">Earlier — a separate build step</text>
 <text x="560" y="22" font-size="13" text-anchor="middle" fill="#5b6472">Now — running `python file.py` / `./program`</text>
 <line x1="270" y1="36" x2="270" y2="452" stroke="#9aa5b3" stroke-width="2" stroke-dasharray="5,5"></line>

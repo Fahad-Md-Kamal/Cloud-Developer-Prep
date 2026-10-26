@@ -33,6 +33,7 @@ context); the stakes and the specific hardening are what's different.
 ## The Consent Authorization Flow
 
 <svg viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Animated diagram of an Open Banking consent flow: a fintech app redirects the user to their own bank's login page, the user approves a scoped, time-limited request, the bank returns an authorization code, and the app exchanges it for an access token bound to that consent" style="width:100%;height:auto;max-width:900px;display:block;margin:0 auto;font-family:inherit;">
+<rect x="0" y="0" width="900" height="440" fill="#ffffff" stroke="#d0d5dd" stroke-width="1"></rect>
 <rect x="40" y="40" width="190" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
 <text x="135" y="75" font-size="15" font-weight="600" text-anchor="middle" fill="#2b313b">Fintech App</text>
 <rect x="670" y="40" width="190" height="60" rx="8" fill="#eef1f5" stroke="#434d5c" stroke-width="2"></rect>
