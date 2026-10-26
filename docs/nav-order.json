@@ -236,6 +236,10 @@
     "url": "architecture/refactoring-legacy-systems/"
   },
   {
+    "title": "Version Control & Git Workflows",
+    "url": "architecture/version-control-and-git-workflows/"
+  },
+  {
     "title": "How the Internet Moves Files",
     "url": "architecture/how-the-internet-moves-files/"
   },
@@ -274,10 +278,6 @@
   {
     "title": "Threat Detection & Monitoring",
     "url": "architecture/threat-detection-and-monitoring/"
-  },
-  {
-    "title": "Version Control & Git Workflows",
-    "url": "architecture/version-control-and-git-workflows/"
   },
   {
     "title": "System Design Methodology",
@@ -758,6 +758,46 @@
   {
     "title": "LangChain Ecosystem: LangGraph/LangSmith/LangServe",
     "url": "ai-llm/langchain-ecosystem/"
+  },
+  {
+    "title": "Supervised, Unsupervised & Reinforcement Learning",
+    "url": "machine-learning/supervised-unsupervised-and-reinforcement-learning/"
+  },
+  {
+    "title": "Model Evaluation & Validation",
+    "url": "machine-learning/model-evaluation-and-validation/"
+  },
+  {
+    "title": "Classical ML: Regression, Trees & Ensembles",
+    "url": "machine-learning/classical-ml-regression-trees-and-ensembles/"
+  },
+  {
+    "title": "Classical ML: Clustering, SVM & Dimensionality Reduction",
+    "url": "machine-learning/classical-ml-clustering-svm-and-dimensionality-reduction/"
+  },
+  {
+    "title": "Deep Learning Fundamentals: Neural Networks Before Transformers",
+    "url": "machine-learning/deep-learning-fundamentals/"
+  },
+  {
+    "title": "Feature Engineering for ML",
+    "url": "machine-learning/feature-engineering-for-ml/"
+  },
+  {
+    "title": "Regularization & Hyperparameter Tuning",
+    "url": "machine-learning/regularization-and-hyperparameter-tuning/"
+  },
+  {
+    "title": "MLOps: Experiment Tracking, Model Registry & CI/CD",
+    "url": "machine-learning/mlops-experiment-tracking-and-deployment/"
+  },
+  {
+    "title": "Model Monitoring & Drift Detection in Production",
+    "url": "machine-learning/model-monitoring-and-drift-detection/"
+  },
+  {
+    "title": "ML System Design Interviews",
+    "url": "machine-learning/ml-system-design-interviews/"
   },
   {
     "title": "Big-O & the Hardware Underneath It",

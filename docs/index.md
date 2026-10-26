@@ -9,9 +9,9 @@ icon: lucide/house
 
 A full map of software engineering — Frontend, Backend, Architecture,
 Software Testing, Cyber Security, Database, Cloud & DevOps, AI & LLM,
-Algorithms, and Interview Prep — ten domains, 230+ chapters and still
-growing, built from real practice sessions rather than a static
-checklist.
+Machine Learning, Algorithms, and Interview Prep — eleven domains,
+230+ chapters and still growing, built from real practice sessions
+rather than a static checklist.
 
 - Each domain runs from real fundamentals up through senior/staff
   depth — this isn't scoped to one experience level or to backend
@@ -81,6 +81,8 @@ scoped to one role or one experience level.
   + CI/CD ramp plan, including SAA-C03 exam prep), and algorithms/DSA
 - AI/LLM integration and conversational agent development, starting
   from "what is a model" for readers with zero prior AI knowledge
+- Machine learning, from classical algorithms and model evaluation
+  through deep learning fundamentals, MLOps, and ML system design
 - Technical leadership and interview mastery, including
   industry-vertical case studies (healthcare, fintech, telecom, energy)
 
@@ -206,12 +208,13 @@ Framework-agnostic principles, system design methodology, and
 technical leadership — apply regardless of which language or framework
 sits underneath.
 
-- **Clean Code, Design Patterns, and SOLID Principles**
+- **Code Quality & Engineering Practices**
     - [SOLID Principles](architecture/solid-principles.md)
     - [Cohesion & Coupling](architecture/cohesion-and-coupling.md)
     - [Design Patterns](architecture/design-patterns.md)
     - [Clean Code Practices](architecture/clean-code-practices.md)
     - [Refactoring Legacy Systems](architecture/refactoring-legacy-systems.md)
+    - [Version Control & Git Workflows](architecture/version-control-and-git-workflows.md)
 - **APIs**
     - [How the Internet Moves Files](architecture/how-the-internet-moves-files.md) —
       TCP segmentation, multipart uploads, chunked transfer, Range requests
@@ -221,18 +224,20 @@ sits underneath.
     - [gRPC Deep Dive](architecture/grpc-deep-dive.md)
     - [API Production Readiness](architecture/api-production-readiness.md)
 - **Authentication, Authorization, and Security**
-    - [Authentication Patterns](architecture/authentication-patterns.md)
+    - [Authentication Patterns](architecture/authentication-patterns.md) —
+      11 mechanisms compared (sessions, JWT, OAuth2/OIDC, SAML, API
+      keys, mTLS, HMAC signing, Kerberos, WebAuthn/passkeys, magic
+      links), then JWT/OAuth2/MFA/SSO in depth
     - [Authorization Patterns](architecture/authorization-patterns.md)
     - [Security Hardening](architecture/security-hardening.md)
     - [Threat Detection & Monitoring](architecture/threat-detection-and-monitoring.md)
-- [Version Control & Git Workflows](architecture/version-control-and-git-workflows.md)
 - **System Design Interviews**
     - [System Design Methodology](architecture/system-design-methodology.md)
     - [Architecture Diagramming & Communication](architecture/architecture-diagramming-and-communication.md) — includes the C4 model
     - [Common System Design Patterns](architecture/system-design-patterns.md)
     - [Scalability Case Studies](architecture/scalability-case-studies.md) — includes CAP and PACELC
-- [Event-Driven Architecture: CQRS & the Saga Pattern](architecture/event-driven-architecture.md) —
-  splitting reads from writes, and compensating transactions across services
+    - [Event-Driven Architecture: CQRS & the Saga Pattern](architecture/event-driven-architecture.md) —
+      splitting reads from writes, and compensating transactions across services
 
 ### Software Testing
 
@@ -495,6 +500,44 @@ mistakes and fixes kept in as teaching material.
 
 - [LangChain Agents](ai-llm/langchain-agents.md) — agent types, tools, memory, LCEL
 - [LangChain Ecosystem: LangGraph, LangSmith, LangServe](ai-llm/langchain-ecosystem.md) — plus LangCache
+
+### Machine Learning
+
+The classical ML body of knowledge — distinct from the LLM/agent-
+focused material in AI & LLM above, and the skill set most "ML
+Engineer"/"Data Scientist" interviews actually test.
+
+**Foundations**
+
+- [Supervised, Unsupervised & Reinforcement Learning](machine-learning/supervised-unsupervised-and-reinforcement-learning.md) —
+  the three learning paradigms, and the bias-variance tradeoff underneath almost every technique that follows
+- [Model Evaluation & Validation](machine-learning/model-evaluation-and-validation.md) —
+  train/val/test splits, precision/recall/F1, ROC-AUC, MAE vs. RMSE
+
+**ML Algorithms**
+
+- [Classical ML: Regression, Trees & Ensembles](machine-learning/classical-ml-regression-trees-and-ensembles.md) —
+  linear/logistic regression, decision trees, random forests, gradient boosting
+- [Classical ML: Clustering, SVM & Dimensionality Reduction](machine-learning/classical-ml-clustering-svm-and-dimensionality-reduction.md) —
+  k-means, DBSCAN, the kernel trick, PCA vs. t-SNE/UMAP
+- [Deep Learning Fundamentals: Neural Networks Before Transformers](machine-learning/deep-learning-fundamentals.md) —
+  backpropagation, vanishing gradients, CNNs, RNNs/LSTMs
+
+**Model Building**
+
+- [Feature Engineering for ML](machine-learning/feature-engineering-for-ml.md) —
+  missing data, encoding, the data leakage trap, feature selection
+- [Regularization & Hyperparameter Tuning](machine-learning/regularization-and-hyperparameter-tuning.md) —
+  L1 vs. L2, dropout, cross-validation, grid vs. random vs. Bayesian search
+
+**Production & MLOps**
+
+- [MLOps: Experiment Tracking, Model Registry & CI/CD](machine-learning/mlops-experiment-tracking-and-deployment.md) —
+  MLflow, model registries, shadow/canary deployment, batch vs. real-time serving
+- [Model Monitoring & Drift Detection in Production](machine-learning/model-monitoring-and-drift-detection.md) —
+  data drift vs. concept drift, what to monitor without waiting for labels
+- [ML System Design Interviews](machine-learning/ml-system-design-interviews.md) —
+  the ML-specific framework on top of regular system design, worked through a recommendation system
 
 ### Algorithms
 

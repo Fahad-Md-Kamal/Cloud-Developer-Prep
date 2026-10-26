@@ -7,7 +7,7 @@ repo_url = "https://github.com/Fahad-Md-Kamal/Cloud-Developer-Prep"
 repo_name = "Fahad-Md-Kamal/Cloud-Developer-Prep"
 
 extra_javascript = ["javascripts/download-pdf.js", "javascripts/read-aloud.js", "javascripts/nav-accordion.js"]
-extra_css = ["stylesheets/print.css", "stylesheets/read-aloud.css"]
+extra_css = ["stylesheets/print.css", "stylesheets/read-aloud.css", "stylesheets/layout.css"]
 
 nav = [
   { "Home" = "index.md" },
@@ -101,12 +101,13 @@ nav = [
       ] },
   ] },
   { "Architecture" = [
-      { "Clean Code & Design Patterns" = [
+      { "Code Quality & Engineering Practices" = [
           { "SOLID Principles" = "architecture/solid-principles.md" },
           { "Cohesion & Coupling" = "architecture/cohesion-and-coupling.md" },
           { "Design Patterns" = "architecture/design-patterns.md" },
           { "Clean Code Practices" = "architecture/clean-code-practices.md" },
           { "Refactoring Legacy Systems" = "architecture/refactoring-legacy-systems.md" },
+          { "Version Control & Git Workflows" = "architecture/version-control-and-git-workflows.md" },
       ] },
       { "APIs" = [
           { "How the Internet Moves Files" = "architecture/how-the-internet-moves-files.md" },
@@ -122,14 +123,13 @@ nav = [
           { "Security Hardening" = "architecture/security-hardening.md" },
           { "Threat Detection & Monitoring" = "architecture/threat-detection-and-monitoring.md" },
       ] },
-      { "Version Control & Git Workflows" = "architecture/version-control-and-git-workflows.md" },
       { "System Design Interviews" = [
           { "System Design Methodology" = "architecture/system-design-methodology.md" },
           { "Architecture Diagramming & Communication" = "architecture/architecture-diagramming-and-communication.md" },
           { "Common System Design Patterns" = "architecture/system-design-patterns.md" },
           { "Scalability Case Studies" = "architecture/scalability-case-studies.md" },
+          { "Event-Driven Architecture: CQRS & the Saga Pattern" = "architecture/event-driven-architecture.md" },
       ] },
-      { "Event-Driven Architecture: CQRS & the Saga Pattern" = "architecture/event-driven-architecture.md" },
   ] },
   { "Software Testing" = [
       { "Manual Testing Fundamentals: Test Case Design & Bug Reports" = "testing/manual-testing-fundamentals.md" },
@@ -294,6 +294,26 @@ nav = [
       { "LangChain" = [
           { "LangChain Agents" = "ai-llm/langchain-agents.md" },
           { "LangChain Ecosystem: LangGraph/LangSmith/LangServe" = "ai-llm/langchain-ecosystem.md" },
+      ] },
+  ] },
+  { "Machine Learning" = [
+      { "Foundations" = [
+          { "Supervised, Unsupervised & Reinforcement Learning" = "machine-learning/supervised-unsupervised-and-reinforcement-learning.md" },
+          { "Model Evaluation & Validation" = "machine-learning/model-evaluation-and-validation.md" },
+      ] },
+      { "ML Algorithms" = [
+          { "Classical ML: Regression, Trees & Ensembles" = "machine-learning/classical-ml-regression-trees-and-ensembles.md" },
+          { "Classical ML: Clustering, SVM & Dimensionality Reduction" = "machine-learning/classical-ml-clustering-svm-and-dimensionality-reduction.md" },
+          { "Deep Learning Fundamentals: Neural Networks Before Transformers" = "machine-learning/deep-learning-fundamentals.md" },
+      ] },
+      { "Model Building" = [
+          { "Feature Engineering for ML" = "machine-learning/feature-engineering-for-ml.md" },
+          { "Regularization & Hyperparameter Tuning" = "machine-learning/regularization-and-hyperparameter-tuning.md" },
+      ] },
+      { "Production & MLOps" = [
+          { "MLOps: Experiment Tracking, Model Registry & CI/CD" = "machine-learning/mlops-experiment-tracking-and-deployment.md" },
+          { "Model Monitoring & Drift Detection in Production" = "machine-learning/model-monitoring-and-drift-detection.md" },
+          { "ML System Design Interviews" = "machine-learning/ml-system-design-interviews.md" },
       ] },
   ] },
   { "Algorithms" = [
