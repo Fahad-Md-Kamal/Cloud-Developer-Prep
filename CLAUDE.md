@@ -132,6 +132,71 @@ add friction without adding precision.
 - When in doubt, prefer the word a strong non-native English speaker
   would already know over one they'd need to look up.
 
+## Designing a new topic page: fundamentals before the question that prompted it
+
+A reader can't evaluate a trade-off, a comparison, or a "why X instead
+of Y" until they already have a mental model of what X and Y *are*.
+Opening a page with that kind of question anyway is a common mistake:
+it reads well to whoever already knows the topic (including whoever's
+writing it), and fails exactly the reader it's for.
+
+**The rule:** before the first comparison, trade-off, or "why"
+question, plainly state what the thing actually *is* — in the kind of
+sentence that needs no prior knowledge of the topic to follow. The
+specific question that prompted the page (a user's confusion, a JD
+requirement, an interview question) is where the content should
+*arrive*, not where it should start.
+
+Turn this:
+
+> ## 1. "Why use connection pooling instead of opening a new database
+> connection per request?"
+
+Into this:
+
+> A **database connection** is a live, stateful link between your
+> application and the database server — opening one isn't free; it
+> costs a TCP handshake, authentication, and server-side memory, every
+> single time.
+>
+> ## 1. "Why use connection pooling instead of opening a new database
+> connection per request?"
+
+**Why this is the right default, not just a style preference:**
+
+- A reader builds understanding by attaching new facts to a model they
+  already have. A page that opens mid-comparison gives them nothing to
+  attach the comparison *to* — they either already knew the
+  fundamentals (the page taught them nothing new at the start) or they
+  didn't (the comparison doesn't land).
+- This is the same instinct behind
+  [Depth over tools](#depth-over-tools-lead-with-fundamentals-not-command-lists)
+  below, generalized: that section is the tool-chapter-specific case
+  (mechanism before commands); this is the general case for *any* new
+  page (definition before nuance).
+- It's also why [leading with the one core
+  idea](#content-writing-style) matters structurally, not just
+  sentence-by-sentence — the core idea usually *is* "what this thing
+  is," and everything else hangs off it.
+
+**Spell out every abbreviation on first use**, generously — including
+ones that feel obvious to an expert (`API` → "API (Application
+Programming Interface)", `OWASP` → "OWASP (Open Worldwide Application
+Security Project)"). The same
+[plain-vocabulary reasoning](#plain-vocabulary-not-fancy-synonyms)
+applies: what's obvious to the writer isn't obvious to every reader,
+and a three-word expansion costs nothing.
+
+- **Exception:** a literal, copy-pasteable artifact meant to be pasted
+  into an AI tool, a terminal, or run as-is (a prompt template, a code
+  block, a CLI command) doesn't need this — that content's audience is
+  the tool, not the human reader, so standard abbreviations inside it
+  are fine.
+
+**Scope:** this governs new pages and substantial rewrites, the same
+as every other convention in this file — existing pages written before
+this rule don't need retroactive rewriting unless asked.
+
 ## Splitting large chapters into nested nav files
 
 When a chapter/page grows too large or covers several genuinely distinct

@@ -320,6 +320,9 @@ content rather than duplicating it.
   Storm-0558, and 23andMe, each mapped to the mechanism that caused it
 - [AI & LLM Security](security/ai-and-llm-security.md) —
   the OWASP Top 10 for LLM Applications, excessive agency, RAG corpus poisoning, model theft
+- [AI-Assisted Security Vulnerability Audits](security/ai-assisted-security-vulnerability-audit.md) —
+  a reusable prompt covering the OWASP Top 10 plus token/auth-specific
+  attack scenarios, to run against your own code
 
 ### Database
 

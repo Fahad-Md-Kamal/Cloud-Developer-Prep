@@ -4,6 +4,14 @@ title: "Redis as a Database"
 
 # Redis as a Database
 
+**Redis** is an in-memory data structure store — a database that
+keeps its entire dataset in RAM (Random Access Memory) instead of on
+disk, organized as named data structures (strings, hashes, lists,
+sets, sorted sets) rather than rows in a table. That one fact is what
+nearly everything else about Redis follows from: no disk to wait on,
+and data structures chosen to match exactly how an application
+actually uses them.
+
 Redis already shows up on this site as a cache (see
 [Caching Layers & Global Accelerator](../cloud-devops/caching-layers-and-global-accelerator.md)).
 This page covers what gets left out of that framing: Redis has
@@ -53,7 +61,8 @@ one. The mechanism underneath it explains both roles at once.
 
 **Answer:**
 
-- **RDB (snapshotting)** — periodically dumps the entire dataset to disk
+- **RDB (Redis Database, Redis's snapshot file format)** —
+  periodically dumps the entire dataset to disk
   as a single binary file. Fast to restart from, but any writes since the
   last snapshot are lost on a crash.
 - **AOF (Append-Only File)** — logs every write operation to disk as it

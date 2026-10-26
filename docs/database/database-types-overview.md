@@ -17,8 +17,10 @@ chapter is the deep dive.
 **Answer:**
 
 - Built around **tables with enforced relationships** — foreign keys,
-  constraints, and multi-row ACID transactions that guarantee
-  correctness even under concurrent writes.
+  constraints, and multi-row **ACID** (Atomicity, Consistency,
+  Isolation, Durability) transactions that guarantee correctness even
+  under concurrent writes. **SQL** (Structured Query Language) is the
+  query language every database in this category speaks.
 - Default choice whenever data has real relationships and correctness
   matters more than raw write throughput — orders, payments, inventory,
   anything where a half-applied transaction would be a real problem.
@@ -81,7 +83,7 @@ chapter is the deep dive.
 
 - Built around **similarity search**, not exact match — given a query
   vector, find the stored vectors closest to it, the mechanism behind
-  semantic search and RAG.
+  semantic search and **RAG** (Retrieval-Augmented Generation).
 - The one category on this list that doesn't compete with the others
   directly — it typically sits alongside a relational or document store,
   handling the specific "find things that mean something similar" query

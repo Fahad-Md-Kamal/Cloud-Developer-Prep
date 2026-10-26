@@ -4,9 +4,18 @@ title: "Elasticsearch Architecture"
 
 # Elasticsearch Architecture
 
-How Elasticsearch's query model differs from SQL, designing an index
-under constant write and search load, and where Elasticsearch
-belongs — and doesn't — in an overall data architecture.
+**Elasticsearch** is a distributed search and analytics engine built
+around an **inverted index** — a structure that maps each word to
+every document containing it, the opposite direction of a normal
+database's row-to-value lookup. That's the one design choice
+everything else below follows from: it isn't built to answer "does
+this row match," the way a relational database with **SQL**
+(Structured Query Language) is — it's built to answer "which
+documents are relevant to this query, ranked."
+
+This page covers how that query model differs from SQL in practice,
+designing an index under constant write and search load, and where
+Elasticsearch belongs — and doesn't — in an overall data architecture.
 
 ## 1. "How is an Elasticsearch query fundamentally different from a SQL `WHERE` clause?"
 
@@ -20,9 +29,11 @@ belongs — and doesn't — in an overall data architecture.
 - A SQL `WHERE` clause returns rows that exactly match a predicate —
   true or false, no ranking.
 - A `match` query in Elasticsearch analyzes and tokenizes the search
-  text, then returns documents *ranked* by relevance (BM25 scoring),
-  not a boolean match — there's no single "the" answer, only a
-  best-ranked list.
+  text, then returns documents *ranked* by relevance — scored by
+  **BM25**, an algorithm that weighs how often a term appears in a
+  document against how rare that term is across the whole index — not
+  a boolean match. There's no single "the" answer, only a best-ranked
+  list.
 - `term` queries are the exception, matching exactly against an
   unanalyzed `keyword` field.
 - The mapping decision — whether a field is `text` (analyzed,
@@ -40,8 +51,8 @@ belongs — and doesn't — in an overall data architecture.
 - Use index aliases so a reindex (changing a mapping, say) can happen
   behind the scenes and be swapped in atomically with zero downtime
   for readers.
-- For time-series-shaped data, use Index Lifecycle Management to age
-  data through hot → warm → cold tiers with cheaper hardware and fewer
+- For time-series-shaped data, use Index Lifecycle Management (ILM) to
+  age data through hot → warm → cold tiers with cheaper hardware and fewer
   replicas as it gets less relevant to active search.
 - Replica count is a direct trade-off: more replicas means more read
   throughput and resilience, at the cost of more write amplification
@@ -58,7 +69,8 @@ belongs — and doesn't — in an overall data architecture.
 **Answer:**
 
 - Almost never as the sole system of record — it doesn't give the
-  ACID transactional guarantees or the same durability story as
+  ACID (Atomicity, Consistency, Isolation, Durability) transactional
+  guarantees or the same durability story as
   Postgres or Mongo.
 - The standard architecture keeps a real database as the source of
   truth and syncs data into Elasticsearch purely for what it's good

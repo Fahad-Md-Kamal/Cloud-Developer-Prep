@@ -161,6 +161,7 @@ nav = [
       { "Security Certifications & Career Path" = "security/security-certifications-and-career-path.md" },
       { "Real-World Breach Case Studies (2023–2025)" = "security/real-world-breach-case-studies.md" },
       { "AI & LLM Security" = "security/ai-and-llm-security.md" },
+      { "AI-Assisted Security Vulnerability Audits" = "security/ai-assisted-security-vulnerability-audit.md" },
   ] },
   { "Database" = [
       { "Database Architecture for Scale" = [

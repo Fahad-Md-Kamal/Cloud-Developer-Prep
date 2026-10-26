@@ -19,7 +19,7 @@ For *what they're allowed to do* once authenticated, see
 |---|---|---|---|---|
 | Session + cookie | Server stores session state; browser holds an opaque session ID cookie | Traditional server-rendered web apps, one backend | Instant server-side revocation; the cookie itself carries no data to leak | Needs a shared session store to scale across servers; CSRF needs its own defenses |
 | JWT | Signed, stateless token carrying claims; verified with a key, no DB lookup | Stateless APIs, microservices, mobile backends | Scales with zero shared state — any service holding the public key verifies independently | Can't revoke before expiry without extra infrastructure ([§2](#2-jwt-design-and-security)) |
-| OAuth2 + OIDC | Delegated authorization (OAuth2) plus an identity layer on top (OIDC) issuing an ID token | "Log in with Google," third-party API access without sharing a password | The app never sees or stores the user's real password; scopes are fine-grained and revocable | Genuinely complex to implement correctly; the wrong flow choice is a real vulnerability ([§4](#4-oauth2-flow-selection)) |
+| OAuth2 + OIDC | Delegated authorization (OAuth2) plus an identity layer on top (OIDC) issuing an ID token | "Log in with Google," third-party API access without sharing a password | The app never sees or stores the user's real password; scopes are fine-grained and revocable | Genuinely complex to implement correctly; the wrong flow choice is a real vulnerability ([§5](#5-oauth2-flow-selection)) |
 | SAML | XML-based assertion exchanged between an Identity Provider and Service Provider | Enterprise SSO into legacy/internal systems | Mature and battle-tested at large-enterprise scale; not limited to browser-based apps | Verbose XML, harder to debug than OIDC's JSON |
 | API keys | A long-lived static secret sent with every request, checked against a stored value | Service-to-service calls, third-party integrations, internal tooling | Trivial to implement and understand | No real user identity, no built-in expiry — a leaked key is valid until someone manually revokes it |
 | HTTP Basic Auth | Username:password base64-encoded in every request's header | Quick internal tools, scripts, or layered behind something like mTLS | Zero setup, supported everywhere | Credentials sent on every single request; only ever safe over TLS, no revocation without changing the password |
@@ -127,11 +127,11 @@ response.set_cookie(
 - **`samesite` is a separate, related defense — CSRF, not theft.**
   `httponly`/`secure` stop the token from being *read*; `samesite`
   controls when the browser is willing to *send* it automatically.
-  Without it, a malicious page on another site could make the
-  victim's browser silently attach their real cookie to a request your
-  malicious page itself triggered — `strict` refuses to send the
-  cookie on any request that didn't originate from your own site,
-  closing that gap.
+- Without it, a malicious page on another site could make the
+  victim's browser silently attach their real cookie to a request that
+  page itself triggered.
+- `strict` refuses to send the cookie on any request that didn't
+  originate from your own site, closing that gap.
 - **Bind the token to the client, not just the bearer** — the direct
   fix for "what if it still leaks anyway":
     - **DPoP** (Demonstrating Proof-of-Possession) — the client signs
@@ -173,7 +173,87 @@ storage), make a stolen token less useful (binding), and catch it fast
 when it happens anyway (rotation + reuse detection, anomaly detection)
 — not any single mechanism claiming to solve it outright.
 
-## 4. OAuth2 Flow Selection
+## 4. Other JWT Attack Scenarios Beyond Theft
+
+**"Theft-and-replay assumes the attacker gets hold of an intact,
+legitimate token. What if they never steal one at all?"**
+
+**Algorithm/signature forgery — the attacker makes their own token:**
+
+- The `alg=none` attack — some libraries trust the `alg` field *inside
+  the token itself* to decide how to verify it. Strip the signature,
+  set `alg: none`, and a naive verifier skips verification entirely.
+- RS256→HS256 confusion — if a server accepts both algorithms without
+  pinning which one a given token must use, an attacker who knows the
+  RS256 public key (often published openly via a **JWKS** endpoint —
+  a JSON Web Key Set, the standard JSON document of public keys an
+  issuer hosts so others can verify its tokens, typically at
+  `/.well-known/jwks.json`) can sign a forged token with HS256, using
+  that public key as the HMAC secret. The server's own public key
+  becomes the attacker's signing key.
+- `kid`/`jku` header injection — some implementations let the token
+  itself specify which key to verify against via its `kid` (which key
+  *in* the JWKS) or `jku` (a URL to a JWKS document entirely). A
+  server that blindly fetches whatever key a token's `jku` header
+  points to will happily "verify" a token against a key the attacker
+  controls.
+- **Defense:** pin the expected algorithm server-side — never let the
+  token's own header pick its verification method — and never fetch a
+  verification key from a URL the token itself supplies.
+
+**Silent leakage through your own infrastructure — nobody "stole" anything:**
+
+- A token passed as a URL query parameter ends up in browser history,
+  server access logs, and the `Referer` header sent to any third-party
+  script or image loaded on that page.
+- A token in the `Authorization` header gets captured whole by error
+  trackers (Sentry, Datadog) or API gateway logs that record full
+  request headers by default.
+- **Defense:** never put a token in a URL; explicitly configure
+  logging/error-tracking tools to redact `Authorization`/`Cookie`
+  headers — treat the logging pipeline as part of the threat model,
+  not just the browser.
+
+**Cross-service audience confusion — a legitimate token, used somewhere it shouldn't be:**
+
+- Microservices sharing one signing key is common — a token minted
+  for Service A (`aud: "service-a"`) gets presented to Service B. If B
+  only checks the signature and skips `aud`, it accepts a token that
+  was never meant for it.
+- **Defense:** every service validates `aud`/`iss` itself — a valid
+  signature proves the token came from the trusted issuer, not that
+  it was meant for *this particular* service.
+
+**Man-in-the-browser — defeats storage protections entirely:**
+
+- A malicious or compromised browser extension runs with access to
+  the page's network traffic and DOM directly, bypassing the
+  same-origin restrictions that protect against a page's own injected
+  script — `httponly` stops `document.cookie` from reading the token,
+  but doesn't stop an extension intercepting the request that carries
+  it.
+- **Defense:** there's no pure storage fix here — this is exactly
+  where client-binding (DPoP/mTLS from [§3](#3-defending-against-token-theft))
+  earns its cost: even an intercepted request is useless without the
+  private key the extension can't extract, plus a tighter CSP and
+  fewer trusted third-party scripts as defense-in-depth.
+
+| Scenario | Attacker needs | Real defense |
+|---|---|---|
+| Algorithm forgery | No stolen token at all — just a weak verifier | Pin the algorithm server-side; never trust the token's own header to pick it |
+| Infrastructure leakage | Access to logs/analytics, not the user's browser | Redact tokens from logs; never put them in a URL |
+| Audience confusion | A token meant for a different service | Validate `aud`/`iss` on every single service, not just the signature |
+| Man-in-the-browser | A malicious extension or compromised device | Client-binding (DPoP/mTLS) — storage hygiene alone can't fix this one |
+
+**Interview point:** this is the real contrast with §3 — theft-and-replay
+is about protecting an *intact* token from being copied; these four are
+about a token that was never copied at all, either forged outright,
+leaked by your own systems, or valid but misused outside its intended
+scope. A strong answer names which category a given scenario actually
+falls into before reaching for a fix, since "use `httponly` cookies"
+answers none of these four.
+
+## 5. OAuth2 Flow Selection
 
 **"Which OAuth2 flow for a SPA, a backend service, and a CLI tool — and why?"**
 
@@ -201,7 +281,7 @@ registered redirect URI?"** Exact `redirect_uri` matching (no
 wildcards) + PKCE, so an intercepted code can't be exchanged without
 the original verifier.
 
-## 5. Multi-Factor Authentication
+## 6. Multi-Factor Authentication
 
 **"TOTP vs. SMS vs. WebAuthn — what's the real trade-off, and how would you roll out MFA?"**
 
@@ -230,7 +310,7 @@ def setup_totp(user_id: str, issuer: str) -> tuple[str, str]:
 | SMS: zero setup friction | SIM-swap/SS7 make it the weakest factor |
 | WebAuthn: phishing-resistant, origin-bound | Hardware cost; still needs a fallback |
 
-## 6. Enterprise SSO Integration
+## 7. Enterprise SSO Integration
 
 **"Validating an incoming SAML/OIDC assertion — what goes wrong with sloppy Just-in-Time provisioning?"**
 

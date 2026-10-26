@@ -408,6 +408,10 @@
     "url": "security/ai-and-llm-security/"
   },
   {
+    "title": "AI-Assisted Security Vulnerability Audits",
+    "url": "security/ai-assisted-security-vulnerability-audit/"
+  },
+  {
     "title": "Database Types: The Decision Framework",
     "url": "database/database-types-overview/"
   },
