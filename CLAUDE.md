@@ -6,15 +6,23 @@ This site is built with [Zensical](https://zensical.org/) (a Markdown-based
 static site generator). Content lives in `docs/**/*.md`, organized into
 subdirectories mirroring `zensical.toml`'s nav (e.g.
 `docs/database/postgresql-for-scale.md`,
-`docs/backend/python/django-orm.md`) — only `index.md`
-sits at `docs/` root. As of 2026-10-22 the
-top-level domains are Frontend, Backend, Architecture, Software
-Testing, Cyber Security, Database, Cloud & DevOps, AI & LLM,
-Algorithms, and Interview Prep — a flat, domain-based structure
-(no "Study Materials" wrapper, no
-"Programming Languages" grouping — Python/Go/Kotlin live under
-Backend, JS/TS/React under Frontend) replacing the earlier
-chapter-numbered and then topic-grouped layouts. Config in
+`docs/python/django-orm.md`) — only `index.md`
+sits at `docs/` root. As of 2026-10-26 the
+top-level domains are Frontend, Python, Backend, Architecture,
+Microservices & Distributed Systems, Software Testing, Cyber
+Security, Database, Cloud & DevOps, AI & LLM, Machine Learning,
+Algorithms, and Interview Prep — a flat, domain-based structure (no
+"Study Materials" wrapper, no "Programming Languages" grouping —
+Python has its own top-level domain given its depth, Go/Kotlin live
+under Backend, JS/TS/React under Frontend) replacing the earlier
+chapter-numbered and then topic-grouped layouts. Domains get
+split out to their own top level, or folded into a more fitting one,
+as their actual scale/scope changes — Machine Learning (promoted out
+of AI & LLM), Microservices & Distributed Systems (promoted out of
+Backend, by way of Architecture), and Python itself (promoted out of
+Backend) are precedent for when that's warranted: once a nested group
+is bigger than several existing top-level domains, or its content
+stops matching the domain it's nested under. Config in
 `zensical.toml`, and `.github/workflows/docs.yml` builds and deploys
 it to GitHub Pages automatically on every push to `main`.
 
@@ -47,6 +55,63 @@ it to GitHub Pages automatically on every push to `main`.
 - This is meant to be an ongoing, evolving job-prep resource — not scoped to
   one interview. New tracks (new roles, new topic areas) get their own pages
   and `nav` entries rather than replacing what's here.
+
+## Git workflow
+
+- **Never push unprompted.** Commit locally by default after making
+  changes; leave pushing to the user's own initiative. This applies
+  even when a push would otherwise seem like the natural next step.
+- **When the user explicitly asks to merge/squash and push** (their
+  usual phrasing: "merge commits and push as one," "finally merge
+  commits and push") — this is an established, recurring workflow by
+  now, not a one-off exception. Do it promptly: `git reset --soft
+  origin/main`, write one consolidated commit message summarizing the
+  whole batch, commit, then `git push`. No need to ask for
+  confirmation again when this exact request is made.
+- Never add a `Co-Authored-By: Claude` (or similar AI-attribution)
+  trailer to commit messages.
+
+## Handling a pasted job description
+
+When the user pastes a job description, don't create a "JD notes" or
+"JD tracker" summary page — the deliverable is study content, not a
+summary of the posting.
+
+- Identify the named technologies/topics from the JD that aren't
+  already covered on the site, and add each as its own real study
+  page in the nav — same depth and format as existing chapters
+  (Q&A-style, code examples, "where this shows up" grounding), not a
+  stub or skeleton outline to fill in later.
+- **Classify each technology before grouping it**: general-purpose
+  and reusable across many future JDs (e.g. Spark, Kafka, Kubernetes,
+  Kong API Gateway) vs. genuinely specific to that JD's own domain
+  (e.g. FHIR/HL7 for healthcare). Group general-purpose tech under its
+  own topic-named section; keep only genuinely domain-specific pieces
+  under a domain-named section. Don't lump everything from one JD
+  under one domain-flavored group just because it came from the same
+  posting — ask "is this tool itself specific to the JD's theme, or
+  just used in that context this one time?", not just "is it specific
+  to the JD's industry?"
+- A quick gap-check against the user's CV/background is fine as a
+  short, internal judgment call made in conversation — it's not a
+  saved artifact. The file that gets committed is the study content
+  itself.
+
+## Nav label length
+
+Keep `zensical.toml` nav labels (and the matching link text in
+`docs/index.md`'s Contents section) short — roughly 2-5 words, not a
+colon-separated list of every subtopic a page covers. A long,
+multi-clause nav label wraps to multiple lines in the sidebar.
+
+- The page's own `# H1` / `title:` frontmatter is already allowed to
+  differ from its nav label on this site, and should stay fully
+  descriptive — only the nav label itself needs to be short (existing
+  precedent: `docs/python/django-orm.md`'s nav label is "ORM Query
+  Cheat Sheet" while its H1 is "Django ORM Query Cheat Sheet for
+  Senior Engineers").
+- This governs new nav entries going forward — don't go back and
+  rename every existing longer label on a whim.
 
 ## Content writing style
 

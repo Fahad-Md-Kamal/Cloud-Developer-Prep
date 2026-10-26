@@ -39,7 +39,7 @@ Operational weight. Kafka needs partitioning, consumer-group, and
 offset-management decisions Redis doesn't — reaching for it to send one
 background job (send this email) is solving a problem you don't have
 yet. For a single-process, no-fan-out background job, plain Celery
-([Practical Patterns §3](../python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+([Practical Patterns §4](../python/practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
 is often enough on its own.
 
 ## 2. Schema Evolution for Long-Lived Event Streams

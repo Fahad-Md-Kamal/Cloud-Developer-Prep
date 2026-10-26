@@ -27,6 +27,7 @@ nav = [
           { "Python's Execution Model" = "python/pythons-execution-model.md" },
           { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "python/python-implementations.md" },
           { "Typing & Generics" = "python/typing-and-generics.md" },
+          { "Syntax Idioms & Expressions" = "python/syntax-idioms-and-expressions.md" },
           { "Python Internals & Advanced OOP" = "python/python-internals-and-advanced-oop.md" },
           { "Practical Patterns" = "python/practical-patterns.md" },
       ] },

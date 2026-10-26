@@ -127,6 +127,9 @@ or otherwise), not just Django/FastAPI.
     - [Python Implementations: CPython, PyPy, GraalPy & Beyond](python/python-implementations.md) —
       what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
     - [Typing & Generics](python/typing-and-generics.md)
+    - [Syntax Idioms & Expressions](python/syntax-idioms-and-expressions.md) —
+      conditional expressions, list/dict/set/generator comprehensions,
+      the walrus operator, unpacking, `match`/`case`, f-strings
     - [Python Internals & Advanced OOP](python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
     - [Practical Patterns](python/practical-patterns.md)
 - **Performance & Memory**

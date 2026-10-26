@@ -162,7 +162,7 @@ def generate_report(self, filters: dict):
 - This doesn't belong inline in an HTTP request — a 10GB report can
   take minutes, far beyond any reasonable request timeout. Run it as a
   background job (Celery), the same pattern as
-  [Practical Patterns §3](../python/practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request).
+  [Practical Patterns §4](../python/practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request).
 - Stream progress back (`update_state`) so the client can show real
   progress instead of a spinner with no information for several
   minutes.

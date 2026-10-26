@@ -163,7 +163,7 @@ async def analyze_document(
 - It runs in the same process though, so it's not a substitute for
   Celery when the work is heavy, needs retries, or must survive a
   process restart — for that, hand off to a real task queue (see
-  [Practical Patterns §3](practical-patterns.md#3-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+  [Practical Patterns §4](practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
   instead.
 - A dependency with a `yield` (like `get_db` in
   [§3](#3-yield-dependencies-setup-teardown-exception-propagation))

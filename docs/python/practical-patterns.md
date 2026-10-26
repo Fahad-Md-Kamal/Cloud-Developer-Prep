@@ -31,10 +31,8 @@ def say_hello(name: str):
 - Be able to draw that shape cold.
 
 **Likely follow-up — "why can `wrapper` still see `n` after `repeat(3)` already returned?"**
-
-- It's a closure — `wrapper` references `n`, so Python keeps it alive
-  as long as `wrapper` exists, even though `repeat`'s own stack frame
-  is long gone.
+It's a closure — see [§2](#2-what-exactly-is-a-closure-and-why-does-wrapper-still-see-n-after-repeat-already-returned)
+for the full mechanism.
 
 **Where you'd actually use this:**
 
@@ -50,7 +48,58 @@ def say_hello(name: str):
 | Reusable across many functions with zero duplication | Debugging requires understanding closures — a real barrier for less experienced reviewers |
 | Composable — multiple decorators stack cleanly | Stacking order matters and is easy to get wrong |
 
-## 2. "What are the two ways to build a context manager, and what does `__exit__`'s return value control?"
+## 2. "What exactly is a closure, and why does `wrapper` still see `n` after `repeat()` already returned?"
+
+```python
+def make_multiplier(factor):
+    def multiply(x):
+        return x * factor  # "factor" isn't a parameter of multiply() -- it's closed over
+    return multiply
+
+double = make_multiplier(2)
+triple = make_multiplier(3)
+
+print(double(5))  # 10 -- remembers factor=2
+print(triple(5))  # 15 -- remembers factor=3
+```
+
+**Answer:**
+
+- A **closure** is a function that remembers the variables from the
+  scope it was *defined* in, even after that outer scope has already
+  finished running.
+- This only happens when an inner function is defined inside an outer
+  function and the inner function is returned (or otherwise escapes)
+  — the inner function keeps a live reference to the outer function's
+  variables instead of them being thrown away when the outer function
+  returns.
+- `make_multiplier(2)` runs and returns, so normally `factor` would be
+  gone — but `multiply` still has access to it, because `multiply`
+  carries its own private copy of the environment it was created in.
+- **Each call creates a separate closure** — `double` and `triple`
+  each remember their own `factor`, not a shared one.
+
+**This is exactly the mechanism behind [§1](#1-write-a-decorator-that-takes-an-argument-then-explain-why-it-works)'s decorator:**
+
+- `repeat(3)` returns `decorator`, and `decorator(func)` returns
+  `wrapper` — `wrapper` references both `n` and `func`, so Python
+  keeps them alive as long as `wrapper` itself exists, even though
+  `repeat`'s own stack frame is long gone by the time `wrapper`
+  actually runs.
+- This is also *why* a decorator can take its own arguments at all
+  (`@repeat(3)` vs. a plain `@decorator`) — the extra outer function
+  level exists specifically to create a closure over those arguments
+  before the real decorator/wrapper machinery even starts.
+
+**Interview point:** "why does debugging a closure-heavy decorator
+feel harder than debugging a plain function?" — expects naming that
+the variables involved aren't visible in the wrapper's own local scope
+in an obvious way (they're captured from an enclosing scope that's
+already returned), which is exactly the "real barrier for less
+experienced reviewers" named in [§1](#1-write-a-decorator-that-takes-an-argument-then-explain-why-it-works)'s
+trade-off table.
+
+## 3. "What are the two ways to build a context manager, and what does `__exit__`'s return value control?"
 
 ```python
 from contextlib import contextmanager
@@ -90,7 +139,7 @@ def managed_file(path: str, mode: str):
 | `with` blocks make resource lifetime visible at the call site | A class-based version needs two extra methods for what a `finally` block could do inline |
 | Composable — multiple resources nest cleanly (`with a, b:`) | Swallowing exceptions via `__exit__` returning `True` is an easy, hard-to-spot bug |
 
-## 3. "When do you reach for Celery instead of just handling something in the request?"
+## 4. "When do you reach for Celery instead of just handling something in the request?"
 
 ```python
 from celery import Celery

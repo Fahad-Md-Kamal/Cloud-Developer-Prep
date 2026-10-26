@@ -44,6 +44,10 @@
     "url": "python/typing-and-generics/"
   },
   {
+    "title": "Syntax Idioms & Expressions",
+    "url": "python/syntax-idioms-and-expressions/"
+  },
+  {
     "title": "Python Internals & Advanced OOP",
     "url": "python/python-internals-and-advanced-oop/"
   },
