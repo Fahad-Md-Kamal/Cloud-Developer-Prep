@@ -8,10 +8,10 @@ icon: lucide/house
 **A Living, Multi-Domain Study & Interview Guide**
 
 A full map of software engineering — Frontend, Backend, Architecture,
-Software Testing, Cyber Security, Database, Cloud & DevOps, AI & LLM,
-Machine Learning, Algorithms, and Interview Prep — eleven domains,
-230+ chapters and still growing, built from real practice sessions
-rather than a static checklist.
+Microservices & Distributed Systems, Software Testing, Cyber Security,
+Database, Cloud & DevOps, AI & LLM, Machine Learning, Algorithms, and
+Interview Prep — twelve domains, 230+ chapters and still growing,
+built from real practice sessions rather than a static checklist.
 
 - Each domain runs from real fundamentals up through senior/staff
   depth — this isn't scoped to one experience level or to backend
@@ -171,36 +171,23 @@ Django/FastAPI.
 
 **Go**
 
-- [Go for Python Developers](backend/go/go-for-python-developers.md)
+- [Go Fundamentals: Types, Structs & Interfaces](backend/go/go-fundamentals.md) —
+  slices vs. arrays, structs and methods, interfaces as implicit/structural typing
+- [Concurrency in Go: Goroutines, Channels & the Scheduler](backend/go/go-concurrency.md) —
+  the M:N scheduler, channels, worker pools/fan-out-fan-in, `context`
+- [Go Memory Management & Performance](backend/go/go-memory-and-performance.md) —
+  escape analysis, the garbage collector, value vs. pointer semantics, `pprof`
+- [Building Web Services & Microservices in Go](backend/go/go-web-services-and-microservices.md) —
+  `net/http`, when gin/echo earn their place, middleware, graceful shutdown
+- [Testing in Go](backend/go/go-testing.md) —
+  table-driven tests, `testify`, benchmarks, native fuzzing
+- [Go Standard Library Essentials](backend/go/go-standard-library.md) —
+  `io.Reader`/`io.Writer`, `encoding/json`, file I/O, the `time` format gotcha
 
 **Kotlin**
 
 - [Kotlin for JVM Backend Interviews](backend/kotlin/kotlin-for-jvm-interviews.md) —
   coroutines vs. Python AsyncIO, Kotlin vs. Java
-
-**Microservices & Distributed Systems**
-
-- **Microservices & Messaging**
-    - [Service Boundaries & Architecture](backend/service-boundaries-and-architecture.md)
-    - [Messaging: Kafka, Redis & AWS](backend/messaging-kafka-redis-and-aws.md) —
-      includes SNS/SQS, the fan-out pattern, and idempotent event handling
-    - [Inter-Service Communication](backend/inter-service-communication.md)
-- **Distributed System Design**
-    - [Fault Tolerance Patterns](backend/fault-tolerance-patterns.md)
-    - [Load Balancing & Auto-Scaling](backend/load-balancing-and-autoscaling.md)
-    - [Consistency & Consensus](backend/consistency-and-consensus.md)
-    - [Data & Capacity Scaling](backend/data-and-capacity-scaling.md)
-- **API Gateway & Resilience**
-    - [API Gateway Architecture](backend/api-gateway-architecture.md)
-    - [Rate Limiting Strategies](backend/rate-limiting-strategies.md)
-    - [Circuit Breakers, Retries & Bulkheads](backend/circuit-breakers-retries-and-bulkheads.md)
-    - [API Management & Versioning](backend/api-management-and-versioning.md)
-    - [Kong API Gateway](backend/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
-- **Observability**
-    - [Structured Logging](backend/structured-logging.md)
-    - [Metrics & Prometheus](backend/metrics-and-prometheus.md)
-    - [Distributed Tracing](backend/distributed-tracing.md)
-    - [Dashboards & Alerting](backend/dashboards-and-alerting.md)
 
 ### Architecture
 
@@ -230,7 +217,6 @@ sits underneath.
       links), then JWT/OAuth2/MFA/SSO in depth
     - [Authorization Patterns](architecture/authorization-patterns.md)
     - [Security Hardening](architecture/security-hardening.md)
-    - [Threat Detection & Monitoring](architecture/threat-detection-and-monitoring.md)
 - **System Design Interviews**
     - [System Design Methodology](architecture/system-design-methodology.md)
     - [Architecture Diagramming & Communication](architecture/architecture-diagramming-and-communication.md) — includes the C4 model
@@ -238,6 +224,34 @@ sits underneath.
     - [Scalability Case Studies](architecture/scalability-case-studies.md) — includes CAP and PACELC
     - [Event-Driven Architecture: CQRS & the Saga Pattern](architecture/event-driven-architecture.md) —
       splitting reads from writes, and compensating transactions across services
+
+### Microservices & Distributed Systems
+
+Service-to-service concerns at scale — language-agnostic, the same
+way Architecture above is, just specifically about systems made of
+many communicating services rather than any single one.
+
+- **Microservices & Messaging**
+    - [Service Boundaries & Architecture](distributed-systems/service-boundaries-and-architecture.md)
+    - [Messaging: Kafka, Redis & AWS](distributed-systems/messaging-kafka-redis-and-aws.md) —
+      includes SNS/SQS, the fan-out pattern, and idempotent event handling
+    - [Inter-Service Communication](distributed-systems/inter-service-communication.md)
+- **Distributed System Design**
+    - [Fault Tolerance Patterns](distributed-systems/fault-tolerance-patterns.md)
+    - [Load Balancing & Auto-Scaling](distributed-systems/load-balancing-and-autoscaling.md)
+    - [Consistency & Consensus](distributed-systems/consistency-and-consensus.md)
+    - [Data & Capacity Scaling](distributed-systems/data-and-capacity-scaling.md)
+- **API Gateway & Resilience**
+    - [API Gateway Architecture](distributed-systems/api-gateway-architecture.md)
+    - [Rate Limiting Strategies](distributed-systems/rate-limiting-strategies.md)
+    - [Circuit Breakers, Retries & Bulkheads](distributed-systems/circuit-breakers-retries-and-bulkheads.md)
+    - [API Management & Versioning](distributed-systems/api-management-and-versioning.md)
+    - [Kong API Gateway](distributed-systems/kong-api-gateway.md) — the concrete product behind "API Gateway (Kong)" in a JD
+- **Observability**
+    - [Structured Logging](distributed-systems/structured-logging.md)
+    - [Metrics & Prometheus](distributed-systems/metrics-and-prometheus.md)
+    - [Distributed Tracing](distributed-systems/distributed-tracing.md)
+    - [Dashboards & Alerting](distributed-systems/dashboards-and-alerting.md)
 
 ### Software Testing
 
@@ -290,6 +304,8 @@ frameworks, cloud security posture, the certification/career path, and
 AI/LLM-specific security — cross-linking into the existing AppSec
 content rather than duplicating it.
 
+**Fundamentals**
+
 - [Cybersecurity for Beginners: The Learning Roadmap](security/cybersecurity-for-beginners-roadmap.md) —
   the prerequisites (networking, Linux, scripting), the recommended
   order through this track, and the single biggest beginner mistake
@@ -299,25 +315,42 @@ content rather than duplicating it.
   symmetric vs. asymmetric, the TLS handshake, digital signatures, why bcrypt not SHA-256
 - [The OWASP Top 10, In Depth](security/owasp-top-10-in-depth.md) —
   the canonical map, with insecure design, vulnerable components, and SSRF covered in full
+
+**Offensive & Defensive Operations**
+
 - [Cybersecurity Tools by Category](security/cybersecurity-tools-by-category.md) —
   Nessus/OpenVAS, Burp Suite/ZAP, Metasploit, Hashcat, Splunk/ELK, Autopsy/Volatility
 - [Offensive Security & Penetration Testing Methodology](security/offensive-security-and-pentesting.md) —
   recon through reporting, red/blue/purple team, bug bounty programs
 - [Security Operations: SIEM, Logging & Incident Response](security/security-operations-and-incident-response.md) —
   log correlation, and the full incident response lifecycle
+- [Threat Detection & Monitoring](security/threat-detection-and-monitoring.md) —
+  security audit logging, anomaly detection & behavior analytics, vulnerability management
+
+**Identity & Human-Factor Threats**
+
 - [Identity Security: Zero Trust & Privileged Access](security/identity-security-zero-trust-and-pam.md) —
   continuous verification, MFA method strength, PAM and just-in-time access
 - [Malware, Phishing & Social Engineering](security/malware-phishing-and-social-engineering.md) —
   virus/worm/trojan/ransomware mechanics, why phishing works
+
+**Governance & Cloud Security**
+
 - [Compliance & Security Frameworks](security/compliance-and-security-frameworks.md) —
   SOC 2, ISO 27001, GDPR, PCI-DSS
 - [Cloud Security Fundamentals](security/cloud-security-fundamentals.md) —
   shared responsibility, CSPM, why most cloud incidents are misconfiguration
+
+**Career & Case Studies**
+
 - [Security Certifications & Career Path](security/security-certifications-and-career-path.md) —
   Security+, OSCP/CEH, GCIH/GCIA, CISSP, and which track each fits
 - [Real-World Breach Case Studies (2023–2025)](security/real-world-breach-case-studies.md) —
   MOVEit, Change Healthcare, the Snowflake customer campaign, Microsoft
   Storm-0558, and 23andMe, each mapped to the mechanism that caused it
+
+**AI Security**
+
 - [AI & LLM Security](security/ai-and-llm-security.md) —
   the OWASP Top 10 for LLM Applications, excessive agency, RAG corpus poisoning, model theft
 - [AI-Assisted Security Vulnerability Audits](security/ai-assisted-security-vulnerability-audit.md) —

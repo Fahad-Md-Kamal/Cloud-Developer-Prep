@@ -25,7 +25,7 @@ possible is **consensus**, not a cleverer query planner.
   piece of engineering that makes "distributed" and "strongly
   consistent" stop being contradictory.
 - This is a direct, deeper answer to the question already raised in
-  [Consistency & Consensus §3](../backend/consistency-and-consensus.md#3-when-you-actually-need-consensus):
+  [Consistency & Consensus §3](../distributed-systems/consistency-and-consensus.md#3-when-you-actually-need-consensus):
   a NewSQL database is a concrete, full-database example of "something
   already built on Raft/Paxos" that most engineers only ever interact
   with as a client, never having to implement the consensus layer
@@ -72,7 +72,7 @@ continuing from the last committed entry with nothing lost.
     new leader through the same majority vote means the cluster never
     has two nodes simultaneously believing they're in charge
     (**split-brain**) — the same quorum idea from
-    [Consistency & Consensus](../backend/consistency-and-consensus.md),
+    [Consistency & Consensus](../distributed-systems/consistency-and-consensus.md),
     now doing double duty for both durability and leader election.
 
 ## 2. "How does a transaction spanning multiple ranges commit atomically?"

@@ -98,7 +98,7 @@ practically, not just as CAP-theorem trivia?"**
   read-heavy, non-financial data: accept that it might be briefly out
   of date, in exchange for staying available and fast. It's one point
   on a wider spectrum — see
-  [Consistency & Consensus §1](../backend/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual)
+  [Consistency & Consensus §1](../distributed-systems/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual)
   for the options in between (causal, read-your-own-writes, monotonic
   reads, session, bounded staleness).
 
@@ -179,7 +179,7 @@ they follow."
       capped/sampled version) for huge accounts — so one celebrity's
       post never triggers millions of writes at once.
     - This is the exact same idea as
-      [SNS+SQS fan-out](../backend/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern)
+      [SNS+SQS fan-out](../distributed-systems/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern)
       — "do the expensive broadcast once, let everyone else work
       independently" — just aimed at feed entries instead of service
       events. The huge-account problem here is the same kind of

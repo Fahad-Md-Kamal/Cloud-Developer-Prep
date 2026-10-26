@@ -18,7 +18,7 @@ just familiar.
 
 - **Language/backend fundamentals** — whichever of [Backend >
   Python](../backend/python/pythons-execution-model.md),
-  [Go](../backend/go/go-for-python-developers.md), or
+  [Go](../backend/go/go-fundamentals.md), or
   [Kotlin](../backend/kotlin/kotlin-for-jvm-interviews.md) matches the
   role, reviewed cold, not just skimmed.
 - **DSA practice** — a daily block working through

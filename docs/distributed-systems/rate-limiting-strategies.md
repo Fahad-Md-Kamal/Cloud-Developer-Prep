@@ -5,8 +5,9 @@ title: "Rate Limiting Strategies"
 # Rate Limiting Strategies
 
 Token bucket vs. sliding window, making limits work across multiple
-gateway instances, and per-user/per-endpoint limits in Django/DRF —
-part of the same gateway discussion as
+gateway instances, per-user/per-endpoint limits in Django/DRF, and
+rate limiting as a defense against abuse and DDoS — part of the same
+gateway discussion as
 [API Gateway Architecture](api-gateway-architecture.md).
 
 ## 1. "Compare token bucket and sliding window rate limiting. Which would you pick and why?"
@@ -59,6 +60,7 @@ class TokenBucket:
 
 | Algorithm | Pros | Cons / Trade-offs |
 |---|---|---|
+| Fixed window | Simplest, cheapest to implement | Allows up to 2x the limit right at the window boundary |
 | Token bucket | Tolerates legitimate bursts; simple to reason about | A client can "save up" tokens and burst harder than the average rate suggests |
 | Sliding window | Precise, hard rate cap over any window | More expensive to compute exactly (log of timestamps) or approximate (fixed-window edge effects) |
 
@@ -159,6 +161,31 @@ or an unrelated `5xx`.
   difference between "you were rejected" and "you were served
   something slightly stale" **explicit** to the caller, not something
   they have to guess at.
+
+## 5. Rate Limiting as a Defense Against Abuse and DDoS
+
+**"Design rate limiting that's fair to real users but stops brute-force and scraping."**
+
+**Answer:**
+
+- Everything above assumes shaping *legitimate* traffic. Using rate
+  limiting as a **security control** — against brute-force login
+  attempts, scraping, or a volumetric DDoS (Distributed Denial of
+  Service) attack — adds one more requirement: the limit has to hold
+  even when the traffic hitting it is deliberately adversarial, not
+  just bursty.
+- **Layer the limits** — per IP, per authenticated user/key, and per
+  endpoint class (auth endpoints much tighter than read endpoints) — a
+  single global limit either blocks legitimate bursts or lets a
+  distributed attacker spread across many IPs straight through.
+- "Block known bot user agents" is a weak, trivially spoofed signal on
+  its own — treat it as one input that tightens an already-real rate
+  limit, never as the limit itself.
+- Pair the gateway-level limit from [§2](#2-how-do-you-implement-rate-limiting-across-multiple-gateway-or-app-instances)
+  with a CDN/WAF-level defense in front of it for genuine volumetric
+  DDoS — rate limiting inside your own infrastructure still means the
+  attack traffic reached your infrastructure at all, which a CDN
+  absorbing it upstream avoids entirely.
 
 ---
 

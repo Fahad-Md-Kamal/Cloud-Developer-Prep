@@ -145,7 +145,7 @@ as any backend interview — covered elsewhere on this site rather than
 duplicated here:
 
 - **AWS SQS vs. Kafka, and handling duplicate events** — see
-  [Messaging: Kafka, Redis & AWS §3](../messaging-kafka-redis-and-aws.md#3-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events).
+  [Messaging: Kafka, Redis & AWS §3](../../distributed-systems/messaging-kafka-redis-and-aws.md#3-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events).
 - **Unit testing vs. integration testing**, including confirming
   integration across components that live in separate repositories —
   see

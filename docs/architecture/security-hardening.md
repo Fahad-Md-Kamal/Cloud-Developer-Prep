@@ -9,7 +9,7 @@ baseline — the defenses that sit around authentication/authorization
 rather than inside them. See
 [Authentication Patterns](authentication-patterns.md) and
 [Authorization Patterns](authorization-patterns.md) for *who* and
-*what*; [Threat Detection & Monitoring](threat-detection-and-monitoring.md)
+*what*; [Threat Detection & Monitoring](../security/threat-detection-and-monitoring.md)
 for catching what gets through anyway.
 
 ## 1. Input Validation and Injection Prevention

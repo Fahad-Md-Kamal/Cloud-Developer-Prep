@@ -82,7 +82,7 @@ it never needs, while missing features it needs by default.
   general-purpose relational database alongside it.
 - **Prometheus** — narrower still: a **pull-based** metrics system
   specifically for monitoring (see
-  [Prometheus's four metric types](../backend/metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)),
+  [Prometheus's four metric types](../distributed-systems/metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)),
   built for short-retention operational metrics with alerting as a
   first-class feature, not a general-purpose time-series store for
   arbitrary application data.

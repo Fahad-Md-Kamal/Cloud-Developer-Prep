@@ -4,10 +4,10 @@ title: "Messaging & Event-Driven Services: SQS, SNS, EventBridge, Kinesis & Amaz
 
 # Messaging & Event-Driven Services: SQS, SNS, EventBridge, Kinesis & Amazon MQ
 
-[Messaging: Kafka, Redis & AWS](../backend/messaging-kafka-redis-and-aws.md)
+[Messaging: Kafka, Redis & AWS](../distributed-systems/messaging-kafka-redis-and-aws.md)
 already covers the *design* questions — SQS vs Kafka, idempotent
 consumers, the
-[SNS fan-out pattern](../backend/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern).
+[SNS fan-out pattern](../distributed-systems/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern).
 This page covers the specific service mechanics the exam actually asks
 about: queue types, DLQs, and the services that don't come up in that
 chapter at all — EventBridge, Kinesis, and Amazon MQ.
@@ -57,7 +57,7 @@ chapter at all — EventBridge, Kinesis, and Amazon MQ.
 
 ## SNS: Filtering on Top of Fan-Out
 
-[Fan-out](../backend/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern)
+[Fan-out](../distributed-systems/messaging-kafka-redis-and-aws.md#4-aws-sns-vs-sqs-and-the-fan-out-pattern)
 already covers publishing once to many subscribed queues. **Subscription
 filter policies** add selectivity on top of that: each subscriber
 declares a filter (e.g. `{"orderType": ["international"]}`), and SNS
@@ -95,7 +95,7 @@ applications) to many targets based on the event's actual *content*.
 ## Kinesis: Streams, Firehose & Data Analytics
 
 The AWS-managed streaming family —
-[Kafka's AWS-managed equivalent](../backend/messaging-kafka-redis-and-aws.md#3-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events),
+[Kafka's AWS-managed equivalent](../distributed-systems/messaging-kafka-redis-and-aws.md#3-aws-sqs-vs-kafka-and-how-to-actually-handle-duplicate-events),
 when replay and multiple independent consumers reading the same stream
 are actually needed.
 

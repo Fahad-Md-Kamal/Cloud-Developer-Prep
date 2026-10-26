@@ -4,44 +4,13 @@ title: "Threat Detection & Monitoring"
 
 # Threat Detection & Monitoring
 
-Rate limiting, audit logging, anomaly detection, and vulnerability
-management — catching what [Security Hardening](security-hardening.md)'s
-defenses don't stop outright, fast enough to matter.
+Audit logging, anomaly detection, and vulnerability management —
+catching what [Security Hardening](../architecture/security-hardening.md)'s
+defenses don't stop outright, fast enough to matter. For rate limiting
+and DDoS defense specifically, see
+[Rate Limiting Strategies §5](../distributed-systems/rate-limiting-strategies.md#5-rate-limiting-as-a-defense-against-abuse-and-ddos).
 
-## 1. Rate Limiting and DDoS Protection
-
-**"Design rate limiting that's fair to real users but stops brute-force and scraping."**
-
-```python
-async def is_allowed(redis, key: str, limit: int, window_seconds: int) -> bool:
-    pipe = redis.pipeline()
-    now = time.time()
-    pipe.zremrangebyscore(key, 0, now - window_seconds)  # drop entries outside window
-    pipe.zcard(key)
-    pipe.zadd(key, {str(now): now})
-    pipe.expire(key, window_seconds)
-    _, count, *_ = await pipe.execute()
-    return count <= limit
-```
-
-**Answer:**
-
-- Layer limits — per IP, per user/key, per endpoint class (auth much
-  tighter than read) — a single global limit either blocks legitimate
-  bursts or lets a distributed attacker through.
-- Sliding-window or token-bucket beats fixed windows, which allow a
-  full quota again right at the boundary.
-- Return `429` + `Retry-After` so well-behaved clients back off.
-- "Block known bot user agents" is weak and trivially spoofed — a
-  signal to tighten further, never the sole gate.
-
-| Approach | Pros | Cons |
-|---|---|---|
-| Fixed window | Simple, cheap | Up to 2x burst right at the window boundary |
-| Sliding window (log) | Accurate, no boundary burst | More storage — tracks individual timestamps |
-| Token bucket | Allows legitimate bursts, caps average | Needs tuning (bucket size + refill rate) |
-
-## 2. Security Audit Logging
+## 1. Security Audit Logging
 
 **"What must a security audit log capture, and what must it never contain?"**
 
@@ -65,7 +34,7 @@ def log_security_event(event_type, user_id, ip, resource, outcome, correlation_i
 - Predefine alert rules (repeated auth failures, privilege escalation,
   key rotation, policy denials) — an unalerted log is just storage.
 
-## 3. Anomaly Detection and Behavior Analytics
+## 2. Anomaly Detection and Behavior Analytics
 
 **"How do you detect account-takeover behavior without drowning the security team in false positives?"**
 
@@ -98,7 +67,7 @@ easier to explain/debug than an opaque model. Reach for ML once you
 have enough labeled incident data to validate it's actually doing
 better.
 
-## 4. Vulnerability Management and Security Testing
+## 3. Vulnerability Management and Security Testing
 
 **"How do you keep dependency and code vulnerabilities from piling up silently?"**
 
@@ -120,6 +89,6 @@ safety check -r requirements.txt --json   # dependency vulnerabilities
 
 ## Code Samples
 
-See [Authentication Patterns' Code Samples](authentication-patterns.md#code-samples)
+See [Authentication Patterns' Code Samples](../architecture/authentication-patterns.md#code-samples)
 for the full `code_samples/chapter-4/` runnable examples this chapter
 group shares.

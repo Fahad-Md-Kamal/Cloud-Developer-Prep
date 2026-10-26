@@ -144,76 +144,32 @@
     "url": "backend/python/regex-and-text-processing/"
   },
   {
-    "title": "Go for Python Developers",
-    "url": "backend/go/go-for-python-developers/"
+    "title": "Go Fundamentals: Types, Structs & Interfaces",
+    "url": "backend/go/go-fundamentals/"
+  },
+  {
+    "title": "Concurrency in Go: Goroutines, Channels & the Scheduler",
+    "url": "backend/go/go-concurrency/"
+  },
+  {
+    "title": "Go Memory Management & Performance",
+    "url": "backend/go/go-memory-and-performance/"
+  },
+  {
+    "title": "Building Web Services & Microservices in Go",
+    "url": "backend/go/go-web-services-and-microservices/"
+  },
+  {
+    "title": "Testing in Go",
+    "url": "backend/go/go-testing/"
+  },
+  {
+    "title": "Go Standard Library Essentials",
+    "url": "backend/go/go-standard-library/"
   },
   {
     "title": "Kotlin for JVM Backend Interviews",
     "url": "backend/kotlin/kotlin-for-jvm-interviews/"
-  },
-  {
-    "title": "Service Boundaries & Architecture",
-    "url": "backend/service-boundaries-and-architecture/"
-  },
-  {
-    "title": "Messaging: Kafka, Redis & AWS",
-    "url": "backend/messaging-kafka-redis-and-aws/"
-  },
-  {
-    "title": "Inter-Service Communication",
-    "url": "backend/inter-service-communication/"
-  },
-  {
-    "title": "Fault Tolerance Patterns",
-    "url": "backend/fault-tolerance-patterns/"
-  },
-  {
-    "title": "Load Balancing & Auto-Scaling",
-    "url": "backend/load-balancing-and-autoscaling/"
-  },
-  {
-    "title": "Consistency & Consensus",
-    "url": "backend/consistency-and-consensus/"
-  },
-  {
-    "title": "Data & Capacity Scaling",
-    "url": "backend/data-and-capacity-scaling/"
-  },
-  {
-    "title": "API Gateway Architecture",
-    "url": "backend/api-gateway-architecture/"
-  },
-  {
-    "title": "Rate Limiting Strategies",
-    "url": "backend/rate-limiting-strategies/"
-  },
-  {
-    "title": "Circuit Breakers, Retries & Bulkheads",
-    "url": "backend/circuit-breakers-retries-and-bulkheads/"
-  },
-  {
-    "title": "API Management & Versioning",
-    "url": "backend/api-management-and-versioning/"
-  },
-  {
-    "title": "Kong API Gateway",
-    "url": "backend/kong-api-gateway/"
-  },
-  {
-    "title": "Structured Logging",
-    "url": "backend/structured-logging/"
-  },
-  {
-    "title": "Metrics & Prometheus",
-    "url": "backend/metrics-and-prometheus/"
-  },
-  {
-    "title": "Distributed Tracing",
-    "url": "backend/distributed-tracing/"
-  },
-  {
-    "title": "Dashboards & Alerting",
-    "url": "backend/dashboards-and-alerting/"
   },
   {
     "title": "SOLID Principles",
@@ -276,10 +232,6 @@
     "url": "architecture/security-hardening/"
   },
   {
-    "title": "Threat Detection & Monitoring",
-    "url": "architecture/threat-detection-and-monitoring/"
-  },
-  {
     "title": "System Design Methodology",
     "url": "architecture/system-design-methodology/"
   },
@@ -298,6 +250,70 @@
   {
     "title": "Event-Driven Architecture: CQRS & the Saga Pattern",
     "url": "architecture/event-driven-architecture/"
+  },
+  {
+    "title": "Service Boundaries & Architecture",
+    "url": "distributed-systems/service-boundaries-and-architecture/"
+  },
+  {
+    "title": "Messaging: Kafka, Redis & AWS",
+    "url": "distributed-systems/messaging-kafka-redis-and-aws/"
+  },
+  {
+    "title": "Inter-Service Communication",
+    "url": "distributed-systems/inter-service-communication/"
+  },
+  {
+    "title": "Fault Tolerance Patterns",
+    "url": "distributed-systems/fault-tolerance-patterns/"
+  },
+  {
+    "title": "Load Balancing & Auto-Scaling",
+    "url": "distributed-systems/load-balancing-and-autoscaling/"
+  },
+  {
+    "title": "Consistency & Consensus",
+    "url": "distributed-systems/consistency-and-consensus/"
+  },
+  {
+    "title": "Data & Capacity Scaling",
+    "url": "distributed-systems/data-and-capacity-scaling/"
+  },
+  {
+    "title": "API Gateway Architecture",
+    "url": "distributed-systems/api-gateway-architecture/"
+  },
+  {
+    "title": "Rate Limiting Strategies",
+    "url": "distributed-systems/rate-limiting-strategies/"
+  },
+  {
+    "title": "Circuit Breakers, Retries & Bulkheads",
+    "url": "distributed-systems/circuit-breakers-retries-and-bulkheads/"
+  },
+  {
+    "title": "API Management & Versioning",
+    "url": "distributed-systems/api-management-and-versioning/"
+  },
+  {
+    "title": "Kong API Gateway",
+    "url": "distributed-systems/kong-api-gateway/"
+  },
+  {
+    "title": "Structured Logging",
+    "url": "distributed-systems/structured-logging/"
+  },
+  {
+    "title": "Metrics & Prometheus",
+    "url": "distributed-systems/metrics-and-prometheus/"
+  },
+  {
+    "title": "Distributed Tracing",
+    "url": "distributed-systems/distributed-tracing/"
+  },
+  {
+    "title": "Dashboards & Alerting",
+    "url": "distributed-systems/dashboards-and-alerting/"
   },
   {
     "title": "Manual Testing Fundamentals: Test Case Design & Bug Reports",
@@ -378,6 +394,10 @@
   {
     "title": "Security Operations: SIEM, Logging & Incident Response",
     "url": "security/security-operations-and-incident-response/"
+  },
+  {
+    "title": "Threat Detection & Monitoring",
+    "url": "security/threat-detection-and-monitoring/"
   },
   {
     "title": "Identity Security: Zero Trust & Privileged Access",

@@ -76,9 +76,9 @@ page is the interview-framing layer, not a re-derivation.
   queue," not picking a specific broker — be ready to justify why a
   given interaction needs to be async at all.
 - For the concrete choice between message brokers, see
-  [Messaging: Kafka, Redis & AWS](../backend/messaging-kafka-redis-and-aws.md);
+  [Messaging: Kafka, Redis & AWS](../distributed-systems/messaging-kafka-redis-and-aws.md);
   for the patterns built on top of them (sagas), see
-  [Inter-Service Communication](../backend/inter-service-communication.md)
+  [Inter-Service Communication](../distributed-systems/inter-service-communication.md)
   and [Event-Driven Architecture: CQRS & the Saga Pattern](event-driven-architecture.md).
 
 ## 5. "When does a CDN or edge computing actually matter for a design?"

@@ -64,7 +64,7 @@ see [Django & DRF](django-orm.md) and
   FastAPI for a specific high-throughput or async-heavy service (an
   AI/LLM gateway, a webhook processor) — not mutually exclusive at the
   org level. Matches how
-  [Service Boundaries & Architecture](../service-boundaries-and-architecture.md)
+  [Service Boundaries & Architecture](../../distributed-systems/service-boundaries-and-architecture.md)
   treats FastAPI as one service type among several in a microservices
   architecture.
 

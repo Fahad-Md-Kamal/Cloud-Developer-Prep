@@ -196,7 +196,7 @@ them up is the single most common ECS IAM mistake.
   task definition revision if too many new tasks fail to start
   healthy — the same "stop digging once it's clearly not working"
   idea as the
-  [circuit breaker pattern](../backend/fault-tolerance-patterns.md#1-circuit-breakers)
+  [circuit breaker pattern](../distributed-systems/fault-tolerance-patterns.md#1-circuit-breakers)
   covered elsewhere, applied to deployments instead of API calls.
 
 ### Hands-On: A First ECS Service, from the Console

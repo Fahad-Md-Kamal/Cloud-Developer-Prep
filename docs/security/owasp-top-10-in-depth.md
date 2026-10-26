@@ -23,7 +23,7 @@ integrity, and SSRF.
 | A06 | Vulnerable & Outdated Components | This page, §2 |
 | A07 | Identification & Authentication Failures | [Authentication Patterns](../architecture/authentication-patterns.md) |
 | A08 | Software & Data Integrity Failures | This page, §3 |
-| A09 | Security Logging & Monitoring Failures | [Threat Detection & Monitoring §2](../architecture/threat-detection-and-monitoring.md#2-security-audit-logging) |
+| A09 | Security Logging & Monitoring Failures | [Threat Detection & Monitoring §1](threat-detection-and-monitoring.md#1-security-audit-logging) |
 | A10 | Server-Side Request Forgery (SSRF) | This page, §4 |
 
 ## 1. "What's 'insecure design,' and how is it different from a specific implementation bug like injection?"

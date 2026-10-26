@@ -46,7 +46,7 @@ worker dying mid-task. Each tool below answers a different one of those.
   and an archival system, or just one of them — it publishes "URL
   discovered" events, and each downstream system subscribes
   independently.
-- See [Messaging: Kafka, Redis & AWS §1](../backend/messaging-kafka-redis-and-aws.md#1-choosing-between-kafka-and-redis)
+- See [Messaging: Kafka, Redis & AWS §1](../distributed-systems/messaging-kafka-redis-and-aws.md#1-choosing-between-kafka-and-redis)
   for the deeper mechanism of why Kafka fits this "many independent
   consumers, replayable log" shape specifically, versus a task queue's
   "one worker takes this task, then it's gone" model.

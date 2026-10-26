@@ -4,7 +4,7 @@ title: "Event-Driven Architecture: CQRS & the Saga Pattern"
 
 # Event-Driven Architecture: CQRS & the Saga Pattern
 
-[Consistency & Consensus §2](../backend/consistency-and-consensus.md#2-eventual-consistency-in-practice-event-sourcing)
+[Consistency & Consensus §2](../distributed-systems/consistency-and-consensus.md#2-eventual-consistency-in-practice-event-sourcing)
 already covers event sourcing — an immutable event log as the source of
 truth, with a read model replayed from it. This page covers the two
 patterns that sit alongside it and get confused with it: CQRS (splitting
@@ -45,7 +45,7 @@ multiple services, where no single database transaction can cover it).
 - **CQRS with event sourcing** is the fuller version: the write side
   *is* the event log itself, and every read model is a projection
   replayed from it — covered in full in
-  [Consistency & Consensus §2](../backend/consistency-and-consensus.md#2-eventual-consistency-in-practice-event-sourcing).
+  [Consistency & Consensus §2](../distributed-systems/consistency-and-consensus.md#2-eventual-consistency-in-practice-event-sourcing).
 - The practical decision: reach for CQRS alone when the only problem is
   "reads and writes need different shapes"; add event sourcing on top
   specifically when you also need a full audit trail or the ability to
@@ -130,7 +130,7 @@ multiple services, where no single database transaction can cover it).
 **Answer:**
 
 - The same read-model lag already covered generally in
-  [Consistency & Consensus §1](../backend/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual)
+  [Consistency & Consensus §1](../distributed-systems/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual)
   shows up concretely in CQRS: a write (command) can succeed while a
   query against the read model, issued immediately after, hasn't caught
   up to reflect it yet.

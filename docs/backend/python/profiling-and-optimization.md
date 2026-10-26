@@ -8,11 +8,11 @@ Finding out *where* time actually goes, and fixing it once you know.
 This page covers profiling tools and algorithmic optimization
 specifically — for the topics that used to live alongside this material
 but now have their own real, deeper coverage, see
-[Multi-Layer Caching](../data-and-capacity-scaling.md#2-multi-layer-caching)
+[Multi-Layer Caching](../../distributed-systems/data-and-capacity-scaling.md#2-multi-layer-caching)
 and [Caching Layers & Global Accelerator](../../cloud-devops/caching-layers-and-global-accelerator.md)
-for caching, [Load Balancing & Auto-Scaling](../load-balancing-and-autoscaling.md)
-and [Data & Capacity Scaling](../data-and-capacity-scaling.md) for
-scaling, [Circuit Breakers, Retries & Bulkheads](../circuit-breakers-retries-and-bulkheads.md)
+for caching, [Load Balancing & Auto-Scaling](../../distributed-systems/load-balancing-and-autoscaling.md)
+and [Data & Capacity Scaling](../../distributed-systems/data-and-capacity-scaling.md) for
+scaling, [Circuit Breakers, Retries & Bulkheads](../../distributed-systems/circuit-breakers-retries-and-bulkheads.md)
 for resilience, and [PostgreSQL for Scale](../../database/postgresql-for-scale.md)
 for query diagnosis and index selection.
 
@@ -120,8 +120,8 @@ def handle_request(request): ...
   latency (not just the average, which hides the tail that annoys
   users), error rate, and throughput — and alert on threshold
   violations rather than on every metric that moves. See
-  [Prometheus's four metric types](../metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)
-  and [SLIs and SLOs](../metrics-and-prometheus.md#3-design-slis-and-slos-for-an-api-endpoint-how-is-an-slo-different-from-an-sla)
+  [Prometheus's four metric types](../../distributed-systems/metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)
+  and [SLIs and SLOs](../../distributed-systems/metrics-and-prometheus.md#3-design-slis-and-slos-for-an-api-endpoint-how-is-an-slo-different-from-an-sla)
   for the full production-monitoring picture.
 - Distributed tracing matters once a single request crosses several
   services, so you can tell which hop actually added the latency

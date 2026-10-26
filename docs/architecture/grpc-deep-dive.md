@@ -101,7 +101,7 @@ message OrderResponse {
       name); changing a field's *number* or its *wire type* is a
       breaking change.
 - This is the same additive-first discipline as
-  [Schema Evolution for Long-Lived Event Streams](../backend/messaging-kafka-redis-and-aws.md#2-schema-evolution-for-long-lived-event-streams),
+  [Schema Evolution for Long-Lived Event Streams](../distributed-systems/messaging-kafka-redis-and-aws.md#2-schema-evolution-for-long-lived-event-streams),
   applied to RPC contracts instead of Kafka events — the same lesson
   shows up at every layer that needs forward/backward compatibility.
 
@@ -299,7 +299,7 @@ service OrderService {
   [error-type-specific retry logic](../ai-llm/llm-apis-and-providers.md#7-walk-through-error-handling-and-retry-strategy-for-an-llm-api-call-whats-different-from-a-typical-rest-api-retry)
   already established elsewhere on this site.
 - This is a narrower, protocol-level tool than a full
-  [circuit breaker](../backend/circuit-breakers-retries-and-bulkheads.md#2-how-does-a-circuit-breaker-interact-with-retries-and-timeouts-what-breaks-if-you-get-the-order-wrong) —
+  [circuit breaker](../distributed-systems/circuit-breakers-retries-and-bulkheads.md#2-how-does-a-circuit-breaker-interact-with-retries-and-timeouts-what-breaks-if-you-get-the-order-wrong) —
   gRPC's retry policy decides "should this one call be retried," not
   "should we stop sending calls to a service that's clearly down
   entirely." A production system typically layers both: gRPC's retry

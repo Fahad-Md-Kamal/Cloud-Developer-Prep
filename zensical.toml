@@ -68,36 +68,15 @@ nav = [
           ] },
       ] },
       { "Go" = [
-          { "Go for Python Developers" = "backend/go/go-for-python-developers.md" },
+          { "Go Fundamentals: Types, Structs & Interfaces" = "backend/go/go-fundamentals.md" },
+          { "Concurrency in Go: Goroutines, Channels & the Scheduler" = "backend/go/go-concurrency.md" },
+          { "Go Memory Management & Performance" = "backend/go/go-memory-and-performance.md" },
+          { "Building Web Services & Microservices in Go" = "backend/go/go-web-services-and-microservices.md" },
+          { "Testing in Go" = "backend/go/go-testing.md" },
+          { "Go Standard Library Essentials" = "backend/go/go-standard-library.md" },
       ] },
       { "Kotlin" = [
           { "Kotlin for JVM Backend Interviews" = "backend/kotlin/kotlin-for-jvm-interviews.md" },
-      ] },
-      { "Microservices & Distributed Systems" = [
-          { "Microservices & Messaging" = [
-              { "Service Boundaries & Architecture" = "backend/service-boundaries-and-architecture.md" },
-              { "Messaging: Kafka, Redis & AWS" = "backend/messaging-kafka-redis-and-aws.md" },
-              { "Inter-Service Communication" = "backend/inter-service-communication.md" },
-          ] },
-          { "Distributed System Design" = [
-              { "Fault Tolerance Patterns" = "backend/fault-tolerance-patterns.md" },
-              { "Load Balancing & Auto-Scaling" = "backend/load-balancing-and-autoscaling.md" },
-              { "Consistency & Consensus" = "backend/consistency-and-consensus.md" },
-              { "Data & Capacity Scaling" = "backend/data-and-capacity-scaling.md" },
-          ] },
-          { "API Gateway & Resilience" = [
-              { "API Gateway Architecture" = "backend/api-gateway-architecture.md" },
-              { "Rate Limiting Strategies" = "backend/rate-limiting-strategies.md" },
-              { "Circuit Breakers, Retries & Bulkheads" = "backend/circuit-breakers-retries-and-bulkheads.md" },
-              { "API Management & Versioning" = "backend/api-management-and-versioning.md" },
-              { "Kong API Gateway" = "backend/kong-api-gateway.md" },
-          ] },
-          { "Observability" = [
-              { "Structured Logging" = "backend/structured-logging.md" },
-              { "Metrics & Prometheus" = "backend/metrics-and-prometheus.md" },
-              { "Distributed Tracing" = "backend/distributed-tracing.md" },
-              { "Dashboards & Alerting" = "backend/dashboards-and-alerting.md" },
-          ] },
       ] },
   ] },
   { "Architecture" = [
@@ -121,7 +100,6 @@ nav = [
           { "Authentication Patterns" = "architecture/authentication-patterns.md" },
           { "Authorization Patterns" = "architecture/authorization-patterns.md" },
           { "Security Hardening" = "architecture/security-hardening.md" },
-          { "Threat Detection & Monitoring" = "architecture/threat-detection-and-monitoring.md" },
       ] },
       { "System Design Interviews" = [
           { "System Design Methodology" = "architecture/system-design-methodology.md" },
@@ -129,6 +107,32 @@ nav = [
           { "Common System Design Patterns" = "architecture/system-design-patterns.md" },
           { "Scalability Case Studies" = "architecture/scalability-case-studies.md" },
           { "Event-Driven Architecture: CQRS & the Saga Pattern" = "architecture/event-driven-architecture.md" },
+      ] },
+  ] },
+  { "Microservices & Distributed Systems" = [
+      { "Microservices & Messaging" = [
+          { "Service Boundaries & Architecture" = "distributed-systems/service-boundaries-and-architecture.md" },
+          { "Messaging: Kafka, Redis & AWS" = "distributed-systems/messaging-kafka-redis-and-aws.md" },
+          { "Inter-Service Communication" = "distributed-systems/inter-service-communication.md" },
+      ] },
+      { "Distributed System Design" = [
+          { "Fault Tolerance Patterns" = "distributed-systems/fault-tolerance-patterns.md" },
+          { "Load Balancing & Auto-Scaling" = "distributed-systems/load-balancing-and-autoscaling.md" },
+          { "Consistency & Consensus" = "distributed-systems/consistency-and-consensus.md" },
+          { "Data & Capacity Scaling" = "distributed-systems/data-and-capacity-scaling.md" },
+      ] },
+      { "API Gateway & Resilience" = [
+          { "API Gateway Architecture" = "distributed-systems/api-gateway-architecture.md" },
+          { "Rate Limiting Strategies" = "distributed-systems/rate-limiting-strategies.md" },
+          { "Circuit Breakers, Retries & Bulkheads" = "distributed-systems/circuit-breakers-retries-and-bulkheads.md" },
+          { "API Management & Versioning" = "distributed-systems/api-management-and-versioning.md" },
+          { "Kong API Gateway" = "distributed-systems/kong-api-gateway.md" },
+      ] },
+      { "Observability" = [
+          { "Structured Logging" = "distributed-systems/structured-logging.md" },
+          { "Metrics & Prometheus" = "distributed-systems/metrics-and-prometheus.md" },
+          { "Distributed Tracing" = "distributed-systems/distributed-tracing.md" },
+          { "Dashboards & Alerting" = "distributed-systems/dashboards-and-alerting.md" },
       ] },
   ] },
   { "Software Testing" = [
@@ -147,21 +151,34 @@ nav = [
       { "Testing AI & LLM Applications" = "testing/testing-ai-and-llm-applications.md" },
   ] },
   { "Cyber Security" = [
-      { "Cybersecurity for Beginners: The Learning Roadmap" = "security/cybersecurity-for-beginners-roadmap.md" },
-      { "Network Security Fundamentals" = "security/network-security-fundamentals.md" },
-      { "Cryptography Fundamentals" = "security/cryptography-fundamentals.md" },
-      { "The OWASP Top 10, In Depth" = "security/owasp-top-10-in-depth.md" },
-      { "Cybersecurity Tools by Category" = "security/cybersecurity-tools-by-category.md" },
-      { "Offensive Security & Penetration Testing Methodology" = "security/offensive-security-and-pentesting.md" },
-      { "Security Operations: SIEM, Logging & Incident Response" = "security/security-operations-and-incident-response.md" },
-      { "Identity Security: Zero Trust & Privileged Access" = "security/identity-security-zero-trust-and-pam.md" },
-      { "Malware, Phishing & Social Engineering" = "security/malware-phishing-and-social-engineering.md" },
-      { "Compliance & Security Frameworks" = "security/compliance-and-security-frameworks.md" },
-      { "Cloud Security Fundamentals" = "security/cloud-security-fundamentals.md" },
-      { "Security Certifications & Career Path" = "security/security-certifications-and-career-path.md" },
-      { "Real-World Breach Case Studies (2023–2025)" = "security/real-world-breach-case-studies.md" },
-      { "AI & LLM Security" = "security/ai-and-llm-security.md" },
-      { "AI-Assisted Security Vulnerability Audits" = "security/ai-assisted-security-vulnerability-audit.md" },
+      { "Fundamentals" = [
+          { "Cybersecurity for Beginners: The Learning Roadmap" = "security/cybersecurity-for-beginners-roadmap.md" },
+          { "Network Security Fundamentals" = "security/network-security-fundamentals.md" },
+          { "Cryptography Fundamentals" = "security/cryptography-fundamentals.md" },
+          { "The OWASP Top 10, In Depth" = "security/owasp-top-10-in-depth.md" },
+      ] },
+      { "Offensive & Defensive Operations" = [
+          { "Cybersecurity Tools by Category" = "security/cybersecurity-tools-by-category.md" },
+          { "Offensive Security & Penetration Testing Methodology" = "security/offensive-security-and-pentesting.md" },
+          { "Security Operations: SIEM, Logging & Incident Response" = "security/security-operations-and-incident-response.md" },
+          { "Threat Detection & Monitoring" = "security/threat-detection-and-monitoring.md" },
+      ] },
+      { "Identity & Human-Factor Threats" = [
+          { "Identity Security: Zero Trust & Privileged Access" = "security/identity-security-zero-trust-and-pam.md" },
+          { "Malware, Phishing & Social Engineering" = "security/malware-phishing-and-social-engineering.md" },
+      ] },
+      { "Governance & Cloud Security" = [
+          { "Compliance & Security Frameworks" = "security/compliance-and-security-frameworks.md" },
+          { "Cloud Security Fundamentals" = "security/cloud-security-fundamentals.md" },
+      ] },
+      { "Career & Case Studies" = [
+          { "Security Certifications & Career Path" = "security/security-certifications-and-career-path.md" },
+          { "Real-World Breach Case Studies (2023–2025)" = "security/real-world-breach-case-studies.md" },
+      ] },
+      { "AI Security" = [
+          { "AI & LLM Security" = "security/ai-and-llm-security.md" },
+          { "AI-Assisted Security Vulnerability Audits" = "security/ai-assisted-security-vulnerability-audit.md" },
+      ] },
   ] },
   { "Database" = [
       { "Database Architecture for Scale" = [

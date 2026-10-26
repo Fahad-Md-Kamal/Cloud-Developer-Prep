@@ -130,7 +130,7 @@ or deleted (Cassandra's deletes are actually a special marker called a
   `ONE` only needs a single replica to respond, giving low latency at the
   cost of a real window where different replicas can briefly disagree.
 - This is the same spectrum covered generally in
-  [Consistency & Consensus §1](../backend/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual) —
+  [Consistency & Consensus §1](../distributed-systems/consistency-and-consensus.md#1-the-consistency-spectrum-from-strong-to-eventual) —
   Cassandra is simply a concrete system where that spectrum is a literal,
   per-query setting rather than a fixed architectural choice.
 

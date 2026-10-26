@@ -109,7 +109,7 @@ JavaScript — it only ever sees the raw response bytes.
   convention a crawler has to actually choose to read and respect; both
   Scrapy and most serious crawling setups parse and honor it by default.
 - Per-domain rate limiting matters independently of being polite — the
-  same [token-bucket reasoning](../backend/rate-limiting-strategies.md#1-compare-token-bucket-and-sliding-window-rate-limiting-which-would-you-pick-and-why)
+  same [token-bucket reasoning](../distributed-systems/rate-limiting-strategies.md#1-compare-token-bucket-and-sliding-window-rate-limiting-which-would-you-pick-and-why)
   covered for API gateways applies directly here: cap concurrent
   requests and request rate *per target domain*, not just globally,
   since a target site's own capacity is what you're actually bound by.

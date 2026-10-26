@@ -4,7 +4,7 @@ title: "Security Operations: SIEM, Logging & Incident Response"
 
 # Security Operations: SIEM, Logging & Incident Response
 
-[Threat Detection & Monitoring §2](../architecture/threat-detection-and-monitoring.md#2-security-audit-logging)
+[Threat Detection & Monitoring §1](threat-detection-and-monitoring.md#1-security-audit-logging)
 already covers *what* to log for security purposes. This page covers
 what happens to those logs next — how a SIEM turns scattered log lines
 into an actual detected incident, and the structured process that
@@ -28,7 +28,7 @@ starts the moment detection happens.
   credential-stuffing attack in progress.
 - This is the SIEM-specific application of the same anomaly-detection
   principle already named generally in
-  [Threat Detection & Monitoring §3](../architecture/threat-detection-and-monitoring.md#3-anomaly-detection-and-behavior-analytics)
+  [Threat Detection & Monitoring §2](threat-detection-and-monitoring.md#2-anomaly-detection-and-behavior-analytics)
   — a SIEM is the tool that actually operationalizes that detection
   across every log source at once, not just within one service's own
   logs.
