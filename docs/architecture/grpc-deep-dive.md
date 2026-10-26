@@ -211,7 +211,7 @@ service OrderService {
 - A server interceptor is the natural place to enforce things like
   authentication uniformly across every RPC method without repeating
   the check in each handler — the RPC-layer equivalent of
-  [DRF's permission classes](../backend/python/django-drf.md#4-authentication-permissions).
+  [DRF's permission classes](../python/django-drf.md#4-authentication-permissions).
 
 ## 7. Channels: The Connection Management Abstraction
 

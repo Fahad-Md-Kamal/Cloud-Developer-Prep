@@ -28,7 +28,7 @@ measurable trade-offs when it guesses wrong.
   memory and pathways for instructions vs. data, avoiding that
   contention entirely. It's less flexible for general-purpose computing,
   which is exactly why it's common specifically in
-  [microcontrollers](../backend/python/python-implementations.md#6-micropython-and-circuitpython-why-does-python-need-a-completely-separate-implementation-for-embedded-hardware) —
+  [microcontrollers](../python/python-implementations.md#6-micropython-and-circuitpython-why-does-python-need-a-completely-separate-implementation-for-embedded-hardware) —
   a fixed, known program doesn't need the flexibility von Neumann's
   shared memory buys you, and avoiding the bottleneck matters more on
   constrained hardware.
@@ -196,13 +196,13 @@ measurable trade-offs when it guesses wrong.
   hyperthreading on one core does.
 - This is the actual hardware mechanism underneath
   [why multiprocessing achieves real parallel speedup for CPU-bound
-  Python work while GIL-constrained threading can't](../backend/python/threading-and-the-gil.md) —
+  Python work while GIL-constrained threading can't](../python/threading-and-the-gil.md) —
   separate OS processes can genuinely be scheduled onto separate
   physical cores, each executing independently; threads inside one
   GIL-holding process are all competing for the same single core's
   bytecode-execution turn, regardless of how many physical cores the
   machine actually has.
-- [Multiprocessing in Practice](../backend/python/multiprocessing-in-practice.md)
+- [Multiprocessing in Practice](../python/multiprocessing-in-practice.md)
   covers the practical Python-side mechanics of actually using this —
   this page is the hardware fact that makes that approach work at all.
 

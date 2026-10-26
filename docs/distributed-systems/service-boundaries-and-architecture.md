@@ -7,8 +7,8 @@ title: "Service Boundaries & Architecture"
 Where one microservice ends and another begins, and how an API gateway
 and a service mesh divide the traffic-handling work between them — as
 questions you should be able to answer cold. FastAPI's own mechanics live in
-[Dependency Injection & Background Tasks](../backend/python/fastapi-dependency-injection.md)
-and [Performance & Production Patterns](../backend/python/fastapi-performance-patterns.md)
+[Dependency Injection & Background Tasks](../python/fastapi-dependency-injection.md)
+and [Performance & Production Patterns](../python/fastapi-performance-patterns.md)
 and aren't repeated here; general REST API design
 (resource modeling, versioning, caching) lives in
 [REST Deep Dive](../architecture/rest-deep-dive.md). This page is about the
@@ -57,7 +57,7 @@ admin/back-office, FastAPI for a specific high-throughput or
 async-heavy service (an AI/LLM gateway, a webhook processor) — not
 mutually exclusive at the org level, treating FastAPI as one service
 type among several here, not the only way to build a service. See
-[Choosing a Python Web Framework](../backend/python/choosing-a-python-web-framework.md)
+[Choosing a Python Web Framework](../python/choosing-a-python-web-framework.md)
 for the full decision.
 
 ## 2. API Gateway vs. Service Mesh

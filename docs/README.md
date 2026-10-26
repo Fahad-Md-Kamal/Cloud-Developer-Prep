@@ -9,7 +9,7 @@ here for anyone (or any agent) editing content.
 As of 2026-10-09, `docs/*.md` is no longer flat — every file lives
 under a subdirectory matching its top-level nav domain (e.g.
 `docs/database/postgresql-for-scale.md`,
-`docs/backend/python/django-orm.md`,
+`docs/python/django-orm.md`,
 `docs/frontend/js-ts/react-and-react-native.md`). Only `index.md`
 stays at `docs/` root, as the site's entry point.
 Put a new file in the subdirectory matching where it belongs in the

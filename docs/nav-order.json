@@ -33,115 +33,115 @@
   },
   {
     "title": "Python's Execution Model",
-    "url": "backend/python/pythons-execution-model/"
+    "url": "python/pythons-execution-model/"
   },
   {
     "title": "Python Implementations: CPython, PyPy, GraalPy & Beyond",
-    "url": "backend/python/python-implementations/"
+    "url": "python/python-implementations/"
   },
   {
     "title": "Typing & Generics",
-    "url": "backend/python/typing-and-generics/"
+    "url": "python/typing-and-generics/"
   },
   {
     "title": "Python Internals & Advanced OOP",
-    "url": "backend/python/python-internals-and-advanced-oop/"
+    "url": "python/python-internals-and-advanced-oop/"
   },
   {
     "title": "Practical Patterns",
-    "url": "backend/python/practical-patterns/"
+    "url": "python/practical-patterns/"
   },
   {
     "title": "Bit Manipulation Basics",
-    "url": "backend/python/bit-manipulation-basics/"
+    "url": "python/bit-manipulation-basics/"
   },
   {
     "title": "Memory & Caching",
-    "url": "backend/python/memory-and-caching/"
+    "url": "python/memory-and-caching/"
   },
   {
     "title": "Data Structures & Their Memory Model",
-    "url": "backend/python/data-structures-and-memory/"
+    "url": "python/data-structures-and-memory/"
   },
   {
     "title": "Profiling & Optimization",
-    "url": "backend/python/profiling-and-optimization/"
+    "url": "python/profiling-and-optimization/"
   },
   {
     "title": "Choosing a Concurrency Model",
-    "url": "backend/python/choosing-a-concurrency-model/"
+    "url": "python/choosing-a-concurrency-model/"
   },
   {
     "title": "Threading & the GIL",
-    "url": "backend/python/threading-and-the-gil/"
+    "url": "python/threading-and-the-gil/"
   },
   {
     "title": "AsyncIO Internals",
-    "url": "backend/python/asyncio-internals/"
+    "url": "python/asyncio-internals/"
   },
   {
     "title": "Worker Pools & Backpressure",
-    "url": "backend/python/worker-pools-and-backpressure/"
+    "url": "python/worker-pools-and-backpressure/"
   },
   {
     "title": "Multiprocessing in Practice",
-    "url": "backend/python/multiprocessing-in-practice/"
+    "url": "python/multiprocessing-in-practice/"
   },
   {
     "title": "Capstone: A Concurrent Data Pipeline",
-    "url": "backend/python/concurrent-data-pipeline-capstone/"
+    "url": "python/concurrent-data-pipeline-capstone/"
   },
   {
     "title": "Choosing a Python Web Framework",
-    "url": "backend/python/choosing-a-python-web-framework/"
+    "url": "python/choosing-a-python-web-framework/"
   },
   {
     "title": "ORM Query Cheat Sheet",
-    "url": "backend/python/django-orm/"
+    "url": "python/django-orm/"
   },
   {
     "title": "Deep Dive: Serializers, Auth, Signals, Testing",
-    "url": "backend/python/django-drf/"
+    "url": "python/django-drf/"
   },
   {
     "title": "Routing & Pydantic Validation",
-    "url": "backend/python/fastapi-routing-and-validation/"
+    "url": "python/fastapi-routing-and-validation/"
   },
   {
     "title": "Dependency Injection & Background Tasks",
-    "url": "backend/python/fastapi-dependency-injection/"
+    "url": "python/fastapi-dependency-injection/"
   },
   {
     "title": "Auth, Middleware & Lifecycle Events",
-    "url": "backend/python/fastapi-auth-and-middleware/"
+    "url": "python/fastapi-auth-and-middleware/"
   },
   {
     "title": "Database Integration & Testing",
-    "url": "backend/python/fastapi-database-and-testing/"
+    "url": "python/fastapi-database-and-testing/"
   },
   {
     "title": "Performance & Production Patterns",
-    "url": "backend/python/fastapi-performance-patterns/"
+    "url": "python/fastapi-performance-patterns/"
   },
   {
     "title": "Pathlib & File Operations",
-    "url": "backend/python/pathlib-and-file-operations/"
+    "url": "python/pathlib-and-file-operations/"
   },
   {
     "title": "Collections & Itertools",
-    "url": "backend/python/collections-and-itertools/"
+    "url": "python/collections-and-itertools/"
   },
   {
     "title": "Configuration & CLI Tools",
-    "url": "backend/python/config-and-cli-tools/"
+    "url": "python/config-and-cli-tools/"
   },
   {
     "title": "Functools: Caching & Decorators",
-    "url": "backend/python/functools-patterns/"
+    "url": "python/functools-patterns/"
   },
   {
     "title": "Regex & Text Processing",
-    "url": "backend/python/regex-and-text-processing/"
+    "url": "python/regex-and-text-processing/"
   },
   {
     "title": "Go Fundamentals: Types, Structs & Interfaces",

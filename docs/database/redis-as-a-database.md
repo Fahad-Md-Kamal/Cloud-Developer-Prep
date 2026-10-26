@@ -44,7 +44,7 @@ one. The mechanism underneath it explains both roles at once.
 
 - Through an **event loop** built on I/O multiplexing (`epoll` on
   Linux) — the exact same OS-level mechanism already explained in
-  [AsyncIO Internals](../backend/python/asyncio-internals.md#the-os-io-model-underneath-asyncio):
+  [AsyncIO Internals](../python/asyncio-internals.md#the-os-io-model-underneath-asyncio):
   one thread asks the kernel "which of these thousands of sockets
   actually has data ready," instead of checking each one individually or
   dedicating a thread per connection.

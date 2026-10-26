@@ -102,7 +102,7 @@ const resolvers = {
   query**: fetching 50 orders then each order's `customer` field naively
   fires 50 separate `customer` lookups — one per order — the identical
   failure mode as
-  [Django ORM's N+1 problem](../backend/python/django-orm.md#1-query-loading-patterns),
+  [Django ORM's N+1 problem](../python/django-orm.md#1-query-loading-patterns),
   just triggered by GraphQL's per-field resolver model instead of lazy
   ORM attribute access.
 - **The standard fix is a DataLoader** (batching + per-request

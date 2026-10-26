@@ -8,8 +8,8 @@ Async-first, automatic request validation via Pydantic, and dependency
 injection as the core extensibility mechanism. For general REST API
 design principles (resource modeling, versioning, caching, rate
 limiting) that apply regardless of framework, see
-[REST Deep Dive](../../architecture/rest-deep-dive.md) and
-[API Production Readiness](../../architecture/api-production-readiness.md). For Django/DRF,
+[REST Deep Dive](../architecture/rest-deep-dive.md) and
+[API Production Readiness](../architecture/api-production-readiness.md). For Django/DRF,
 see [Django & DRF Deep Dive](django-drf.md). For routing and Pydantic
 validation, see
 [FastAPI Fundamentals: Routing & Pydantic Validation](fastapi-routing-and-validation.md).

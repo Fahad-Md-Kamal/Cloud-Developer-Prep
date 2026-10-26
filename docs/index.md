@@ -7,11 +7,12 @@ icon: lucide/house
 
 **A Living, Multi-Domain Study & Interview Guide**
 
-A full map of software engineering — Frontend, Backend, Architecture,
-Microservices & Distributed Systems, Software Testing, Cyber Security,
-Database, Cloud & DevOps, AI & LLM, Machine Learning, Algorithms, and
-Interview Prep — twelve domains, 230+ chapters and still growing,
-built from real practice sessions rather than a static checklist.
+A full map of software engineering — Frontend, Python, Backend,
+Architecture, Microservices & Distributed Systems, Software Testing,
+Cyber Security, Database, Cloud & DevOps, AI & LLM, Machine Learning,
+Algorithms, and Interview Prep — thirteen domains, 230+ chapters and
+still growing, built from real practice sessions rather than a static
+checklist.
 
 - Each domain runs from real fundamentals up through senior/staff
   depth — this isn't scoped to one experience level or to backend
@@ -20,9 +21,9 @@ built from real practice sessions rather than a static checklist.
   testing, security, databases, cloud/DevOps, and behavioral prep
   apply whether the primary stack is Python, Go, Ruby, Rust, or a
   frontend framework.
-- Python and Django get the deepest, most detailed coverage inside
-  [Backend](#backend), since that's the author's own specialization
-  and current job search — everything else stands on its own.
+- Python and Django get the deepest, most detailed coverage of any
+  track on this site, since that's the author's own specialization and
+  current job search — everything else stands on its own.
 
 Hiring itself has changed, too — interviewers now routinely ask how
 candidates actually use AI tools day to day, live coding happens with
@@ -49,10 +50,9 @@ scoped to one role or one experience level.
   already deep into one.
 - Python and Django get the deepest, most detailed coverage since
   that's the author's own specialization and current job search, but
-  that lives inside the Python subsection of [Backend](#backend)
-  rather than being baked into the rest of the guide. A Go, Kotlin,
-  Ruby, Rust, or frontend engineer gets full value from everything
-  else.
+  that lives in its own dedicated [Python](#python) track rather than
+  being baked into the rest of the guide. A Go, Kotlin, Ruby, Rust, or
+  frontend engineer gets full value from everything else.
 
 ## Who should read this
 
@@ -91,11 +91,11 @@ scoped to one role or one experience level.
 Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
-- Mutable default arguments → [Practical Patterns](backend/python/practical-patterns.md#practice-notes-from-live-session)
-- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](backend/python/django-orm.md#practice-notes-from-live-session)
+- Mutable default arguments → [Practical Patterns](python/practical-patterns.md#practice-notes-from-live-session)
+- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](python/django-orm.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [PostgreSQL for Scale](database/postgresql-for-scale.md#practice-notes-from-live-session)
 - Project stories for system-design questions → [Personal Project Stories](interview-prep/project-stories.md)
-- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](backend/python/django-drf.md)
+- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](python/django-drf.md)
 
 ## Contents
 
@@ -115,59 +115,62 @@ top-level area one click deep from here.
       rendering performance, Redux/Immer/RTK Query, the RN bridge architecture
     - [TypeScript & Angular for Backend Leads](frontend/js-ts/typescript-and-angular-for-backend-leads.md)
 
-### Backend
+### Python
 
-Python gets the deepest, most detailed coverage since that's the
-author's own specialization and current job search; Go and Kotlin are
-earlier-stage tracks for engineers coming from those languages.
-
-**Python** — generic section name on purpose, covers any Python
-framework added here later (web, desktop, or otherwise), not just
-Django/FastAPI.
+This site's deepest, most detailed track, since that's the author's
+own specialization and current job search — generic section name on
+purpose, covers any Python framework added here later (web, desktop,
+or otherwise), not just Django/FastAPI.
 
 - **Language Fundamentals**
-    - [Python's Execution Model](backend/python/pythons-execution-model.md)
-    - [Python Implementations: CPython, PyPy, GraalPy & Beyond](backend/python/python-implementations.md) —
+    - [Python's Execution Model](python/pythons-execution-model.md)
+    - [Python Implementations: CPython, PyPy, GraalPy & Beyond](python/python-implementations.md) —
       what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
-    - [Typing & Generics](backend/python/typing-and-generics.md)
-    - [Python Internals & Advanced OOP](backend/python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
-    - [Practical Patterns](backend/python/practical-patterns.md)
+    - [Typing & Generics](python/typing-and-generics.md)
+    - [Python Internals & Advanced OOP](python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
+    - [Practical Patterns](python/practical-patterns.md)
 - **Performance & Memory**
-    - [Bit Manipulation Basics](backend/python/bit-manipulation-basics.md)
-    - [Memory & Caching](backend/python/memory-and-caching.md)
-    - [Data Structures & Their Memory Model](backend/python/data-structures-and-memory.md)
-    - [Profiling & Optimization](backend/python/profiling-and-optimization.md) —
+    - [Bit Manipulation Basics](python/bit-manipulation-basics.md)
+    - [Memory & Caching](python/memory-and-caching.md)
+    - [Data Structures & Their Memory Model](python/data-structures-and-memory.md)
+    - [Profiling & Optimization](python/profiling-and-optimization.md) —
       cProfile/py-spy, tracemalloc, algorithmic complexity, bounding async concurrency
 - **Concurrency & Parallelism**
-    - [Choosing a Concurrency Model](backend/python/choosing-a-concurrency-model.md)
-    - [Threading & the GIL](backend/python/threading-and-the-gil.md)
-    - [AsyncIO Internals](backend/python/asyncio-internals.md)
-    - [Worker Pools & Backpressure](backend/python/worker-pools-and-backpressure.md)
-    - [Multiprocessing in Practice](backend/python/multiprocessing-in-practice.md)
-    - [Capstone: A Concurrent Data Pipeline](backend/python/concurrent-data-pipeline-capstone.md)
+    - [Choosing a Concurrency Model](python/choosing-a-concurrency-model.md)
+    - [Threading & the GIL](python/threading-and-the-gil.md)
+    - [AsyncIO Internals](python/asyncio-internals.md)
+    - [Worker Pools & Backpressure](python/worker-pools-and-backpressure.md)
+    - [Multiprocessing in Practice](python/multiprocessing-in-practice.md)
+    - [Capstone: A Concurrent Data Pipeline](python/concurrent-data-pipeline-capstone.md)
 - **Web Frameworks**
-    - [Choosing a Python Web Framework](backend/python/choosing-a-python-web-framework.md) —
+    - [Choosing a Python Web Framework](python/choosing-a-python-web-framework.md) —
       Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
     - **Django & DRF**
-        - [Django ORM Query Cheat Sheet](backend/python/django-orm.md)
-        - [Django & DRF Deep Dive](backend/python/django-drf.md) — serializers, permissions,
+        - [Django ORM Query Cheat Sheet](python/django-orm.md)
+        - [Django & DRF Deep Dive](python/django-drf.md) — serializers, permissions,
           auth, signals, migrations, testing, caching
     - **FastAPI**
-        - [Routing & Pydantic Validation](backend/python/fastapi-routing-and-validation.md) —
+        - [Routing & Pydantic Validation](python/fastapi-routing-and-validation.md) —
           path/query/body parameters, validators, response models, auto `422`s
-        - [Dependency Injection & Background Tasks](backend/python/fastapi-dependency-injection.md)
-        - [Auth, Middleware & Lifecycle Events](backend/python/fastapi-auth-and-middleware.md) —
+        - [Dependency Injection & Background Tasks](python/fastapi-dependency-injection.md)
+        - [Auth, Middleware & Lifecycle Events](python/fastapi-auth-and-middleware.md) —
           OAuth2/JWT, security scopes, Starlette middleware ordering, `lifespan` startup/shutdown
-        - [Database Integration & Testing](backend/python/fastapi-database-and-testing.md) —
+        - [Database Integration & Testing](python/fastapi-database-and-testing.md) —
           SQLAlchemy 2.0 async + Alembic, `httpx.AsyncClient`, dependency overrides
-        - [Performance & Production Patterns](backend/python/fastapi-performance-patterns.md) —
+        - [Performance & Production Patterns](python/fastapi-performance-patterns.md) —
           connection pooling, WebSockets, ASGI vs. WSGI
 - **Python Standard Library**
-    - [Pathlib & File Operations](backend/python/pathlib-and-file-operations.md)
-    - [Collections & Itertools](backend/python/collections-and-itertools.md)
-    - [Configuration & CLI Tools](backend/python/config-and-cli-tools.md)
-    - [Functools: Caching & Decorators](backend/python/functools-patterns.md)
-    - [Regex & Text Processing](backend/python/regex-and-text-processing.md)
+    - [Pathlib & File Operations](python/pathlib-and-file-operations.md)
+    - [Collections & Itertools](python/collections-and-itertools.md)
+    - [Configuration & CLI Tools](python/config-and-cli-tools.md)
+    - [Functools: Caching & Decorators](python/functools-patterns.md)
+    - [Regex & Text Processing](python/regex-and-text-processing.md)
+
+### Backend
+
+Backend language tracks beyond Python — earlier-stage tracks for
+engineers coming from Go or Kotlin specifically, where Python's own
+track (above) is this site's deepest.
 
 **Go**
 

@@ -129,9 +129,9 @@ mux.Handle("/users/", loggingMiddleware(userHandler))
   a service, write the response), services hold business logic, and a
   repository/store layer wraps the actual database calls — the Go
   version of the service-layer pattern already established for
-  [Django](../python/django-drf.md#1-project-structure-that-scales)
+  [Django](../../python/django-drf.md#1-project-structure-that-scales)
   and
-  [FastAPI](../python/fastapi-database-and-testing.md#3-repository-service-layer-pattern).
+  [FastAPI](../../python/fastapi-database-and-testing.md#3-repository-service-layer-pattern).
 - **gRPC** is a common choice for service-to-service calls within a Go
   microservices architecture specifically because Go's `protoc`
   tooling and generated code are first-class, well-maintained, and the

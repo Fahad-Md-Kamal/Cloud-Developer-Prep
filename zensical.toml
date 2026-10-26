@@ -22,51 +22,51 @@ nav = [
           { "TypeScript & Angular for Backend Leads" = "frontend/js-ts/typescript-and-angular-for-backend-leads.md" },
       ] },
   ] },
-  { "Backend" = [
-      { "Python" = [
-          { "Language Fundamentals" = [
-              { "Python's Execution Model" = "backend/python/pythons-execution-model.md" },
-              { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "backend/python/python-implementations.md" },
-              { "Typing & Generics" = "backend/python/typing-and-generics.md" },
-              { "Python Internals & Advanced OOP" = "backend/python/python-internals-and-advanced-oop.md" },
-              { "Practical Patterns" = "backend/python/practical-patterns.md" },
+  { "Python" = [
+      { "Language Fundamentals" = [
+          { "Python's Execution Model" = "python/pythons-execution-model.md" },
+          { "Python Implementations: CPython, PyPy, GraalPy & Beyond" = "python/python-implementations.md" },
+          { "Typing & Generics" = "python/typing-and-generics.md" },
+          { "Python Internals & Advanced OOP" = "python/python-internals-and-advanced-oop.md" },
+          { "Practical Patterns" = "python/practical-patterns.md" },
+      ] },
+      { "Performance & Memory" = [
+          { "Bit Manipulation Basics" = "python/bit-manipulation-basics.md" },
+          { "Memory & Caching" = "python/memory-and-caching.md" },
+          { "Data Structures & Their Memory Model" = "python/data-structures-and-memory.md" },
+          { "Profiling & Optimization" = "python/profiling-and-optimization.md" },
+      ] },
+      { "Concurrency & Parallelism" = [
+          { "Choosing a Concurrency Model" = "python/choosing-a-concurrency-model.md" },
+          { "Threading & the GIL" = "python/threading-and-the-gil.md" },
+          { "AsyncIO Internals" = "python/asyncio-internals.md" },
+          { "Worker Pools & Backpressure" = "python/worker-pools-and-backpressure.md" },
+          { "Multiprocessing in Practice" = "python/multiprocessing-in-practice.md" },
+          { "Capstone: A Concurrent Data Pipeline" = "python/concurrent-data-pipeline-capstone.md" },
+      ] },
+      { "Web Frameworks" = [
+          { "Choosing a Python Web Framework" = "python/choosing-a-python-web-framework.md" },
+          { "Django & DRF" = [
+              { "ORM Query Cheat Sheet" = "python/django-orm.md" },
+              { "Deep Dive: Serializers, Auth, Signals, Testing" = "python/django-drf.md" },
           ] },
-          { "Performance & Memory" = [
-              { "Bit Manipulation Basics" = "backend/python/bit-manipulation-basics.md" },
-              { "Memory & Caching" = "backend/python/memory-and-caching.md" },
-              { "Data Structures & Their Memory Model" = "backend/python/data-structures-and-memory.md" },
-              { "Profiling & Optimization" = "backend/python/profiling-and-optimization.md" },
-          ] },
-          { "Concurrency & Parallelism" = [
-              { "Choosing a Concurrency Model" = "backend/python/choosing-a-concurrency-model.md" },
-              { "Threading & the GIL" = "backend/python/threading-and-the-gil.md" },
-              { "AsyncIO Internals" = "backend/python/asyncio-internals.md" },
-              { "Worker Pools & Backpressure" = "backend/python/worker-pools-and-backpressure.md" },
-              { "Multiprocessing in Practice" = "backend/python/multiprocessing-in-practice.md" },
-              { "Capstone: A Concurrent Data Pipeline" = "backend/python/concurrent-data-pipeline-capstone.md" },
-          ] },
-          { "Web Frameworks" = [
-              { "Choosing a Python Web Framework" = "backend/python/choosing-a-python-web-framework.md" },
-              { "Django & DRF" = [
-                  { "ORM Query Cheat Sheet" = "backend/python/django-orm.md" },
-                  { "Deep Dive: Serializers, Auth, Signals, Testing" = "backend/python/django-drf.md" },
-              ] },
-              { "FastAPI" = [
-                  { "Routing & Pydantic Validation" = "backend/python/fastapi-routing-and-validation.md" },
-                  { "Dependency Injection & Background Tasks" = "backend/python/fastapi-dependency-injection.md" },
-                  { "Auth, Middleware & Lifecycle Events" = "backend/python/fastapi-auth-and-middleware.md" },
-                  { "Database Integration & Testing" = "backend/python/fastapi-database-and-testing.md" },
-                  { "Performance & Production Patterns" = "backend/python/fastapi-performance-patterns.md" },
-              ] },
-          ] },
-          { "Python Standard Library" = [
-              { "Pathlib & File Operations" = "backend/python/pathlib-and-file-operations.md" },
-              { "Collections & Itertools" = "backend/python/collections-and-itertools.md" },
-              { "Configuration & CLI Tools" = "backend/python/config-and-cli-tools.md" },
-              { "Functools: Caching & Decorators" = "backend/python/functools-patterns.md" },
-              { "Regex & Text Processing" = "backend/python/regex-and-text-processing.md" },
+          { "FastAPI" = [
+              { "Routing & Pydantic Validation" = "python/fastapi-routing-and-validation.md" },
+              { "Dependency Injection & Background Tasks" = "python/fastapi-dependency-injection.md" },
+              { "Auth, Middleware & Lifecycle Events" = "python/fastapi-auth-and-middleware.md" },
+              { "Database Integration & Testing" = "python/fastapi-database-and-testing.md" },
+              { "Performance & Production Patterns" = "python/fastapi-performance-patterns.md" },
           ] },
       ] },
+      { "Python Standard Library" = [
+          { "Pathlib & File Operations" = "python/pathlib-and-file-operations.md" },
+          { "Collections & Itertools" = "python/collections-and-itertools.md" },
+          { "Configuration & CLI Tools" = "python/config-and-cli-tools.md" },
+          { "Functools: Caching & Decorators" = "python/functools-patterns.md" },
+          { "Regex & Text Processing" = "python/regex-and-text-processing.md" },
+      ] },
+  ] },
+  { "Backend" = [
       { "Go" = [
           { "Go Fundamentals: Types, Structs & Interfaces" = "backend/go/go-fundamentals.md" },
           { "Concurrency in Go: Goroutines, Channels & the Scheduler" = "backend/go/go-concurrency.md" },

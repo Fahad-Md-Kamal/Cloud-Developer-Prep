@@ -58,7 +58,7 @@ suspend fun fetchOrdersConcurrently(ids: List<String>): List<Order> = coroutineS
   without blocking the thread it's running on — structurally, this is
   the same idea as a Python `async def` function suspending at
   `await`, covered in depth in
-  [AsyncIO Internals](../python/asyncio-internals.md).
+  [AsyncIO Internals](../../python/asyncio-internals.md).
   `async { }` + `awaitAll()` is Kotlin's `asyncio.gather()`.
 - **The real difference from Python's asyncio**: Kotlin coroutines run
   on a thread pool (a `Dispatcher`) underneath, and the JVM doesn't
@@ -72,7 +72,7 @@ suspend fun fetchOrdersConcurrently(ids: List<String>): List<Order> = coroutineS
 - **A concrete real-life example**: fetching data from three
   microservices to assemble one API response — exactly the
   "three slow API calls" scenario from
-  [AsyncIO Internals' cooperative scheduling](../python/asyncio-internals.md#cooperative-scheduling),
+  [AsyncIO Internals' cooperative scheduling](../../python/asyncio-internals.md#cooperative-scheduling),
   solved with `async { }` blocks instead of `asyncio.gather()`.
 - **Structured concurrency**: a `coroutineScope` only returns once
   every coroutine launched inside it completes (or one fails and

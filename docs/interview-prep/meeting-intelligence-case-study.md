@@ -486,7 +486,7 @@ This case study demonstrates how advanced AI systems can be successfully integra
 
 - **Multi-modal AI Architecture** ([AI & LLM](../index.md#ai-llm))
 - **Microservices Design** (Chapters 6-10)
-- **FastAPI Development** ([FastAPI](../backend/python/fastapi-dependency-injection.md))
+- **FastAPI Development** ([FastAPI](../python/fastapi-dependency-injection.md))
 - **Security Implementation** (Chapter 4)
 - **Performance Optimization** (Chapter 5)
 - **System Design at Scale** (Chapters 26-30)

@@ -42,7 +42,7 @@ func main() {
   `GOMAXPROCS` CPU cores. This is genuine parallelism on multi-core
   hardware, not just concurrency on a single thread the way Python's
   `asyncio` event loop is — see
-  [Threading & the GIL](../python/threading-and-the-gil.md) for
+  [Threading & the GIL](../../python/threading-and-the-gil.md) for
   exactly what Python's GIL restricts that Go's model doesn't have to
   work around at all.
 - **Interview point:** "are goroutines green threads?" — close enough
@@ -151,7 +151,7 @@ func wordCountSafe(docs []string) map[string]int {
   unsynchronized as a Python `dict` — "goroutines are lightweight"
   says nothing about whether shared state they touch is safe, the same
   lesson as
-  [Threading & the GIL's threading pitfalls](../python/threading-and-the-gil.md#threading-problems-and-how-to-fix-them)
+  [Threading & the GIL's threading pitfalls](../../python/threading-and-the-gil.md#threading-problems-and-how-to-fix-them)
   applied to a different language.
 - `sync.Mutex` is Go's direct equivalent of Python's `threading.Lock`
   — `mu.Lock()`/`mu.Unlock()` (usually paired with `defer mu.Unlock()`
@@ -194,7 +194,7 @@ func workerPool(jobs <-chan int, results chan<- int, numWorkers int) {
   shared channel, bounding concurrency instead of launching one
   goroutine per item unboundedly — the same reasoning as a thread pool
   in any language, see
-  [Worker Pools & Backpressure](../python/worker-pools-and-backpressure.md)
+  [Worker Pools & Backpressure](../../python/worker-pools-and-backpressure.md)
   for the general concept this instantiates in Go specifically.
 - **Fan-out/fan-in** — fan-out distributes work across multiple
   goroutines reading the same input channel; fan-in merges multiple

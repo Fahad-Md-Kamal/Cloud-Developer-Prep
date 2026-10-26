@@ -124,7 +124,7 @@ loading an entire multi-gigabyte file into memory before processing or
 forwarding it throws away a property the network already gave you, for
 nothing in return. This is the exact same buffering idea already
 covered for local disk I/O in
-[How File I/O Actually Works](../backend/python/pathlib-and-file-operations.md#how-file-io-actually-works) —
+[How File I/O Actually Works](../python/pathlib-and-file-operations.md#how-file-io-actually-works) —
 read/write/forward data in bounded chunks, not with an unbounded
 `.read()`, and a server can handle a file larger than its own available
 RAM, and a client can start acting on a download before it has even

@@ -9,7 +9,7 @@ validation — the request-shape fundamentals DRF's serializers handle
 in Django, done FastAPI's way: via type hints instead of a separate
 serializer class. For general REST API design principles that apply
 regardless of framework, see
-[REST Deep Dive](../../architecture/rest-deep-dive.md). For
+[REST Deep Dive](../architecture/rest-deep-dive.md). For
 Django/DRF, see [Django & DRF Deep Dive](django-drf.md).
 
 ---

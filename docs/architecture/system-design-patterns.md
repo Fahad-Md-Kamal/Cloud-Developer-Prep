@@ -42,7 +42,7 @@ page is the interview-framing layer, not a re-derivation.
 - Invalidation strategy matters as much as the caching pattern itself
   — TTL-based (simple, bounded staleness) vs. event-based (precise,
   more moving parts). See
-  [Memory & Caching](../backend/python/memory-and-caching.md)
+  [Memory & Caching](../python/memory-and-caching.md)
   for the mechanics at the single-process level, and
   [LLM Response Caching](../ai-llm/llm-response-caching.md) for a
   worked TTL-strategy example that generalizes beyond LLM responses.
