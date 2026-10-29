@@ -228,6 +228,54 @@
     "url": "python/standard-library/regex-and-text-processing/"
   },
   {
+    "title": "Learning Roadmap",
+    "url": "rust/rust-learning-roadmap/"
+  },
+  {
+    "title": "Toolchain & Cargo",
+    "url": "rust/foundations/rust-toolchain-and-cargo/"
+  },
+  {
+    "title": "Ownership & Borrowing",
+    "url": "rust/foundations/rust-ownership-and-borrowing/"
+  },
+  {
+    "title": "Lifetimes",
+    "url": "rust/foundations/rust-lifetimes/"
+  },
+  {
+    "title": "Types, Enums & Patterns",
+    "url": "rust/foundations/rust-types-enums-and-patterns/"
+  },
+  {
+    "title": "Error Handling",
+    "url": "rust/foundations/rust-error-handling/"
+  },
+  {
+    "title": "Collections & Strings",
+    "url": "rust/foundations/rust-collections-and-strings/"
+  },
+  {
+    "title": "Traits & Generics",
+    "url": "rust/foundations/rust-traits-and-generics/"
+  },
+  {
+    "title": "Iterators & Closures",
+    "url": "rust/foundations/rust-iterators-and-closures/"
+  },
+  {
+    "title": "Smart Pointers",
+    "url": "rust/foundations/rust-smart-pointers/"
+  },
+  {
+    "title": "Modules, Crates & Editions",
+    "url": "rust/foundations/rust-modules-crates-and-editions/"
+  },
+  {
+    "title": "Testing & Docs",
+    "url": "rust/foundations/rust-testing-and-documentation/"
+  },
+  {
     "title": "Go Fundamentals: Types, Structs & Interfaces",
     "url": "backend/go/go-fundamentals/"
   },

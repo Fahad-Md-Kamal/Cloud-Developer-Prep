@@ -97,6 +97,22 @@ nav = [
           { "Regex & Text Processing" = "python/standard-library/regex-and-text-processing.md" },
       ] },
   ] },
+  { "Rust" = [
+      { "Learning Roadmap" = "rust/rust-learning-roadmap.md" },
+      { "Foundations" = [
+          { "Toolchain & Cargo" = "rust/foundations/rust-toolchain-and-cargo.md" },
+          { "Ownership & Borrowing" = "rust/foundations/rust-ownership-and-borrowing.md" },
+          { "Lifetimes" = "rust/foundations/rust-lifetimes.md" },
+          { "Types, Enums & Patterns" = "rust/foundations/rust-types-enums-and-patterns.md" },
+          { "Error Handling" = "rust/foundations/rust-error-handling.md" },
+          { "Collections & Strings" = "rust/foundations/rust-collections-and-strings.md" },
+          { "Traits & Generics" = "rust/foundations/rust-traits-and-generics.md" },
+          { "Iterators & Closures" = "rust/foundations/rust-iterators-and-closures.md" },
+          { "Smart Pointers" = "rust/foundations/rust-smart-pointers.md" },
+          { "Modules, Crates & Editions" = "rust/foundations/rust-modules-crates-and-editions.md" },
+          { "Testing & Docs" = "rust/foundations/rust-testing-and-documentation.md" },
+      ] },
+  ] },
   { "Backend" = [
       { "Go" = [
           { "Go Fundamentals: Types, Structs & Interfaces" = "backend/go/go-fundamentals.md" },

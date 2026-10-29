@@ -12,9 +12,9 @@ same way regardless of session.
   sits at `docs/` root.
 - Nav is flat and domain-based — no "Study Materials" wrapper, no
   "Programming Languages" grouping. Current top-level domains:
-  Frontend, Python, Backend, Architecture, Microservices & Distributed
-  Systems, Software Testing, Cyber Security, Database, Cloud & DevOps,
-  AI & LLM, Machine Learning, Algorithms, Interview Prep.
+  Frontend, Python, Rust, Backend, Architecture, Microservices &
+  Distributed Systems, Software Testing, Cyber Security, Database,
+  Cloud & DevOps, AI & LLM, Machine Learning, Algorithms, Interview Prep.
 - **Promote a nested group to its own top-level domain** (or fold one
   into a better-fitting parent) when its scale or scope outgrows its
   current home — precedent: Machine Learning (ex-AI & LLM),
@@ -199,6 +199,11 @@ Applies to new site content and chat answers alike.
 - **The owner learns for mastery, not only for interviews.** Favor
   breadth and correct depth over interview shortcuts, and say plainly
   what a page does not cover.
+- **Rust track is in progress.** `RUST-TRACK-PLAN.md` (repo root, not
+  part of the site) lists what is done and the exact pages left, with the
+  process to follow. Read it before touching `docs/rust/` or
+  `code_samples/rust/`. Regenerate the Rust nav with
+  `python3 scripts/generate_rust_nav.py`.
 - **Odoo app build is deferred.** Only the plan page exists
   (`docs/python/odoo/build-an-odoo-app-plan.md`). Do not write or run
   the app unless asked. If asked: put it in

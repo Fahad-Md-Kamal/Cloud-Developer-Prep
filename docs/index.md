@@ -214,6 +214,38 @@ or otherwise), not just Django/FastAPI.
     - [Functools: Caching & Decorators](python/standard-library/functools-patterns.md)
     - [Regex & Text Processing](python/standard-library/regex-and-text-processing.md)
 
+### Rust
+
+A deep, version-checked track for becoming a Rust expert, written for
+**Rust 1.99** and the **2024 edition**. Every page has runnable code
+in `code_samples/rust/` that was compiled and run, and real compiler
+errors. Start at the roadmap, then follow the groups in order.
+
+- [Rust Learning Roadmap](rust/rust-learning-roadmap.md) — the path, the stages, how to practice, and the reading list
+- **Foundations**
+    - [Toolchain & Cargo](rust/foundations/rust-toolchain-and-cargo.md) —
+      rustup, editions, what `cargo build` does, profiles, features, workspaces
+    - [Ownership & Borrowing](rust/foundations/rust-ownership-and-borrowing.md) —
+      moves, drop order, the borrow rules and why they exist, reading borrow errors
+    - [Lifetimes](rust/foundations/rust-lifetimes.md) —
+      elision, structs that borrow, `'static`, higher-ranked bounds, 2024 `impl Trait` capture
+    - [Types, Enums & Patterns](rust/foundations/rust-types-enums-and-patterns.md) —
+      number rules, enums, every pattern form, let chains, `if let` guards
+    - [Error Handling](rust/foundations/rust-error-handling.md) —
+      `Result` and `?`, `thiserror` vs `anyhow`, panics, error design
+    - [Collections & Strings](rust/foundations/rust-collections-and-strings.md) —
+      `Vec` internals, UTF-8 strings, `HashMap`, `BTreeMap`, choosing a container
+    - [Traits & Generics](rust/foundations/rust-traits-and-generics.md) —
+      static vs dynamic dispatch, dyn compatibility, associated types, blanket impls
+    - [Iterators & Closures](rust/foundations/rust-iterators-and-closures.md) —
+      lazy adapters, custom iterators, `Fn`/`FnMut`/`FnOnce`, returning closures
+    - [Smart Pointers & Interior Mutability](rust/foundations/rust-smart-pointers.md) —
+      `Box`, `Rc`/`Arc`/`Weak`, `RefCell`, `Cow`, `OnceLock`, `Deref`
+    - [Modules, Crates & Editions](rust/foundations/rust-modules-crates-and-editions.md) —
+      privacy rules, re-exports, what each edition changed, the 2024 edition
+    - [Testing & Documentation](rust/foundations/rust-testing-and-documentation.md) —
+      unit, integration and doc tests, `proptest`, testable design
+
 ### Backend
 
 Backend language tracks beyond Python — earlier-stage tracks for
