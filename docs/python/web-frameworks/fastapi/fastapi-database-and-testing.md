@@ -11,8 +11,8 @@ here from separate libraries instead of one framework. For
 dependency injection fundamentals, see
 [FastAPI: Dependency Injection & Background Tasks](fastapi-dependency-injection.md).
 For the Django/DRF equivalents, see
-[Django ORM Query Cheat Sheet](django-orm.md) and
-[Django & DRF Deep Dive §8](django-drf.md#8-testing-drf).
+[Django ORM Query Cheat Sheet](../django/django-orm.md) and
+[Django & DRF Deep Dive §8](../django/django-drf.md#8-testing-drf).
 
 ---
 
@@ -76,7 +76,7 @@ alembic upgrade head
   recorded state and writes a migration file; `upgrade head` applies
   pending migrations, the same two-step shape as Django.
 - The same zero-downtime discipline from
-  [Django & DRF §7](django-drf.md#7-migrations) applies identically
+  [Django & DRF §7](../django/django-drf.md#7-migrations) applies identically
   here: add a new column nullable → deploy dual-write code → backfill
   → deploy read-from-new-column code → drop the old column later.
   Nothing about using FastAPI/SQLAlchemy instead of Django changes
@@ -108,7 +108,7 @@ async def get_order_service(db: AsyncSession = Depends(get_db)) -> OrderService:
 ```
 
 - The same layering discipline from
-  [Django & DRF §1](django-drf.md#1-project-structure-that-scales) —
+  [Django & DRF §1](../django/django-drf.md#1-project-structure-that-scales) —
   keep business logic out of the route function — maps onto FastAPI
   as a service class, itself resolved as a dependency
   (`get_order_service` depending on `get_db`). A route function stays
@@ -194,7 +194,7 @@ def client(test_db):
 - `factory_boy`/`factory` (the same library Django teams use, via
   `SQLAlchemyModelFactory` instead of `DjangoModelFactory`) works
   here too, for the same reason it's preferred in
-  [Django & DRF §8](django-drf.md#8-testing-drf): factories compose
+  [Django & DRF §8](../django/django-drf.md#8-testing-drf): factories compose
   and stay valid as the schema evolves, unlike fixtures loaded from a
   static JSON/YAML file.
 

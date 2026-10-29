@@ -17,7 +17,7 @@ language/backend core knowledge and DSA — are genuinely solid, not
 just familiar.
 
 - **Language/backend fundamentals** — whichever of [Backend >
-  Python](../python/pythons-execution-model.md),
+  Python](../python/language-fundamentals/pythons-execution-model.md),
   [Go](../backend/go/go-fundamentals.md), or
   [Kotlin](../backend/kotlin/kotlin-for-jvm-interviews.md) matches the
   role, reviewed cold, not just skimmed.

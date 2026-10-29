@@ -63,8 +63,8 @@ JavaScript — it only ever sees the raw response bytes.
   can have hundreds of requests in flight at once, switching to whichever
   response arrives next instead of blocking on one request at a time.
 - This is the same underlying reasoning as
-  [AsyncIO Internals](../python/asyncio-internals.md) and
-  [Choosing a Concurrency Model](../python/choosing-a-concurrency-model.md) —
+  [AsyncIO Internals](../python/concurrency/asyncio-internals.md) and
+  [Choosing a Concurrency Model](../python/concurrency/choosing-a-concurrency-model.md) —
   I/O-bound work is exactly where concurrency multiplies real throughput,
   because the bottleneck is waiting, not computing.
 - This is also why a naive sequential crawler (one `requests.get()` at a

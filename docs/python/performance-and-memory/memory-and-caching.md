@@ -8,7 +8,7 @@ Processing data that doesn't fit in memory, and memoizing expensive
 calls — two efficiency questions with the same underlying theme: pay
 only for what you actually use. For CPython's own memory internals
 (the GC, reference counting, how a dict is actually structured), see
-[Python Internals & Advanced OOP](python-internals-and-advanced-oop.md).
+[Python Internals & Advanced OOP](../language-fundamentals/python-internals-and-advanced-oop.md).
 
 ## 1. "How would you process a file too large to fit in memory?"
 
@@ -79,7 +79,7 @@ get_user_data(123)  # cache hit, no DB call
 - Be ready to explain *why both* are needed — a hash map alone can't
   cheaply track recency order, and a linked list alone can't do O(1)
   lookup by key. See
-  [Python Internals' hash table structure](python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured)
+  [Python Internals' hash table structure](../language-fundamentals/python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured)
   for why the hash map side is O(1) in the first place.
 
 | Pros | Cons / Trade-offs |

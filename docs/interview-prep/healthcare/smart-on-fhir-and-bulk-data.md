@@ -120,7 +120,7 @@ Prefer: respond-async
   JSON object per line, not one giant array) specifically because a
   multi-gigabyte extract can be streamed and processed line by line,
   the exact same
-  [streaming-over-loading](../../python/memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory)
+  [streaming-over-loading](../../python/performance-and-memory/memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory)
   reasoning already covered for ordinary large-file processing, applied
   here to a healthcare-specific export format.
 

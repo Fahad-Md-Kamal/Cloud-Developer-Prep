@@ -224,7 +224,7 @@ f"{'high' if score >= 90 else 'low'}"   # any expression is valid inside {}
 - **Security note, not just a style one:** never build a SQL query (or
   any other command a lower-trust layer will execute) with an
   f-string — see
-  [Django ORM Query Cheat Sheet §16](django-orm.md#16-raw-sql-escape-hatches)
+  [Django ORM Query Cheat Sheet §16](../web-frameworks/django/django-orm.md#16-raw-sql-escape-hatches)
   for exactly why string-formatting user input into a query is an
   injection risk regardless of which formatting syntax does it.
 

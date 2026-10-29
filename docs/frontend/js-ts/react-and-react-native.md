@@ -64,7 +64,7 @@ function useSearch(query) {
   can overwrite correct data with stale data (a classic React race
   condition, structurally the same "two operations racing over shared
   state" hazard as
-  [Threading & the GIL's threading pitfalls](../../python/threading-and-the-gil.md#threading-problems-and-how-to-fix-them),
+  [Threading & the GIL's threading pitfalls](../../python/concurrency/threading-and-the-gil.md#threading-problems-and-how-to-fix-them),
   just at the UI layer instead of the OS thread layer).
 
 ## 2. React Fundamentals: Portals and Uncontrolled Components

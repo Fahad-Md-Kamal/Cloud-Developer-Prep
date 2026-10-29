@@ -128,7 +128,7 @@ client.transition_model_version_stage("fraud-detector", version=3, stage="Produc
   forecast, this week's churn-risk scores).
 - **Real-time inference** — a live API endpoint that takes one input
   and returns a prediction on demand (see
-  [FastAPI: Performance & Production Patterns](../python/fastapi-performance-patterns.md)
+  [FastAPI: Performance & Production Patterns](../python/web-frameworks/fastapi/fastapi-performance-patterns.md)
   for the serving-infrastructure side of this). Needed when the
   prediction depends on input only available at request time (fraud
   scoring a transaction as it happens).

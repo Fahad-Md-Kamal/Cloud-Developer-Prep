@@ -17,7 +17,7 @@ worker dying mid-task. Each tool below answers a different one of those.
 **Answer:**
 
 - This is exactly the
-  [from-scratch worker pool to Celery](../python/worker-pools-and-backpressure.md#from-your-own-worker-pool-to-celery)
+  [from-scratch worker pool to Celery](../python/concurrency/worker-pools-and-backpressure.md#from-your-own-worker-pool-to-celery)
   jump already covered in Worker Pools & Backpressure — a crawling task
   queue is a direct application of that same pattern, not a different
   one.

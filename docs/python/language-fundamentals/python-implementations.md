@@ -7,7 +7,7 @@ title: "Python Implementations: CPython, PyPy, GraalPy & Beyond"
 Every other Python page on this site describes CPython specifically —
 its [execution model](pythons-execution-model.md), its
 **GIL** (Global Interpreter Lock, see
-[Threading & the GIL](threading-and-the-gil.md)), its
+[Threading & the GIL](../concurrency/threading-and-the-gil.md)), its
 [memory model](python-internals-and-advanced-oop.md). This page is the
 one level up: all of these are implementations of the *same* Python
 language specification, and the real differences between them are what
@@ -44,7 +44,7 @@ actually run inside.
   model are already covered in
   [Python's Execution Model](pythons-execution-model.md) and
   [Python Internals & Advanced OOP](python-internals-and-advanced-oop.md).
-- It's the implementation the [GIL](threading-and-the-gil.md) actually
+- It's the implementation the [GIL](../concurrency/threading-and-the-gil.md) actually
   belongs to, and the one virtually every C-extension package (NumPy,
   pandas's C internals) is written against first — which is exactly why
   it remains the default: the surrounding ecosystem assumes it.
@@ -60,7 +60,7 @@ actually run inside.
   [CPython always pays](pythons-execution-model.md#the-eval-loop)
   entirely, for exactly the code that's actually worth optimizing.
 - This is a direct, practical application of the same insight behind
-  [profiling before optimizing](profiling-and-optimization.md)
+  [profiling before optimizing](../performance-and-memory/profiling-and-optimization.md)
   elsewhere on this site — most of a
   program's total runtime is spent in a small fraction of its code, so
   compiling only that fraction gets most of the possible speedup without

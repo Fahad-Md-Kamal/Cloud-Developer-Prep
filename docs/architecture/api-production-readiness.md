@@ -54,5 +54,5 @@ integration testing strategies:
 - `code_samples/chapter-3/api_integration_testing.py`
 
 Framework-specific examples live with their framework:
-[Django code samples](../python/django-drf.md#code-samples) ·
-[FastAPI code samples](../python/fastapi-dependency-injection.md#code-samples).
+[Django code samples](../python/web-frameworks/django/django-drf.md#code-samples) ·
+[FastAPI code samples](../python/web-frameworks/fastapi/fastapi-dependency-injection.md#code-samples).

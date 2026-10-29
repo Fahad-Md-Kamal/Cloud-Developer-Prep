@@ -13,7 +13,7 @@ what let you reason about a slow query or a bloated table in a way
 (indexing, query diagnosis, partitioning, replication, JSONB) follows
 below that. For pushing computation into SQL from Django specifically
 (query count, `F()` expressions, row locking), see
-[Django ORM Query Cheat Sheet](../python/django-orm.md).
+[Django ORM Query Cheat Sheet](../python/web-frameworks/django/django-orm.md).
 
 ## How Postgres Actually Works
 
@@ -247,7 +247,7 @@ SELECT * FROM orders WHERE metadata @> '{"source": "mobile_app"}';
   both trade real operational complexity for real scaling headroom.
 - Pushing computation into SQL instead of Python, fixing N+1, and
   scoping row locks correctly is Django-ORM-specific — see
-  [Django ORM Query Cheat Sheet](../python/django-orm.md) for that.
+  [Django ORM Query Cheat Sheet](../python/web-frameworks/django/django-orm.md) for that.
 
 ---
 

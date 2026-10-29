@@ -332,7 +332,7 @@ self-directed here:
   skip straight to the optimized version) — then fixed with
   `select_related`/`prefetch_related`, so you can articulate *why*
   each one applies to *which* relation. See
-  [Django ORM Query Cheat Sheet §1](../python/django-orm.md#1-query-loading-patterns)
+  [Django ORM Query Cheat Sheet §1](../python/web-frameworks/django/django-orm.md#1-query-loading-patterns)
   for the forward/one-to-one vs. reverse/many-to-many distinction that
   decides which one to use where.
 - The state machine actually rejects invalid transitions with a real

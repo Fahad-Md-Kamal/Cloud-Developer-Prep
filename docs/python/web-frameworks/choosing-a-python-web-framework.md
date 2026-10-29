@@ -7,8 +7,8 @@ title: "Choosing a Python Web Framework"
 Django vs. FastAPI, and Python vs. other backend ecosystems — the
 "why this stack" questions that come up when justifying a technology
 choice, not the framework-specific mechanics themselves. For those,
-see [Django & DRF](django-orm.md) and
-[FastAPI: Dependency Injection & Background Tasks](fastapi-dependency-injection.md).
+see [Django & DRF](django/django-orm.md) and
+[FastAPI: Dependency Injection & Background Tasks](fastapi/fastapi-dependency-injection.md).
 
 ## 1. "Django vs. FastAPI — how do you decide which one to reach for on a new service?"
 
@@ -39,7 +39,7 @@ see [Django & DRF](django-orm.md) and
     I/O), rather than having async support bolted onto a framework
     originally designed as synchronous. FastAPI is async-first;
     Django's async support arrived later and is still partial in
-    places — see [AsyncIO Internals](asyncio-internals.md)
+    places — see [AsyncIO Internals](../concurrency/asyncio-internals.md)
     for what async actually buys you and when it doesn't matter.
 
 !!! info "Micro-framework"
@@ -64,7 +64,7 @@ see [Django & DRF](django-orm.md) and
   FastAPI for a specific high-throughput or async-heavy service (an
   AI/LLM gateway, a webhook processor) — not mutually exclusive at the
   org level. Matches how
-  [Service Boundaries & Architecture](../distributed-systems/service-boundaries-and-architecture.md)
+  [Service Boundaries & Architecture](../../distributed-systems/service-boundaries-and-architecture.md)
   treats FastAPI as one service type among several in a microservices
   architecture.
 

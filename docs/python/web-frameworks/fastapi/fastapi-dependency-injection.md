@@ -8,9 +8,9 @@ Async-first, automatic request validation via Pydantic, and dependency
 injection as the core extensibility mechanism. For general REST API
 design principles (resource modeling, versioning, caching, rate
 limiting) that apply regardless of framework, see
-[REST Deep Dive](../architecture/rest-deep-dive.md) and
-[API Production Readiness](../architecture/api-production-readiness.md). For Django/DRF,
-see [Django & DRF Deep Dive](django-drf.md). For routing and Pydantic
+[REST Deep Dive](../../../architecture/rest-deep-dive.md) and
+[API Production Readiness](../../../architecture/api-production-readiness.md). For Django/DRF,
+see [Django & DRF Deep Dive](../django/django-drf.md). For routing and Pydantic
 validation, see
 [FastAPI Fundamentals: Routing & Pydantic Validation](fastapi-routing-and-validation.md).
 For connection pooling, concurrency, and response-encoding patterns,
@@ -163,7 +163,7 @@ async def analyze_document(
 - It runs in the same process though, so it's not a substitute for
   Celery when the work is heavy, needs retries, or must survive a
   process restart — for that, hand off to a real task queue (see
-  [Practical Patterns §4](practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
+  [Practical Patterns §4](../../language-fundamentals/practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request))
   instead.
 - A dependency with a `yield` (like `get_db` in
   [§3](#3-yield-dependencies-setup-teardown-exception-propagation))

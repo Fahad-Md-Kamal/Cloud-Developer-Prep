@@ -11,7 +11,7 @@ middleware stack, and custom exception handler cover in Django. For
 dependency injection fundamentals, see
 [FastAPI: Dependency Injection & Background Tasks](fastapi-dependency-injection.md).
 For the Django/DRF equivalents, see
-[Django & DRF Deep Dive §4 and §6](django-drf.md#4-authentication-permissions).
+[Django & DRF Deep Dive §4 and §6](../django/django-drf.md#4-authentication-permissions).
 
 ---
 
@@ -92,7 +92,7 @@ async def delete_order(order_id: int):
   `orders:delete` at all") — it says nothing about *which* order. The
   Django/DRF distinction between `has_permission` (view-level) and
   `has_object_permission` (per-object) in
-  [Django & DRF §4](django-drf.md#4-authentication-permissions)
+  [Django & DRF §4](../django/django-drf.md#4-authentication-permissions)
   applies identically here: object-level checks ("does this user own
   *this* order") still need an explicit check inside the
   route/service — scopes alone don't cover it.
@@ -147,7 +147,7 @@ app.add_middleware(
   built on Starlette) — `call_next` is how a middleware hands the
   request to the next layer and gets the response back, the same
   "wraps the handler" shape as Django's `get_response` callable in
-  [Django & DRF §6](django-drf.md#6-middleware).
+  [Django & DRF §6](../django/django-drf.md#6-middleware).
 - **Execution order matters the same way it does in Django, but
   reversed in how it's declared**: middleware added *last* via
   `add_middleware` runs *first* on the way in (it wraps everything
@@ -206,7 +206,7 @@ async def order_not_found_handler(request: Request, exc: OrderNotFoundError):
 - `@app.exception_handler` maps a specific exception type to a
   response — the FastAPI equivalent of DRF's `EXCEPTION_HANDLER`
   setting in
-  [Django & DRF §14](django-drf.md#14-custom-exception-handling),
+  [Django & DRF §14](../django/django-drf.md#14-custom-exception-handling),
   except registered per exception type instead of one global handler
   function that inspects the exception.
 - Letting a plain domain exception (`OrderNotFoundError`, raised deep

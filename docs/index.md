@@ -91,11 +91,11 @@ scoped to one role or one experience level.
 Practice work from live sessions lives as "Practice Notes" sections
 inside the relevant chapter, not on separate pages:
 
-- Mutable default arguments → [Practical Patterns](python/practical-patterns.md#practice-notes-from-live-session)
-- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](python/django-orm.md#practice-notes-from-live-session)
+- Mutable default arguments → [Practical Patterns](python/language-fundamentals/practical-patterns.md#practice-notes-from-live-session)
+- `select_related` vs `prefetch_related` → [Django ORM Query Cheat Sheet](python/web-frameworks/django/django-orm.md#practice-notes-from-live-session)
 - SQL window functions + practice sandbox → [PostgreSQL for Scale](database/postgresql-for-scale.md#practice-notes-from-live-session)
 - Project stories for system-design questions → [Personal Project Stories](interview-prep/project-stories.md)
-- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](python/django-drf.md)
+- Django & DRF in depth (serializers, permissions, auth, signals, migrations, testing, caching) → [Django & DRF Deep Dive](python/web-frameworks/django/django-drf.md)
 
 ## Contents
 
@@ -123,51 +123,88 @@ purpose, covers any Python framework added here later (web, desktop,
 or otherwise), not just Django/FastAPI.
 
 - **Language Fundamentals**
-    - [Python's Execution Model](python/pythons-execution-model.md)
-    - [Python Implementations: CPython, PyPy, GraalPy & Beyond](python/python-implementations.md) —
+    - [Python's Execution Model](python/language-fundamentals/pythons-execution-model.md)
+    - [Python Implementations: CPython, PyPy, GraalPy & Beyond](python/language-fundamentals/python-implementations.md) —
       what PyPy's JIT actually speeds up, GraalVM interop, why Jython/IronPython stalled, MicroPython for embedded
-    - [Typing & Generics](python/typing-and-generics.md)
-    - [Syntax Idioms & Expressions](python/syntax-idioms-and-expressions.md) —
+    - [Typing & Generics](python/language-fundamentals/typing-and-generics.md)
+    - [Syntax Idioms & Expressions](python/language-fundamentals/syntax-idioms-and-expressions.md) —
       conditional expressions, list/dict/set/generator comprehensions,
       the walrus operator, unpacking, `match`/`case`, f-strings
-    - [Python Internals & Advanced OOP](python/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
-    - [Practical Patterns](python/practical-patterns.md)
+    - [Python Internals & Advanced OOP](python/language-fundamentals/python-internals-and-advanced-oop.md) — descriptors, metaclasses, MRO, dunder-method correctness
+    - [Practical Patterns](python/language-fundamentals/practical-patterns.md)
 - **Performance & Memory**
-    - [Bit Manipulation Basics](python/bit-manipulation-basics.md)
-    - [Memory & Caching](python/memory-and-caching.md)
-    - [Data Structures & Their Memory Model](python/data-structures-and-memory.md)
-    - [Profiling & Optimization](python/profiling-and-optimization.md) —
+    - [Bit Manipulation Basics](python/performance-and-memory/bit-manipulation-basics.md)
+    - [Memory & Caching](python/performance-and-memory/memory-and-caching.md)
+    - [Data Structures & Their Memory Model](python/performance-and-memory/data-structures-and-memory.md)
+    - [Profiling & Optimization](python/performance-and-memory/profiling-and-optimization.md) —
       cProfile/py-spy, tracemalloc, algorithmic complexity, bounding async concurrency
 - **Concurrency & Parallelism**
-    - [Choosing a Concurrency Model](python/choosing-a-concurrency-model.md)
-    - [Threading & the GIL](python/threading-and-the-gil.md)
-    - [AsyncIO Internals](python/asyncio-internals.md)
-    - [Worker Pools & Backpressure](python/worker-pools-and-backpressure.md)
-    - [Multiprocessing in Practice](python/multiprocessing-in-practice.md)
-    - [Capstone: A Concurrent Data Pipeline](python/concurrent-data-pipeline-capstone.md)
+    - [Choosing a Concurrency Model](python/concurrency/choosing-a-concurrency-model.md)
+    - [Threading & the GIL](python/concurrency/threading-and-the-gil.md)
+    - [AsyncIO Internals](python/concurrency/asyncio-internals.md)
+    - [Worker Pools & Backpressure](python/concurrency/worker-pools-and-backpressure.md)
+    - [Multiprocessing in Practice](python/concurrency/multiprocessing-in-practice.md)
+    - [Capstone: A Concurrent Data Pipeline](python/concurrency/concurrent-data-pipeline-capstone.md)
 - **Web Frameworks**
-    - [Choosing a Python Web Framework](python/choosing-a-python-web-framework.md) —
+    - [Choosing a Python Web Framework](python/web-frameworks/choosing-a-python-web-framework.md) —
       Django vs. FastAPI vs. Node/Rails/Spring Boot, and when each wins
     - **Django & DRF**
-        - [Django ORM Query Cheat Sheet](python/django-orm.md)
-        - [Django & DRF Deep Dive](python/django-drf.md) — serializers, permissions,
+        - [Django ORM Query Cheat Sheet](python/web-frameworks/django/django-orm.md)
+        - [Django & DRF Deep Dive](python/web-frameworks/django/django-drf.md) — serializers, permissions,
           auth, signals, migrations, testing, caching
     - **FastAPI**
-        - [Routing & Pydantic Validation](python/fastapi-routing-and-validation.md) —
+        - [Routing & Pydantic Validation](python/web-frameworks/fastapi/fastapi-routing-and-validation.md) —
           path/query/body parameters, validators, response models, auto `422`s
-        - [Dependency Injection & Background Tasks](python/fastapi-dependency-injection.md)
-        - [Auth, Middleware & Lifecycle Events](python/fastapi-auth-and-middleware.md) —
+        - [Dependency Injection & Background Tasks](python/web-frameworks/fastapi/fastapi-dependency-injection.md)
+        - [Auth, Middleware & Lifecycle Events](python/web-frameworks/fastapi/fastapi-auth-and-middleware.md) —
           OAuth2/JWT, security scopes, Starlette middleware ordering, `lifespan` startup/shutdown
-        - [Database Integration & Testing](python/fastapi-database-and-testing.md) —
+        - [Database Integration & Testing](python/web-frameworks/fastapi/fastapi-database-and-testing.md) —
           SQLAlchemy 2.0 async + Alembic, `httpx.AsyncClient`, dependency overrides
-        - [Performance & Production Patterns](python/fastapi-performance-patterns.md) —
+        - [Performance & Production Patterns](python/web-frameworks/fastapi/fastapi-performance-patterns.md) —
           connection pooling, WebSockets, ASGI vs. WSGI
+- **Odoo**
+    - **Framework**
+        - [ORM & Recordsets](python/odoo/framework/odoo-orm-and-recordsets.md) —
+          recordsets, domains, x2many commands, computed fields, `env`
+        - [Views, Actions & QWeb](python/odoo/framework/odoo-views-actions-and-qweb.md) —
+          menu → action → view, view inheritance, new expression syntax, QWeb directives
+        - [Inheritance & Customization](python/odoo/framework/odoo-inheritance.md) —
+          `_inherit` vs `_inherits`, `super()`, XPath view changes, mixins
+        - [Mail, Chatter & Activities](python/odoo/framework/odoo-mail-chatter-and-activities.md) —
+          `mail.thread`, tracking, email routing and aliases, `activity_schedule`
+        - [Security Model](python/odoo/framework/odoo-security.md) —
+          `ir.access` rows with domains, multi-company, `sudo()`
+        - [Automation & Server Actions](python/odoo/framework/odoo-automation-and-server-actions.md) —
+          triggers, before/after filters, how rules patch `write`, rule vs. code
+        - [Data Files, Sequences & Translations](python/odoo/framework/odoo-data-sequences-and-translations.md) —
+          `noupdate`, `ir.sequence` (standard vs. no-gap), `.po` files
+        - [Performance & Testing](python/odoo/framework/odoo-performance-and-testing.md) —
+          prefetching, N+1, `read_group`, `TransactionCase`, `Form`
+        - [Upgrades & Migration Scripts](python/odoo/framework/odoo-upgrades-and-migrations.md) —
+          pre/post/end scripts, the exact upgrade order, hooks, upgrading custom modules
+        - [Configuration & Deployment](python/odoo/framework/odoo-configuration-and-deployment.md) —
+          `odoo.conf`, workers and limits, `proxy_mode`, what to check before going live
+    - **Core Apps Flow**
+        - [Sales to Cash](python/odoo/core-apps/odoo-sales-to-cash-flow.md) —
+          bridge modules, hook methods, confirm → delivery → invoice, traced in the source
+        - [Inventory Internals](python/odoo/core-apps/odoo-inventory-internals.md) —
+          moves vs. quants, stock rules, reservation, what validate really does
+        - [Accounting Internals](python/odoo/core-apps/odoo-accounting-internals.md) —
+          `account.move`, journal items, balance check, posting, reconciliation
+        - [Purchase to Pay](python/odoo/core-apps/odoo-purchase-to-pay-flow.md) —
+          `_run_buy`, PO merging, approval, receipt, vendor bill
+        - [Manufacturing Internals](python/odoo/core-apps/odoo-manufacturing-internals.md) —
+          BoM vs. MO, `_run_manufacture`, multi-level shortages, mark as done
+        - [Point of Sale Internals](python/odoo/core-apps/odoo-point-of-sale-internals.md) —
+          offline sync with `sync_from_ui`, sessions, one combined entry at close
+    - [Build an Odoo App: The Step-by-Step Plan](python/odoo/build-an-odoo-app-plan.md) —
+      a Service Desk build in three parts (13 core steps, 7 design steps, 6 platform steps), each with a check and the page to read first
 - **Python Standard Library**
-    - [Pathlib & File Operations](python/pathlib-and-file-operations.md)
-    - [Collections & Itertools](python/collections-and-itertools.md)
-    - [Configuration & CLI Tools](python/config-and-cli-tools.md)
-    - [Functools: Caching & Decorators](python/functools-patterns.md)
-    - [Regex & Text Processing](python/regex-and-text-processing.md)
+    - [Pathlib & File Operations](python/standard-library/pathlib-and-file-operations.md)
+    - [Collections & Itertools](python/standard-library/collections-and-itertools.md)
+    - [Configuration & CLI Tools](python/standard-library/config-and-cli-tools.md)
+    - [Functools: Caching & Decorators](python/standard-library/functools-patterns.md)
+    - [Regex & Text Processing](python/standard-library/regex-and-text-processing.md)
 
 ### Backend
 

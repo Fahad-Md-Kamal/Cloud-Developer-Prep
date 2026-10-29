@@ -247,7 +247,7 @@ actual skill.
 - The trade-off for all of that: real infrastructure (a broker to run
   and monitor) and real operational complexity, instead of a
   self-contained class. See
-  [Practical Patterns §4](practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request)
+  [Practical Patterns §4](../language-fundamentals/practical-patterns.md#4-when-do-you-reach-for-celery-instead-of-just-handling-something-in-the-request)
   for when that trade-off is actually worth making.
 
 | From-scratch worker pool | Celery |

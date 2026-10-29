@@ -111,6 +111,6 @@ Big-O is a **starting point for reasoning, not the final answer**. The
 hardware underneath — cache lines, memory locality, paging — is where
 real-world performance differences between same-complexity algorithms
 actually come from, and it's exactly why
-[data structure memory layout](../python/data-structures-and-memory.md)
+[data structure memory layout](../python/performance-and-memory/data-structures-and-memory.md)
 (how contiguous or scattered a structure actually is) matters as much in
 practice as its textbook complexity does.

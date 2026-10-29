@@ -66,7 +66,7 @@ one more bytecode instruction.
     Since this loop only ever executes one bytecode instruction at a
     time, only one thread can be inside it at once — which is exactly
     what the
-    [GIL](threading-and-the-gil.md#the-gil)
+    [GIL](../concurrency/threading-and-the-gil.md#the-gil)
     is: the lock that enforces "only one thread runs Python bytecode at
     a time." Understanding the eval loop is what makes the GIL stop
     being an arbitrary rule and start being an obvious consequence of
@@ -134,7 +134,7 @@ stack of frames already sitting there.
 the OS to create a genuine native thread (`pthread_create` on
 Linux/macOS), scheduled by the OS exactly like a thread in any other
 language. Python doesn't invent its own thread concept underneath;
-[the GIL](threading-and-the-gil.md#the-gil)
+[the GIL](../concurrency/threading-and-the-gil.md#the-gil)
 is the one thing CPython bolts on top of otherwise-ordinary OS threads —
 every thread is real and OS-scheduled, but only one at a time is ever
 allowed inside the eval loop above, executing Python bytecode.
@@ -142,4 +142,4 @@ allowed inside the eval loop above, executing Python bytecode.
 For what that one restriction actually means in practice — when threads
 still help despite it, and how AsyncIO/multiprocessing fit around it —
 see
-[Choosing a Concurrency Model](choosing-a-concurrency-model.md).
+[Choosing a Concurrency Model](../concurrency/choosing-a-concurrency-model.md).

@@ -4,9 +4,9 @@ title: "How Interpreters & Compilers Actually Work"
 
 # How Interpreters & Compilers Actually Work
 
-[Python's Execution Model](../python/pythons-execution-model.md)
+[Python's Execution Model](../python/language-fundamentals/pythons-execution-model.md)
 and
-[Python Implementations](../python/python-implementations.md)
+[Python Implementations](../python/language-fundamentals/python-implementations.md)
 cover this mechanism for CPython and its alternatives specifically.
 This page is the general, language-agnostic version underneath all of
 it — the actual pipeline every language's toolchain runs in some form,
@@ -73,7 +73,7 @@ at once.
   node each time, because the hard structural work already happened
   once, upfront.
 - This is exactly the mechanism behind
-  [CPython's own eval loop](../python/pythons-execution-model.md#the-eval-loop) —
+  [CPython's own eval loop](../python/language-fundamentals/pythons-execution-model.md#the-eval-loop) —
   not a Python-specific trick, but this page's general pattern, applied
   to one concrete language.
 
@@ -118,7 +118,7 @@ at once.
   runs frequently** — a loop executed thousands of times — and compile
   *just that part* to real machine code **during execution**, then
   switch to running the compiled version for the rest of the program's
-  life. [PyPy](../python/python-implementations.md#3-what-is-pypy-and-how-does-its-jit-actually-make-python-code-faster-than-cpython),
+  life. [PyPy](../python/language-fundamentals/python-implementations.md#3-what-is-pypy-and-how-does-its-jit-actually-make-python-code-faster-than-cpython),
   the JVM, and JavaScript's V8 engine are all real, widely-used examples
   of exactly this pattern.
 - The payoff: near-AOT speed for the specific code that actually

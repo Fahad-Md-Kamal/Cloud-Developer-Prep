@@ -363,7 +363,7 @@ gc.freeze()          # treat everything currently alive as permanent, stop re-sc
   re-scanning data that was never going away.
 - **Interview trap to avoid:** the GIL and the GC are two unrelated
   locks on two unrelated things — the GIL protects bytecode execution
-  ([Threading & the GIL](threading-and-the-gil.md)); the cyclic GC
+  ([Threading & the GIL](../concurrency/threading-and-the-gil.md)); the cyclic GC
   is purely about memory, and runs independently of it.
 
 ### Weak references: holding a reference that doesn't count
@@ -401,7 +401,7 @@ print(child.parent_ref())  # call it to get the actual object (or None if freed)
 - **Interview point:** this is the mechanism-level answer to "what's
   the difference between a cache that leaks memory and one that
   doesn't" — a plain `dict` cache (or `functools.lru_cache` from
-  [Memory & Caching §2](memory-and-caching.md#2-implement-an-lru-cache-what-data-structures-does-it-need-and-why-both))
+  [Memory & Caching §2](../performance-and-memory/memory-and-caching.md#2-implement-an-lru-cache-what-data-structures-does-it-need-and-why-both))
   holds a real, counted reference and keeps every cached object alive
   until explicitly evicted; a `WeakValueDictionary` never does that by
   itself.
@@ -424,7 +424,7 @@ print(child.parent_ref())  # call it to get the actual object (or None if freed)
     - An unbounded cache — a plain `dict` or an `lru_cache` with no
       `maxsize` — every entry is a real, counted reference, so nothing
       is ever freed until the process restarts. See
-      [Memory & Caching §2](memory-and-caching.md#2-implement-an-lru-cache-what-data-structures-does-it-need-and-why-both)
+      [Memory & Caching §2](../performance-and-memory/memory-and-caching.md#2-implement-an-lru-cache-what-data-structures-does-it-need-and-why-both)
       for the data structure; the leak is simply never evicting from it.
     - A module-level list/dict used as an event log or registry that
       only ever grows — nothing wrong with the data structure, the bug
@@ -451,7 +451,7 @@ print(child.parent_ref())  # call it to get the actual object (or None if freed)
   "memory climbs steadily, then the process gets OOM-killed after N
   hours" rather than an immediate, obvious failure.
 - **Detecting one:** `tracemalloc` (built in, already named in
-  [Memory & Caching §1](memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory))
+  [Memory & Caching §1](../performance-and-memory/memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory))
   for general growth tracking; `gc.garbage` and the `objgraph` package
   specifically for finding uncollectable reference cycles.
 - **On "benefits":** there genuinely aren't any — a memory leak is a

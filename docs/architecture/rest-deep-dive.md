@@ -11,8 +11,8 @@ and versioning, the same depth treatment as the
 [gRPC Deep Dive](grpc-deep-dive.md) give their paradigms.
 Framework-agnostic, applies whether the implementation is Django,
 FastAPI, or anything else — for framework-specific depth, see
-[Frameworks → Django & DRF](../python/django-orm.md) or
-[Frameworks → FastAPI](../python/fastapi-dependency-injection.md).
+[Frameworks → Django & DRF](../python/web-frameworks/django/django-orm.md) or
+[Frameworks → FastAPI](../python/web-frameworks/fastapi/fastapi-dependency-injection.md).
 
 ## 1. Resource Modeling
 

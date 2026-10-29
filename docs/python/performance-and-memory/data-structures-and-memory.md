@@ -7,9 +7,9 @@ title: "Data Structures & Their Memory Model"
 One file, one core memory idea per built-in data structure — `list`,
 `tuple`, `dict`, `set`, `str`, `bytes` — each measured, not guessed.
 For dict/hash-table internals specifically, see
-[Python Internals §6](python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured);
+[Python Internals §6](../language-fundamentals/python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured);
 for GC/reference counting, see
-[Python Internals §5](python-internals-and-advanced-oop.md#5-explain-pythons-memory-model-how-does-it-actually-know-when-to-free-an-object).
+[Python Internals §5](../language-fundamentals/python-internals-and-advanced-oop.md#5-explain-pythons-memory-model-how-does-it-actually-know-when-to-free-an-object).
 
 ## 1. List — a resizable array of pointers, over-allocated to grow cheaply
 
@@ -68,7 +68,7 @@ a sparse index table plus a dense, insertion-ordered array.
 - Full structure (open addressing, the compact-dict sparse/dense
   split, resizing, why lookup is *amortized* O(1) not guaranteed) is
   covered in
-  [Python Internals §6](python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured) —
+  [Python Internals §6](../language-fundamentals/python-internals-and-advanced-oop.md#6-how-is-a-dict-or-a-hash-map-in-any-language-actually-structured) —
   not repeated here.
 - The one fact worth knowing *for this page specifically*: a dict's
   memory cost is dominated by its hash table, not by whatever values

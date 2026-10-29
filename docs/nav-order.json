@@ -33,119 +33,187 @@
   },
   {
     "title": "Python's Execution Model",
-    "url": "python/pythons-execution-model/"
+    "url": "python/language-fundamentals/pythons-execution-model/"
   },
   {
     "title": "Python Implementations: CPython, PyPy, GraalPy & Beyond",
-    "url": "python/python-implementations/"
+    "url": "python/language-fundamentals/python-implementations/"
   },
   {
     "title": "Typing & Generics",
-    "url": "python/typing-and-generics/"
+    "url": "python/language-fundamentals/typing-and-generics/"
   },
   {
     "title": "Syntax Idioms & Expressions",
-    "url": "python/syntax-idioms-and-expressions/"
+    "url": "python/language-fundamentals/syntax-idioms-and-expressions/"
   },
   {
     "title": "Python Internals & Advanced OOP",
-    "url": "python/python-internals-and-advanced-oop/"
+    "url": "python/language-fundamentals/python-internals-and-advanced-oop/"
   },
   {
     "title": "Practical Patterns",
-    "url": "python/practical-patterns/"
+    "url": "python/language-fundamentals/practical-patterns/"
   },
   {
     "title": "Bit Manipulation Basics",
-    "url": "python/bit-manipulation-basics/"
+    "url": "python/performance-and-memory/bit-manipulation-basics/"
   },
   {
     "title": "Memory & Caching",
-    "url": "python/memory-and-caching/"
+    "url": "python/performance-and-memory/memory-and-caching/"
   },
   {
     "title": "Data Structures & Their Memory Model",
-    "url": "python/data-structures-and-memory/"
+    "url": "python/performance-and-memory/data-structures-and-memory/"
   },
   {
     "title": "Profiling & Optimization",
-    "url": "python/profiling-and-optimization/"
+    "url": "python/performance-and-memory/profiling-and-optimization/"
   },
   {
     "title": "Choosing a Concurrency Model",
-    "url": "python/choosing-a-concurrency-model/"
+    "url": "python/concurrency/choosing-a-concurrency-model/"
   },
   {
     "title": "Threading & the GIL",
-    "url": "python/threading-and-the-gil/"
+    "url": "python/concurrency/threading-and-the-gil/"
   },
   {
     "title": "AsyncIO Internals",
-    "url": "python/asyncio-internals/"
+    "url": "python/concurrency/asyncio-internals/"
   },
   {
     "title": "Worker Pools & Backpressure",
-    "url": "python/worker-pools-and-backpressure/"
+    "url": "python/concurrency/worker-pools-and-backpressure/"
   },
   {
     "title": "Multiprocessing in Practice",
-    "url": "python/multiprocessing-in-practice/"
+    "url": "python/concurrency/multiprocessing-in-practice/"
   },
   {
     "title": "Capstone: A Concurrent Data Pipeline",
-    "url": "python/concurrent-data-pipeline-capstone/"
+    "url": "python/concurrency/concurrent-data-pipeline-capstone/"
   },
   {
     "title": "Choosing a Python Web Framework",
-    "url": "python/choosing-a-python-web-framework/"
+    "url": "python/web-frameworks/choosing-a-python-web-framework/"
   },
   {
     "title": "ORM Query Cheat Sheet",
-    "url": "python/django-orm/"
+    "url": "python/web-frameworks/django/django-orm/"
   },
   {
     "title": "Deep Dive: Serializers, Auth, Signals, Testing",
-    "url": "python/django-drf/"
+    "url": "python/web-frameworks/django/django-drf/"
   },
   {
     "title": "Routing & Pydantic Validation",
-    "url": "python/fastapi-routing-and-validation/"
+    "url": "python/web-frameworks/fastapi/fastapi-routing-and-validation/"
   },
   {
     "title": "Dependency Injection & Background Tasks",
-    "url": "python/fastapi-dependency-injection/"
+    "url": "python/web-frameworks/fastapi/fastapi-dependency-injection/"
   },
   {
     "title": "Auth, Middleware & Lifecycle Events",
-    "url": "python/fastapi-auth-and-middleware/"
+    "url": "python/web-frameworks/fastapi/fastapi-auth-and-middleware/"
   },
   {
     "title": "Database Integration & Testing",
-    "url": "python/fastapi-database-and-testing/"
+    "url": "python/web-frameworks/fastapi/fastapi-database-and-testing/"
   },
   {
     "title": "Performance & Production Patterns",
-    "url": "python/fastapi-performance-patterns/"
+    "url": "python/web-frameworks/fastapi/fastapi-performance-patterns/"
+  },
+  {
+    "title": "ORM & Recordsets",
+    "url": "python/odoo/framework/odoo-orm-and-recordsets/"
+  },
+  {
+    "title": "Views, Actions & QWeb",
+    "url": "python/odoo/framework/odoo-views-actions-and-qweb/"
+  },
+  {
+    "title": "Inheritance & Customization",
+    "url": "python/odoo/framework/odoo-inheritance/"
+  },
+  {
+    "title": "Mail, Chatter & Activities",
+    "url": "python/odoo/framework/odoo-mail-chatter-and-activities/"
+  },
+  {
+    "title": "Security Model",
+    "url": "python/odoo/framework/odoo-security/"
+  },
+  {
+    "title": "Automation & Server Actions",
+    "url": "python/odoo/framework/odoo-automation-and-server-actions/"
+  },
+  {
+    "title": "Data, Sequences & Translations",
+    "url": "python/odoo/framework/odoo-data-sequences-and-translations/"
+  },
+  {
+    "title": "Performance & Testing",
+    "url": "python/odoo/framework/odoo-performance-and-testing/"
+  },
+  {
+    "title": "Upgrades & Migrations",
+    "url": "python/odoo/framework/odoo-upgrades-and-migrations/"
+  },
+  {
+    "title": "Configuration & Deployment",
+    "url": "python/odoo/framework/odoo-configuration-and-deployment/"
+  },
+  {
+    "title": "Sales to Cash",
+    "url": "python/odoo/core-apps/odoo-sales-to-cash-flow/"
+  },
+  {
+    "title": "Inventory Internals",
+    "url": "python/odoo/core-apps/odoo-inventory-internals/"
+  },
+  {
+    "title": "Accounting Internals",
+    "url": "python/odoo/core-apps/odoo-accounting-internals/"
+  },
+  {
+    "title": "Purchase to Pay",
+    "url": "python/odoo/core-apps/odoo-purchase-to-pay-flow/"
+  },
+  {
+    "title": "Manufacturing Internals",
+    "url": "python/odoo/core-apps/odoo-manufacturing-internals/"
+  },
+  {
+    "title": "Point of Sale Internals",
+    "url": "python/odoo/core-apps/odoo-point-of-sale-internals/"
+  },
+  {
+    "title": "App Build Plan",
+    "url": "python/odoo/build-an-odoo-app-plan/"
   },
   {
     "title": "Pathlib & File Operations",
-    "url": "python/pathlib-and-file-operations/"
+    "url": "python/standard-library/pathlib-and-file-operations/"
   },
   {
     "title": "Collections & Itertools",
-    "url": "python/collections-and-itertools/"
+    "url": "python/standard-library/collections-and-itertools/"
   },
   {
     "title": "Configuration & CLI Tools",
-    "url": "python/config-and-cli-tools/"
+    "url": "python/standard-library/config-and-cli-tools/"
   },
   {
     "title": "Functools: Caching & Decorators",
-    "url": "python/functools-patterns/"
+    "url": "python/standard-library/functools-patterns/"
   },
   {
     "title": "Regex & Text Processing",
-    "url": "python/regex-and-text-processing/"
+    "url": "python/standard-library/regex-and-text-processing/"
   },
   {
     "title": "Go Fundamentals: Types, Structs & Interfaces",

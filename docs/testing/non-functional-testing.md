@@ -28,7 +28,7 @@ completely fail on.
 - **Soak testing** — sustained, moderate load held for an extended
   period (hours, not minutes) — built specifically to catch problems
   that only show up over time, like a slow [memory
-  leak](../python/python-internals-and-advanced-oop.md#memory-leaks-what-they-actually-are-and-how-one-happens-even-with-a-garbage-collector)
+  leak](../python/language-fundamentals/python-internals-and-advanced-oop.md#memory-leaks-what-they-actually-are-and-how-one-happens-even-with-a-garbage-collector)
   or a resource that's never properly released, invisible in a short
   burst test.
 - The tools differ mainly in how virtual users are scripted and scaled,

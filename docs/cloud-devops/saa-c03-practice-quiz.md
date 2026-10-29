@@ -759,7 +759,7 @@ best practices?
     capacity track the backlog automatically, with EC2 consumers that
     have no execution-time ceiling.
 
-    See: [Worker Pools & Backpressure](../python/worker-pools-and-backpressure.md)
+    See: [Worker Pools & Backpressure](../python/concurrency/worker-pools-and-backpressure.md)
 
 **Q27.** A chat application stores messages with a key-value data model.
 Groups of users read the same messages repeatedly, and the database must

@@ -106,7 +106,7 @@ for _, elem in ET.iterparse("huge_feed.xml", tag="product"):
   element as it's parsed and letting you discard it (`elem.clear()`)
   once you've extracted what you need — memory use stays flat regardless
   of total document size, the same trade-off as the
-  [generator-vs-load-everything pattern](../python/memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory)
+  [generator-vs-load-everything pattern](../python/performance-and-memory/memory-and-caching.md#1-how-would-you-process-a-file-too-large-to-fit-in-memory)
   covered for plain file processing.
 - The cost is the same trade-off, too: a streaming parse can't do random
   access or re-visit an earlier element — once you've moved past it and

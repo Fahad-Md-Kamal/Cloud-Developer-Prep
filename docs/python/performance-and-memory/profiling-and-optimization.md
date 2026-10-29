@@ -8,12 +8,12 @@ Finding out *where* time actually goes, and fixing it once you know.
 This page covers profiling tools and algorithmic optimization
 specifically — for the topics that used to live alongside this material
 but now have their own real, deeper coverage, see
-[Multi-Layer Caching](../distributed-systems/data-and-capacity-scaling.md#2-multi-layer-caching)
-and [Caching Layers & Global Accelerator](../cloud-devops/caching-layers-and-global-accelerator.md)
-for caching, [Load Balancing & Auto-Scaling](../distributed-systems/load-balancing-and-autoscaling.md)
-and [Data & Capacity Scaling](../distributed-systems/data-and-capacity-scaling.md) for
-scaling, [Circuit Breakers, Retries & Bulkheads](../distributed-systems/circuit-breakers-retries-and-bulkheads.md)
-for resilience, and [PostgreSQL for Scale](../database/postgresql-for-scale.md)
+[Multi-Layer Caching](../../distributed-systems/data-and-capacity-scaling.md#2-multi-layer-caching)
+and [Caching Layers & Global Accelerator](../../cloud-devops/caching-layers-and-global-accelerator.md)
+for caching, [Load Balancing & Auto-Scaling](../../distributed-systems/load-balancing-and-autoscaling.md)
+and [Data & Capacity Scaling](../../distributed-systems/data-and-capacity-scaling.md) for
+scaling, [Circuit Breakers, Retries & Bulkheads](../../distributed-systems/circuit-breakers-retries-and-bulkheads.md)
+for resilience, and [PostgreSQL for Scale](../../database/postgresql-for-scale.md)
 for query diagnosis and index selection.
 
 ## 1. "Where do you actually start when someone says an endpoint is slow?"
@@ -70,7 +70,7 @@ for stat in snapshot2.compare_to(snapshot1, "lineno")[:10]:
   signature.
 - A common real cause is an unbounded in-memory cache that keeps
   everything it's ever seen — see
-  [Memory Leaks](python-internals-and-advanced-oop.md#memory-leaks-what-they-actually-are-and-how-one-happens-even-with-a-garbage-collector)
+  [Memory Leaks](../language-fundamentals/python-internals-and-advanced-oop.md#memory-leaks-what-they-actually-are-and-how-one-happens-even-with-a-garbage-collector)
   for the full mechanism and other common Python-specific leak patterns.
 
 ## 3. "CPU usage on the box is low but the endpoint is still slow — what's your next move?"
@@ -120,8 +120,8 @@ def handle_request(request): ...
   latency (not just the average, which hides the tail that annoys
   users), error rate, and throughput — and alert on threshold
   violations rather than on every metric that moves. See
-  [Prometheus's four metric types](../distributed-systems/metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)
-  and [SLIs and SLOs](../distributed-systems/metrics-and-prometheus.md#3-design-slis-and-slos-for-an-api-endpoint-how-is-an-slo-different-from-an-sla)
+  [Prometheus's four metric types](../../distributed-systems/metrics-and-prometheus.md#1-explain-prometheuss-four-metric-types-and-when-youd-reach-for-each)
+  and [SLIs and SLOs](../../distributed-systems/metrics-and-prometheus.md#3-design-slis-and-slos-for-an-api-endpoint-how-is-an-slo-different-from-an-sla)
   for the full production-monitoring picture.
 - Distributed tracing matters once a single request crosses several
   services, so you can tell which hop actually added the latency
@@ -184,7 +184,7 @@ async def fetch(session, url):
 - It's the same shape as "use `asyncio.gather` for concurrent I/O," with
   a backpressure mechanism added once concurrency is high enough that
   the downstream service itself becomes the constraint — see
-  [LLM APIs & Providers §4](../ai-llm/llm-apis-and-providers.md#4-design-an-async-client-for-calling-an-llm-api-under-load-what-does-it-need-beyond-await-clientchatcompletionscreate)
+  [LLM APIs & Providers §4](../../ai-llm/llm-apis-and-providers.md#4-design-an-async-client-for-calling-an-llm-api-under-load-what-does-it-need-beyond-await-clientchatcompletionscreate)
   for this exact pattern applied to a real production client.
 
 | Pros | Cons / Trade-offs |

@@ -43,7 +43,7 @@ async def get_dashboard(user_id: int):
   for no reason — `asyncio.gather` runs them concurrently since none
   depends on another's result.
 - This is the same "why is this endpoint slow" diagnostic covered in
-  [AsyncIO Internals' cooperative scheduling](asyncio-internals.md#cooperative-scheduling),
+  [AsyncIO Internals' cooperative scheduling](../../concurrency/asyncio-internals.md#cooperative-scheduling),
   applied specifically to a FastAPI handler.
 
 ## 2. WebSockets
@@ -83,7 +83,7 @@ async def order_updates(websocket: WebSocket, order_id: int):
 | Separate app mount | `app.mount("/v2", app_v2)` for a fully separate FastAPI app | Clean separation for a genuinely breaking rewrite; two codebases to maintain in parallel |
 
 - Same strategies and the same underlying trade-off as
-  [Django & DRF §13](django-drf.md#13-api-versioning) — FastAPI just
+  [Django & DRF §13](../django/django-drf.md#13-api-versioning) — FastAPI just
   implements "URL path" via a prefixed `APIRouter` instead of a
   Django/DRF versioning class.
 - **Interview point:** the harder problem, same as in DRF, is never
@@ -110,7 +110,7 @@ async def get_order(order_id: int):
   `/redoc`) **automatically from route signatures and Pydantic
   models** — no separate introspection library needed, unlike DRF's
   `drf-spectacular` in
-  [Django & DRF §17](django-drf.md#17-api-schema-documentation). This
+  [Django & DRF §17](../django/django-drf.md#17-api-schema-documentation). This
   is a genuine structural advantage of type-hint-driven design: the
   schema can't drift from the code the way a hand-maintained OpenAPI
   YAML file can, since both are generated from the same source.
@@ -152,7 +152,7 @@ async def get_dashboard_stats(organization_id: int):
   store like Redis, accessed directly or via a library like
   `fastapi-cache2`.
 - The same invalidation discipline from
-  [Django & DRF §9](django-drf.md#9-caching) still applies regardless
+  [Django & DRF §9](../django/django-drf.md#9-caching) still applies regardless
   of framework: key the cache by everything the value depends on, and
   invalidate explicitly on the write path rather than relying on TTL
   alone for data that needs to be fresh.
@@ -179,7 +179,7 @@ async def get_dashboard_stats(organization_id: int):
   async support later?" — expects naming ASGI vs. WSGI specifically:
   FastAPI/Starlette were built on an async-native interface from the
   start, while Django's async views
-  ([Django & DRF §16](django-drf.md#16-async-views-in-djangodrf)) are
+  ([Django & DRF §16](../django/django-drf.md#16-async-views-in-djangodrf)) are
   a newer layer added on top of a framework whose request-handling
   core (and still, much of DRF) remains fundamentally synchronous.
 

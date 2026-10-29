@@ -9,8 +9,8 @@ validation — the request-shape fundamentals DRF's serializers handle
 in Django, done FastAPI's way: via type hints instead of a separate
 serializer class. For general REST API design principles that apply
 regardless of framework, see
-[REST Deep Dive](../architecture/rest-deep-dive.md). For
-Django/DRF, see [Django & DRF Deep Dive](django-drf.md).
+[REST Deep Dive](../../../architecture/rest-deep-dive.md). For
+Django/DRF, see [Django & DRF Deep Dive](../django/django-drf.md).
 
 ---
 
@@ -44,7 +44,7 @@ app.include_router(users.router)
 **Avoid:** business logic inline in a route function instead of a
 service it calls — makes it untestable without spinning up the whole
 HTTP layer, same reasoning as Django's service-layer advice in
-[Django & DRF §1](django-drf.md#1-project-structure-that-scales).
+[Django & DRF §1](../django/django-drf.md#1-project-structure-that-scales).
 
 ## 2. Path, Query & Body Parameters
 
