@@ -109,7 +109,7 @@ proxy_mode = True
   big for a request. The fix is usually **moving it to a cron job or a
   queue**, not raising the limit. Raising limits hides problems and can
   exhaust memory.
-- See [Odoo Performance & Testing](odoo-performance-and-testing.md) for
+- See [Odoo Performance & Testing](../framework/odoo-performance-and-testing.md) for
   finding the slow part first.
 
 ## 5. "What should sit in front of Odoo?"

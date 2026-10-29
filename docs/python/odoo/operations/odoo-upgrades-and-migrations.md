@@ -149,14 +149,14 @@ def migrate(cr, version):
 - The `pre-` script renames the column, so the data follows the new name.
 - The `post-` script uses the ORM to set the new field, in one `write`
   on the whole recordset. See
-  [Odoo ORM & Recordsets](odoo-orm-and-recordsets.md#2-how-do-you-search-create-update-and-delete-records).
+  [Odoo ORM & Recordsets](../framework/odoo-orm-and-recordsets.md#2-how-do-you-search-create-update-and-delete-records).
 - Steps to ship it:
     1. Change the Python field name.
     2. Bump `version` in the manifest, for example from `1.0` to `1.1`.
     3. Add the two scripts under `migrations/1.1/`.
 - On a large table, prefer one SQL `UPDATE` to loading every record
   through the ORM. See
-  [Odoo Performance & Testing](odoo-performance-and-testing.md).
+  [Odoo Performance & Testing](../framework/odoo-performance-and-testing.md).
 
 ## 6. "How do major-version upgrades differ?"
 
@@ -179,7 +179,7 @@ def migrate(cr, version):
     5. Repeat until it is clean, then schedule the real upgrade.
 - Keep the number of custom modules and the amount of copied core code
   small. Both make every upgrade harder. See
-  [Odoo Inheritance & Customization §5](odoo-inheritance.md#5-how-do-you-extend-without-breaking-upgrades).
+  [Odoo Inheritance & Customization §5](../framework/odoo-inheritance.md#5-how-do-you-extend-without-breaking-upgrades).
 
 ## 7. "How do you test and debug an upgrade?"
 
@@ -202,7 +202,7 @@ def migrate(cr, version):
     5. Was the module really upgraded (`-u`)?
 - If a view fails to load after the upgrade, it is usually an inherited
   view whose target changed. See
-  [Odoo Views, Actions & QWeb](odoo-views-actions-and-qweb.md#5-how-does-view-inheritance-work).
+  [Odoo Views, Actions & QWeb](../framework/odoo-views-actions-and-qweb.md#5-how-does-view-inheritance-work).
 - Always take a backup first. A bad migration can destroy data.
 
 ## 8. "Where does AI help here?"

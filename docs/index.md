@@ -170,19 +170,27 @@ or otherwise), not just Django/FastAPI.
           menu → action → view, view inheritance, new expression syntax, QWeb directives
         - [Inheritance & Customization](python/odoo/framework/odoo-inheritance.md) —
           `_inherit` vs `_inherits`, `super()`, XPath view changes, mixins
-        - [Mail, Chatter & Activities](python/odoo/framework/odoo-mail-chatter-and-activities.md) —
-          `mail.thread`, tracking, email routing and aliases, `activity_schedule`
         - [Security Model](python/odoo/framework/odoo-security.md) —
           `ir.access` rows with domains, multi-company, `sudo()`
-        - [Automation & Server Actions](python/odoo/framework/odoo-automation-and-server-actions.md) —
-          triggers, before/after filters, how rules patch `write`, rule vs. code
+        - [Mail, Chatter & Activities](python/odoo/framework/odoo-mail-chatter-and-activities.md) —
+          `mail.thread`, tracking, email routing and aliases, `activity_schedule`
+        - [Wizards & Reports](python/odoo/framework/odoo-wizards-and-reports.md) —
+          transient models, `active_ids`, report actions, `_get_report_values`, `t-lang`
         - [Data Files, Sequences & Translations](python/odoo/framework/odoo-data-sequences-and-translations.md) —
           `noupdate`, `ir.sequence` (standard vs. no-gap), `.po` files
+        - [Automation & Server Actions](python/odoo/framework/odoo-automation-and-server-actions.md) —
+          triggers, before/after filters, how rules patch `write`, rule vs. code
         - [Performance & Testing](python/odoo/framework/odoo-performance-and-testing.md) —
           prefetching, N+1, `read_group`, `TransactionCase`, `Form`
-        - [Upgrades & Migration Scripts](python/odoo/framework/odoo-upgrades-and-migrations.md) —
+    - **Integration & Frontend**
+        - [External API (JSON-2)](python/odoo/integration/odoo-external-api.md) —
+          bearer API keys, one transaction per call, moving off XML-RPC
+        - [OWL & the Web Client](python/odoo/integration/odoo-owl-and-the-web-client.md) —
+          Owl components, asset bundles, registries, services, `patch`
+    - **Operations**
+        - [Upgrades & Migration Scripts](python/odoo/operations/odoo-upgrades-and-migrations.md) —
           pre/post/end scripts, the exact upgrade order, hooks, upgrading custom modules
-        - [Configuration & Deployment](python/odoo/framework/odoo-configuration-and-deployment.md) —
+        - [Configuration & Deployment](python/odoo/operations/odoo-configuration-and-deployment.md) —
           `odoo.conf`, workers and limits, `proxy_mode`, what to check before going live
     - **Core Apps Flow**
         - [Sales to Cash](python/odoo/core-apps/odoo-sales-to-cash-flow.md) —

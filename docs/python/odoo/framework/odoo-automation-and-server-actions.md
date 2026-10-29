@@ -140,7 +140,7 @@ Python instead.
 - Then they are in Git, installed with the module, and reviewed like code.
 - For upgrades, decide whether the data should be overwritten on update
   or left alone, so a customer's changes are not lost. See
-  [Odoo Upgrades & Migration Scripts](odoo-upgrades-and-migrations.md).
+  [Odoo Upgrades & Migration Scripts](../operations/odoo-upgrades-and-migrations.md).
 - Name rules clearly. The name appears in the logs and in the error
   messages.
 

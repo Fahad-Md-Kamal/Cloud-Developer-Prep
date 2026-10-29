@@ -140,32 +140,44 @@
     "url": "python/odoo/framework/odoo-inheritance/"
   },
   {
-    "title": "Mail, Chatter & Activities",
-    "url": "python/odoo/framework/odoo-mail-chatter-and-activities/"
-  },
-  {
     "title": "Security Model",
     "url": "python/odoo/framework/odoo-security/"
   },
   {
-    "title": "Automation & Server Actions",
-    "url": "python/odoo/framework/odoo-automation-and-server-actions/"
+    "title": "Mail, Chatter & Activities",
+    "url": "python/odoo/framework/odoo-mail-chatter-and-activities/"
+  },
+  {
+    "title": "Wizards & Reports",
+    "url": "python/odoo/framework/odoo-wizards-and-reports/"
   },
   {
     "title": "Data, Sequences & Translations",
     "url": "python/odoo/framework/odoo-data-sequences-and-translations/"
   },
   {
+    "title": "Automation & Server Actions",
+    "url": "python/odoo/framework/odoo-automation-and-server-actions/"
+  },
+  {
     "title": "Performance & Testing",
     "url": "python/odoo/framework/odoo-performance-and-testing/"
   },
   {
+    "title": "External API (JSON-2)",
+    "url": "python/odoo/integration/odoo-external-api/"
+  },
+  {
+    "title": "OWL & the Web Client",
+    "url": "python/odoo/integration/odoo-owl-and-the-web-client/"
+  },
+  {
     "title": "Upgrades & Migrations",
-    "url": "python/odoo/framework/odoo-upgrades-and-migrations/"
+    "url": "python/odoo/operations/odoo-upgrades-and-migrations/"
   },
   {
     "title": "Configuration & Deployment",
-    "url": "python/odoo/framework/odoo-configuration-and-deployment/"
+    "url": "python/odoo/operations/odoo-configuration-and-deployment/"
   },
   {
     "title": "Sales to Cash",

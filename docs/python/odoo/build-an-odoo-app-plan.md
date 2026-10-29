@@ -145,7 +145,8 @@ to pass an interview. The plan has three parts:
 - **Check:** closing a ticket without the pop-up is not possible, and the
   note is saved on the ticket.
 - **Read first:**
-  [Inheritance §4: abstract and transient models](framework/odoo-inheritance.md#4-what-are-abstract-models-and-mixins).
+  [Odoo Wizards & Reports](framework/odoo-wizards-and-reports.md) (§1 to §3)
+  and [Inheritance §4](framework/odoo-inheritance.md#4-what-are-abstract-models-and-mixins).
 
 ### Step 8: Report and email
 
@@ -155,7 +156,8 @@ to pass an interview. The plan has three parts:
     - Add an email template and send it from the close step.
 - **Check:** you can print the PDF, and the email shows in the chatter.
 - **Read first:**
-  [Views §7: QWeb](framework/odoo-views-actions-and-qweb.md#7-what-is-qweb-and-what-are-its-main-directives).
+  [Odoo Wizards & Reports](framework/odoo-wizards-and-reports.md) (§4 to §6)
+  and [Views §7: QWeb](framework/odoo-views-actions-and-qweb.md#7-what-is-qweb-and-what-are-its-main-directives).
 
 ### Step 9: A scheduled action
 
@@ -215,7 +217,9 @@ to pass an interview. The plan has three parts:
 - **Check:** the script creates a ticket you can see in the UI, and the
   renamed field keeps its old data after `-u`.
 - **Read first:**
-  [Upgrades & Migration Scripts](framework/odoo-upgrades-and-migrations.md).
+  [Odoo External API (JSON-2)](integration/odoo-external-api.md) and
+  [Upgrades & Migration Scripts](operations/odoo-upgrades-and-migrations.md).
+  Use JSON-2, not XML-RPC: the old endpoints are deprecated.
 
 ## 4. "What is Phase 2, and when should you start it?"
 
@@ -320,7 +324,8 @@ to pass an interview. The plan has three parts:
 - **Check:** the widget shows on the screen and updates when the value
   changes.
 - **Read first:**
-  [Point of Sale Internals §6](core-apps/odoo-point-of-sale-internals.md#6-how-do-you-customize-pos)
+  [Odoo OWL & the Web Client](integration/odoo-owl-and-the-web-client.md),
+  then [Point of Sale Internals §6](core-apps/odoo-point-of-sale-internals.md#6-how-do-you-customize-pos)
   (how the browser side is customized by patching components).
 - This step is a separate skill from the Python work. It is fine to skip
   it.
@@ -409,7 +414,7 @@ to pass an interview. The plan has three parts:
 - **Check:** start Odoo only from the config file, open it through the
   proxy, and see the logs.
 - **Read first:**
-  [Configuration & Deployment](framework/odoo-configuration-and-deployment.md).
+  [Configuration & Deployment](operations/odoo-configuration-and-deployment.md).
   Performance work from Step 19 will make more sense after this.
 
 ## 6. "What is still not covered, even after Phase 3?"

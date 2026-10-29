@@ -28,6 +28,15 @@ same way regardless of session.
   a whole domain. Precedent: AI & LLM, Database, Backend, Cyber
   Security, and Architecture itself all got this treatment. Mirror the
   grouping in `docs/index.md`'s Contents section.
+- **Every nav group is a subfolder** (`docs/python/` is split into
+  `language-fundamentals/`, `concurrency/`, `web-frameworks/django/`,
+  `odoo/framework/`, and so on). When you move files, rewrite every
+  relative link, the nav, `docs/index.md`, and `nav-order.json`, then
+  build.
+- **Nav order is learning order.** Put prerequisites first and optional
+  or advanced topics later. A page must not link forward to a concept
+  taught after it. Capstones and build plans go last. Keep a group to
+  about 9 items; split into sub-groups beyond that.
 - File names are descriptive kebab-case (`django-orm.md`, not
   `chapter-6.md`) — legacy numbered files get renamed when touched.
 - New tracks (roles, topic areas) get their own pages/nav entries
@@ -55,17 +64,24 @@ same way regardless of session.
 - **Verify**: `zensical build --clean` must print "No issues found."
   Any "Warning: anchor does not exist" is a broken internal link — fix
   it before moving on.
+- **If `zensical serve` is running**, `build --clean` fails with
+  "cache directory could not be removed" because both use `.cache`.
+  Don't kill the user's server. Verify in a throwaway copy instead:
+  `rsync -a --exclude .venv --exclude .cache --exclude site --exclude .git ./ /tmp/copy/`,
+  then run `zensical build --clean` there.
 
 ## 3. Git
 
 - **Never push unprompted.** Commit locally by default; leave pushing
   to the user. Applies even when a push seems like the natural next
   step.
-- **When explicitly asked to merge/squash and push** ("merge commits
-  and push as one," "finally merge commits and push") — an
-  established, recurring request, not a one-off: `git reset --soft
-  origin/main` → one consolidated commit message → `git push`. No need
-  to re-confirm when this exact request is made.
+- **"Commit and push" always means squash, then push.** Whenever the
+  user says "commit and push" (or "merge commits and push as one",
+  "finally merge commits and push"), commit any pending changes, then
+  squash **all unpushed commits** into one: `git fetch` → check
+  `git log origin/main..HEAD` → `git reset --soft origin/main` → one
+  descriptive commit message → `git push`. No need to re-confirm.
+  Never push without that request.
 - Never add a `Co-Authored-By: Claude` (or similar AI-attribution)
   trailer to commits.
 
@@ -168,6 +184,26 @@ Applies to new site content and chat answers alike.
   workflows realistically changed that topic's day-to-day practice.
   Skip pure CS-theory topics. A real interview question naming this
   directly is the signal to add it.
+- **Always use the latest stable version** of every technology, unless
+  the user asks for an older one. Verify the current version (web
+  search or the source) before writing, state it in the page (for
+  example a `!!! note "Version"` admonition under the intro), and use
+  that version's APIs and syntax. Mention older-version differences
+  briefly, only where they help. Current example: Odoo 20.
+- **Verify technical facts against the source, don't write from
+  memory.** Prefer official source and docs. When a docs site blocks
+  fetching (`odoo.com` returns 403), read the GitHub raw files instead
+  (`odoo/odoo` and `odoo/documentation`, branch `20.0`). Cite real
+  method and file names. If a detail can't be confirmed, soften it or
+  leave it out. Never present a guess as fact.
+- **The owner learns for mastery, not only for interviews.** Favor
+  breadth and correct depth over interview shortcuts, and say plainly
+  what a page does not cover.
+- **Odoo app build is deferred.** Only the plan page exists
+  (`docs/python/odoo/build-an-odoo-app-plan.md`). Do not write or run
+  the app unless asked. If asked: put it in
+  `code_samples/odoo/service_desk/`, one commit per step, and test each
+  step in Docker (Odoo 20 + PostgreSQL).
 - **Keep it name-agnostic** — this repo is meant to eventually go
   public. New content uses generic placeholders (`demo`, `example.com`,
   "a legal-tech startup," "a Senior Python Developer JD") — never the

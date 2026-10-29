@@ -82,7 +82,7 @@ again and again: **what is loaded when**, **how does numbering work
 - Rule of thumb:
     - Code-owned data (views, menus, actions, groups): normal.
     - Customer-editable data (sequences, templates, settings): `noupdate`.
-- See [Odoo Upgrades & Migration Scripts](odoo-upgrades-and-migrations.md)
+- See [Odoo Upgrades & Migration Scripts](../operations/odoo-upgrades-and-migrations.md)
   for where data loading sits in an upgrade.
 
 ## 3. "What is a sequence, and how do you use it?"
