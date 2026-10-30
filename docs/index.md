@@ -7,10 +7,10 @@ icon: lucide/house
 
 **A Living, Multi-Domain Study & Interview Guide**
 
-A full map of software engineering — Frontend, Python, Backend,
+A full map of software engineering — Frontend, Python, Rust, Backend,
 Architecture, Microservices & Distributed Systems, Software Testing,
 Cyber Security, Database, Cloud & DevOps, AI & LLM, Machine Learning,
-Algorithms, and Interview Prep — thirteen domains, 230+ chapters and
+Algorithms, and Interview Prep — fourteen domains, 260+ chapters and
 still growing, built from real practice sessions rather than a static
 checklist.
 
@@ -245,6 +245,61 @@ errors. Start at the roadmap, then follow the groups in order.
       privacy rules, re-exports, what each edition changed, the 2024 edition
     - [Testing & Documentation](rust/foundations/rust-testing-and-documentation.md) —
       unit, integration and doc tests, `proptest`, testable design
+- **Advanced Language**
+    - [Memory Layout & Dynamically Sized Types](rust/advanced-language/rust-memory-layout-and-dsts.md) —
+      size and alignment, `repr`, niches, fat pointers, `Sized`
+    - [Advanced Traits & Type-Level Design](rust/advanced-language/rust-advanced-traits-and-type-level-design.md) —
+      GATs, higher-ranked bounds, typestate, sealed traits, const generics
+    - [Variance, Drop Check & PhantomData](rust/advanced-language/rust-variance-dropck-and-phantomdata.md) —
+      subtyping, invariance, dropck, `PhantomData`, auto traits
+    - [Unsafe Rust & Miri](rust/advanced-language/rust-unsafe-and-miri.md) —
+      the five powers, undefined behaviour, aliasing models, `MaybeUninit`, Miri
+    - [FFI & C Interoperability](rust/advanced-language/rust-ffi-and-c-interop.md) —
+      `extern "C"`, `repr(C)`, bindgen, ownership across the boundary, PyO3
+    - [Declarative & Procedural Macros](rust/advanced-language/rust-macros.md) —
+      `macro_rules!`, derive, attribute and function-like proc macros, hygiene
+- **Concurrency & Async**
+    - [Threads & Synchronization](rust/concurrency-and-async/rust-threads-and-synchronization.md) —
+      `Send`/`Sync`, scoped threads, channels, `Mutex`, `Condvar`, rayon
+    - [Atomics & Memory Ordering](rust/concurrency-and-async/rust-atomics-and-memory-ordering.md) —
+      `Ordering`, happens-before, CAS loops, building a spinlock
+    - [Async Rust Internals](rust/concurrency-and-async/rust-async-internals.md) —
+      `Future`, `Poll`, wakers, state machines, `Pin`, writing an executor
+    - [Tokio & Async Patterns](rust/concurrency-and-async/rust-tokio-and-async-patterns.md) —
+      runtime, tasks, `select!`, cancellation safety, backpressure, shutdown
+- **Performance & Internals**
+    - [Performance Engineering](rust/performance-and-internals/rust-performance-engineering.md) —
+      measuring, profiling, allocation, cache, SIMD, release tuning
+    - [How rustc Works](rust/performance-and-internals/rustc-how-the-compiler-works.md) —
+      pipeline, MIR, borrow checker, monomorphization, compile times
+    - [no_std & Embedded Rust](rust/performance-and-internals/rust-no-std-and-embedded.md) —
+      `core` vs `alloc`, panics, allocators, embedded HAL
+    - [Rust & WebAssembly](rust/performance-and-internals/rust-webassembly.md) —
+      targets, `wasm-bindgen`, size tuning, WASI
+- **Production Rust**
+    - [Web Services with Axum](rust/production/rust-web-services-with-axum.md) —
+      Tokio, tower, extractors, middleware, state, graceful shutdown
+    - [Databases in Rust](rust/production/rust-databases.md) —
+      `sqlx`, Diesel, pools, transactions, migrations
+    - [Serde & Serialization](rust/production/rust-serde-and-serialization.md) —
+      how derive works, formats, zero-copy, custom (de)serializers
+    - [Observability: Tracing, Metrics & Logs](rust/production/rust-observability.md) —
+      `tracing`, spans, OpenTelemetry, metrics
+    - [Project Architecture & API Design](rust/production/rust-project-architecture-and-api-design.md) —
+      workspace layout, API guidelines, semver, error boundaries
+    - [CLI Tools & Systems Programming](rust/production/rust-cli-and-systems-programming.md) —
+      `clap`, processes, files, signals, memory mapping
+    - [CI/CD & Supply Chain](rust/production/rust-ci-cd-and-supply-chain.md) —
+      pipelines, `cargo deny`/`audit`, containers, reproducible builds
+- **Mastery**
+    - [Modern Rust: 2024 Edition to 1.99](rust/mastery/modern-rust-2024-to-1-99.md) —
+      what changed from Rust 1.85 to 1.99, release by release
+    - [Rust for Python, Go & Kotlin Developers](rust/mastery/rust-for-python-go-and-kotlin-developers.md) —
+      idiom translation tables and the traps for each background
+    - [Capstone Projects](rust/mastery/rust-capstone-projects.md) —
+      ten graded projects from a CLI tool to a lock-free queue
+    - [Guru Question Bank](rust/mastery/rust-guru-question-bank.md) —
+      deep questions with answers, grouped by topic
 
 ### Backend
 

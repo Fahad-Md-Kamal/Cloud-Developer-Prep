@@ -1,0 +1,34 @@
+# Example GitHub Actions workflow. NOT active: it lives outside `.github/workflows/`.
+# Copy it to `.github/workflows/ci.yml` in your own repository to use it.
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: "-D warnings"
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+        with: { components: "rustfmt, clippy" }
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - run: cargo test --workspace --locked
+      - run: cargo doc --workspace --no-deps --locked
+        env: { RUSTDOCFLAGS: "-D warnings" }
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@master
+        with: { toolchain: "1.99" }   # the value of `rust-version` in Cargo.toml
+      - run: cargo check --workspace --locked
+  supply-chain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: EmbarkStudios/cargo-deny-action@v2

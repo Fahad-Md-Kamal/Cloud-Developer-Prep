@@ -1,5 +1,13 @@
 # Rust Track: Plan and What Is Left
 
+> **STATUS (2026-10-30): the 25 pages and the hub in section 5 are written.**
+> The site builds with "No issues found", the root samples crate passes clippy
+> and tests, and `code_samples/rust/README.md` exists. Sections 1 and 5 below
+> describe the original plan and are kept as history. Open ideas: pages on
+> idioms and design patterns, advanced testing and fuzzing, and networking.
+> Not run when written (see each page): Diesel/SeaORM, OTLP collector, PyO3,
+> `wasm-pack`, `cross`, `cargo vet`, and real GitHub Actions.
+
 > **For whoever continues this (human or Claude Code, on any machine).**
 > This file is **not** part of the site (it sits outside `docs/`). It records
 > the plan, the finished work, the exact remaining pages, and the process that

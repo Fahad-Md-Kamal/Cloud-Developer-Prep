@@ -32,7 +32,11 @@ impl Describe for Robot {
 
 // 2. Static dispatch: the compiler generates one copy per concrete type (monomorphization).
 fn intro_static<T: Describe>(x: &T) -> String {
-    format!("[{}] {}", std::any::type_name::<T>().rsplit("::").next().unwrap(), x.describe())
+    format!(
+        "[{}] {}",
+        std::any::type_name::<T>().rsplit("::").next().unwrap(),
+        x.describe()
+    )
 }
 
 // 3. Dynamic dispatch: one copy of the code, a vtable lookup at run time.
@@ -78,7 +82,10 @@ struct V2 {
 impl Add for V2 {
     type Output = V2;
     fn add(self, o: V2) -> V2 {
-        V2 { x: self.x + o.x, y: self.y + o.y }
+        V2 {
+            x: self.x + o.x,
+            y: self.y + o.y,
+        }
     }
 }
 
@@ -162,7 +169,11 @@ fn main() {
     for z in &zoo {
         println!("dyn: {}", intro_dyn(z.as_ref()));
     }
-    println!("size_of &Dog = {}, size_of &dyn Describe = {}", size_of::<&Dog>(), size_of::<&dyn Describe>());
+    println!(
+        "size_of &Dog = {}, size_of &dyn Describe = {}",
+        size_of::<&Dog>(),
+        size_of::<&dyn Describe>()
+    );
 
     println!("first = {}", show_first(&Stack(vec![10, 20])));
     println!("{} {}", "hello".shout(), 42.shout());
@@ -178,5 +189,10 @@ fn main() {
     let boxed: Box<dyn Visitor> = Box::new(Doubler);
     println!("dyn visit = {}", boxed.visit(21));
 
-    println!("{} {:.1} {}", largest(&[3, 9, 2]), largest(&[1.5, 0.2]), largest(&['x', 'b']));
+    println!(
+        "{} {:.1} {}",
+        largest(&[3, 9, 2]),
+        largest(&[1.5, 0.2]),
+        largest(&['x', 'b'])
+    );
 }

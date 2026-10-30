@@ -1,0 +1,9 @@
+[package]
+name = "sqlx_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "1.0.104"
+sqlx = { version = "0.9.0", features = ["runtime-tokio", "postgres", "migrate", "macros"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros"] }

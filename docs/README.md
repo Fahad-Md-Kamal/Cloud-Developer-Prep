@@ -14,8 +14,10 @@ under a subdirectory matching its top-level nav domain (e.g.
 stays at `docs/` root, as the site's entry point.
 Put a new file in the subdirectory matching where it belongs in the
 nav — don't drop it back at the flat root. The top-level domains
-are: Frontend, Backend, Architecture, Database, Cloud & DevOps,
-AI & LLM, Algorithms, and Interview Prep (plus Home).
+are: Frontend, Python, Rust, Backend, Architecture, Microservices &
+Distributed Systems, Software Testing, Cyber Security, Database,
+Cloud & DevOps, AI & LLM, Machine Learning, Algorithms, and Interview
+Prep (plus Home).
 
 Internal links between pages are normal relative Markdown paths from
 the linking file's own location — `../other-group/page.md` to link

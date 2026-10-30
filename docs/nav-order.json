@@ -276,6 +276,106 @@
     "url": "rust/foundations/rust-testing-and-documentation/"
   },
   {
+    "title": "Memory Layout & DSTs",
+    "url": "rust/advanced-language/rust-memory-layout-and-dsts/"
+  },
+  {
+    "title": "Advanced Traits",
+    "url": "rust/advanced-language/rust-advanced-traits-and-type-level-design/"
+  },
+  {
+    "title": "Variance & Drop Check",
+    "url": "rust/advanced-language/rust-variance-dropck-and-phantomdata/"
+  },
+  {
+    "title": "Unsafe & Miri",
+    "url": "rust/advanced-language/rust-unsafe-and-miri/"
+  },
+  {
+    "title": "FFI & C Interop",
+    "url": "rust/advanced-language/rust-ffi-and-c-interop/"
+  },
+  {
+    "title": "Macros",
+    "url": "rust/advanced-language/rust-macros/"
+  },
+  {
+    "title": "Threads & Sync",
+    "url": "rust/concurrency-and-async/rust-threads-and-synchronization/"
+  },
+  {
+    "title": "Atomics & Ordering",
+    "url": "rust/concurrency-and-async/rust-atomics-and-memory-ordering/"
+  },
+  {
+    "title": "Async Internals",
+    "url": "rust/concurrency-and-async/rust-async-internals/"
+  },
+  {
+    "title": "Tokio & Async Patterns",
+    "url": "rust/concurrency-and-async/rust-tokio-and-async-patterns/"
+  },
+  {
+    "title": "Performance Engineering",
+    "url": "rust/performance-and-internals/rust-performance-engineering/"
+  },
+  {
+    "title": "How rustc Works",
+    "url": "rust/performance-and-internals/rustc-how-the-compiler-works/"
+  },
+  {
+    "title": "no_std & Embedded",
+    "url": "rust/performance-and-internals/rust-no-std-and-embedded/"
+  },
+  {
+    "title": "WebAssembly",
+    "url": "rust/performance-and-internals/rust-webassembly/"
+  },
+  {
+    "title": "Web Services (Axum)",
+    "url": "rust/production/rust-web-services-with-axum/"
+  },
+  {
+    "title": "Databases",
+    "url": "rust/production/rust-databases/"
+  },
+  {
+    "title": "Serde",
+    "url": "rust/production/rust-serde-and-serialization/"
+  },
+  {
+    "title": "Observability",
+    "url": "rust/production/rust-observability/"
+  },
+  {
+    "title": "Architecture & API Design",
+    "url": "rust/production/rust-project-architecture-and-api-design/"
+  },
+  {
+    "title": "CLI & Systems",
+    "url": "rust/production/rust-cli-and-systems-programming/"
+  },
+  {
+    "title": "CI/CD & Supply Chain",
+    "url": "rust/production/rust-ci-cd-and-supply-chain/"
+  },
+  {
+    "title": "Modern Rust",
+    "url": "rust/mastery/modern-rust-2024-to-1-99/"
+  },
+  {
+    "title": "Rust for Python/Go/Kotlin",
+    "url": "rust/mastery/rust-for-python-go-and-kotlin-developers/"
+  },
+  {
+    "title": "Capstone Projects",
+    "url": "rust/mastery/rust-capstone-projects/"
+  },
+  {
+    "title": "Guru Question Bank",
+    "url": "rust/mastery/rust-guru-question-bank/"
+  },
+  {
     "title": "Go Fundamentals: Types, Structs & Interfaces",
     "url": "backend/go/go-fundamentals/"
   },

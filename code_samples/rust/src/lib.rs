@@ -77,7 +77,9 @@ pub fn parse_duration(s: &str) -> Result<Duration, ParseDurationError> {
     }
     let split = s.find(|c: char| !c.is_ascii_digit()).unwrap_or(s.len());
     let (num, unit) = s.split_at(split);
-    let n: u64 = num.parse().map_err(|_| ParseDurationError::BadNumber(num.to_string()))?;
+    let n: u64 = num
+        .parse()
+        .map_err(|_| ParseDurationError::BadNumber(num.to_string()))?;
     match unit {
         "ms" => Ok(Duration::from_millis(n)),
         "s" => Ok(Duration::from_secs(n)),
@@ -147,8 +149,14 @@ mod tests {
     #[test]
     fn parse_errors_are_specific() {
         assert_eq!(parse_duration(""), Err(ParseDurationError::Empty));
-        assert_eq!(parse_duration("5x"), Err(ParseDurationError::BadUnit("x".into())));
-        assert!(matches!(parse_duration("ms"), Err(ParseDurationError::BadNumber(_))));
+        assert_eq!(
+            parse_duration("5x"),
+            Err(ParseDurationError::BadUnit("x".into()))
+        );
+        assert!(matches!(
+            parse_duration("ms"),
+            Err(ParseDurationError::BadNumber(_))
+        ));
     }
 
     #[test]

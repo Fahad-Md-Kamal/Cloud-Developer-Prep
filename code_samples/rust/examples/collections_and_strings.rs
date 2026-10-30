@@ -17,13 +17,20 @@ fn main() {
     }
     let mut w: Vec<u8> = Vec::with_capacity(1000);
     w.extend_from_slice(b"abc");
-    println!("with_capacity: len={} cap>=1000? {}", w.len(), w.capacity() >= 1000);
+    println!(
+        "with_capacity: len={} cap>=1000? {}",
+        w.len(),
+        w.capacity() >= 1000
+    );
 
     // 2. String is UTF-8 bytes. len() is bytes, not characters.
     let s = String::from("héllo 🦀");
     println!("bytes={} chars={}", s.len(), s.chars().count());
     for (i, c) in s.char_indices().filter(|(_, c)| !c.is_ascii()) {
-        println!("  non-ascii {c:?} starts at byte {i} and is {} bytes", c.len_utf8());
+        println!(
+            "  non-ascii {c:?} starts at byte {i} and is {} bytes",
+            c.len_utf8()
+        );
     }
     println!("get(0..2) = {:?}", s.get(0..2)); // cuts inside 'é' -> None, no panic
     println!("get(0..3) = {:?}", s.get(0..3));
@@ -52,7 +59,11 @@ fn main() {
     }
     let top: Vec<_> = scores.range(80..).map(|(p, n)| (*n, *p)).collect();
     println!("scored 80+: {top:?}");
-    println!("first={:?} last={:?}", scores.first_key_value(), scores.last_key_value());
+    println!(
+        "first={:?} last={:?}",
+        scores.first_key_value(),
+        scores.last_key_value()
+    );
 
     // 5. VecDeque: O(1) at both ends. BinaryHeap: a max-heap (use Reverse for a min-heap).
     let mut dq: VecDeque<i32> = (1..=3).collect();

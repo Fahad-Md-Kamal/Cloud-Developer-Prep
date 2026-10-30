@@ -53,7 +53,10 @@ fn main() {
     println!("  old={old:?} v={v:?}");
 
     println!("6. partial move out of a struct");
-    let p = Person { name: "Ann".into(), age: 3 };
+    let p = Person {
+        name: "Ann".into(),
+        age: 3,
+    };
     let n = p.name; // moves only the `name` field
     println!("  name={n} age={}", p.age); // `age` is Copy and still usable
 

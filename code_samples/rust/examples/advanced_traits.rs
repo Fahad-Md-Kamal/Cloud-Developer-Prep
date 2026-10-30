@@ -17,15 +17,24 @@ struct Door<State> {
 
 impl Door<Closed> {
     fn new() -> Self {
-        Door { opened_times: 0, _state: PhantomData }
+        Door {
+            opened_times: 0,
+            _state: PhantomData,
+        }
     }
     fn open(self) -> Door<Open> {
-        Door { opened_times: self.opened_times + 1, _state: PhantomData }
+        Door {
+            opened_times: self.opened_times + 1,
+            _state: PhantomData,
+        }
     }
 }
 impl Door<Open> {
     fn close(self) -> Door<Closed> {
-        Door { opened_times: self.opened_times, _state: PhantomData }
+        Door {
+            opened_times: self.opened_times,
+            _state: PhantomData,
+        }
     }
 }
 impl<S> Door<S> {
@@ -59,7 +68,10 @@ struct Money<C: Currency> {
 }
 impl<C: Currency> Money<C> {
     fn new(cents: i64) -> Self {
-        Money { cents, _c: PhantomData }
+        Money {
+            cents,
+            _c: PhantomData,
+        }
     }
     fn add(&self, other: &Money<C>) -> Money<C> {
         Money::new(self.cents + other.cents)
@@ -135,18 +147,33 @@ fn main() {
     println!("{}", a.add(&b).show());
     let e: Money<Eur> = Money::new(100);
     println!("{} (a Money<Usd> cannot be added to this)", e.show());
-    println!("size_of Money<Usd> = {} (same as i64)", size_of::<Money<Usd>>());
+    println!(
+        "size_of Money<Usd> = {} (same as i64)",
+        size_of::<Money<Usd>>()
+    );
 
     let mut data = [1, 2, 3, 4, 5];
-    let mut w = WindowsMut { slice: &mut data, start: 0, size: 3 };
+    let mut w = WindowsMut {
+        slice: &mut data,
+        start: 0,
+        size: 3,
+    };
     while let Some(win) = w.next() {
         win[0] += win[1] + win[2]; // overlapping windows, each mutable: impossible with Iterator
     }
     println!("lending iterator result = {data:?}");
 
-    println!("{} {}", "A man, a plan, a canal: Panama".is_palindrome(), "rust".is_palindrome());
+    println!(
+        "{} {}",
+        "A man, a plan, a canal: Panama".is_palindrome(),
+        "rust".is_palindrome()
+    );
 
-    let items: Vec<Box<dyn Any>> = vec![Box::new(5_i32), Box::new(String::from("hi")), Box::new(1.5_f64)];
+    let items: Vec<Box<dyn Any>> = vec![
+        Box::new(5_i32),
+        Box::new(String::from("hi")),
+        Box::new(1.5_f64),
+    ];
     for it in &items {
         println!("{}", describe(it.as_ref()));
     }

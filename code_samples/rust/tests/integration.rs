@@ -1,6 +1,6 @@
 //! Integration tests: compiled as a separate crate, so they can only use the PUBLIC API.
 
-use guru_samples::{parse_duration, slugify, Stack};
+use guru_samples::{Stack, parse_duration, slugify};
 
 #[test]
 fn public_api_works_together() {

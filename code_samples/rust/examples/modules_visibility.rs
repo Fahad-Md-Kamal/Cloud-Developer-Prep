@@ -19,7 +19,10 @@ mod bank {
 
     impl Account {
         pub fn open(owner: &str, deposit: i64) -> Self {
-            Account { owner: owner.to_string(), balance: deposit }
+            Account {
+                owner: owner.to_string(),
+                balance: deposit,
+            }
         }
         pub fn balance(&self) -> i64 {
             self.balance

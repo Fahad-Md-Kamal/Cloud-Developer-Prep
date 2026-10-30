@@ -9,7 +9,10 @@ use std::num::ParseIntError;
 #[derive(Debug)]
 enum ConfigError {
     Missing(&'static str),
-    BadNumber { key: &'static str, source: ParseIntError },
+    BadNumber {
+        key: &'static str,
+        source: ParseIntError,
+    },
 }
 
 impl fmt::Display for ConfigError {
@@ -36,8 +39,10 @@ fn port(cfg: &[(&str, &str)]) -> Result<u16, ConfigError> {
         .find(|(k, _)| *k == "port")
         .map(|(_, v)| *v)
         .ok_or(ConfigError::Missing("port"))?; // `?` returns early on Err
-    raw.parse::<u16>()
-        .map_err(|source| ConfigError::BadNumber { key: "port", source })
+    raw.parse::<u16>().map_err(|source| ConfigError::BadNumber {
+        key: "port",
+        source,
+    })
 }
 
 // 2. The same idea with thiserror: less code, same behaviour.

@@ -61,27 +61,59 @@ static TABLE: LazyLock<Vec<u32>> = LazyLock::new(|| {
 fn main() {
     println!("1. Box");
     let l = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
-    println!("  sum = {}, size_of Box<List> = {}", sum(&l), size_of::<Box<List>>());
+    println!(
+        "  sum = {}, size_of Box<List> = {}",
+        sum(&l),
+        size_of::<Box<List>>()
+    );
 
     println!("2. Deref and Drop");
     {
         let b = MyBox(String::from("rust"));
-        println!("  {} (deref coercion: &MyBox<String> -> &String -> &str)", greet(&b));
+        println!(
+            "  {} (deref coercion: &MyBox<String> -> &String -> &str)",
+            greet(&b)
+        );
         println!("  len through Deref = {}", b.len());
     }
 
     println!("3. Rc, Weak and RefCell");
-    let leaf = Rc::new(Node { name: "leaf".into(), parent: RefCell::new(Weak::new()), children: RefCell::new(vec![]) });
-    println!("  leaf parent before = {:?}", leaf.parent.borrow().upgrade().map(|p| p.name.clone()));
+    let leaf = Rc::new(Node {
+        name: "leaf".into(),
+        parent: RefCell::new(Weak::new()),
+        children: RefCell::new(vec![]),
+    });
+    println!(
+        "  leaf parent before = {:?}",
+        leaf.parent.borrow().upgrade().map(|p| p.name.clone())
+    );
     {
-        let branch = Rc::new(Node { name: "branch".into(), parent: RefCell::new(Weak::new()), children: RefCell::new(vec![Rc::clone(&leaf)]) });
+        let branch = Rc::new(Node {
+            name: "branch".into(),
+            parent: RefCell::new(Weak::new()),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
         *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
-        println!("  leaf parent now = {:?}", leaf.parent.borrow().upgrade().map(|p| p.name.clone()));
-        println!("  branch strong={} weak={}", Rc::strong_count(&branch), Rc::weak_count(&branch));
-        println!("  leaf   strong={} weak={}", Rc::strong_count(&leaf), Rc::weak_count(&leaf));
+        println!(
+            "  leaf parent now = {:?}",
+            leaf.parent.borrow().upgrade().map(|p| p.name.clone())
+        );
+        println!(
+            "  branch strong={} weak={}",
+            Rc::strong_count(&branch),
+            Rc::weak_count(&branch)
+        );
+        println!(
+            "  leaf   strong={} weak={}",
+            Rc::strong_count(&leaf),
+            Rc::weak_count(&leaf)
+        );
         println!("  branch has {} child(ren)", branch.children.borrow().len());
     } // branch dropped here: its strong count hit 0
-    println!("  leaf parent after = {:?}", leaf.parent.borrow().upgrade().map(|p| p.name.clone()));
+    println!(
+        "  leaf parent after = {:?}",
+        leaf.parent.borrow().upgrade().map(|p| p.name.clone())
+    );
 
     println!("4. RefCell moves the borrow rules to run time");
     let cell = RefCell::new(vec![1, 2, 3]);
@@ -89,7 +121,10 @@ fn main() {
         let r1 = cell.borrow();
         let r2 = cell.borrow(); // many shared borrows: fine
         println!("  two readers: {} {}", r1.len(), r2.len());
-        println!("  try_borrow_mut while borrowed -> is_err = {}", cell.try_borrow_mut().is_err());
+        println!(
+            "  try_borrow_mut while borrowed -> is_err = {}",
+            cell.try_borrow_mut().is_err()
+        );
     }
     cell.borrow_mut().push(4);
     println!("  after push: {:?}", cell.borrow());
@@ -123,7 +158,10 @@ fn main() {
     for h in handles {
         println!("  {}", h.join().unwrap());
     }
-    println!("  strong_count after joins = {}", Arc::strong_count(&shared));
+    println!(
+        "  strong_count after joins = {}",
+        Arc::strong_count(&shared)
+    );
 
     println!("8. Cow");
     let c1: Cow<str> = Cow::Borrowed("static text");
@@ -133,7 +171,11 @@ fn main() {
 
     println!("9. OnceLock / LazyLock");
     CONFIG.set("production".into()).unwrap();
-    println!("  config = {:?}, second set fails = {}", CONFIG.get(), CONFIG.set("x".into()).is_err());
+    println!(
+        "  config = {:?}, second set fails = {}",
+        CONFIG.get(),
+        CONFIG.set("x".into()).is_err()
+    );
     println!("  table = {:?}", *TABLE);
     println!("  table again = {:?}", TABLE.len());
 

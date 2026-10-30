@@ -18,7 +18,10 @@ fn main() {
     // Plain `+` panics in debug builds and wraps in release builds.
     let big: u8 = std::hint::black_box(255);
     let r = std::panic::catch_unwind(|| big + 1);
-    println!("plain + panicked = {} (true in debug, false in release)", r.is_err());
+    println!(
+        "plain + panicked = {} (true in debug, false in release)",
+        r.is_err()
+    );
 
     // 2. `as` casts truncate or saturate silently. Prefer From/TryFrom.
     println!("300_i32 as u8    = {}", 300_i32 as u8); // truncates to 44
@@ -39,13 +42,23 @@ fn main() {
     println!("0.1 + 0.2        = {}", 0.1 + 0.2);
 
     // 4. char is a 4-byte Unicode scalar value, not a byte.
-    println!("size_of char = {}, '🦀' as u32 = {:#x}", size_of::<char>(), '🦀' as u32);
+    println!(
+        "size_of char = {}, '🦀' as u32 = {:#x}",
+        size_of::<char>(),
+        '🦀' as u32
+    );
 
     // 5. NonZero types give the compiler a spare bit pattern ("niche").
     println!("size_of Option<u32>        = {}", size_of::<Option<u32>>());
-    println!("size_of Option<NonZeroU32> = {}", size_of::<Option<NonZeroU32>>());
+    println!(
+        "size_of Option<NonZeroU32> = {}",
+        size_of::<Option<NonZeroU32>>()
+    );
     println!("size_of Option<&u8>        = {}", size_of::<Option<&u8>>());
-    println!("size_of Option<Box<u8>>    = {}", size_of::<Option<Box<u8>>>());
+    println!(
+        "size_of Option<Box<u8>>    = {}",
+        size_of::<Option<Box<u8>>>()
+    );
 
     // 6. assert_matches! (stable since 1.96) prints the value when a pattern fails.
     let value: Result<u8, String> = Ok(7);

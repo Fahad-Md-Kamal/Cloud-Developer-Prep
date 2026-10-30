@@ -41,14 +41,20 @@ struct RequestBuilder {
 
 impl RequestBuilder {
     fn new(url: impl Into<String>) -> Self {
-        RequestBuilder { url: url.into(), retries: 0 }
+        RequestBuilder {
+            url: url.into(),
+            retries: 0,
+        }
     }
     fn retries(mut self, n: u32) -> Self {
         self.retries = n;
         self
     }
     fn build(self) -> Request {
-        Request { url: self.url, retries: self.retries }
+        Request {
+            url: self.url,
+            retries: self.retries,
+        }
     }
 }
 
@@ -85,17 +91,32 @@ fn main() {
     }
     println!("(names was moved)");
 
-    let mut q = Queue { current: Some(Job { name: "build".into(), retries: 0 }) };
+    let mut q = Queue {
+        current: Some(Job {
+            name: "build".into(),
+            retries: 0,
+        }),
+    };
     println!("renamed from {:?}", q.rename("deploy".into()));
     let done = q.finish();
-    println!("finished {done:?}, queue now {:?}", q.current.as_ref().map(|j| &j.name));
+    println!(
+        "finished {done:?}, queue now {:?}",
+        q.current.as_ref().map(|j| &j.name)
+    );
 
-    let req = RequestBuilder::new("https://example.com").retries(3).build();
+    let req = RequestBuilder::new("https://example.com")
+        .retries(3)
+        .build();
     println!("{req:?}");
+    println!("url={} retries={}", req.url, req.retries);
 
     let a = normalize("no_spaces");
     let b = normalize("has some spaces");
-    println!("{a} borrowed={} | {b} borrowed={}", matches!(a, Cow::Borrowed(_)), matches!(b, Cow::Borrowed(_)));
+    println!(
+        "{a} borrowed={} | {b} borrowed={}",
+        matches!(a, Cow::Borrowed(_)),
+        matches!(b, Cow::Borrowed(_))
+    );
 
     print_all(["x", "y"]);
     print_all(vec![String::from("p"), String::from("q")]);
@@ -107,7 +128,10 @@ fn main() {
     println!("{scores:?}");
 
     // Default::default + mem::take: leave a valid empty value behind.
-    let mut job = Job { name: "x".into(), retries: 2 };
+    let mut job = Job {
+        name: "x".into(),
+        retries: 2,
+    };
     let taken = mem::take(&mut job);
-    println!("{taken:?} / {job:?}");
+    println!("{taken:?} / {job:?} (retries was {})", taken.retries);
 }

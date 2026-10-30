@@ -1,0 +1,13 @@
+[package]
+name = "ffi_demo"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+description = "FFI examples for the Rust track: a Rust library called from C, and Rust calling libc"
+
+[lib]
+name = "ffi_demo"
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[workspace]

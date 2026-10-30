@@ -63,16 +63,57 @@ fn main() {
 
     // 2. Common adapters and consumers.
     let v = vec![1, 2, 3, 4, 5, 6];
-    println!("evens squared = {:?}", evens_squared(&v).collect::<Vec<_>>());
-    println!("sum={} product={} max={:?}", v.iter().sum::<i32>(), v.iter().product::<i32>(), v.iter().max());
-    println!("fold  = {}", v.iter().fold(String::new(), |acc, n| acc + &n.to_string()));
-    println!("zip   = {:?}", v.iter().zip("abc".chars()).collect::<Vec<_>>());
-    println!("windows = {:?}", v.windows(3).map(|w| w.iter().sum::<i32>()).collect::<Vec<_>>());
+    println!(
+        "evens squared = {:?}",
+        evens_squared(&v).collect::<Vec<_>>()
+    );
+    println!(
+        "sum={} product={} max={:?}",
+        v.iter().sum::<i32>(),
+        v.iter().product::<i32>(),
+        v.iter().max()
+    );
+    println!(
+        "fold  = {}",
+        v.iter().fold(String::new(), |acc, n| acc + &n.to_string())
+    );
+    println!(
+        "zip   = {:?}",
+        v.iter().zip("abc".chars()).collect::<Vec<_>>()
+    );
+    println!(
+        "windows = {:?}",
+        v.windows(3)
+            .map(|w| w.iter().sum::<i32>())
+            .collect::<Vec<_>>()
+    );
     println!("chunks  = {:?}", v.chunks(4).collect::<Vec<_>>());
-    println!("flat_map = {:?}", ["ab", "cd"].iter().flat_map(|s| s.chars()).collect::<String>());
-    println!("scan  = {:?}", v.iter().scan(0, |s, x| { *s += x; Some(*s) }).collect::<Vec<_>>());
-    println!("rev/step_by = {:?}", (0..10).rev().step_by(3).collect::<Vec<_>>());
-    println!("any/all/position = {} {} {:?}", v.iter().any(|x| *x > 5), v.iter().all(|x| *x > 0), v.iter().position(|x| *x == 4));
+    println!(
+        "flat_map = {:?}",
+        ["ab", "cd"]
+            .iter()
+            .flat_map(|s| s.chars())
+            .collect::<String>()
+    );
+    println!(
+        "scan  = {:?}",
+        v.iter()
+            .scan(0, |s, x| {
+                *s += x;
+                Some(*s)
+            })
+            .collect::<Vec<_>>()
+    );
+    println!(
+        "rev/step_by = {:?}",
+        (0..10).rev().step_by(3).collect::<Vec<_>>()
+    );
+    println!(
+        "any/all/position = {} {} {:?}",
+        v.iter().any(|x| *x > 5),
+        v.iter().all(|x| *x > 0),
+        v.iter().position(|x| *x == 4)
+    );
     let (small, big): (Vec<i32>, Vec<i32>) = v.iter().partition(|x| **x < 4);
     println!("partition = {small:?} {big:?}");
 
@@ -92,14 +133,26 @@ fn main() {
     }
     println!("peekable read number = {number}, next = {:?}", p.peek());
     let mut n = 0;
-    let evens: Vec<_> = std::iter::from_fn(|| { n += 2; (n <= 8).then_some(n) }).collect();
+    let evens: Vec<_> = std::iter::from_fn(|| {
+        n += 2;
+        (n <= 8).then_some(n)
+    })
+    .collect();
     println!("from_fn = {evens:?}");
-    println!("successors = {:?}", std::iter::successors(Some(1u32), |x| x.checked_mul(10)).collect::<Vec<_>>());
+    println!(
+        "successors = {:?}",
+        std::iter::successors(Some(1u32), |x| x.checked_mul(10)).collect::<Vec<_>>()
+    );
 
     // 5. Custom iterators.
     println!("countdown = {:?}", Countdown(4).collect::<Vec<_>>());
-    println!("countdown zip = {:?}", Countdown(3).zip(Countdown(5).skip(1)).collect::<Vec<_>>());
-    let pl = Playlist { songs: vec!["one".into(), "two".into()] };
+    println!(
+        "countdown zip = {:?}",
+        Countdown(3).zip(Countdown(5).skip(1)).collect::<Vec<_>>()
+    );
+    let pl = Playlist {
+        songs: vec!["one".into(), "two".into()],
+    };
     for song in &pl {
         print!("{song} ");
     }
@@ -112,7 +165,11 @@ fn main() {
     let owned = String::from("owned");
     println!("{}", call_once(move || owned + " and consumed")); // FnOnce: moves `owned`
     let add5 = make_adder(5);
-    println!("add5(1) = {}, boxed double(4) = {}", add5(1), make_boxed("double")(4));
+    println!(
+        "add5(1) = {}, boxed double(4) = {}",
+        add5(1),
+        make_boxed("double")(4)
+    );
 
     // 7. A Vec of different closures needs Box<dyn Fn>.
     let ops: Vec<(&str, Box<dyn Fn(i32) -> i32>)> =
@@ -123,8 +180,14 @@ fn main() {
     println!();
 
     // 8. Disjoint closure captures (edition 2021+): the closure borrows only the field it uses.
-    struct S { a: String, b: String }
-    let mut s = S { a: "a".into(), b: "b".into() };
+    struct S {
+        a: String,
+        b: String,
+    }
+    let mut s = S {
+        a: "a".into(),
+        b: "b".into(),
+    };
     let read_a = || s.a.len();
     s.b.push('!'); // fine: the closure only borrows `s.a`
     println!("read_a = {}, b = {}", read_a(), s.b);

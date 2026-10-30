@@ -1,0 +1,14 @@
+[package]
+name = "tracing_demo"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+metrics = "0.24.6"
+opentelemetry = "0.33.1"
+opentelemetry-stdout = "0.33.1"
+opentelemetry_sdk = "0.33.1"
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros", "time"] }
+tracing = "0.1.44"
+tracing-opentelemetry = "0.34.0"
+tracing-subscriber = { version = "0.3.23", features = ["json", "env-filter"] }

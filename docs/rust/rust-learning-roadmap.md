@@ -1,396 +1,316 @@
-# Rust Learning Roadmap: Beginner to Professional
+---
+title: "Rust Learning Roadmap: Beginner to Guru"
+---
 
-Coming from Python/Go/Kotlin, the one new idea the whole language is
-built around is **ownership** — everything else here either sets that
-up or builds on it. This roadmap runs from "never written a line of
-Rust" through to what a production Rust codebase actually looks like,
-in four levels, each with a project to force the concepts to stick.
+# Rust Learning Roadmap: Beginner to Guru
 
-## Level 0: Before You Start
+Rust is a systems language that gives you **memory safety and thread safety
+without a garbage collector**, checked by the compiler before the program
+runs. This page is the **map of the whole Rust track**: what to learn, in what
+order, how long it takes, how to practice, and how to know you are done. Every
+other page in the track is linked from here, in learning order.
 
-**Why Rust, concretely** — it gives you memory safety and
-thread-safety *guarantees* without a garbage collector, enforced by
-the compiler at build time instead of caught by tests or production
-incidents. That's the actual trade Rust is making: a harder, slower
-compile-time learning curve in exchange for removing an entire class
-of bugs (use-after-free, data races, null pointer dereferences) that
-Python/Go/Kotlin either don't have to think about (GC) or only catch
-at runtime (Go's race detector).
+!!! note "Version"
+    The whole track is written for **Rust 1.99** and the **2024 edition** (the
+    latest edition; no newer one exists). Every page has runnable code in
+    `code_samples/rust/` that was compiled and run, and real compiler errors.
+    If a newer stable release exists when you read this, start with
+    [Modern Rust: 2024 Edition to 1.99](mastery/modern-rust-2024-to-1-99.md).
 
-- **Reach for Rust when**: raw performance matters (systems tools,
-  game engines, high-throughput services), you need predictable
-  low-latency behavior a GC's pause times can't give you, you're
-  targeting WebAssembly, or you're writing something safety-critical
-  (embedded, OS-level code).
-- **Don't reach for Rust when**: you're prototyping fast, the team
-  doesn't have time to absorb the learning curve, or the workload is
-  I/O-bound and a GC's overhead was never the bottleneck anyway — this
-  is most backend CRUD APIs, where Python/Go are a faster path to
-  shipping.
-- **Setup**: `rustup` (the toolchain installer/version manager — the
-  `pyenv`/`nvm` equivalent), `cargo` (bundled — build tool, package
-  manager, and test runner all in one, unlike Python's separate
-  pip/venv/pytest). Editor: VS Code + `rust-analyzer` extension for
-  real-time type/borrow-checker feedback as you type.
-- Play with syntax with zero local setup first: the
-  [Rust Playground](https://play.rust-lang.org/).
+## 1. "Why Rust, and when should I not use it?"
 
-## Level 1: Beginner — The Core Language
+**Answer:**
 
-### 1.1 Ownership, Borrowing & Lifetimes
+- **Core idea:** Rust trades a **steeper learning curve** for removing a whole
+  class of bugs (use-after-free, data races, null dereferences) at compile
+  time, with speed close to C and C++.
+- Reach for Rust when:
+    - speed or low, **predictable latency** matters (no garbage-collector pauses),
+    - you build **systems tools**, game engines, databases, or network services
+      under heavy load,
+    - you target **WebAssembly** or **embedded** devices,
+    - you want a **single static binary**, or a fast library that Python, Node, or
+      Kotlin can call.
+- Do **not** reach for Rust when:
+    - you are prototyping fast and the design is still changing,
+    - the work waits on a database or network anyway (most CRUD backends),
+    - the team has no time to learn it, or the library you need only exists in
+      another language (most machine-learning stacks).
+- Coming from Python, Go, or Kotlin? Read
+  [Rust for Python, Go & Kotlin Developers](mastery/rust-for-python-go-and-kotlin-developers.md)
+  alongside the Foundations group.
 
-- **Ownership**: every value has exactly one owner; the value is freed
-  the instant that owner goes out of scope — no garbage collector, no
-  manual `free()` either. Assigning or passing a non-`Copy` value
-  *moves* it — the old variable becomes invalid, not a second
-  reference to the same data the way Python assignment would be.
-- **Borrowing** (`&T`, `&mut T`): lets code *use* a value without
-  taking ownership. The compiler enforces, at compile time: any number
-  of immutable borrows, *or* exactly one mutable borrow, never both at
-  once — this single rule is what eliminates data races before the
-  program ever runs.
-- **The borrow checker** will reject code that looks obviously fine to
-  someone coming from a GC'd language. Expect to lose a week fighting
-  it — that's the normal learning curve, not a sign of doing something
-  wrong. Read the compiler's error messages closely; they're
-  unusually good at explaining exactly what rule was violated.
-- **Lifetimes** (`'a`): explicit annotations for the cases where the
-  compiler can't automatically prove a reference stays valid long
-  enough on its own. Most code never needs them written out — the
-  compiler infers them — but function signatures returning a
-  reference, and structs holding one, often do.
+## 2. "What is the one idea everything else builds on?"
 
-### 1.2 Types, Structs, Enums & Pattern Matching
+**Answer:**
 
-- Scalar types (`i32`, `u64`, `f64`, `bool`, `char`), tuples, arrays
-  vs. the growable `Vec<T>`.
-- `struct` for grouped data (closest to a Python `dataclass` or a Go
-  struct).
-- `enum` — genuinely more powerful than Python's `Enum` or Go's
-  `iota`-based constants: each variant can carry its own differently-
-  shaped data (`enum Shape { Circle(f64), Rectangle(f64, f64) }`),
-  making it a real sum/algebraic type, not just a labeled constant.
-- `match` — exhaustive pattern matching; the compiler forces every
-  variant to be handled (or an explicit `_` catch-all), which is what
-  makes `enum` + `match` together Rust's primary tool for modeling
-  "one of several possible states" safely.
+- **Ownership:** every value has one owner, and it is freed when the owner goes
+  out of scope. Assigning or passing a value **moves** it.
+- **Borrowing** (`&T`, `&mut T`) lets code use a value without owning it, with
+  one rule: many readers **or** one writer, never both.
+- **Lifetimes** are the compiler's way to check that a reference never outlives
+  what it points to.
+- Traits, generics, concurrency, and `async` all reuse these ideas. Expect to
+  fight the borrow checker for the first weeks; that is the normal curve.
+- Start here: [Ownership & Borrowing](foundations/rust-ownership-and-borrowing.md).
 
-### 1.3 Error Handling: `Result` and `Option`
+## 3. "What is the setup?"
 
-- No exceptions, no `null`. A function that can fail returns
-  `Result<T, E>` (`Ok(value)` or `Err(error)`); a value that might be
-  absent is `Option<T>` (`Some(value)` or `None`).
-- The `?` operator propagates an `Err`/`None` up to the caller in one
-  character, the idiomatic alternative to Go's `if err != nil {
-  return err }` repeated after every call.
-- The compiler forces you to handle (or deliberately ignore via
-  `.unwrap()`/`.expect()`) every `Result`/`Option` — an error can't
-  silently vanish the way an uncaught exception's stack trace can get
-  swallowed elsewhere.
+**Answer:**
 
-### 1.4 Collections & String Handling
+- Install with **`rustup`** (the toolchain installer and version manager). It
+  gives you `rustc`, `cargo`, `rustfmt`, and `clippy`.
+- **`cargo`** is the build tool, package manager, test runner, and doc generator
+  in one.
+- Editor: any editor with **`rust-analyzer`** (VS Code, RustRover, Zed, Neovim)
+  for live type and borrow errors.
+- No install yet? The [Rust Playground](https://play.rust-lang.org/) runs code
+  in a browser.
+- Details: [Toolchain & Cargo](foundations/rust-toolchain-and-cargo.md).
 
-- `Vec<T>` (growable array), `HashMap<K, V>`, `HashSet<T>` — the
-  everyday collections, directly comparable to Python's list/dict/set.
-- `String` (owned, heap-allocated, growable) vs. `&str` (a borrowed
-  view into string data — could point into a `String`, a string
-  literal, or part of either). This split is ownership applied
-  directly to the most common type in the language, and the single
-  most common beginner confusion.
+## 4. "What is the learning path?"
 
-**Project**: a command-line calculator or a simple word-frequency
-counter reading a text file — enough to touch ownership, `Result`,
-collections, and string handling together without anything else in
-the way.
+Follow the groups **in order**. Each lists its pages in learning order (a
+page never relies on one after it), a time estimate for part-time study
+(about 8 to 10 hours a week), an exit signal, and a checkpoint project from the
+[Capstone Projects](mastery/rust-capstone-projects.md) page.
 
-## Level 2: Intermediate — Writing Idiomatic Rust
+### Foundations
+- **Time (part-time):** 6 to 8 weeks.
+- **Exit signal:** You can write ownership-correct code, design an error type, and read a borrow error without panic.
+- **Checkpoint project:** Capstones 1, 2 and 3 ([Capstone Projects](mastery/rust-capstone-projects.md)).
+- **Pages, in order:**
+    1. [Toolchain & Cargo](foundations/rust-toolchain-and-cargo.md): rustup, editions, what `cargo build` does, profiles, features, workspaces
+    1. [Ownership & Borrowing](foundations/rust-ownership-and-borrowing.md): moves, drop order, the borrow rules and why they exist, reading borrow errors
+    1. [Lifetimes](foundations/rust-lifetimes.md): elision, structs that borrow, `'static`, higher-ranked bounds, 2024 `impl Trait` capture
+    1. [Types, Enums & Patterns](foundations/rust-types-enums-and-patterns.md): number rules, enums, every pattern form, let chains, `if let` guards
+    1. [Error Handling](foundations/rust-error-handling.md): `Result` and `?`, `thiserror` vs `anyhow`, panics, error design
+    1. [Collections & Strings](foundations/rust-collections-and-strings.md): `Vec` internals, UTF-8 strings, `HashMap`, `BTreeMap`, choosing a container
+    1. [Traits & Generics](foundations/rust-traits-and-generics.md): static vs dynamic dispatch, dyn compatibility, associated types, blanket impls
+    1. [Iterators & Closures](foundations/rust-iterators-and-closures.md): lazy adapters, custom iterators, `Fn`/`FnMut`/`FnOnce`, returning closures
+    1. [Smart Pointers & Interior Mutability](foundations/rust-smart-pointers.md): `Box`, `Rc`/`Arc`/`Weak`, `RefCell`, `Cow`, `OnceLock`, `Deref`
+    1. [Modules, Crates & Editions](foundations/rust-modules-crates-and-editions.md): privacy rules, re-exports, what each edition changed, the 2024 edition
+    1. [Testing & Documentation](foundations/rust-testing-and-documentation.md): unit, integration and doc tests, `proptest`, testable design
 
-### 2.1 Traits & Generics
+### Advanced Language
+- **Time (part-time):** 5 to 6 weeks.
+- **Exit signal:** You can explain layout, variance, and every `unsafe` block you write, and a Miri run is clean.
+- **Checkpoint project:** Capstone 8 (arena allocator).
+- **Pages, in order:**
+    1. [Memory Layout & Dynamically Sized Types](advanced-language/rust-memory-layout-and-dsts.md): size and alignment, `repr`, niches, fat pointers, `Sized`
+    1. [Advanced Traits & Type-Level Design](advanced-language/rust-advanced-traits-and-type-level-design.md): GATs, higher-ranked bounds, typestate, sealed traits, const generics
+    1. [Variance, Drop Check & PhantomData](advanced-language/rust-variance-dropck-and-phantomdata.md): subtyping, invariance, dropck, `PhantomData`, auto traits
+    1. [Unsafe Rust & Miri](advanced-language/rust-unsafe-and-miri.md): the five powers, undefined behaviour, aliasing models, `MaybeUninit`, Miri
+    1. [FFI & C Interoperability](advanced-language/rust-ffi-and-c-interop.md): `extern "C"`, `repr(C)`, bindgen, ownership across the boundary, PyO3
+    1. [Declarative & Procedural Macros](advanced-language/rust-macros.md): `macro_rules!`, derive, attribute and function-like proc macros, hygiene
 
-- **Traits** are Rust's interfaces — a set of methods a type promises
-  to implement. Closer to Go's implicit "has the right methods"
-  satisfaction than Java/Kotlin's explicit `implements`, but Rust
-  traits are declared explicitly (`impl TraitName for MyType`).
-- **Generics** (`fn largest<T: PartialOrd>(list: &[T]) -> T`) write
-  one function/struct that works across multiple types, with trait
-  bounds constraining *which* types are actually allowed.
-- `dyn Trait` vs. generics: generics are resolved at compile time
-  (zero runtime cost, but one compiled copy per concrete type used —
-  "monomorphization"); `dyn Trait` is resolved at runtime via a vtable
-  (one shared compiled version, small runtime dispatch cost) — the
-  real trade-off to know for an interview: compile-time speed/binary
-  size vs. runtime flexibility.
+### Concurrency & Async
+- **Time (part-time):** 4 to 5 weeks.
+- **Exit signal:** You can say which ordering you need and why, and you can write a small executor.
+- **Checkpoint project:** Capstones 6, 9, 10 and 5 (thread pool, lock-free queue, async runtime, chat server).
+- **Pages, in order:**
+    1. [Threads & Synchronization](concurrency-and-async/rust-threads-and-synchronization.md): `Send`/`Sync`, scoped threads, channels, `Mutex`, `Condvar`, rayon
+    1. [Atomics & Memory Ordering](concurrency-and-async/rust-atomics-and-memory-ordering.md): `Ordering`, happens-before, CAS loops, building a spinlock
+    1. [Async Rust Internals](concurrency-and-async/rust-async-internals.md): `Future`, `Poll`, wakers, state machines, `Pin`, writing an executor
+    1. [Tokio & Async Patterns](concurrency-and-async/rust-tokio-and-async-patterns.md): runtime, tasks, `select!`, cancellation safety, backpressure, shutdown
 
-### 2.2 Iterators & Closures
+### Performance & Internals
+- **Time (part-time):** 3 to 4 weeks.
+- **Exit signal:** You measure before you change code, and you can read MIR and assembly for a small function.
+- **Checkpoint project:** Take Capstone 3 or 4 and make it twice as fast, with a benchmark and a profile to prove it.
+- **Pages, in order:**
+    1. [Performance Engineering](performance-and-internals/rust-performance-engineering.md): measuring, profiling, allocation, cache, SIMD, release tuning
+    1. [How rustc Works](performance-and-internals/rustc-how-the-compiler-works.md): pipeline, MIR, borrow checker, monomorphization, compile times
+    1. [no_std & Embedded Rust](performance-and-internals/rust-no-std-and-embedded.md): `core` vs `alloc`, panics, allocators, embedded HAL
+    1. [Rust & WebAssembly](performance-and-internals/rust-webassembly.md): targets, `wasm-bindgen`, size tuning, WASI
 
-- Iterator chains (`.iter().map(...).filter(...).collect()`) —
-  functional in style like a Python comprehension, but **lazy**: a
-  `.map()` does nothing until something actually consumes the
-  iterator (a `for` loop, `.collect()`, `.sum()`), closer to a Python
-  generator than a list comprehension in that respect.
-- Closures (`|x| x + 1`) capture their environment automatically; the
-  compiler infers *how* (by reference, mutable reference, or by
-  value/move) from how the closure's body actually uses each captured
-  variable — explicit `move` forces capture by value when needed
-  (commonly, handing a closure off to another thread).
+### Production Rust
+- **Time (part-time):** 5 to 6 weeks.
+- **Exit signal:** You can ship a tested, observable service in a minimal container.
+- **Checkpoint project:** A REST API with a real database, tracing, tests, and CI (the page samples are the skeleton).
+- **Pages, in order:**
+    1. [Web Services with Axum](production/rust-web-services-with-axum.md): Tokio, tower, extractors, middleware, state, graceful shutdown
+    1. [Databases in Rust](production/rust-databases.md): `sqlx`, Diesel, pools, transactions, migrations
+    1. [Serde & Serialization](production/rust-serde-and-serialization.md): how derive works, formats, zero-copy, custom (de)serializers
+    1. [Observability: Tracing, Metrics & Logs](production/rust-observability.md): `tracing`, spans, OpenTelemetry, metrics
+    1. [Project Architecture & API Design](production/rust-project-architecture-and-api-design.md): workspace layout, API guidelines, semver, error boundaries
+    1. [CLI Tools & Systems Programming](production/rust-cli-and-systems-programming.md): `clap`, processes, files, signals, memory mapping
+    1. [CI/CD & Supply Chain](production/rust-ci-cd-and-supply-chain.md): pipelines, `cargo deny`/`audit`, containers, reproducible builds
 
-### 2.3 Smart Pointers & Interior Mutability
+### Mastery
+- **Time (part-time):** ongoing.
+- **Exit signal:** You read release notes for fun and answer the question bank without notes.
+- **Checkpoint project:** Two of the hardest capstones, written up as design documents.
+- **Pages, in order:**
+    1. [Modern Rust: 2024 Edition to 1.99](mastery/modern-rust-2024-to-1-99.md): what changed from Rust 1.85 to 1.99, release by release
+    1. [Rust for Python, Go & Kotlin Developers](mastery/rust-for-python-go-and-kotlin-developers.md): idiom translation tables and the traps for each background
+    1. [Capstone Projects](mastery/rust-capstone-projects.md): ten graded projects from a CLI tool to a lock-free queue
+    1. [Guru Question Bank](mastery/rust-guru-question-bank.md): deep questions with answers, grouped by topic
 
-- `Box<T>` — a value on the heap instead of the stack; needed for
-  recursive types (a type that contains itself) and for storing a
-  `dyn Trait` value, since its size isn't known at compile time.
-- `Rc<T>` — reference-counted shared ownership, single-threaded only.
-  `Arc<T>` — the thread-safe equivalent (atomic reference counting),
-  used anywhere shared ownership crosses threads.
-- `RefCell<T>` — interior mutability: lets you mutate data through a
-  shared (`&`) reference by moving the borrow-checking from compile
-  time to *runtime* (panics if the rules are violated at runtime
-  instead of refusing to compile) — the escape hatch for the genuinely
-  rare cases the compile-time borrow checker is too conservative for.
+## 5. "How do I practice, beyond reading?"
 
-### 2.4 Modules, Crates & the Cargo Ecosystem
+**Answer:**
 
-- A **crate** is a compilation unit (a library or binary) — Rust's
-  equivalent of a Python package or Go module. `Cargo.toml` declares
-  dependencies, pulled from [crates.io](https://crates.io) (the
-  PyPI/npm equivalent).
-- `mod` organizes code within one crate into a module tree;
-  `pub`/private visibility is explicit and enforced per-item, stricter
-  by default than Python's underscore convention.
-- `cargo doc --open` generates and opens browsable API docs from
-  doc-comments (`///`) — built into the toolchain, no separate Sphinx-
-  style setup needed.
+- **Core idea:** you learn Rust by **reading compiler errors and fixing them**.
+  Spend at least half your study time writing code.
+- **Rustlings:** small exercises, driven by compiler errors. Do it during
+  Foundations.
+- **Exercism (Rust track):** graded problems with mentor feedback and other
+  people's solutions to compare with.
+- **Advent of Code:** good practice for iterators, parsing, and `HashMap`
+  patterns. Re-solve old years and then optimize.
+- **Read the standard library source:** every function in the std docs has a
+  `[src]` link. Reading `Vec`, `Option`, and `Rc` teaches idiomatic and
+  `unsafe` Rust.
+- **Read real crates:** start small (`itoa`, `fastrand`, `bytes`), then bigger
+  (`tokio`, `serde`).
+- **Contribute:** fix a documentation typo or a "good first issue" in a crate you
+  use. Review feedback is free teaching.
+- **Always run:** `cargo clippy`, `cargo fmt`, `cargo test`, and Miri for any
+  `unsafe`.
+- **Use AI tools carefully.** They are good at explaining a compiler error and at
+  quizzing you, and weak at lifetimes, `unsafe`, and ordering rules, where
+  plausible but wrong answers are common. Write first, then ask for review.
+  See [Interviewing in the AI Era](../interview-prep/interviewing-in-the-ai-era.md).
 
-### 2.5 Testing
+## 6. "Which books and references go with this track?"
 
-- `#[test]` functions plus `cargo test` — built directly into the
-  toolchain and standard library, no separate pytest-equivalent
-  dependency required.
-- Unit tests commonly live in a `#[cfg(test)] mod tests` block at the
-  bottom of the same file as the code under test; integration tests
-  live in a separate top-level `tests/` directory, testing the crate's
-  public API only, the same "test the contract, not the internals"
-  split as a well-organized Python/Go test suite.
-- Doc-comments with embedded code examples are run as tests too
-  (`cargo test` executes them) — documentation that silently goes
-  stale and stops matching the real API is structurally harder here.
+**Answer:**
 
-**Project**: a CLI tool with real subcommands (`clap` for argument
-parsing), its own unit + integration tests, published as a usable
-binary via `cargo install --path .`.
+| Resource | Use it for | Pairs with |
+|---|---|---|
+| *The Rust Programming Language* ("the Book", free) | the first full read | Foundations |
+| *Rust by Example* (free) | quick runnable syntax lookups | Foundations |
+| *Rustlings* | exercises while reading the Book | Foundations |
+| *The Rust Reference* (free) | exact rules of the language | any page |
+| *The Cargo Book* (free) | workspaces, features, publishing, config | Toolchain, CI/CD |
+| *The Edition Guide* (free) | what each edition changed, and why | Modules, Crates & Editions |
+| *Programming Rust* (O'Reilly) | systems-level depth on ownership and types | Foundations, Advanced |
+| *Rust for Rustaceans* (No Starch) | idioms and API design, after the Book | Advanced, Production |
+| *The Rustonomicon* (free) | `unsafe`, layout, variance, drop check | Advanced Language |
+| *Rust Atomics and Locks* (free online) | atomics and locks from first principles | Concurrency & Async |
+| *The Async Book* and the Tokio tutorial (free) | futures and the runtime | Concurrency & Async |
+| *The rustc Dev Guide* (free) | how the compiler works | Performance & Internals |
+| *Zero To Production In Rust* | one full web service, end to end | Production Rust |
 
-## Level 3: Advanced — Concurrency & Systems-Level Rust
+## 7. "Which crates should I know?"
 
-### 3.1 Fearless Concurrency: Threads, Channels, `Arc<Mutex<T>>`
-
-- `std::thread::spawn` for OS threads; `mpsc` (multi-producer,
-  single-consumer) channels to pass data between them, the same
-  "share memory by communicating" instinct as Go's channels.
-- The ownership/borrowing rules extend into concurrency: the compiler
-  refuses to compile code that would let two threads mutate the same
-  data unsynchronized — most data races are caught at compile time
-  instead of needing a separate tool like Go's `-race` detector.
-- `Arc<Mutex<T>>` is the standard shared-mutable-state pattern —
-  directly comparable to Go's `sync.Mutex`, except the type system
-  physically prevents touching the locked data without holding the
-  lock first (there's no way to even *reach* the `T` inside without
-  going through `.lock()`).
-
-### 3.2 Async Rust: Tokio, Futures, `async`/`await`
-
-- `async fn` returns a `Future` that does nothing until it's actually
-  `.await`ed or handed to a runtime — conceptually close to Python's
-  `asyncio` coroutines, but Rust has no built-in runtime; **Tokio** is
-  the de facto standard one (comparable to picking an event loop
-  implementation yourself).
-- Needed for essentially any real web service or network-heavy tool —
-  the ecosystem (Axum, most database drivers, `reqwest` for HTTP
-  clients) assumes an async runtime is already running.
-- Common early trap: mixing blocking, synchronous code (heavy CPU
-  work, blocking file I/O) directly inside an `async` function stalls
-  the whole runtime's thread — blocking work needs
-  `tokio::task::spawn_blocking` to move it off the async executor.
-
-### 3.3 Unsafe Rust & FFI
-
-- `unsafe` unlocks a small set of operations the compiler can't verify
-  are safe (raw pointer dereferencing, calling foreign/C functions,
-  mutable access to statics) — it does **not** turn off the borrow
-  checker everywhere, just inside that specific block, and the
-  programmer is now personally responsible for upholding the
-  invariants the compiler would otherwise enforce.
-- FFI (calling C libraries, or being called from C/Python/Node via a
-  native extension) is the most common real reason to reach for
-  `unsafe` in application code — most other application-level Rust
-  never needs it at all.
-
-### 3.4 Macros: Declarative & Procedural
-
-- **Declarative macros** (`macro_rules!`) — pattern-match on the
-  tokens passed in and generate code, Rust's answer to avoiding
-  repetitive boilerplate without a preprocessor.
-- **Procedural macros** — run arbitrary code at compile time to
-  generate code; `#[derive(Debug, Clone, Serialize)]` is the most
-  common form every Rust developer uses constantly without writing one
-  themselves. Writing a custom proc macro is a genuinely advanced,
-  rarely-needed skill — know what they are and why `#[derive(...)]`
-  works before attempting to write your own.
-
-### 3.5 Performance: Profiling, Benchmarking, Release Builds
-
-- `cargo build --release` (optimizations on, debug assertions off) vs.
-  a plain `cargo build` (fast to compile, slow to run) — a debug build
-  can be an order of magnitude slower; never benchmark or ship a
-  debug build.
-- `criterion` crate for real statistical benchmarking (handles warm-up,
-  noise, outliers) instead of hand-rolled timing.
-- `cargo flamegraph` for CPU profiling — the Rust-ecosystem equivalent
-  of `py-spy`/`pprof`, pointing at exactly which function is actually
-  consuming the time before optimizing blind.
-
-**Project**: a concurrent tool that touches all three — a multi-
-threaded or async web scraper/crawler with shared state (a visited-URL
-set behind `Arc<Mutex<_>>`, or fully async with Tokio), profiled once
-it's correct.
-
-## Level 4: Professional — Production Rust
-
-### 4.1 Web Services
-
-- **Axum** or **Actix-web** — the Django/FastAPI-shaped layer:
-  routing, extractors (pulling typed data out of a request, similar
-  role to FastAPI's dependency injection), middleware, and JSON
-  (de)serialization via **serde** (the universal serialization crate
-  — `#[derive(Serialize, Deserialize)]` on a struct is most Rust
-  developers' first real encounter with procedural macros in
-  practice).
-
-### 4.2 Database Layer
-
-- **`sqlx`** — async, and *compile-time checks your SQL against the
-  real database schema* if you opt into its macro mode, catching a
-  typo'd column name at compile time instead of in production.
-- **`diesel`** — a full, synchronous ORM with a stricter compile-time-
-  checked query builder.
-- **`sea-orm`** — async ORM, closer in spirit to Django's ORM for
-  anyone who wants that level of abstraction over raw SQL.
-
-### 4.3 Error Handling at Scale
-
-- **`thiserror`** — a derive macro for defining your own clean, typed
-  error enums with minimal boilerplate (library-facing: callers get a
-  precise error type to match on).
-- **`anyhow`** — a single flexible error type for application code
-  that just needs to propagate "something went wrong" up to a top-
-  level handler with context, without defining a type per failure
-  mode (application-facing, not for a library's public API).
-- Real services need an explicit **error boundary** — one place
-  (commonly Axum/Actix middleware) that converts internal error types
-  into the actual HTTP status codes and JSON error bodies clients see,
-  the same centralizing instinct as a Django/DRF custom exception
-  handler.
-
-### 4.4 Observability
-
-- **`tracing`** — structured, span-based logging built for async code
-  specifically (a plain log line loses which concurrent request it
-  belongs to; `tracing`'s spans don't). The de facto standard,
-  displacing the older `log` crate for anything async.
-- Metrics/export typically via `tracing` subscribers feeding
-  Prometheus/OpenTelemetry — same end destination as any other
-  language's observability stack, different wiring to get there.
-
-### 4.5 Workspace Organization
-
-- A **Cargo workspace** (one top-level `Cargo.toml` listing multiple
-  member crates) splits a large project into separate compilation
-  units — faster incremental builds (only the changed crate and its
-  dependents recompile), and a real enforced boundary between, say, a
-  shared domain-types crate and the web-service crate that depends on
-  it.
-
-### 4.6 Testing Strategy
-
-- Unit + integration tests (Level 2) still apply at scale.
-- **`proptest`** — property-based testing (state a property that must
-  always hold, let the tool generate adversarial inputs trying to
-  break it), the same idea as Python's Hypothesis, native to Rust.
-- Doc-tests stay compiled and run as part of `cargo test` even in a
-  large codebase — API documentation genuinely can't silently drift
-  out of sync with the real function signature.
-
-### 4.7 Tooling, CI/CD & Deployment
-
-- **`clippy`** — the standard linter, catches a large set of common
-  non-idiomatic patterns the compiler itself doesn't flag; run in CI
-  as a hard gate, same role as `ruff`/`golangci-lint`.
-- **`rustfmt`** — the standard formatter, one canonical style, no
-  bikeshedding (same role as `black`/`gofmt`).
-- **`cargo audit`** — checks dependencies against a known-
-  vulnerability database, the Rust-ecosystem equivalent of
-  `pip-audit`/`npm audit`.
-- Deployment: Rust compiles to a single static(-ish) binary — a
-  multi-stage Docker build (compile in a `rust:` builder image, copy
-  just the final binary into a minimal runtime image like `distroless`
-  or `alpine`) produces a genuinely tiny final image compared to
-  shipping a full language runtime.
-- Cross-compilation (`cargo build --target x86_64-unknown-linux-musl`,
-  etc.) for building a Linux binary from a different host OS, or
-  targeting a `musl` libc for a fully static binary with zero system
-  dependencies at runtime.
-
-### 4.8 Specialization Branches (pick based on actual goal)
-
-- **WebAssembly** — `wasm-pack`, compiling Rust to run in a browser or
-  any WASM host at near-native speed; a genuinely distinctive Rust
-  strength few other languages compete with directly.
-- **Embedded** — `no_std` (opting out of the standard library for
-  environments with no OS underneath, like a microcontroller), the
-  `embedded-hal` ecosystem.
-
-**Project**: a production-shaped REST API — real database (`sqlx` +
-Postgres), structured error handling, `tracing` instrumentation, a
-test suite (unit + integration + at least one `proptest`), `clippy`/
-`rustfmt` wired into CI, and a multi-stage Docker build that deploys
-it as a minimal image.
-
-## Ecosystem Cheat Sheet
+**Answer:**
 
 | Need | Crate |
 |---|---|
-| Web framework | `axum`, `actix-web` |
+| Web framework | `axum` (also `actix-web`) |
 | Async runtime | `tokio` |
+| Middleware layers | `tower` |
 | Serialization | `serde` (+ `serde_json`) |
 | HTTP client | `reqwest` |
-| Database (async, compile-checked SQL) | `sqlx` |
-| Database (full ORM) | `diesel`, `sea-orm` |
-| CLI argument parsing | `clap` |
+| Database (async, checked SQL) | `sqlx` |
+| Database (ORM) | `diesel`, `sea-orm` |
+| CLI arguments | `clap` |
 | Error types (library) | `thiserror` |
 | Error handling (application) | `anyhow` |
-| Structured logging/tracing | `tracing` + `tracing-subscriber` |
-| Benchmarking | `criterion` |
+| Logging and tracing | `tracing` + `tracing-subscriber` |
+| Benchmarking | `criterion`, `divan` |
 | Property-based testing | `proptest` |
 | Parallel data processing | `rayon` |
+| Concurrency model checking | `loom` |
+| Macros (writing proc macros) | `syn`, `quote`, `proc-macro2` |
+| WebAssembly | `wasm-bindgen`, `wasm-pack` |
+| Python bindings | `pyo3`, `maturin` |
+| Dependency policy and audit | `cargo-deny`, `cargo-audit`, `cargo-vet` |
 
-## Resources by Level
+- Check the current version of a crate on crates.io before you pin it; versions
+  on this site are stated per page.
 
-- **Beginner**: *The Rust Programming Language* ("the Book," free,
-  official) read alongside **Rustlings** (interactive, compiler-
-  error-driven exercises) — the standard starting combination.
-- **Intermediate**: *Rust by Example* for quick, runnable syntax
-  reference; *Programming Rust* (O'Reilly) for a deeper systems-level
-  treatment of ownership and types.
-- **Advanced/Professional**: *Zero To Production In Rust* (web
-  services specifically, Axum/sqlx/testing/deployment all covered
-  together); the official `tokio` tutorial for async in depth; the
-  `cargo` book for workspace/publishing/build-config details.
+## 8. "How long does it take?"
 
-## Suggested Timeline
+**Answer:**
 
-| Level | Time (part-time study) | Exit signal |
+| Stage | Time (part-time) | Exit signal |
 |---|---|---|
-| 0 — Setup | 1-2 days | Toolchain installed, Playground explored |
-| 1 — Beginner | 1-2 weeks | Can write ownership-correct code without fighting the compiler on every line |
-| 2 — Intermediate | 2-3 weeks | Comfortable with traits, iterators, and a tested CLI tool shipped |
-| 3 — Advanced | 2-3 weeks | A concurrent/async project working and profiled |
-| 4 — Professional | 4-6+ weeks, ongoing | A deployed, tested, observable web service — and genuinely comfortable reading unfamiliar production Rust code |
+| Setup | 1 to 2 days | Toolchain installed, first program run |
+| Foundations | 6 to 8 weeks | Ownership-correct code without fighting every line |
+| Advanced Language | 5 to 6 weeks | You can justify every `unsafe` block |
+| Concurrency & Async | 4 to 5 weeks | A concurrent and an async project, both tested |
+| Performance & Internals | 3 to 4 weeks | A profile-driven speed-up with numbers |
+| Production Rust | 5 to 6 weeks | A deployed, tested, observable service |
+| Mastery | ongoing | You answer the [Guru Question Bank](mastery/rust-guru-question-bank.md) without notes |
+
+- Total: roughly **6 to 9 months** at 8 to 10 hours a week to be strong; guru
+  level comes from **years of building**, not from finishing a list.
+- Many people skip the Advanced and Performance groups at first and return after
+  a real project. That is fine; Foundations and Production are the core.
+
+## 9. "What is the guru checklist?"
+
+**Answer:** you can do each of these **without looking anything up**.
+
+- **Ownership:** explain moves, drop order, and the borrow rules, and fix any
+  borrow error by changing the design, not by cloning.
+- **Lifetimes:** read and write signatures with several lifetimes, and explain
+  `'static` both ways.
+- **Types:** model a domain so illegal states cannot be built (enums,
+  typestate, newtypes).
+- **Traits:** choose between generics, `dyn`, and an `enum`, and explain
+  dyn compatibility and the orphan rule.
+- **Errors:** design an error type for a library and the error boundary of a
+  service.
+- **Memory:** predict the size and layout of a struct, and explain niches and
+  fat pointers.
+- **Unsafe:** write a safe abstraction over `unsafe`, document its safety
+  contract, and check it with Miri.
+- **Concurrency:** pick `Mutex`, channel, or atomic, and justify the memory
+  ordering.
+- **Async:** explain what an `async fn` compiles to, write a tiny executor, and
+  find a cancellation or blocking bug.
+- **Performance:** benchmark, profile, and speed up a program with evidence.
+- **Compiler:** explain the path from source to binary, and what makes builds
+  slow.
+- **Production:** ship a service with tests, tracing, CI, a locked dependency
+  set, and a small container.
+- **Judgment:** say when Rust is the wrong tool.
+- **Currency:** read a release note and know whether it changes your code.
+
+## 10. "How do AI tools change this roadmap?"
+
+**Answer:**
+
+- **Help:** explaining compiler errors, generating test cases, quizzing you
+  (use the [Guru Question Bank](mastery/rust-guru-question-bank.md) as the
+  source), and reviewing your finished code.
+- **Hurt:** writing the code you are supposed to learn from, and confident wrong
+  answers about lifetimes, `unsafe`, and atomics.
+- **Rule of thumb:** verify with the compiler, `clippy`, tests, Miri, `loom`, and
+  a benchmark. An answer you cannot verify is a guess.
+- Interviews now probe this directly; see
+  [Interviewing in the AI Era](../interview-prep/interviewing-in-the-ai-era.md).
+
+## 11. Interview Questions You're Likely to Get Asked
+
+- "Why would you choose Rust for this service?" — expects: a specific reason
+  (latency, memory, safety, one binary) and a stated cost,
+  [§1](#1-why-rust-and-when-should-i-not-use-it).
+- "How did you learn Rust, and what was hardest?" — expects: ownership and
+  lifetimes, a concrete project, what you changed in your thinking,
+  [§5](#5-how-do-i-practice-beyond-reading).
+- "Which crates do you reach for first on a new service?" — expects: `tokio`,
+  `axum`, `serde`, `sqlx`, `tracing`, `thiserror`/`anyhow`,
+  [§7](#7-which-crates-should-i-know).
+- "Where would you not use Rust?" — expects: prototypes, plain CRUD, missing
+  ecosystem, team readiness, [§1](#1-why-rust-and-when-should-i-not-use-it).
+
+---
+
+## Code Samples
+
+- `code_samples/rust/`: the runnable examples for every page
+  (`cargo run --example NAME`), `compile_fail/` files with real error text, and
+  `cargo test`.
+- `code_samples/rust/capstones/`: compiling skeletons for the ten capstone
+  projects.
+
+```bash
+cd code_samples/rust
+cargo test
+cargo run --example ownership_moves
+```

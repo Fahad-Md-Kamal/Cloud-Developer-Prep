@@ -73,7 +73,12 @@ fn main() {
     }
 
     println!("{:?} {:?}", parse_kv("age = 42"), parse_kv("oops"));
-    println!("{} | {} | {}", describe(&[]), describe(&[7]), describe(&[1, 2, 3]));
+    println!(
+        "{} | {} | {}",
+        describe(&[]),
+        describe(&[7]),
+        describe(&[1, 2, 3])
+    );
 
     // Binding with @ and nested patterns.
     let msg = Some(15);
@@ -103,5 +108,8 @@ fn main() {
     }
 
     // matches! for a quick boolean test.
-    println!("is circle: {}", matches!(shapes[0], Shape::Circle { r } if r > 0.5));
+    println!(
+        "is circle: {}",
+        matches!(shapes[0], Shape::Circle { r } if r > 0.5)
+    );
 }

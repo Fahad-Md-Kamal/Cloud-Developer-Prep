@@ -22,3 +22,18 @@ fancy = []
 
 [dev-dependencies]
 proptest = "1"
+
+# The samples demonstrate pitfalls on purpose (NaN comparisons, drop order of
+# `if let`, ...), so these lints would flag the lesson itself.
+[lints.clippy]
+needless_range_loop = "allow"
+redundant_pattern_matching = "allow"
+eq_op = "allow"
+type_complexity = "allow"
+cast_nan_to_int = "allow"
+deref_addrof = "allow"
+needless_lifetimes = "allow"
+question_mark = "allow"
+redundant_closure = "allow"
+transmute_int_to_bool = "allow"
+useless_vec = "allow"

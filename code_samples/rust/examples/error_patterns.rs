@@ -11,7 +11,9 @@ fn parse_all(items: &[&str]) -> Result<Vec<i32>, ParseIntError> {
 }
 
 fn sum_until_bad(items: &[&str]) -> Result<i32, ParseIntError> {
-    items.iter().try_fold(0, |acc, s| Ok(acc + s.parse::<i32>()?))
+    items
+        .iter()
+        .try_fold(0, |acc, s| Ok(acc + s.parse::<i32>()?))
 }
 
 fn maybe_number(s: Option<&str>) -> Result<Option<i32>, ParseIntError> {
@@ -44,9 +46,18 @@ fn run() -> Result<(), Box<dyn Error + Send + Sync>> {
     println!("transpose none = {:?}", maybe_number(None));
     println!("transpose bad  = {:?}", maybe_number(Some("z")).is_err());
 
-    println!("Result<(), SmallError> = {} bytes", size_of::<Result<(), SmallError>>());
-    println!("Result<(), BigError>   = {} bytes", size_of::<Result<(), BigError>>());
-    println!("Result<(), Box<BigError>> = {} bytes", size_of::<Result<(), Box<BigError>>>());
+    println!(
+        "Result<(), SmallError> = {} bytes",
+        size_of::<Result<(), SmallError>>()
+    );
+    println!(
+        "Result<(), BigError>   = {} bytes",
+        size_of::<Result<(), BigError>>()
+    );
+    println!(
+        "Result<(), Box<BigError>> = {} bytes",
+        size_of::<Result<(), Box<BigError>>>()
+    );
 
     let r = std::panic::catch_unwind(|| must_be_positive(-3));
     println!("track_caller panic caught = {}", r.is_err());
