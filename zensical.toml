@@ -329,7 +329,8 @@ nav = [
       { "Containers" = [
           { "Docker: Production Container Images" = "cloud-devops/docker-production-images.md" },
           { "Container Orchestration: ECS & EKS" = "cloud-devops/container-orchestration-ecs-eks.md" },
-          { "Helm & GitOps" = "cloud-devops/helm-and-gitops.md" },
+          { "Helm" = "cloud-devops/helm-packaging-kubernetes-apps.md" },
+          { "GitOps (ArgoCD & Flux)" = "cloud-devops/gitops-with-argocd-and-flux.md" },
       ] },
       { "Serverless & Managed Compute" = "cloud-devops/serverless-and-managed-compute.md" },
       { "Messaging & Event-Driven Services" = "cloud-devops/messaging-and-event-driven-services.md" },

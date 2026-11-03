@@ -35,6 +35,9 @@ and real compiler error text, not remembered text.
   toolchain and cargo, ownership and borrowing, lifetimes, types/enums/patterns,
   error handling, collections and strings, traits and generics, iterators and
   closures, smart pointers, modules/crates/editions, testing and documentation.
+- **Advanced Language group, all 6 pages** (the first, `rust-memory-layout-and-dsts.md`,
+  was written in a separate, parallel session before the rest of the track
+  landed — see the status banner above for the current, complete state).
 - Runnable samples crate **`code_samples/rust/`** (package
   `rust-guru-samples`, edition 2024, `rust-version = "1.99"`):
     - `examples/*.rs` (run with `cargo run --example NAME`)
@@ -46,23 +49,19 @@ and real compiler error text, not remembered text.
   **and** the Rust section of `docs/index.md` from one page list. A page is
   listed only if its file exists.
 
-### Written but **not yet used by a page** (samples exist, page missing)
-
-These were compiled and run on 1.99.1 and are ready to be quoted:
-
-| Sample | For page | Verified output (short) |
-|---|---|---|
-| `examples/memory_layout.rs` | memory layout & DSTs | default-repr struct 8 bytes vs `repr(C)` 12; `Option<Option<bool>>` = 1; `&[u8]`/`&str`/`&dyn` = 16; `Vec<()>` capacity is `usize::MAX`; `offset_of!` works |
-| `examples/advanced_traits.rs` | advanced traits | typestate door, sealed trait, `Money<C>` is 8 bytes, GAT `LendingIterator` (`WindowsMut`), extension trait, `dyn Any` downcast |
-| `compile_fail/invariant_mut_ref.rs` | variance & dropck | `E0597` because `&mut T` is invariant |
-| `compile_fail/dropck_inspector.rs` | variance & dropck | `E0597` ... "borrow might be used here, when `world` is dropped and runs the destructor" |
+All samples referenced below are now used by a written page — see the status
+banner at the top of this file for the current, complete state of the track.
 
 ### Known state of the site
 
-- `zensical build --clean` currently reports **31 "page does not exist"
-  warnings and nothing else**. They are **forward links** from the finished
-  pages to pages that are not written yet. The build still exits with code 0, so
-  GitHub Pages deploys. Each new page removes some warnings. **Target: zero.**
+- `zensical build --clean` currently reports **36 "page does not exist"
+  warnings and nothing else** (was 31 before A1; A1 resolved 1 and added 6 new
+  forward links to pages it cross-links that aren't written yet — expected,
+  not a regression). They are **forward links** from the finished pages to
+  pages that are not written yet. The build still exits with code 0, so
+  GitHub Pages deploys. The count doesn't necessarily drop after every single
+  page early on (a well-connected page adds forward links of its own), but
+  trends to zero as the remaining pages fill in. **Target: zero.**
 - `docs/rust/rust-learning-roadmap.md` is not yet the hub (task H).
 
 ---
@@ -154,26 +153,19 @@ always target the latest stable version.
 
 ---
 
-## 5. Remaining pages (25) and the roadmap hub
+## 5. Remaining pages (24) and the roadmap hub
 
 **File names, nav labels and descriptions are already fixed** in
 `scripts/generate_rust_nav.py`. The finished pages **already link to these exact
-file names** (that is why the build shows 31 dangling links), so **do not rename
+file names** (that is why the build shows dangling links), so **do not rename
 them**. Each entry below: path under `docs/rust/`, then what it must cover, the
 sample to write, and facts to verify.
 
 ### Group: Advanced Language (`advanced-language/`)
 
-**A1. `rust-memory-layout-and-dsts.md`** — sample done (`memory_layout.rs`).
-Cover: stack/heap/static; size and alignment; padding and why the default
-`repr(Rust)` **reorders fields** (8 vs 12 bytes); `repr(C)`, `repr(packed)`
-(references to packed fields are a problem), `repr(align)`, `repr(u8)` enums,
-`repr(transparent)`; enum layout (tag + payload); **niche optimization** with
-the printed table; thin vs fat pointers (`&[T]`, `&str`, `&dyn`, `Box<dyn>`,
-`Rc<str>`); `Sized` and `?Sized`; DSTs and `size_of_val`; ZSTs (`Vec<()>` never
-allocates, capacity `usize::MAX`); `mem::offset_of!`; `Layout` and the
-allocator API at a glance; layout is **not guaranteed** for `repr(Rust)`.
-Verify: `core::mem::size_of_val_raw` and `align_of_val_raw` are stable in 1.99.
+**A1. `rust-memory-layout-and-dsts.md`** — **DONE.**
+
+**A2 is next** — sample already done (`advanced_traits.rs`, see the table above).
 
 **A2. `rust-advanced-traits-and-type-level-design.md`** — sample done
 (`advanced_traits.rs`). Cover: typestate builder; sealed traits; `PhantomData`

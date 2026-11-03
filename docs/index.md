@@ -589,7 +589,11 @@ mistakes and fixes kept in as teaching material.
 - **Containers**
     - [Docker: Production Container Images](cloud-devops/docker-production-images.md)
     - [Container Orchestration: ECS & EKS](cloud-devops/container-orchestration-ecs-eks.md)
-    - [Helm & GitOps](cloud-devops/helm-and-gitops.md)
+    - [Helm](cloud-devops/helm-packaging-kubernetes-apps.md) —
+      charts, releases, rollback, chart repositories
+    - [GitOps (ArgoCD & Flux)](cloud-devops/gitops-with-argocd-and-flux.md) —
+      pull-based deployment, drift detection, secrets handling,
+      GitOps-native progressive delivery, promotion workflows
 - [Serverless & Managed Compute](cloud-devops/serverless-and-managed-compute.md) — Lambda limits, Elastic Beanstalk, AWS Batch, Step Functions
 - [Messaging & Event-Driven Services](cloud-devops/messaging-and-event-driven-services.md) — SQS, SNS, EventBridge, Kinesis, Amazon MQ
 - [Data Analytics: Glue, Lake Formation & EMR](cloud-devops/data-analytics-glue-lake-formation-emr.md)
