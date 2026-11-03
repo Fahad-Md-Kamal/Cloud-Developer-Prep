@@ -591,15 +591,15 @@ mistakes and fixes kept in as teaching material.
     - [Container Orchestration: ECS & EKS](cloud-devops/container-orchestration-ecs-eks.md)
     - [Helm](cloud-devops/helm-packaging-kubernetes-apps.md) —
       charts, releases, rollback, chart repositories
-    - **GitOps**
-        - [GitOps Fundamentals](cloud-devops/gitops-fundamentals.md) —
-          pull-based deployment, secrets handling, promotion workflows
-        - [ArgoCD In Depth](cloud-devops/argocd-in-depth.md) —
-          architecture, the Application resource, sync waves/hooks,
-          ApplicationSets, projects/RBAC, image updater
-        - [Flux In Depth](cloud-devops/flux-in-depth.md) —
-          the GitOps Toolkit, Kustomization & HelmRelease, image
-          automation, multi-tenancy, bootstrap
+- **GitOps**
+    - [GitOps Fundamentals](cloud-devops/gitops-fundamentals.md) —
+      pull-based deployment, secrets handling, promotion workflows
+    - [ArgoCD In Depth](cloud-devops/argocd-in-depth.md) —
+      architecture, the Application resource, sync waves/hooks,
+      ApplicationSets, projects/RBAC, image updater
+    - [Flux In Depth](cloud-devops/flux-in-depth.md) —
+      the GitOps Toolkit, Kustomization & HelmRelease, image
+      automation, multi-tenancy, bootstrap
 - [Serverless & Managed Compute](cloud-devops/serverless-and-managed-compute.md) — Lambda limits, Elastic Beanstalk, AWS Batch, Step Functions
 - [Messaging & Event-Driven Services](cloud-devops/messaging-and-event-driven-services.md) — SQS, SNS, EventBridge, Kinesis, Amazon MQ
 - [Data Analytics: Glue, Lake Formation & EMR](cloud-devops/data-analytics-glue-lake-formation-emr.md)
