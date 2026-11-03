@@ -844,8 +844,20 @@
     "url": "cloud-devops/container-orchestration-ecs-eks/"
   },
   {
-    "title": "Helm & GitOps",
-    "url": "cloud-devops/helm-and-gitops/"
+    "title": "Helm",
+    "url": "cloud-devops/helm-packaging-kubernetes-apps/"
+  },
+  {
+    "title": "GitOps Fundamentals",
+    "url": "cloud-devops/gitops-fundamentals/"
+  },
+  {
+    "title": "ArgoCD In Depth",
+    "url": "cloud-devops/argocd-in-depth/"
+  },
+  {
+    "title": "Flux In Depth",
+    "url": "cloud-devops/flux-in-depth/"
   },
   {
     "title": "Serverless & Managed Compute",

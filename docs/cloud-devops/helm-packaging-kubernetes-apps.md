@@ -10,10 +10,10 @@ with each other — so the same definition can be reused across
 environments instead of hand-maintaining near-duplicate YAML per
 environment. For *when* and *how* a packaged application actually gets
 deployed, see
-[GitOps: Git as the Source of Truth for Deployments](gitops-with-argocd-and-flux.md)
+[GitOps Fundamentals](gitops-fundamentals.md)
 — Helm and GitOps solve different problems and compose directly,
 covered there in
-[§7](gitops-with-argocd-and-flux.md#7-how-does-gitops-compose-with-helm).
+[§5](gitops-fundamentals.md#5-how-does-gitops-compose-with-helm).
 
 ## The Problem It Solves
 
